@@ -1,0 +1,42 @@
+package main;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+
+
+public class miniApp extends JFrame {
+	private JFrame app;
+	
+	public miniApp(){
+		
+	}
+	
+	public void init() {
+		app=this;
+		
+	}
+	
+	
+	public void setting() {
+		app.setTitle("miniApp");
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		app.setLocationRelativeTo(null);
+		app.setSize(1200,900);
+		app.setLayout(null);
+	}
+	public void batch() {
+	}
+	public void listener() {
+		keybo
+	}
+	public void keyboardEvent() {
+		addKeyListener(new KeyAdapter() {
+		});
+	}
+
+}
+

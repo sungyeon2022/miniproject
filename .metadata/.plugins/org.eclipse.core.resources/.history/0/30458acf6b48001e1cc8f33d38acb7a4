@@ -1,0 +1,29 @@
+package main;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+
+
+public class miniApp extends JFrame {
+	private JFrame app;
+	
+	public miniApp(){
+		
+	}
+	
+	public void init() {
+		app=this;
+		
+	}
+	
+	
+	public void setting() {
+		app.setTitle("mainApp");
+	}
+
+}
+

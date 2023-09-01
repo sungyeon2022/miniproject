@@ -1,0 +1,81 @@
+package main;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+
+
+public class miniApp extends JFrame {
+	private JFrame app;
+	
+	public miniApp(){
+		
+	}
+	
+	public void init() {
+		app=this;
+		
+	}
+	
+	
+	public void setting() {
+		app.setTitle("miniApp");
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		app.setLocationRelativeTo(null);
+		app.setSize(1200,900);
+		app.setLayout(null);
+	}
+	public void batch() {
+	}
+	public void listener() {
+		keyboardEvent();
+	}
+	
+	public static void main(String[] argStrings) {
+		
+	}
+	public void keyboardEvent() {
+		addKeyListener(new KeyAdapter() {
+		public void KeyPressed(KeyEvent e) {
+			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_UP) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_E) {
+				
+			}
+		}
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_UP) {
+				
+			}	
+		}
+		});
+	}
+
+}
+
