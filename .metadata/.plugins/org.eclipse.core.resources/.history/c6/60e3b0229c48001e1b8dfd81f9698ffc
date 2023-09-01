@@ -1,0 +1,11 @@
+package player;
+
+public class Snippet {
+	public void moveLeft() {}
+	public void moveUp() {}
+	public void moveDown() {}
+	public void moveMotion() {}
+	public void isDeadCheck() {}
+	public void dead() {}
+	public void attack() {}}
+

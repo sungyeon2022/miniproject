@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.util.Vector;
 
+
 import javax.swing.JFrame;
 
 import map.Background;
@@ -42,7 +43,7 @@ public class miniApp extends JFrame {
 	public void setting() {
 		app.setTitle("miniApp");
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		app.setSize(1200,900);
+		app.setSize(960,640);
 		app.setLocationRelativeTo(null);
 		app.setLayout(null);
 	}

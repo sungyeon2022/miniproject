@@ -1,0 +1,13 @@
+package player;
+
+
+import javax.swing.JFrame;
+
+import lombok.Data;
+
+public class player {
+	private JFrame app;
+	private final static String GUBUN="player";
+	private double life,maxlife;
+	private double attackDamage;
+}
