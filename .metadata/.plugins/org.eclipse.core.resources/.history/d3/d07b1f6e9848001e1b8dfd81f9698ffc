@@ -1,9 +1,0 @@
-package player;
-
-
-import javax.swing.JFrame;
-
-import lombok.Data;
-public class player {
-	
-}

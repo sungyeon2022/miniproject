@@ -1,0 +1,30 @@
+package SpriteSheet;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import lombok.Data;
+
+@Data
+
+public class SpriteSheet extends JLabel{
+	private final static String TAG = "SpriteSheet:";
+	private BufferedImage imgSprite;
+	private String url;
+	private String gubun;
+	private int xPos,yPos, width, height;
+	private ImageIcon imgicon;
+	
+	public SpriteSheet() {}
+	
+	public SpriteSheet(String url, String gubun, int xPos, int yPos, int width, int height) {
+		this.url = url;
+		this.gubun = gubun;
+	}
+	
+	
+}

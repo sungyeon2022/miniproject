@@ -1,0 +1,41 @@
+package player;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import SpriteSheet.SpriteSheet;
+import lombok.Data;
+import objectSize;
+
+@Data
+
+public class isaac extends Player{
+	private final static String TAG = "isaac: ";
+	private isaac isaac = this;
+	
+	private SpriteSheet ssHead,ssBody;
+	private SpriteSheet ssTotal;
+	
+	private int xPlusBody = 7, yPlusBody = 30;
+	private int yTotalSize;
+	private int item1Count = 0;
+	private int item2Count = 0;
+	private int item3Count = 0;
+	private int item4Count = 0;
+	private int moveSpeed = 12;
+	
+	public isaac(JFrame app) {
+		super(app);
+		System.out.println(TAG + "make isaac");
+		
+	}
+	public void init() {
+		ssHead = new SpriteSheet("isaac/isaac.png","isaacssHead",0,0,isaacSize.ISAACHEADWIDTH,isaacSize.ISAACHEADHEIGHT);
+		ssBody = new SpriteSheet("isaac/isaac.png", "isaacBody", 0, (isaacSize.ISAACHEADHEIGHT + Gap.ROWGAP), IsaacSize.BODYWIDTH, IsaacSize.BODYHEIGHT);
+		ssTotal = new SpriteSheet("isaac/isaac.png", "isaacBody", 0, yTotalSize, IsaacSize.TOTALWIDTH, IsaacSize.TOTALHEIGHT);
+	}
+}

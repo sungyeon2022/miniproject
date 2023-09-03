@@ -1,18 +1,19 @@
 package player;
 
-
 import javax.swing.JFrame;
 
 import lombok.Data;
+import lombok.Lombok;
+import objectSetting.*;
 
 @Data
-
-public class Player {
+public class Player extends Lombok {
 	private JFrame app;
 	private final static String GUBUN="player";
 	private double life,maxlife; //생명,최대 생명
 	private double attackDamage; //공격 데미지
 	private boolean isUp, isDown, isRight, isLeft;
+	private int viewDriect;
 	private int xPlayer, yPlayer;
 	private int xPlayerCenter, yPlayerCenter;//플레이어 중심값
 	private boolean dead;
