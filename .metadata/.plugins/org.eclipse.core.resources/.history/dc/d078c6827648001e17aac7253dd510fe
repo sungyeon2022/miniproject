@@ -1,7 +1,0 @@
-package map;
-
-import java.awt.Color;
-
-public class Background {
-
-}

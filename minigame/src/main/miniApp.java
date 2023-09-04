@@ -4,15 +4,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.util.Vector;
 
+
 import javax.swing.JFrame;
 
 import map.Background;
+import player.isaac;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
 	private JFrame app;
 	
 	private Background bg;
+	private isaac isaac;
 	
 	//miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp(){
@@ -21,7 +24,6 @@ public class miniApp extends JFrame {
 		batch();
 		listener();
 		new Thread(new Runnable() {
-			
 			@Override
 			public void run() {
 				
@@ -35,14 +37,15 @@ public class miniApp extends JFrame {
 	public void init() {
 		app=this;
 		bg = new Background(app);
+		isaac = new isaac(app);
 		
 	}
 	
 	//JFrame을 통한 창출력
 	public void setting() {
 		app.setTitle("miniApp");
+		app.setSize(960,640);
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		app.setSize(1200,900);
 		app.setLocationRelativeTo(null);
 		app.setLayout(null);
 	}
@@ -55,63 +58,47 @@ public class miniApp extends JFrame {
 	public static void main(String[] args) {
 		new miniApp();
 	}
+	
 	public void keyboardEvent() {
 		addKeyListener(new KeyAdapter() {
-		public void KeyPressed(KeyEvent e) {
+		@Override
+		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+				isaac.moveRight();
+			}else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+				isaac.moveLeft();
+			}else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+				isaac.moveDown();
+			}else if(e.getKeyCode()==KeyEvent.VK_UP) {
+				isaac.moveUp();
+			}else if(e.getKeyCode()==KeyEvent.VK_W) {
 				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+			}else if(e.getKeyCode()==KeyEvent.VK_D) {
 				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+			}else if(e.getKeyCode()==KeyEvent.VK_A) {
 				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_UP) {
+			}else if(e.getKeyCode()==KeyEvent.VK_S) {
 				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_W) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_D) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_A) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_S) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_E) {
+			}else if(e.getKeyCode()==KeyEvent.VK_E) {
 				
 			}
 		}
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-				
+				isaac.setRight(false);
+				isaac.refreshDirect();
+			}else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+				isaac.setLeft(false);
+				isaac.refreshDirect();
+			}else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+				isaac.setDown(false);
+				isaac.refreshDirect();
+			}else if(e.getKeyCode()==KeyEvent.VK_UP) {
+				isaac.setUp(false);
+				isaac.refreshDirect();
 			}
-			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_UP) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_W) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_D) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_A) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_S) {
-				
-			}
+			
 		}
 		});
 	}
