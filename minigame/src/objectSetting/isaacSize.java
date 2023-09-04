@@ -4,7 +4,7 @@ public interface isaacSize {
 	int ISAACHEADWIDTH = 42;
 	int ISAACHEADHEIGHT = 38;
 	int ISAACBODYWIDTH = 27;
-	int ISAACBODYHEIGHT = 22;
+	int ISAACBODYHEIGHT = 22; //
 	int ISAACTOTALWIDTH = 54;
 	int ISAACTOTALHEIGHT = 50;
 	
