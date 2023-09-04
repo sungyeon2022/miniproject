@@ -92,6 +92,99 @@ public class isaac extends Player{
 		}).start(); 
 	}
 	@Override
+	public void moveLeft() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if(isLeft()==false) {
+					setLeft(true);
+					setViewDirect(ViewDirect.LEFT);
+					while (isLeft()) {
+						if(getXPlayer()<130) {
+							setLeft(false);
+							refreshDirect();
+							break;
+						}
+						setXPlayer(getXPlayer()-1);
+						setXPlayerCenter(getXPlayerCenter()-1);
+						moveMotion();
+						try {
+							Thread.sleep(moveSpeed);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}	
+					}
+					System.out.println("캐릭터생성");
+					ssBody.setXPos(0);
+					ssHead.drawObj(getXPlayer(), getYPlayer());
+					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+				}
+			}
+		}).start(); 
+	}
+	@Override
+	public void moveDown() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if(isDown()==false) {
+					setDown(true);
+					setViewDirect(ViewDirect.DOWN);
+					while (isDown()) {
+						if(getYPlayer()>440) {
+							setDown(false);
+							refreshDirect();
+							break;
+						}
+						setYPlayer(getYPlayer()+1);//플레이어 이동시 좌표값 변경
+						setYPlayerCenter(getYPlayerCenter()+1);//중앙
+						moveMotion();
+						try {
+							Thread.sleep(moveSpeed);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}	
+					}
+					System.out.println("캐릭터생성");
+					ssBody.setXPos(0);
+					ssHead.drawObj(getXPlayer(), getYPlayer());
+					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+				}
+			}
+		}).start(); 
+	}
+	@Override
+	public void moveUp() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if(isUp()==false) {
+					setUp(true);
+					setViewDirect(ViewDirect.UP);
+					while (isUp()) {
+						if(getYPlayer()<100) {
+							setUp(false);
+							refreshDirect();
+							break;
+						}
+						setYPlayer(getYPlayer()-1);
+						setXPlayerCenter(getXPlayerCenter()-1);
+						moveMotion();
+						try {
+							Thread.sleep(moveSpeed);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}	
+					}
+					System.out.println("캐릭터생성");
+					ssBody.setXPos(0);
+					ssHead.drawObj(getXPlayer(), getYPlayer());
+					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+				}
+			}
+		}).start(); 
+	}
+	@Override
 	public void moveMotion() {
 		new Thread(new Runnable() {
 			
@@ -117,19 +210,19 @@ public class isaac extends Player{
 							if(motion>9) 
 								motion=0;
 							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
-							if(getViewDirect()==ViewDirect.UP) {
+							if(getViewDirect()==ViewDirect.LEFT) {
 								ssHead.setXPos(isaacSize.ISAACHEADWIDTH*6+Gap.COLUMGAP*6);
-								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT*2+Gap.COLUMGAP*3);
+								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT*2+Gap.ROWGAP*3);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 								motion += 1;
 							}
 						}
-						else if(isUp()&&getViewDirect()==ViewDirect.DOWN) {
+						else if(isUp()&&getViewDirect()==ViewDirect.UP) {
 							if(motion>9) 
 								motion=0;
 							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
-							if(getViewDirect()==ViewDirect.DOWN) {
+							if(getViewDirect()==ViewDirect.UP) {
 								ssHead.setXPos(isaacSize.ISAACHEADWIDTH*4+Gap.COLUMGAP*4);
 								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+Gap.COLUMGAP);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
@@ -137,24 +230,28 @@ public class isaac extends Player{
 								motion += 1;
 							}
 						}
-						else if(isRight()&&getViewDirect()==ViewDirect.DOWN) {
+						else if(isRight()&&getViewDirect()==ViewDirect.RIGHT) {
 							if(motion>9) 
 								motion=0;
 							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
-							if(getViewDirect()==ViewDirect.DOWN) {
+							if(getViewDirect()==ViewDirect.RIGHT) {
 								ssHead.setXPos(isaacSize.ISAACHEADWIDTH*2+Gap.COLUMGAP*2);
-								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT+Gap.COLUMGAP*2);
+								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT+Gap.ROWGAP*2);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 								motion += 1;
 							}
 						}
-						 
+						try {
+							Thread.sleep(40);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 				
 			}
-		});
+		}).start();
 	}
 	public void refreshDirect() {
 		if(isaac.isDown()) {

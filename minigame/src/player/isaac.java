@@ -60,6 +60,7 @@ public class isaac extends Player{
 		getApp().add(ssHead,0);
 		getApp().add(ssBody,1);
 	}
+	//상하 좌우 이동 모션
 	@Override
 	public void moveRight() {
 		new Thread(new Runnable() {
@@ -69,7 +70,7 @@ public class isaac extends Player{
 					setRight(true);
 					setViewDirect(ViewDirect.RIGHT);
 					while (isRight()) {
-						if(getXPlayer()+isaacSize.ISAACBODYWIDTH>810) {
+						if(getXPlayer()+isaacSize.ISAACBODYWIDTH>810) { //벽이상 움직임 제한 
 							setRight(false);
 							refreshDirect();
 							break;
@@ -184,8 +185,9 @@ public class isaac extends Player{
 			}
 		}).start(); 
 	}
-	@Override
-	public void moveMotion() {
+	@Override //Override
+	public void moveMotion() { //움직이는 동작중 이미지 갱신
+		//Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
 		new Thread(new Runnable() {
 			
 			@Override
@@ -195,14 +197,14 @@ public class isaac extends Player{
 					setPlayerMoveStart(true);
 					while(true) {
 						if(isDown()&&getViewDirect()==ViewDirect.DOWN) {
-							if(motion>9) 
-								motion=0;
-							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
+							if(motion>9) //상하좌우 방향 모션 개수와 동일 0~9 10개
+								motion=0;//마지막사진 도착후 처음으로 순환을 위한 if문 종료
+							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion)); //XPos는 사진에서 가져올 기준이 되는 X좌표가 됩니다
 							if(getViewDirect()==ViewDirect.DOWN) {
-								ssHead.setXPos(0);
-								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+Gap.COLUMGAP);
-								ssHead.drawObj(getXPlayer(), getYPlayer());
-								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/isaac/isaac.img에서 순서 확인하시면 됩니다.
+								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+Gap.COLUMGAP);//X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼 더해서 좌표값을 내려줍니다
+								ssHead.drawObj(getXPlayer(), getYPlayer()); //그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
+								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);//X와Y좌표를 기준으로 머리를 생성하고 머리와 몸이 겹치지 않게하기위해 사용합니다.
 								motion += 1;
 							}
 						}
@@ -212,7 +214,7 @@ public class isaac extends Player{
 							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
 							if(getViewDirect()==ViewDirect.LEFT) {
 								ssHead.setXPos(isaacSize.ISAACHEADWIDTH*6+Gap.COLUMGAP*6);
-								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT*2+Gap.ROWGAP*3);
+								ssBody.setYPos(isaacSize.ISAACHEADHEIGHT+isaacSize.ISAACBODYHEIGHT*2+Gap.ROWGAP*3);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 								motion += 1;
@@ -236,7 +238,7 @@ public class isaac extends Player{
 							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
 							if(getViewDirect()==ViewDirect.RIGHT) {
 								ssHead.setXPos(isaacSize.ISAACHEADWIDTH*2+Gap.COLUMGAP*2);
-								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT+Gap.ROWGAP*2);
+								ssBody.setYPos(isaacSize.ISAACHEADHEIGHT+isaacSize.ISAACBODYHEIGHT+Gap.ROWGAP*2);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 								motion += 1;

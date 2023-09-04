@@ -60,6 +60,7 @@ public class isaac extends Player{
 		getApp().add(ssHead,0);
 		getApp().add(ssBody,1);
 	}
+	//상하 좌우 이동 모션
 	@Override
 	public void moveRight() {
 		new Thread(new Runnable() {
@@ -96,17 +97,17 @@ public class isaac extends Player{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				if(isRight()==false) {
-					setRight(true);
-					setViewDirect(ViewDirect.RIGHT);
-					while (isRight()) {
-						if(getXPlayer()+isaacSize.ISAACBODYWIDTH>810) {
-							setRight(false);
+				if(isLeft()==false) {
+					setLeft(true);
+					setViewDirect(ViewDirect.LEFT);
+					while (isLeft()) {
+						if(getXPlayer()<130) {
+							setLeft(false);
 							refreshDirect();
 							break;
 						}
-						setXPlayer(getXPlayer()+1);
-						setXPlayerCenter(getXPlayerCenter()+1);
+						setXPlayer(getXPlayer()-1);
+						setXPlayerCenter(getXPlayerCenter()-1);
 						moveMotion();
 						try {
 							Thread.sleep(moveSpeed);
@@ -123,21 +124,21 @@ public class isaac extends Player{
 		}).start(); 
 	}
 	@Override
-	public void moveRight() {
+	public void moveDown() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				if(isRight()==false) {
-					setRight(true);
-					setViewDirect(ViewDirect.RIGHT);
-					while (isRight()) {
-						if(getXPlayer()+isaacSize.ISAACBODYWIDTH>810) {
-							setRight(false);
+				if(isDown()==false) {
+					setDown(true);
+					setViewDirect(ViewDirect.DOWN);
+					while (isDown()) {
+						if(getYPlayer()>440) {
+							setDown(false);
 							refreshDirect();
 							break;
 						}
-						setXPlayer(getXPlayer()+1);
-						setXPlayerCenter(getXPlayerCenter()+1);
+						setYPlayer(getYPlayer()+1);//플레이어 이동시 좌표값 변경
+						setYPlayerCenter(getYPlayerCenter()+1);//중앙
 						moveMotion();
 						try {
 							Thread.sleep(moveSpeed);
@@ -154,21 +155,21 @@ public class isaac extends Player{
 		}).start(); 
 	}
 	@Override
-	public void moveRight() {
+	public void moveUp() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				if(isRight()==false) {
-					setRight(true);
-					setViewDirect(ViewDirect.RIGHT);
-					while (isRight()) {
-						if(getXPlayer()+isaacSize.ISAACBODYWIDTH>810) {
-							setRight(false);
+				if(isUp()==false) {
+					setUp(true);
+					setViewDirect(ViewDirect.UP);
+					while (isUp()) {
+						if(getYPlayer()<100) {
+							setUp(false);
 							refreshDirect();
 							break;
 						}
-						setXPlayer(getXPlayer()+1);
-						setXPlayerCenter(getXPlayerCenter()+1);
+						setYPlayer(getYPlayer()-1);
+						setXPlayerCenter(getXPlayerCenter()-1);
 						moveMotion();
 						try {
 							Thread.sleep(moveSpeed);
@@ -185,7 +186,7 @@ public class isaac extends Player{
 		}).start(); 
 	}
 	@Override
-	public void moveMotion() {
+	public void moveMotion() { 
 		new Thread(new Runnable() {
 			
 			@Override
@@ -212,7 +213,7 @@ public class isaac extends Player{
 							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
 							if(getViewDirect()==ViewDirect.LEFT) {
 								ssHead.setXPos(isaacSize.ISAACHEADWIDTH*6+Gap.COLUMGAP*6);
-								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT*2+Gap.COLUMGAP*3);
+								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT*2+Gap.ROWGAP*3);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 								motion += 1;
@@ -236,7 +237,7 @@ public class isaac extends Player{
 							ssBody.setXPos((isaacSize.ISAACBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
 							if(getViewDirect()==ViewDirect.RIGHT) {
 								ssHead.setXPos(isaacSize.ISAACHEADWIDTH*2+Gap.COLUMGAP*2);
-								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT+Gap.COLUMGAP*2);
+								ssBody.setYPos(isaacSize.ISAACHEADWIDTH+isaacSize.ISAACBODYHEIGHT+Gap.ROWGAP*2);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 								motion += 1;
