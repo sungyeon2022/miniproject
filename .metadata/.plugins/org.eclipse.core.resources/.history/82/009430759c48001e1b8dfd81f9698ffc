@@ -1,0 +1,11 @@
+package player;
+
+public interface isaacSize {
+	int ISAACHEADWIDTH = 42;
+	int ISAACHEADHEIGHT = 42;
+	int ISAACBODYWIDTH = 42;
+	int ISAACHEADWIDTH = 42;
+	int ISAACHEADWIDTH = 42;
+	int ISAACHEADWIDTH = 42;
+	
+}
