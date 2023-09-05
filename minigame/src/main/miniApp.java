@@ -8,14 +8,14 @@ import java.util.Vector;
 import javax.swing.JFrame;
 
 import map.Background;
-import player.isaac;
+import player.issac;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
 	private JFrame app;
 	
 	private Background bg;
-	private isaac isaac;
+	private issac issac;
 	
 	//miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp(){
@@ -37,7 +37,7 @@ public class miniApp extends JFrame {
 	public void init() {
 		app=this;
 		bg = new Background(app);
-		isaac = new isaac(app);
+		issac = new issac(app);
 		
 	}
 	
@@ -64,13 +64,37 @@ public class miniApp extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-				isaac.moveRight();
+					issac.moveRight();
+			}
+			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+					issac.moveLeft();
+			}
+			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+					issac.moveDown();
+			}
+			if(e.getKeyCode()==KeyEvent.VK_UP) {
+					issac.moveUp();
+			}
+			if(e.getKeyCode()==KeyEvent.VK_W) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_D) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_A) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_S) {
+				
+			}
+			if(e.getKeyCode()==KeyEvent.VK_E) {
+				issac.moveRight();
 			}else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-				isaac.moveLeft();
+				issac.moveLeft();
 			}else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-				isaac.moveDown();
+				issac.moveDown();
 			}else if(e.getKeyCode()==KeyEvent.VK_UP) {
-				isaac.moveUp();
+				issac.moveUp();
 			}else if(e.getKeyCode()==KeyEvent.VK_W) {
 				
 			}else if(e.getKeyCode()==KeyEvent.VK_D) {
@@ -86,17 +110,17 @@ public class miniApp extends JFrame {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-				isaac.setRight(false);
-				isaac.refreshDirect();
+				issac.setRight(false);
+				issac.refreshDirect();
 			}else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-				isaac.setLeft(false);
-				isaac.refreshDirect();
+				issac.setLeft(false);
+				issac.refreshDirect();
 			}else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-				isaac.setDown(false);
-				isaac.refreshDirect();
+				issac.setDown(false);
+				issac.refreshDirect();
 			}else if(e.getKeyCode()==KeyEvent.VK_UP) {
-				isaac.setUp(false);
-				isaac.refreshDirect();
+				issac.setUp(false);
+				issac.refreshDirect();
 			}
 			
 		}
