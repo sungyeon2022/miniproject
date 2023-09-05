@@ -58,9 +58,11 @@ public class miniApp extends JFrame {
 	public static void main(String[] args) {
 		new miniApp();
 	}
+	
 	public void keyboardEvent() {
 		addKeyListener(new KeyAdapter() {
-		public void KeyPressed(KeyEvent e) {
+		@Override
+		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
 					issac.moveRight();
 			}
@@ -86,35 +88,41 @@ public class miniApp extends JFrame {
 				
 			}
 			if(e.getKeyCode()==KeyEvent.VK_E) {
+				issac.moveRight();
+			}else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+				issac.moveLeft();
+			}else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+				issac.moveDown();
+			}else if(e.getKeyCode()==KeyEvent.VK_UP) {
+				issac.moveUp();
+			}else if(e.getKeyCode()==KeyEvent.VK_W) {
+				
+			}else if(e.getKeyCode()==KeyEvent.VK_D) {
+				
+			}else if(e.getKeyCode()==KeyEvent.VK_A) {
+				
+			}else if(e.getKeyCode()==KeyEvent.VK_S) {
+				
+			}else if(e.getKeyCode()==KeyEvent.VK_E) {
 				
 			}
 		}
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-				
+				issac.setRight(false);
+				issac.refreshDirect();
+			}else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+				issac.setLeft(false);
+				issac.refreshDirect();
+			}else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+				issac.setDown(false);
+				issac.refreshDirect();
+			}else if(e.getKeyCode()==KeyEvent.VK_UP) {
+				issac.setUp(false);
+				issac.refreshDirect();
 			}
-			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_UP) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_W) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_D) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_A) {
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_S) {
-				
-			}
+			
 		}
 		});
 	}

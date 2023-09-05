@@ -1,10 +1,7 @@
 package SpriteSheet;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,7 +16,10 @@ public class SpriteSheet extends JLabel{
 	private BufferedImage imgSprite;
 	private String url;
 	private String gubun;
-	private int xPos,yPos, width, height;
+	private int xPos;
+	private int yPos;
+	private int width;
+	private int height;
 	private ImageIcon imgObj;
 	
 	public SpriteSheet() {}
@@ -50,8 +50,8 @@ public class SpriteSheet extends JLabel{
 		setIcon(imgObj);
 		setSize(width,height);
 		setLocation(x,y);
+		System.out.println(TAG + gubun + "그려짐");
 	}
-	
 	/*
 	 * public static BufferedImage resize(InputStream image, int width, int height)
 	 * throws IOException { BufferedImage inputImage = ImageIO.read(image);
