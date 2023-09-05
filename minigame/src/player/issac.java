@@ -14,10 +14,10 @@ import objectSetting.*;
 
 @Data
 
-public class isaac extends Player{
+public class issac extends Player{
 	Player player;
-	private final static String TAG = "isaac: ";
-	private isaac isaac = this;
+	private final static String TAG = "issac: ";
+	private issac issac = this;
 	
 	private SpriteSheet ssHead,ssBody;
 	private SpriteSheet ssTotal;
@@ -30,18 +30,18 @@ public class isaac extends Player{
 	private int item4Count = 0;
 	private int moveSpeed = 12;
 	
-	public isaac(JFrame app) {
+	public issac(JFrame app) {
 		super(app);
-		System.out.println(TAG + "make isaac");
+		System.out.println(TAG + "make issac");
 		init();
 		setting();
 		batch();
 		
 	}
 	public void init() {
-		ssHead = new SpriteSheet("isaac/isaac.png","isaacssHead",0,0,isaacSize.ISAACHEADWIDTH,isaacSize.ISAACHEADHEIGHT);
-		ssBody = new SpriteSheet("isaac/isaac.png", "isaacBody", 0, (isaacSize.ISAACHEADHEIGHT + Gap.ROWGAP), isaacSize.ISAACBODYWIDTH, isaacSize.ISAACBODYHEIGHT);
-		ssTotal = new SpriteSheet("isaac/isaac.png", "isaacsBody", 0, yTotalSize, isaacSize.ISAACTOTALWIDTH, isaacSize.ISAACTOTALHEIGHT);
+		ssHead = new SpriteSheet("issac/issac.png","issacssHead",0,0,issacSize.issacHEADWIDTH,issacSize.issacHEADHEIGHT);
+		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
+		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
 		
 	}
 	
@@ -49,8 +49,8 @@ public class isaac extends Player{
 		setViewDriect(ViewDirect.DOWN);
 		setXPlayer(480);
 		setYPlayer(430);
-		setXPlayerCenter(getXPlayer()+isaacSize.ISAACHEADWIDTH/2);
-		setYPlayerCenter(getXPlayer()+isaacSize.ISAACHEADHEIGHT);
+		setXPlayerCenter(getXPlayer()+issacSize.issacHEADWIDTH/2);
+		setYPlayerCenter(getXPlayer()+issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 	}

@@ -8,14 +8,14 @@ import java.util.Vector;
 import javax.swing.JFrame;
 
 import map.Background;
-import player.isaac;
+import player.issac;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
 	private JFrame app;
 	
 	private Background bg;
-	private isaac isaac;
+	private issac issac;
 	
 	//miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp(){
@@ -37,7 +37,7 @@ public class miniApp extends JFrame {
 	public void init() {
 		app=this;
 		bg = new Background(app);
-		isaac = new isaac(app);
+		issac = new issac(app);
 		
 	}
 	
@@ -62,16 +62,16 @@ public class miniApp extends JFrame {
 		addKeyListener(new KeyAdapter() {
 		public void KeyPressed(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-				isaac.isRight();
+					issac.moveRight();
 			}
 			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-				isaac.isLeft();
+					issac.moveLeft();
 			}
 			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-				isaac.isDown();
+					issac.moveDown();
 			}
 			if(e.getKeyCode()==KeyEvent.VK_UP) {
-				isaac.isUp();
+					issac.moveUp();
 			}
 			if(e.getKeyCode()==KeyEvent.VK_W) {
 				
