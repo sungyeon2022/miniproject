@@ -30,7 +30,7 @@ public class issac extends Player{
 	private int item2Count = 0;
 	private int item3Count = 0;
 	private int item4Count = 0;
-	private int moveSpeed = 12;
+	private int moveSpeed = 10;
 	
 	public issac(JFrame app) {
 		super(app);
@@ -41,7 +41,7 @@ public class issac extends Player{
 		
 	}
 	public void init() {
-
+		
 		ssHead = new SpriteSheet("issac/issac.png","issacssHead",0,0,issacSize.issacHEADWIDTH,issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
@@ -115,6 +115,7 @@ public class issac extends Player{
 						setXPlayerCenter(getXPlayerCenter()-1);
 						moveMotion();
 						try {
+							
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
 							e.printStackTrace();

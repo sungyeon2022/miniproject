@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 
 import map.Background;
 import player.issac;
+import item.Item;
+import item.*;
+
+import objectSetting.*;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -15,6 +19,7 @@ public class miniApp extends JFrame {
 
 	private Background bg;
 	private issac issac;
+	private Vector<Item> items;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -36,7 +41,15 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		issac = new issac(app);
-
+		items = new Vector<Item>();
+		//아이템 시험 생성
+		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
+		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
+		items.add(new Key(app, "item/key.png", "key", 340, 400, KeySize.WIDTH,KeySize.HEIGHT));
+		items.add(new Pill(app, "item/pill1.png", "Power2", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		items.add(new Pill(app, "item/pill2.png", "PS1", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		items.add(new Pill(app, "item/pill3.png", "Speed2", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		
 	}
 
 	// JFrame을 통한 창출력
