@@ -9,6 +9,11 @@ import javax.swing.JFrame;
 
 import map.Background;
 import player.issac;
+import item.Item;
+import item.Bomb;
+
+import objectSetting.*;
+
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -16,6 +21,7 @@ public class miniApp extends JFrame {
 	
 	private Background bg;
 	private issac issac;
+	private Vector<Item> items;
 	
 	//miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp(){
@@ -38,6 +44,9 @@ public class miniApp extends JFrame {
 		app=this;
 		bg = new Background(app);
 		issac = new issac(app);
+		items = new Vector<Item>();
+		
+		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT ));
 		
 	}
 	
