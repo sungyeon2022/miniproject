@@ -31,7 +31,6 @@
     <fullyQualifiedTypeName name="lombok.Setter"/>
     <fullyQualifiedTypeName name="org.jcp.xml.dsig.internal.dom.DOMSubTreeData"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
-    <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
     <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
     <fullyQualifiedTypeName name="java.io.File"/>
@@ -41,4 +40,6 @@
     <fullyQualifiedTypeName name="objectSetting.isaacSize"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="player.isaac"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
 </qualifiedTypeNameHistroy>
