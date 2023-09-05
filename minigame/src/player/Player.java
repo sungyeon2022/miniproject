@@ -11,7 +11,6 @@ public class Player extends Lombok {
 	private JFrame app;
 	private final static String GUBUN="player";
 	private double life,maxlife; //생명,최대 생명
-	private double attackDamage; //공격 데미지
 	private boolean isUp, isDown, isRight, isLeft;
 	private int viewDirect;
 	private int xPlayer, yPlayer;

@@ -52,6 +52,13 @@ public class SpriteSheet extends JLabel{
 		setLocation(x,y);
 		System.out.println(TAG + gubun + "그려짐");
 	}
+	public void drawandrotate(int x, int y, int grid) {
+		BufferedImage rotaImage = null;
+		imgObj = new ImageIcon(getObjimg());
+		setIcon(imgObj);
+		setSize(width,height);
+		setLocation(x,y);
+	}
 	/*
 	 * public static BufferedImage resize(InputStream image, int width, int height)
 	 * throws IOException { BufferedImage inputImage = ImageIO.read(image);

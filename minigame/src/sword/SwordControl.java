@@ -18,7 +18,7 @@ public class SwordControl {
 	}
 	public void drawSword() {
 		if(sword.getDirection()==ViewDirect.DOWN) {
-			
+			sword.setSsSword();
 		}else if(sword.getDirection()==ViewDirect.LEFT) {
 			
 		}else if(sword.getDirection()==ViewDirect.UP) {
