@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import player.Player;
+import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
 import lombok.Data;
 import objectSetting.*;
@@ -17,7 +18,6 @@ import objectSetting.*;
 @Data
 
 public class issac extends Player{
-	Player player;
 	private final static String TAG = "issac: ";
 	private issac issac = this;
 	
@@ -41,11 +41,6 @@ public class issac extends Player{
 		
 	}
 	public void init() {
-
-		ssHead = new SpriteSheet("issac/issac.png","issacssHead",0,0,issacSize.issacHEADWIDTH,issacSize.issacHEADHEIGHT);
-		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
-		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
-		
 		ssHead = new SpriteSheet("issac/issac.png","issacssHead",0,0,issacSize.issacHEADWIDTH,issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
@@ -185,7 +180,9 @@ public class issac extends Player{
 					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
+					
 					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+					
 				}
 			}
 		}).start(); 

@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import lombok.Data;
 import lombok.Lombok;
 import objectSetting.*;
+import sword.SwordControl;
 
 @Data
 public class Player extends Lombok {
@@ -16,16 +17,18 @@ public class Player extends Lombok {
 	private int xPlayer, yPlayer;
 	private int xPlayerCenter, yPlayerCenter;//플레이어 중심값
 	private boolean dead;
+	private SwordControl swordControl;
+	private double attackDamge;
 	private boolean PlayerMoveStart;
 	private boolean PlayerAttacking;
 	
 	public Player(JFrame app) {
 		this.app = app;
-		isUp = false;
-		isDown = false;
-		isRight = false;
-		isLeft = false;
-		dead = false;
+		this.isUp = false;
+		this.isDown = false;
+		this.isRight = false;
+		this.isLeft = false;
+		this.dead = false;
 	}
 	public void moveRight() {}
 	public void moveLeft() {}

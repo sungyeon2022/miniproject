@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import map.Background;
 import player.*;
 import sword.Sword;
+import sword.SwordControl;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -16,7 +17,7 @@ public class miniApp extends JFrame {
 
 	private Background bg;
 	private issac issac;
-	private Sword sword;
+	private SwordControl swordControl;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -38,7 +39,7 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		issac = new issac(app);
-		
+		swordControl = new SwordControl(app);
 	}
 
 	// JFrame을 통한 창출력

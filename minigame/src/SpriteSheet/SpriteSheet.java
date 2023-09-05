@@ -1,5 +1,7 @@
 package SpriteSheet;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -52,12 +54,8 @@ public class SpriteSheet extends JLabel{
 		setLocation(x,y);
 		System.out.println(TAG + gubun + "그려짐");
 	}
-	public void drawandrotate(int x, int y, int grid) {
-		BufferedImage rotaImage = null;
-		imgObj = new ImageIcon(getObjimg());
-		setIcon(imgObj);
-		setSize(width,height);
-		setLocation(x,y);
+	public void rotate() {
+		
 	}
 	/*
 	 * public static BufferedImage resize(InputStream image, int width, int height)
