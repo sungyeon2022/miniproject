@@ -3,12 +3,14 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.util.Vector;
-
+import item.Bomb;
+import item.Item;
 
 import javax.swing.JFrame;
 
 import map.Background;
 import player.isaac;
+import objectSetting.BombSize;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -16,6 +18,7 @@ public class miniApp extends JFrame {
 	
 	private Background bg;
 	private isaac isaac;
+	private Vector<Item> items;
 	
 	//miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp(){
@@ -38,7 +41,9 @@ public class miniApp extends JFrame {
 		app=this;
 		bg = new Background(app);
 		isaac = new isaac(app);
+		items = new Vector<Item>();
 		
+		items.add(new Bomb(app, "item/bomb.png", "bomb", 400, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT ));
 	}
 	
 	//JFrame을 통한 창출력

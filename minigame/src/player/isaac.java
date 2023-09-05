@@ -1,18 +1,12 @@
 package player;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.io.File;
-import java.util.Vector;
-
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
-import player.Player;
 import SpriteSheet.SpriteSheet;
 import lombok.Data;
-import objectSetting.*;
+import objectSetting.Gap;
+import objectSetting.ViewDirect;
+import objectSetting.isaacSize;
 
 @Data
 
