@@ -17,8 +17,8 @@ public class Player extends Lombok {
 	private int xPlayer, yPlayer;
 	private int xPlayerCenter, yPlayerCenter;//플레이어 중심값
 	private boolean dead;
-	private boolean PlayerMoveStart;
-	private boolean PlayerAttacking;
+	private boolean PlayerMoveStart = false;
+	private boolean PlayerAttacking = false;
 	
 	public Player(JFrame app) {
 		this.app = app;
