@@ -1,19 +1,21 @@
 package main;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
-
 
 import javax.swing.JFrame;
 
 import map.Background;
+import monster.Monster;
+import monster.Worm;
+import objectSetting.WormSize;
 import player.issac;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
 	private JFrame app;
-	
+	private Vector<Monster> monster;
 	private Background bg;
 	private issac issac;
 	
@@ -38,6 +40,9 @@ public class miniApp extends JFrame {
 		app=this;
 		bg = new Background(app);
 		issac = new issac(app);
+		monster = new Vector<Monster>();
+		
+		monster.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		
 	}
 	
