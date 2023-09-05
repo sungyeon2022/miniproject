@@ -7,7 +7,8 @@ import java.util.Vector;
 import javax.swing.JFrame;
 
 import map.Background;
-import player.issac;
+import player.*;
+import sword.Sword;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -15,6 +16,7 @@ public class miniApp extends JFrame {
 
 	private Background bg;
 	private issac issac;
+	private Sword sword;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -36,7 +38,7 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		issac = new issac(app);
-
+		
 	}
 
 	// JFrame을 통한 창출력
@@ -76,7 +78,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-
+					//휘두르는 모션
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_E) {
@@ -98,6 +100,8 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setUp(false);
 					issac.refreshDirect();
+				}else if(e.getKeyCode() == KeyEvent.VK_A) {
+					
 				}
 
 			}
