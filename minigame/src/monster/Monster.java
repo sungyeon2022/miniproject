@@ -10,6 +10,7 @@ import player.issac;
 import lombok.Data;
 import objectSetting.Gap;
 import objectSetting.ViewDirect;
+import objectSetting.issacSize;
 
 @Data
 
@@ -42,29 +43,32 @@ public class Monster extends Player{
 	}
 	public void moveDirectCheck() {
 		// 오른쪽 
-		if(getXPlayerCenter() + getImgWidth() / 2 < getIssac().getXPlayerCenter() ) {
+		if((getXPlayerCenter() + getImgWidth() / 2 < getIssac().getXPlayerCenter()) &&(getXPlayer()>810) ) {
 			setRight(true);
 		} else {
 			setRight(false);
 		}
 		// 왼쪽
-		if(getXPlayerCenter() - getImgWidth() / 2 > getIssac().getXPlayerCenter()) {
+		if((getXPlayerCenter() - getImgWidth() / 2 > getIssac().getXPlayerCenter()) &&(getXPlayer()>130)) {
 			setLeft(true);
 		} else {
 			setLeft(false);
 		}
 		// 아래쪽
-		if(getXPlayerCenter() + getImgHeight() < getIssac().getXPlayerCenter()) {
+		if((getXPlayerCenter() + getImgHeight() < getIssac().getXPlayerCenter()) &&(getYPlayer()<440)) {
 			setDown(true);
 		}else {
 			setDown(false);
 		}
 		// 위쪽
-		if(getXPlayerCenter() - getImgHeight() / 2 > getIssac().getXPlayerCenter()) {
+		if((getXPlayerCenter() - getImgHeight() / 2 > getIssac().getXPlayerCenter()) &&(getYPlayer()>100)) {
 			setUp(true);
 		}else {
 			setUp(false);
 		}
+		
+		// 상하 좌우 중 하나만 활성화 벽에 부딪히면 하나 꺼지고 하나랜덤 활성화
+
 	}
 
 	@Override
@@ -93,9 +97,10 @@ public class Monster extends Player{
 			setViewDirect(ViewDirect.UP);
 			if(getXPlayerCenter() > issac.getXPlayerCenter()) {
 				setYPlayer(getYPlayer() - 1);
-				setXPlayerCenter(getXPlayerCenter() - 1);
+				setXPlayerCenter(getYPlayerCenter() - 1);
 			}
 		}
+		
 	}
 	@Override
 	public void moveDown() {
@@ -103,7 +108,7 @@ public class Monster extends Player{
 			setViewDirect(ViewDirect.DOWN);
 			if(getXPlayerCenter() < issac.getXPlayerCenter()) {
 				setYPlayer(getYPlayer() + 1);
-				setXPlayerCenter(getXPlayerCenter() + 1);
+				setXPlayerCenter(getYPlayerCenter() + 1);
 			}
 		}
 	}

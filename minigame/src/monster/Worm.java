@@ -9,6 +9,7 @@ import player.issac;
 import objectSetting.Gap;
 import objectSetting.ViewDirect;
 import objectSetting.WormSize;
+import objectSetting.issacSize;
 
 public class Worm extends Monster {
 	private final static String GUBUN = "Worm : ";
@@ -24,7 +25,7 @@ public class Worm extends Monster {
 						break;
 					}
 					moveDirectCheck();
-					moveUp();
+					moveUp();					
 					moveDown();
 					moveRight();
 					moveLeft();
@@ -63,6 +64,7 @@ public class Worm extends Monster {
 	public void attckCheck(int direct, int range) {
 		int xDistance = getIssac().getXPlayerCenter() - getXPlayerCenter();
 		int yDistance = getIssac().getYPlayerCenter() - getYPlayerCenter();
+		System.out.println("attack");
 		double distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 		if(distance < range) {
 			attackMotion(direct - 1);

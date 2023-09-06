@@ -50,7 +50,7 @@ public class SpriteSheet extends JLabel{
 		setIcon(imgObj);
 		setSize(width,height);
 		setLocation(x,y);
-		System.out.println(TAG + gubun + "그려짐");
+//		System.out.println(TAG + gubun + "그려짐");
 	}
 	/*
 	 * public static BufferedImage resize(InputStream image, int width, int height)
