@@ -19,6 +19,7 @@ public class Player extends Lombok {
 	private boolean dead;
 	private boolean PlayerMoveStart = false;
 	private boolean PlayerAttacking = false;
+
 	
 	public Player(JFrame app) {
 		this.app = app;

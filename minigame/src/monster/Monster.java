@@ -16,7 +16,7 @@ import objectSetting.issacSize;
 
 public class Monster extends Player{
 	private final static String TAG = "Monster : ";
-	
+	public static int monsterSpeed = 1;
 	private issac issac;
 	private SpriteSheet ssMonster;
 	private SpriteSheet ssDead;
@@ -44,30 +44,45 @@ public class Monster extends Player{
 	public void moveDirectCheck() {
 		// 오른쪽 
 		if((getXPlayerCenter() + getImgWidth() / 2 < getIssac().getXPlayerCenter()) &&(getXPlayer()>810) ) {
+			setLeft(false);
+			setUp(false);
+			setDown(false);
 			setRight(true);
+//			System.out.println("벌레 오른쪽");
 		} else {
 			setRight(false);
 		}
 		// 왼쪽
 		if((getXPlayerCenter() - getImgWidth() / 2 > getIssac().getXPlayerCenter()) &&(getXPlayer()>130)) {
 			setLeft(true);
+			setUp(false);
+			setDown(false);
+			setRight(false);
+//			System.out.println("벌레 왼쪽");
 		} else {
 			setLeft(false);
 		}
 		// 아래쪽
-		if((getXPlayerCenter() + getImgHeight() < getIssac().getXPlayerCenter()) &&(getYPlayer()<440)) {
+		if((getXPlayerCenter() + getImgHeight() / 2 < getIssac().getXPlayerCenter()) &&(getYPlayer()<440)) {
+			setLeft(false);
+			setUp(false);
 			setDown(true);
+			setRight(false);
+//			System.out.println("벌레 아래쪽");
 		}else {
 			setDown(false);
 		}
 		// 위쪽
 		if((getXPlayerCenter() - getImgHeight() / 2 > getIssac().getXPlayerCenter()) &&(getYPlayer()>100)) {
+			setLeft(false);
 			setUp(true);
+			setDown(false);
+			setRight(false);
+//			System.out.println("벌레 위쪽");
 		}else {
 			setUp(false);
 		}
 		
-		// 상하 좌우 중 하나만 활성화 벽에 부딪히면 하나 꺼지고 하나랜덤 활성화
 
 	}
 
@@ -76,8 +91,8 @@ public class Monster extends Player{
 		if(isRight()) {
 			setViewDirect(ViewDirect.RIGHT);
 			if(getXPlayerCenter() < issac.getXPlayerCenter()) {
-				setXPlayer(getXPlayer() + 1);
-				setXPlayerCenter(getXPlayerCenter() + 1);
+				setXPlayer(getXPlayer() + monsterSpeed);
+				setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
 			}
 		}
 	}
@@ -86,8 +101,8 @@ public class Monster extends Player{
 		if(isLeft()) {
 			setViewDirect(ViewDirect.LEFT);
 			if(getXPlayerCenter() > issac.getXPlayerCenter()) {
-				setXPlayer(getXPlayer() - 1);
-				setXPlayerCenter(getXPlayerCenter() - 1);
+				setXPlayer(getXPlayer() - monsterSpeed);
+				setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
 			}
 		}
 	}
@@ -96,8 +111,8 @@ public class Monster extends Player{
 		if(isUp()) {
 			setViewDirect(ViewDirect.UP);
 			if(getXPlayerCenter() > issac.getXPlayerCenter()) {
-				setYPlayer(getYPlayer() - 1);
-				setXPlayerCenter(getYPlayerCenter() - 1);
+				setYPlayer(getYPlayer() - monsterSpeed);
+				setXPlayerCenter(getYPlayerCenter() - monsterSpeed);
 			}
 		}
 		
@@ -107,8 +122,8 @@ public class Monster extends Player{
 		if(isDown()) {
 			setViewDirect(ViewDirect.DOWN);
 			if(getXPlayerCenter() < issac.getXPlayerCenter()) {
-				setYPlayer(getYPlayer() + 1);
-				setXPlayerCenter(getYPlayerCenter() + 1);
+				setYPlayer(getYPlayer() + monsterSpeed);
+				setXPlayerCenter(getYPlayerCenter() + monsterSpeed);
 			}
 		}
 	}

@@ -15,7 +15,7 @@ public class Worm extends Monster {
 	private final static String GUBUN = "Worm : ";
 
 	public Worm(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
-		super(app, Issac, url, imgWidth, imgHeight);
+		super(app, Issac, url, imgWidth, imgHeight );
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -35,6 +35,9 @@ public class Worm extends Monster {
 						Thread.sleep(30);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
+					}
+					if(isPlayerAttacking() == false) {
+						attack();
 					}
 
 				}
@@ -62,12 +65,14 @@ public class Worm extends Monster {
 	}
 	
 	public void attckCheck(int direct, int range) {
+		setPlayerAttacking(true);
 		int xDistance = getIssac().getXPlayerCenter() - getXPlayerCenter();
 		int yDistance = getIssac().getYPlayerCenter() - getYPlayerCenter();
-		System.out.println("attack");
 		double distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 		if(distance < range) {
+			monsterSpeed = 5;
 			attackMotion(direct - 1);
+			System.out.println("공격");
 		}
 	}
 	@Override
@@ -75,20 +80,22 @@ public class Worm extends Monster {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				
 				switch (getViewDirect()) {
 					case ViewDirect.DOWN:
-						attckCheck(ViewDirect.DOWN, 53);
+						attckCheck(ViewDirect.DOWN, 20);
 						break;	
 					case ViewDirect.LEFT:
-						attckCheck(ViewDirect.LEFT, 35);
+						attckCheck(ViewDirect.LEFT, 20);
 						break;
 					case ViewDirect.UP:
-						attckCheck(ViewDirect.UP, 30);
+						attckCheck(ViewDirect.UP, 20);
 						break;
 					case ViewDirect.RIGHT:
-						attckCheck(ViewDirect.RIGHT, 35);
+						attckCheck(ViewDirect.RIGHT, 20);
 						break;
 				}
+				setPlayerAttacking(false);
 			} 
 			
 		}).start();
