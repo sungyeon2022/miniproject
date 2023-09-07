@@ -8,9 +8,7 @@ import SpriteSheet.SpriteSheet;
 import player.Player;
 import player.issac;
 import lombok.Data;
-import objectSetting.Gap;
-import objectSetting.ViewDirect;
-import objectSetting.issacSize;
+import imgSize.*;//objectsetting에서 옮겨옴
 
 @Data
 
@@ -138,7 +136,7 @@ public class Monster extends Player{
 						if(isDown() && getViewDirect() == ViewDirect.DOWN) {
 							if(motion > 3)
 								motion = 0;
-							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMNGAP * motion));
+							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.DOWN) {
 								ssMonster.setYPos(getImgHeight() * 0 + Gap.ROWGAP * 0);	// 몸 이미지 y좌표
 								ssMonster.drawObj(getXPlayer(), getYPlayer());
@@ -148,7 +146,7 @@ public class Monster extends Player{
 						else if(isLeft() && getViewDirect() == ViewDirect.LEFT) {
 							if(motion > 3)
 								motion = 0;
-							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMNGAP * motion));
+							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.LEFT) {
 								ssMonster.setYPos(getImgHeight() * 1 + Gap.ROWGAP * 1);	// 몸 이미지 y좌표
 								ssMonster.drawObj(getXPlayer(), getYPlayer());
@@ -158,7 +156,7 @@ public class Monster extends Player{
 						else if(isUp() && getViewDirect() == ViewDirect.UP) {
 							if(motion > 3)
 								motion = 0;
-							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMNGAP * motion));
+							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.UP) {
 								ssMonster.setYPos(getImgHeight() * 2 + Gap.ROWGAP * 2);	// 몸 이미지 y좌표
 								ssMonster.drawObj(getXPlayer(), getYPlayer());
@@ -168,7 +166,7 @@ public class Monster extends Player{
 						else if(isRight() && getViewDirect() == ViewDirect.RIGHT) {
 							if(motion > 3)
 								motion = 0;
-							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMNGAP * motion));
+							ssMonster.setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.RIGHT) {
 								ssMonster.setYPos(getImgHeight() * 3 + Gap.ROWGAP * 3);	// 몸 이미지 y좌표
 								ssMonster.drawObj(getXPlayer(), getYPlayer());

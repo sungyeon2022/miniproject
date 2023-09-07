@@ -6,10 +6,7 @@ import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
 import player.issac;
-import objectSetting.Gap;
-import objectSetting.ViewDirect;
-import objectSetting.WormSize;
-import objectSetting.issacSize;
+import imgSize.*;
 
 public class Worm extends Monster {
 	private final static String GUBUN = "Worm : ";
@@ -101,7 +98,7 @@ public class Worm extends Monster {
 		}).start();
 	}
 	public void attackMotion(int direct) {
-		getSsMonster().setXPos((WormSize.WIDTH * direct) + (Gap.COLUMNGAP * direct));
+		getSsMonster().setXPos((WormSize.WIDTH * direct) + (Gap.COLUMGAP * direct));
 		getSsMonster().setYPos(WormSize.HEIGHT * 4 + Gap.ROWGAP * 4);
 		getSsMonster().drawObj(getXPlayer(), getYPlayer());
 		try {

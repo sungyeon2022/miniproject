@@ -1,4 +1,4 @@
-package objectSetting;
+package imgSize;
 
 public interface WormSize {
 		int WIDTH = 58;

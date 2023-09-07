@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.Font"/>
     <fullyQualifiedTypeName name="sun.jvm.hotspot.oops.java_lang_Class"/>
     <fullyQualifiedTypeName name="javax.swing.Icon"/>
@@ -38,24 +37,27 @@
     <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="objectSetting.SwordSize"/>
     <fullyQualifiedTypeName name="sword.SwordControl"/>
-    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="sword.Sword"/>
     <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
-    <fullyQualifiedTypeName name="java.awt.Frame"/>
     <fullyQualifiedTypeName name="java.awt.Transparency"/>
-    <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
-    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
-    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
-    <fullyQualifiedTypeName name="java.awt.GraphicsConfiguration"/>
     <fullyQualifiedTypeName name="imgSize.issacSize"/>
     <fullyQualifiedTypeName name="imgSize.Gap"/>
     <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="imgSize.Lifesize"/>
     <fullyQualifiedTypeName name="java.util.Vector"/>
-    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="monster.Monster"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
+    <fullyQualifiedTypeName name="java.awt.GraphicsConfigTemplate"/>
+    <fullyQualifiedTypeName name="java.awt.GraphicsDevice"/>
+    <fullyQualifiedTypeName name="java.awt.Frame"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
+    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+    <fullyQualifiedTypeName name="javax.management.DescriptorAccess"/>
+    <fullyQualifiedTypeName name="java.awt.GraphicsConfiguration"/>
 </qualifiedTypeNameHistroy>

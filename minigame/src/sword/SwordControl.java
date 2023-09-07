@@ -37,7 +37,6 @@ public class SwordControl extends Sword{
 		setDirection(ViewDirect.DOWN);
 		setXSword(480);
 		setYSword(460);
-		rotateImage(ssSword, 90);
 		}
 	private void batch() {
 		getApp().add(ssSword,0);
