@@ -3,9 +3,9 @@ package sword;
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
+import imgSize.SwordSize;
 import lombok.Data;
 import lombok.Lombok;
-import objectSetting.SwordSize;
 
 @Data //sword가 사용할 데이터의 집합
 

@@ -2,16 +2,17 @@ package player;
 
 import javax.swing.JFrame;
 
+import imgSize.*;
 import lombok.Data;
 import lombok.Lombok;
-import objectSetting.*;
 import sword.SwordControl;
 
 @Data
 public class Player extends Lombok {
 	private JFrame app;
 	private final static String GUBUN="player";
-	private double life,maxlife; //생명,최대 생명
+	private double life=5;//생명,최대 생명
+	private double maxlife=8;
 	private boolean isUp, isDown, isRight, isLeft;
 	private int viewDirect;
 	private int xPlayer, yPlayer;

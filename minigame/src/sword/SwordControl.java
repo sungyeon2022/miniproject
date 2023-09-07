@@ -3,8 +3,8 @@ package sword;
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
-import objectSetting.SwordSize;
-import objectSetting.ViewDirect;
+import imgSize.SwordSize;
+import imgSize.ViewDirect;
 import player.issac;
 
 public class SwordControl extends Sword{
@@ -32,7 +32,7 @@ public class SwordControl extends Sword{
 		setDirection(ViewDirect.DOWN);
 		setXSword(480);
 		setYSword(460);
-		ssSword.drawObj(getXSword(), getYSword());
+		ssSword.getrotateImage(90);
 	}
 	private void batch() {
 		getApp().add(ssSword,0);

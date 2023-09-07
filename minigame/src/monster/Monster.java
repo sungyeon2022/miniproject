@@ -1,6 +1,10 @@
 package monster;
 
 import javax.swing.JFrame;
+
+import lombok.Data;
+
+@Data
 public class Monster {
 	private JFrame app;
 	public int monsterX, monsterY; // 몬스터 위치

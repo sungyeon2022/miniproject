@@ -12,17 +12,18 @@ import javax.swing.JLabel;
 import player.Player;
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
+import imgSize.*;
 import lombok.Data;
-import objectSetting.*;
+import monster.Monster;
 
 @Data
 
 public class issac extends Player{
 	private final static String TAG = "issac: ";
 	private issac issac = this;
-	
 	private SpriteSheet ssHead,ssBody;
 	private SpriteSheet ssTotal;
+	private Vector<SpriteSheet> ssLife;
 	
 	private int xPlusBody = 7, yPlusBody = 30;
 	private int yTotalSize;
@@ -45,20 +46,41 @@ public class issac extends Player{
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
 		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
+		ssLife = new Vector<SpriteSheet>();
+		for(int i =0;i<getLife();i++) {
+			this.ssLife.add(i,new SpriteSheet("issac/life.png","life",0,0,Lifesize.LIFEWIDTH,Lifesize.LIFEHEIGHT));
+		}
+		for(int i = (int) getLife();i<getMaxlife();i++) {
+			this.ssLife.add(new SpriteSheet("issac/life.png","life",Lifesize.LIFEWIDTH*2,0,Lifesize.LIFEWIDTH,Lifesize.LIFEHEIGHT));
+		}
+		
 	}
 	
 	public void setting() {
 		setViewDirect(ViewDirect.DOWN);
 		setXPlayer(480);
 		setYPlayer(430);
+		setAttackDamge(1);
+		setLife(3);
 		setXPlayerCenter(getXPlayer()+issacSize.issacHEADWIDTH/2);
 		setYPlayerCenter(getXPlayer()+issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+		for(int i = 0; i < getMaxlife(); i++) {
+			if(i<=getLife()) {
+			ssLife.get(i).drawObj(10 + (i * 30), 10);
+			}else {
+			ssLife.get(i).drawObj(10 + (i * 30), 10);
+			}
+			
+		}
 	}
 	public void batch() {
 		getApp().add(ssHead,0);
 		getApp().add(ssBody,1);
+		for(int i = 0; i < getMaxlife(); i++) {
+			getApp().add(ssLife.get(i), 1);
+		}
 	}
 	//상하 좌우 이동 모션
 	@Override
@@ -270,5 +292,21 @@ public class issac extends Player{
 		if(issac.isRight()) {
 			issac.setViewDirect(ViewDirect.RIGHT);
 		}
+	}
+	public void reDrawLife() {
+		double currentLife = getLife();
+		for(int i =0; i < getMaxlife();i++) {
+			if(currentLife>=1) {
+				ssLife.get(i).setXPos(0);
+				currentLife -= 1;
+			}else if(currentLife>0&&currentLife<1){
+				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH+Gap.COLUMGAP);
+				currentLife-=0.5;
+			}else {
+				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH*2+Gap.COLUMGAP*2);
+			}
+		}
+	}
+	public void takeDamgeMotion() {
 	}
 }
