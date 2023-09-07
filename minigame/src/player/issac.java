@@ -223,10 +223,10 @@ public class issac extends Player{
 						if(isDown()&&getViewDirect()==ViewDirect.DOWN) {
 							if(motion>9) //상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion=0;//마지막사진 도착후 처음으로 순환을 위한 if문 종료
-							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMGAP*motion)); //XPos는 사진에서 가져올 기준이 되는 X좌표가 됩니다
+							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMNGAP*motion)); //XPos는 사진에서 가져올 기준이 되는 X좌표가 됩니다
 							if(getViewDirect()==ViewDirect.DOWN) {
 								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
-								ssBody.setYPos(issacSize.issacHEADWIDTH+Gap.COLUMGAP);//X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼 더해서 좌표값을 내려줍니다
+								ssBody.setYPos(issacSize.issacHEADWIDTH+Gap.COLUMNGAP);//X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼 더해서 좌표값을 내려줍니다
 								ssHead.drawObj(getXPlayer(), getYPlayer()); //그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);//X와Y좌표를 기준으로 머리를 생성하고 머리와 몸이 겹치지 않게하기위해 사용합니다.
 								motion += 1;
@@ -235,9 +235,9 @@ public class issac extends Player{
 						else if(isLeft()&&getViewDirect()==ViewDirect.LEFT) {
 							if(motion>9) 
 								motion=0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
+							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMNGAP*motion));
 							if(getViewDirect()==ViewDirect.LEFT) {
-								ssHead.setXPos(issacSize.issacHEADWIDTH*6+Gap.COLUMGAP*6);
+								ssHead.setXPos(issacSize.issacHEADWIDTH*6+Gap.COLUMNGAP*6);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT*2+Gap.ROWGAP*3);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
@@ -247,10 +247,10 @@ public class issac extends Player{
 						else if(isUp()&&getViewDirect()==ViewDirect.UP) {
 							if(motion>9) 
 								motion=0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
+							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMNGAP*motion));
 							if(getViewDirect()==ViewDirect.UP) {
-								ssHead.setXPos(issacSize.issacHEADWIDTH*4+Gap.COLUMGAP*4);
-								ssBody.setYPos(issacSize.issacHEADWIDTH+Gap.COLUMGAP);
+								ssHead.setXPos(issacSize.issacHEADWIDTH*4+Gap.COLUMNGAP*4);
+								ssBody.setYPos(issacSize.issacHEADWIDTH+Gap.COLUMNGAP);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 								motion += 1;
@@ -259,9 +259,9 @@ public class issac extends Player{
 						else if(isRight()&&getViewDirect()==ViewDirect.RIGHT) {
 							if(motion>9) 
 								motion=0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMGAP*motion));
+							ssBody.setXPos((issacSize.issacBODYWIDTH*motion)+(Gap.COLUMNGAP*motion));
 							if(getViewDirect()==ViewDirect.RIGHT) {
-								ssHead.setXPos(issacSize.issacHEADWIDTH*2+Gap.COLUMGAP*2);
+								ssHead.setXPos(issacSize.issacHEADWIDTH*2+Gap.COLUMNGAP*2);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT+Gap.ROWGAP*2);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
