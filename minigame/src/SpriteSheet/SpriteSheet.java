@@ -7,6 +7,8 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.Image;
 import java.awt.Transparency;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -23,6 +25,7 @@ public class SpriteSheet extends JLabel{
 	private final static String TAG = "SpriteSheet:";
 	JFrame frame;
 	private BufferedImage imgSprite;
+	private BufferedImage newimg;
 	private String url;
 	private String gubun;
 	private int xPos;
@@ -61,6 +64,12 @@ public class SpriteSheet extends JLabel{
 		setSize(width,height);
 		setLocation(x,y);
 //		System.out.println(TAG + gubun + "그려짐");
+	}
+	public void rotateImageandDdraw(BufferedImage img,int digree) {
+		newimg = null;
+		newimg = new BufferedImage(img.getHeight(), img.getWidth(), img.getType());
+		Graphics2D graphics = (Graphics2D) newimg.getGraphics();
+		
 	}
 	
 	/*
