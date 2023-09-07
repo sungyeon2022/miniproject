@@ -39,7 +39,6 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		issac = new issac(app);
-		swordControl = new SwordControl(app);
 	}
 
 	// JFrame을 통한 창출력

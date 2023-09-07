@@ -28,24 +28,3 @@ public class Sword extends Lombok{
 	}
 	
 }
-//public void getrotateImage(double angle) {
-//	BufferedImage img = getObjimg();
-//	double isangle = Math.toRadians(angle);
-//	double sin = Math.abs(Math.sin(isangle));
-//	double cos = Math.abs(Math.cos(isangle));
-//	double w = img.getWidth();
-//	double h = img.getHeight();
-//	int newW = (int)Math.floor(w*cos + h*sin);//sin cos함수를 이용해 회전후 바뀌는 넓이와 높이를 구한다
-//	int newH = (int)Math.floor(w*sin + h*cos);
-//	
-//	
-//	GraphicsConfiguration gc = 
-//	
-//	BufferedImage result = gc.createCompatibleImage(newW, newH, Transparency.TRANSLUCENT);
-//	Graphics2D g = result.createGraphics();
-//	
-//	g.translate((newW-w)/2, (newH-h)/2);
-//	g.rotate(isangle,w/2,h/2);
-//	g.drawRenderedImage(img , null);
-//	g.dispose();
-//}

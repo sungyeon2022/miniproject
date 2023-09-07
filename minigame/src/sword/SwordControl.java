@@ -15,15 +15,16 @@ import javax.swing.JFrame;
 import SpriteSheet.SpriteSheet;
 import imgSize.SwordSize;
 import imgSize.ViewDirect;
+import imgSize.issacSize;
+import lombok.Data;
 import player.issac;
 
+@Data
 public class SwordControl extends Sword{
 	private final static String TAG = "SwordControl : ";
 	private SwordControl swordControl = this;
-	BufferedImage bufferedImage;
 	private SpriteSheet ssSword;
 	private Sword sword;
-	private JFrame app;
 	private issac issac;
 	
 	public SwordControl(JFrame app) {
@@ -34,19 +35,17 @@ public class SwordControl extends Sword{
 		batch();
 	}
 
-	private void init() {
-		ssSword = new SpriteSheet("sword/sword.png","sword",SwordSize.SWORDXGAP,SwordSize.SWORDYGAP,SwordSize.SWORDWIDTH,SwordSize.SWORDYHEIGHT);
-		
+	public void init() {
+		ssSword = new SpriteSheet("sword/sword_down.png","sword",SwordSize.SWORDIMGWIDTH-SwordSize.SWORDXGAP-SwordSize.SWORDWIDTH,SwordSize.SWORDYGAP,SwordSize.SWORDWIDTH,SwordSize.SWORDYHEIGHT);
 	}
-	private void setting() {
+	public void setting() {
 		setDirection(ViewDirect.DOWN);
-		setXSword(480);
-		setYSword(460);
+		setXSword(489);
+		setYSword(475);
 		ssSword.drawObj(getXSword(), getYSword());
 	}
-	private void batch() {
-		getApp().add(ssSword,0);
-		
+	public void batch() {
+		getApp().add(ssSword, 0);
 	}
 	
 }

@@ -3,6 +3,7 @@ package player;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
+import java.net.Socket;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,7 @@ public class issac extends Player{
 	private SpriteSheet ssHead,ssBody;
 	private SpriteSheet ssTotal;
 	private Vector<SpriteSheet> ssLife;
+	private SwordControl swordControl;
 	
 	private int xPlusBody = 7, yPlusBody = 30;
 	private int yTotalSize;
@@ -31,7 +33,7 @@ public class issac extends Player{
 	private int item2Count = 0;
 	private int item3Count = 0;
 	private int item4Count = 0;
-	private int moveSpeed = 12;
+	private int moveSpeed = 7;
 	
 	public issac(JFrame app) {
 		super(app);
@@ -39,13 +41,13 @@ public class issac extends Player{
 		init();
 		setting();
 		batch();
-		
 	}
 	public void init() {
 		ssHead = new SpriteSheet("issac/issac.png","issacssHead",0,0,issacSize.issacHEADWIDTH,issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
 		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
+		swordControl = new SwordControl(getApp());
 		ssLife = new Vector<SpriteSheet>();
 		for(int i =0;i<getLife();i++) {
 			this.ssLife.add(i,new SpriteSheet("issac/life.png","life",0,0,Lifesize.LIFEWIDTH,Lifesize.LIFEHEIGHT));
@@ -63,7 +65,7 @@ public class issac extends Player{
 		setAttackDamge(1);
 		setLife(3);
 		setXPlayerCenter(getXPlayer()+issacSize.issacHEADWIDTH/2);
-		setYPlayerCenter(getXPlayer()+issacSize.issacHEADHEIGHT);
+		setYPlayerCenter(getYPlayer()+issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 		for(int i = 0; i < getMaxlife(); i++) {
@@ -110,6 +112,7 @@ public class issac extends Player{
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+					swordControl.getSsSword().drawObj(getXPlayer(), getYPlayer());
 				}
 			}
 		}).start(); 
