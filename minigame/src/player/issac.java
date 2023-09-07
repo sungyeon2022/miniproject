@@ -305,6 +305,7 @@ public class issac extends Player{
 			}else {
 				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH*2+Gap.COLUMGAP*2);
 			}
+			
 		}
 	}
 	public void takeDamgeMotion() {

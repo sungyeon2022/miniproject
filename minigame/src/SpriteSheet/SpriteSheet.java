@@ -2,7 +2,9 @@ package SpriteSheet;
 
 import java.awt.Frame;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfigTemplate;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
 import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
@@ -10,6 +12,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import lombok.Data;
@@ -17,8 +20,8 @@ import lombok.Data;
 @Data
 
 public class SpriteSheet extends JLabel{
-	Frame frame;
 	private final static String TAG = "SpriteSheet:";
+	JFrame frame;
 	private BufferedImage imgSprite;
 	private String url;
 	private String gubun;
@@ -47,25 +50,6 @@ public class SpriteSheet extends JLabel{
 		}
 	}//url을 통해 이미지 파일을 가져옴 없을경우 SpriteSheet: 이미지 로드 실패 출력
 	
-	public void getrotateImage(double angle) {
-		BufferedImage img = getObjimg();
-		double isangle = Math.toRadians(angle);
-		double sin = Math.abs(Math.sin(isangle));
-		double cos = Math.abs(Math.cos(isangle));
-		double w = img.getWidth();
-		double h = img.getHeight();
-		int newW = (int)Math.floor(w*cos + h*sin);//sin cos함수를 이용해 회전후 바뀌는 넓이와 높이를 구한다
-		int newH = (int)Math.floor(w*sin + h*cos);
-		
-//		GraphicsConfiguration gc = getGraphicsConfiguration();
-//		BufferedImage result = gc.createCompatibleImage(newW, newH, Transparency.TRANSLUCENT);
-//		Graphics2D g = result.createGraphics();
-//		
-//		g.translate((newW-w)/2, (newH-h)/2);
-//		g.rotate(isangle,w/2,h/2);
-//		g.drawRenderedImage(img , null);
-//		g.dispose();
-	}
 	
 	public BufferedImage getObjimg() {
 		return imgSprite.getSubimage(xPos, yPos, width, height);
