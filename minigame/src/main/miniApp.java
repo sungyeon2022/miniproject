@@ -48,9 +48,10 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		bg = new Background(app);
-		issac = new issac(app);
+		
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
+		issac = new issac(app,walls);
 		//아이템 시험 생성
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));

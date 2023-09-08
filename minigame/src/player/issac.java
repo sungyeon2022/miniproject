@@ -1,18 +1,16 @@
 package player;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.io.File;
 import java.util.Vector;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
-import player.Player;
 import SpriteSheet.SpriteSheet;
 import lombok.Data;
-import objectSetting.*;
+import objectSetting.Gap;
+import objectSetting.RockSize;
+import objectSetting.ViewDirect;
+import objectSetting.issacSize;
+import wall.wall;
 
 @Data
 
@@ -24,6 +22,8 @@ public class issac extends Player{
 	private SpriteSheet ssHead,ssBody;
 	private SpriteSheet ssTotal;
 	
+	private Vector<wall> walls;
+	
 	private int xPlusBody = 7, yPlusBody = 30;
 	private int yTotalSize;
 	private int item1Count = 0;
@@ -32,16 +32,16 @@ public class issac extends Player{
 	private int item4Count = 0;
 	private int moveSpeed = 10;
 	
-	public issac(JFrame app) {
+	public issac(JFrame app, Vector<wall> walls) {
 		super(app);
 		System.out.println(TAG + "make issac");
-		init();
+		init(walls);
 		setting();
 		batch();
 		
 	}
-	public void init() {
-		
+	public void init(Vector<wall> walls) {
+		this.walls = walls;
 		ssHead = new SpriteSheet("issac/issac.png","issacssHead",0,0,issacSize.issacHEADWIDTH,issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
@@ -54,13 +54,13 @@ public class issac extends Player{
 	
 	public void setting() {
 		setViewDirect(ViewDirect.DOWN);
-		setXPlayer(600);
+		setXPlayer(400);
 		setYPlayer(430);
 		setXPlayerCenter(getXPlayer()+issacSize.issacHEADWIDTH/2);
 		setYPlayerCenter(getXPlayer()+issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
-	}
+	} 
 	public void batch() {
 		getApp().add(ssHead,0);
 		getApp().add(ssBody,1);
@@ -80,6 +80,26 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
+						//시작
+						boolean isRockCollision = false;
+						// 바위 충돌 검사.
+						for(int i = 0; i < walls.size(); i++) {
+							if(!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+								if(getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall() && 
+									getXPlayerCenter() < walls.get(i).getXwall() + RockSize.WIDTH && 
+									getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i).getYwall() && 
+									getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
+									isRockCollision = true;
+									break;
+								}
+							}
+						}
+						if(isRockCollision) {
+							setRight(false);
+							refreshDirect();
+							break;
+						}
+						//끝
 						setXPlayer(getXPlayer()+1);
 						setXPlayerCenter(getXPlayerCenter()+1);
 						moveMotion();
@@ -111,6 +131,7 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
+						
 						setXPlayer(getXPlayer()-1);
 						setXPlayerCenter(getXPlayerCenter()-1);
 						moveMotion();
@@ -143,6 +164,7 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
+						
 						setYPlayer(getYPlayer()+1);//플레이어 이동시 좌표값 변경
 						setYPlayerCenter(getYPlayerCenter()+1);//중앙
 						moveMotion();
@@ -174,6 +196,8 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
+						
+						
 						setYPlayer(getYPlayer()-1);
 						setXPlayerCenter(getXPlayerCenter()-1);
 						moveMotion();
