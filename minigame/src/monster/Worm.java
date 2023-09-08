@@ -1,12 +1,15 @@
 package monster;
 
-import java.util.Vector;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
+import imgSize.Gap;
+import imgSize.ViewDirect;
+import imgSize.WormSize;
 import player.issac;
-import imgSize.*;
 
 public class Worm extends Monster {
 	private final static String GUBUN = "Worm : ";
@@ -16,38 +19,53 @@ public class Worm extends Monster {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				TimerTask task = new TimerTask() { //4초마다 방향전환
+					public void run() {
+						System.out.println("체크");
+						moveDirectCheck();
+					}
+				};
+				Timer timer = new Timer("Timer");
+				long delay = 100L;
+				long period = 4000L;
+				timer.schedule(task, delay, period);
 				while(!isDead()) {
 					if(getLife() <= 0) {
 						setDead(true);
 						break;
 					}
-					moveDirectCheck();
+//					moveDirectCheck();
+					moveRangeCheck();
 					moveUp();					
 					moveDown();
 					moveRight();
 					moveLeft();
 					moveMotion();
 					getSsMonster().drawObj(getXPlayer(), getYPlayer());
-					try {
+						try {
 						Thread.sleep(30);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if(isPlayerAttacking() == false) {
-						attack();
-					}
-
 				}
+				if(isPlayerAttacking() == false) {
+					attack();
+				}
+				//죽으면 루프멈추고끝
 				if(isDead()) {
+					timer.cancel();
 					dead();
 				}
+				
+				
 			}
 		}).start();
 	}
-	
+	//시작할 때 이미지 불러오기
 	public void init() {
 		setSsMonster(new SpriteSheet(getUrl(), "monster", 0, 0, getImgWidth(), getImgHeight())); 
 	}
+	//기본 세팅
 	public void setting() {
 		setViewDirect(ViewDirect.RIGHT);
 		setXPlayer(180);
@@ -61,38 +79,33 @@ public class Worm extends Monster {
 		getApp().add(getSsMonster(), 0);
 	}
 	
-	public void attckCheck(int direct, int range) {
-		setPlayerAttacking(true);
-		int xDistance = getIssac().getXPlayerCenter() - getXPlayerCenter();
-		int yDistance = getIssac().getYPlayerCenter() - getYPlayerCenter();
-		double distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
-		if(distance < range) {
-			monsterSpeed = 5;
-			attackMotion(direct - 1);
-			System.out.println("공격");
-		}
+	//공격 체크
+	public void attackCheck(int direct, int range) {
+
+		
 	}
+	
+	//공격 체크
 	@Override
 	public void attack() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				
 				switch (getViewDirect()) {
-					case ViewDirect.DOWN:
-						attckCheck(ViewDirect.DOWN, 20);
-						break;	
-					case ViewDirect.LEFT:
-						attckCheck(ViewDirect.LEFT, 20);
-						break;
-					case ViewDirect.UP:
-						attckCheck(ViewDirect.UP, 20);
-						break;
-					case ViewDirect.RIGHT:
-						attckCheck(ViewDirect.RIGHT, 20);
-						break;
+				case ViewDirect.DOWN:
+					attackCheck(ViewDirect.DOWN, getXPlayer());
+					break;	
+				case ViewDirect.LEFT:
+					attackCheck(ViewDirect.LEFT, getYPlayer());
+					break;
+				case ViewDirect.UP:
+					attackCheck(ViewDirect.UP, getXPlayer());
+					break;
+				case ViewDirect.RIGHT:
+					attackCheck(ViewDirect.RIGHT, getYPlayer());
+					break;
 				}
-				setPlayerAttacking(false);
+				
 			} 
 			
 		}).start();
@@ -101,6 +114,7 @@ public class Worm extends Monster {
 		getSsMonster().setXPos((WormSize.WIDTH * direct) + (Gap.COLUMGAP * direct));
 		getSsMonster().setYPos(WormSize.HEIGHT * 4 + Gap.ROWGAP * 4);
 		getSsMonster().drawObj(getXPlayer(), getYPlayer());
+		
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {
@@ -109,6 +123,8 @@ public class Worm extends Monster {
 		getSsMonster().setXPos(0);
 		getSsMonster().setYPos(WormSize.HEIGHT * direct + Gap.ROWGAP * direct);
 		getSsMonster().drawObj(getXPlayer(), getYPlayer());
+		
+		
 		getIssac().setLife(getIssac().getLife() - 1);	// 플레이어 생명력 1감소
 		getIssac().dead();
 		try {
@@ -116,5 +132,4 @@ public class Worm extends Monster {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-}
+	}}

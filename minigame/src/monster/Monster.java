@@ -1,20 +1,21 @@
 package monster;
 
-import java.util.Vector;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
-import player.Player;
-import player.issac;
+import imgSize.Gap;
+import imgSize.ViewDirect;
 import lombok.Data;
-import imgSize.*;//objectsetting에서 옮겨옴
+import player.Player;
+import player.issac;//objectsetting에서 옮겨옴
 
 @Data
 
 public class Monster extends Player{
 	private final static String TAG = "Monster : ";
-	public static int monsterSpeed = 1;
+	public static int monsterSpeed = 2;
 	private issac issac;
 	private SpriteSheet ssMonster;
 	private SpriteSheet ssDead;
@@ -39,46 +40,66 @@ public class Monster extends Player{
 	public void batch() {
 		
 	}
-	public void moveDirectCheck() {
-		// 오른쪽 
-		if((getXPlayerCenter() + getImgWidth() / 2 < getIssac().getXPlayerCenter()) &&(getXPlayer()>810) ) {
-			setLeft(false);
-			setUp(false);
-			setDown(false);
-			setRight(true);
-//			System.out.println("벌레 오른쪽");
-		} else {
+	public void moveRangeCheck() {
+		// 오른쪽
+		if((getXPlayer()==790) ) {
 			setRight(false);
-		}
-		// 왼쪽
-		if((getXPlayerCenter() - getImgWidth() / 2 > getIssac().getXPlayerCenter()) &&(getXPlayer()>130)) {
 			setLeft(true);
-			setUp(false);
 			setDown(false);
-			setRight(false);
-//			System.out.println("벌레 왼쪽");
-		} else {
-			setLeft(false);
+			setUp(false);
 		}
-		// 아래쪽
-		if((getXPlayerCenter() + getImgHeight() / 2 < getIssac().getXPlayerCenter()) &&(getYPlayer()<440)) {
+//		// 왼쪽
+		if((getXPlayer()==130)) {
 			setLeft(false);
+			setRight(true);
+			setDown(false);
+			setUp(false);
+		}
+//		// 아래쪽
+		if((getYPlayer()==440)) {
+			setLeft(false);
+			setRight(false);
+			setDown(false);
+			setUp(true);
+		}
+//		// 위쪽
+		if((getYPlayer()==100)) {
+			setLeft(false);
+			setRight(false);
 			setUp(false);
 			setDown(true);
-			setRight(false);
-//			System.out.println("벌레 아래쪽");
-		}else {
-			setDown(false);
-		}
-		// 위쪽
-		if((getXPlayerCenter() - getImgHeight() / 2 > getIssac().getXPlayerCenter()) &&(getYPlayer()>100)) {
-			setLeft(false);
-			setUp(true);
-			setDown(false);
-			setRight(false);
-//			System.out.println("벌레 위쪽");
-		}else {
-			setUp(false);
+		}	
+	}
+	public void moveDirectCheck() {
+		System.out.println("체크");
+		 Random rd = new Random();
+		 int directionSwitch = rd.nextInt(4);
+		 System.out.println(directionSwitch);
+		 switch(directionSwitch) {
+		 case 0:
+			 setUp(true);
+			 setDown(false);
+			 setLeft(false);
+			 setRight(false);
+			 break;
+		 case 1:
+			 setUp(false);
+			 setDown(true);
+			 setLeft(false);
+			 setRight(false);
+			 break;
+		 case 2:
+			 setUp(false);
+			 setDown(false);
+			 setLeft(true);
+			 setRight(false);
+			 break;
+		 case 3:
+			 setUp(false);
+			 setDown(false);
+			 setLeft(false);
+			 setRight(true);
+			 break;
 		}
 		
 
@@ -88,30 +109,26 @@ public class Monster extends Player{
 	public void moveRight() {
 		if(isRight()) {
 			setViewDirect(ViewDirect.RIGHT);
-			if(getXPlayerCenter() < issac.getXPlayerCenter()) {
 				setXPlayer(getXPlayer() + monsterSpeed);
 				setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
-			}
 		}
 	}
 	@Override
 	public void moveLeft() {
 		if(isLeft()) {
 			setViewDirect(ViewDirect.LEFT);
-			if(getXPlayerCenter() > issac.getXPlayerCenter()) {
 				setXPlayer(getXPlayer() - monsterSpeed);
 				setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
-			}
+			
 		}
 	}
 	@Override
 	public void moveUp() {
 		if(isUp()) {
 			setViewDirect(ViewDirect.UP);
-			if(getXPlayerCenter() > issac.getXPlayerCenter()) {
 				setYPlayer(getYPlayer() - monsterSpeed);
-				setXPlayerCenter(getYPlayerCenter() - monsterSpeed);
-			}
+				setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
+			
 		}
 		
 	}
@@ -119,10 +136,9 @@ public class Monster extends Player{
 	public void moveDown() {
 		if(isDown()) {
 			setViewDirect(ViewDirect.DOWN);
-			if(getXPlayerCenter() < issac.getXPlayerCenter()) {
 				setYPlayer(getYPlayer() + monsterSpeed);
-				setXPlayerCenter(getYPlayerCenter() + monsterSpeed);
-			}
+				setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
+			
 		}
 	}
 	public void moveMotion() {

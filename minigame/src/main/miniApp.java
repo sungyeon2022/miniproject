@@ -1,15 +1,22 @@
 package main;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 
+import imgSize.WormSize;
 import map.Background;
+<<<<<<< HEAD
 import monster.Worm;
 import player.*;
 import sword.Sword;
+=======
+import monster.Monster;
+import monster.Worm;
+import player.issac;
+>>>>>>> origin/임강욱
 import sword.SwordControl;
 
 //JFrame 참조 
@@ -19,7 +26,11 @@ public class miniApp extends JFrame {
 	private Background bg;
 	private issac issac;
 	private SwordControl swordControl;
+<<<<<<< HEAD
 	private Worm worm;
+=======
+	private Vector<Monster> monster;
+>>>>>>> origin/임강욱
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -41,6 +52,13 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		issac = new issac(app);
+<<<<<<< HEAD
+=======
+		swordControl = new SwordControl(app);
+		monster = new Vector<Monster>();
+		monster.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+		
+>>>>>>> origin/임강욱
 	}
 
 	// JFrame을 통한 창출력
