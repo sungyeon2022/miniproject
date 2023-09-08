@@ -34,6 +34,8 @@ public class SwordControl extends Sword{
 		init();
 		setting();
 		batch();
+		
+		
 	}
 
 	public void init() {
@@ -55,6 +57,5 @@ public class SwordControl extends Sword{
 		getApp().add(up_ssSword,4);
 		getApp().add(right_ssSword,0);
 	}
-	
 }
 

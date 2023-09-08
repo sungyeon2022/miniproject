@@ -46,7 +46,6 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		issac = new issac(app);
-		swordControl = new SwordControl(app);
 		monster = new Vector<Monster>();
 		monster.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 	}
@@ -88,7 +87,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					//휘두르는 모션
+					issac.attackMotion();
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_E) {

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
@@ -20,7 +17,6 @@
     <fullyQualifiedTypeName name="objectSetting.Gap"/>
     <fullyQualifiedTypeName name="objectSetting.isaacSize"/>
     <fullyQualifiedTypeName name="player.isaac"/>
-    <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="player.attack"/>
     <fullyQualifiedTypeName name="java.util.jar.JarFile"/>
     <fullyQualifiedTypeName name="java.time.chrono.IsoEra"/>
@@ -29,7 +25,6 @@
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
     <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="objectSetting.SwordSize"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="sword.Sword"/>
     <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
     <fullyQualifiedTypeName name="java.awt.Transparency"/>
@@ -37,14 +32,12 @@
     <fullyQualifiedTypeName name="imgSize.Lifesize"/>
     <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="monster.Monster"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="java.awt.GraphicsConfigTemplate"/>
     <fullyQualifiedTypeName name="java.awt.GraphicsDevice"/>
     <fullyQualifiedTypeName name="java.awt.Frame"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.management.DescriptorAccess"/>
     <fullyQualifiedTypeName name="java.awt.GraphicsConfiguration"/>
-    <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
     <fullyQualifiedTypeName name="java.awt.geom.AffineTransform"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
@@ -52,12 +45,19 @@
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
-    <fullyQualifiedTypeName name="imgSize.SwordSize"/>
     <fullyQualifiedTypeName name="imgSize.issacSize"/>
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="java.net.Socket"/>
-    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="sword.SwordControl"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="main.miniApp"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
+    <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
+    <fullyQualifiedTypeName name="imgSize.SwordSize"/>
+    <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
+    <fullyQualifiedTypeName name="imgSize.SwordMotionSize"/>
+    <fullyQualifiedTypeName name="player.issac"/>
 </qualifiedTypeNameHistroy>

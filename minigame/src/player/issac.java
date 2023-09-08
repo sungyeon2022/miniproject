@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.xml.stream.events.StartDocument;
 
 import player.Player;
 import sword.SwordControl;
@@ -310,6 +311,46 @@ public class issac extends Player{
 				
 			}
 		}).start();
+	}	
+	public void attackMotion() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int xmotion = 0;
+				int ymotion = 1;
+				if(isPlayerAttacking()==false) {
+					setPlayerAttacking(true);
+					while (true) {
+						if (isDown()&&getViewDirect()==ViewDirect.DOWN) {
+							if(ymotion>4&&xmotion<1) {
+								ymotion=1;
+								xmotion++;
+							}
+							if(xmotion==2&&ymotion>2){
+								xmotion=1;
+								ymotion=1;
+							}
+							System.out.println(ymotion);
+							System.out.println(xmotion);
+							swordControl.getDown_ssSword().setXPos((SwordMotionSize.IMGWIDTH/2)*xmotion);
+							swordControl.getDown_ssSword().setYPos((SwordSize.SWORDIMGHEIGHT-SwordMotionSize.IMGHEIGHT)+(SwordMotionSize.HEIGHT*ymotion));
+							if(getViewDirect()==ViewDirect.DOWN) {
+								swordControl.getDown_ssSword().setWidth(SwordMotionSize.IMGWIDTH/2);
+								swordControl.getDown_ssSword().setWidth(SwordMotionSize.IMGHEIGHT/4);
+								swordControl.getDown_ssSword().drawObj(getXPlayer(), getYPlayer());
+								ymotion++;
+							}
+						}
+						try {
+							Thread.sleep(40);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				
+			}
+		}).start();
 	}
 	public void refreshDirect() {
 		if(issac.isDown()) {
@@ -339,7 +380,5 @@ public class issac extends Player{
 			}
 			
 		}
-	}
-	public void takeDamgeMotion() {
 	}
 }
