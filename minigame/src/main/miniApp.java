@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 
 import map.Background;
+import monster.Worm;
 import player.*;
 import sword.Sword;
 import sword.SwordControl;
@@ -18,6 +19,7 @@ public class miniApp extends JFrame {
 	private Background bg;
 	private issac issac;
 	private SwordControl swordControl;
+	private Worm worm;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {

@@ -47,7 +47,6 @@ public class issac extends Player{
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP), issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH, issacSize.issacTOTALHEIGHT);
 		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
-		swordControl = new SwordControl(getApp());
 		ssLife = new Vector<SpriteSheet>();
 		for(int i =0;i<getLife();i++) {
 			this.ssLife.add(i,new SpriteSheet("issac/life.png","life",0,0,Lifesize.LIFEWIDTH,Lifesize.LIFEHEIGHT));
@@ -80,6 +79,7 @@ public class issac extends Player{
 	public void batch() {
 		getApp().add(ssHead,0);
 		getApp().add(ssBody,1);
+		swordControl = new SwordControl(getApp());	
 		for(int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
 		}
@@ -112,7 +112,10 @@ public class issac extends Player{
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
-					swordControl.getSsSword().drawObj(getXPlayer(), getYPlayer());
+					swordControl.getLeft_ssSword().erase();
+					swordControl.getDown_ssSword().erase();
+					swordControl.getUp_ssSword().erase();
+					swordControl.getRight_ssSword().drawObj(getXPlayer()+34, getYPlayer()+32);
 				}
 			}
 		}).start(); 
@@ -144,6 +147,10 @@ public class issac extends Player{
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+					swordControl.getRight_ssSword().erase();
+					swordControl.getDown_ssSword().erase();
+					swordControl.getUp_ssSword().erase();
+					swordControl.getLeft_ssSword().drawObj(getXPlayer()-36, getYPlayer()+27);
 				}
 			}
 		}).start(); 
@@ -175,6 +182,10 @@ public class issac extends Player{
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+					swordControl.getRight_ssSword().erase();
+					swordControl.getLeft_ssSword().erase();
+					swordControl.getUp_ssSword().erase();
+					swordControl.getDown_ssSword().drawObj(getXPlayer()+9, getYPlayer()+50);
 				}
 			}
 		}).start(); 
@@ -205,9 +216,11 @@ public class issac extends Player{
 					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
-					
 					ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
-					
+					swordControl.getRight_ssSword().erase();
+					swordControl.getDown_ssSword().erase();
+					swordControl.getLeft_ssSword().erase();
+					swordControl.getUp_ssSword().drawObj(getXPlayer()+13, getYPlayer()-25);
 				}
 			}
 		}).start(); 
@@ -232,6 +245,10 @@ public class issac extends Player{
 								ssBody.setYPos(issacSize.issacHEADWIDTH+Gap.COLUMGAP);//X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼 더해서 좌표값을 내려줍니다
 								ssHead.drawObj(getXPlayer(), getYPlayer()); //그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);//X와Y좌표를 기준으로 머리를 생성하고 머리와 몸이 겹치지 않게하기위해 사용합니다.
+								swordControl.getLeft_ssSword().erase();
+								swordControl.getRight_ssSword().erase();
+								swordControl.getUp_ssSword().erase();
+								swordControl.getDown_ssSword().drawObj(getXPlayer()+9, getYPlayer()+50);
 								motion += 1;
 							}
 						}
@@ -244,6 +261,10 @@ public class issac extends Player{
 								ssBody.setYPos(issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT*2+Gap.ROWGAP*3);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+								swordControl.getRight_ssSword().erase();
+								swordControl.getDown_ssSword().erase();
+								swordControl.getUp_ssSword().erase();
+								swordControl.getLeft_ssSword().drawObj(getXPlayer()-36, getYPlayer()+27);
 								motion += 1;
 							}
 						}
@@ -256,6 +277,10 @@ public class issac extends Player{
 								ssBody.setYPos(issacSize.issacHEADWIDTH+Gap.COLUMGAP);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+								swordControl.getLeft_ssSword().erase();
+								swordControl.getDown_ssSword().erase();
+								swordControl.getRight_ssSword().erase();
+								swordControl.getUp_ssSword().drawObj(getXPlayer()+13, getYPlayer()-25);
 								motion += 1;
 							}
 						}
@@ -268,6 +293,10 @@ public class issac extends Player{
 								ssBody.setYPos(issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT+Gap.ROWGAP*2);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
+								swordControl.getLeft_ssSword().erase();
+								swordControl.getDown_ssSword().erase();
+								swordControl.getUp_ssSword().erase();
+								swordControl.getRight_ssSword().drawObj(getXPlayer()+34, getYPlayer()+32);
 								motion += 1;
 							}
 						}

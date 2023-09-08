@@ -65,11 +65,9 @@ public class SpriteSheet extends JLabel{
 		setLocation(x,y);
 //		System.out.println(TAG + gubun + "그려짐");
 	}
-	public void rotateImageandDdraw(BufferedImage img,int digree) {
-		newimg = null;
-		newimg = new BufferedImage(img.getHeight(), img.getWidth(), img.getType());
-		Graphics2D graphics = (Graphics2D) newimg.getGraphics();
-		
+	
+	public void erase() {
+		setIcon(null);
 	}
 	
 	/*
