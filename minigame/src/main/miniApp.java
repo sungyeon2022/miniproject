@@ -6,6 +6,8 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 
+import org.w3c.dom.Text;
+
 import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
@@ -15,6 +17,7 @@ import monster.Monster;
 import monster.Worm;
 import player.issac;
 import sword.SwordControl;
+import testimg.testcontorl;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -23,6 +26,7 @@ public class miniApp extends JFrame {
 	private Background bg;
 	private issac issac;
 	private SwordControl swordControl;
+	private testcontorl testcontorl;
 	private Worm worm;
 	private Vector<Monster> monster;
 
@@ -109,8 +113,9 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setUp(false);
 					issac.refreshDirect();
-				}else if(e.getKeyCode() == KeyEvent.VK_A) {
-					
+				} else if(e.getKeyCode() == KeyEvent.VK_A) {
+					System.out.println("a키 떨어짐");
+					issac.setPlayerAttack(false);
 				}
 
 			}

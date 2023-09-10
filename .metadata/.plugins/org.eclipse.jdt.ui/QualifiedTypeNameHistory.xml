@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.io.InputStream"/>
-    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
-    <fullyQualifiedTypeName name="java.awt.Image"/>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
-    <fullyQualifiedTypeName name="player.isaacSize"/>
-    <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.Appendable"/>
     <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
     <fullyQualifiedTypeName name="lombok.Getter"/>
     <fullyQualifiedTypeName name="lombok.Setter"/>
     <fullyQualifiedTypeName name="org.jcp.xml.dsig.internal.dom.DOMSubTreeData"/>
-    <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="objectSetting.Gap"/>
     <fullyQualifiedTypeName name="objectSetting.isaacSize"/>
@@ -23,7 +16,6 @@
     <fullyQualifiedTypeName name="player.sword"/>
     <fullyQualifiedTypeName name="player.Player"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
-    <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="objectSetting.SwordSize"/>
     <fullyQualifiedTypeName name="sword.Sword"/>
     <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
@@ -35,7 +27,6 @@
     <fullyQualifiedTypeName name="java.awt.GraphicsConfigTemplate"/>
     <fullyQualifiedTypeName name="java.awt.GraphicsDevice"/>
     <fullyQualifiedTypeName name="java.awt.Frame"/>
-    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.management.DescriptorAccess"/>
     <fullyQualifiedTypeName name="java.awt.GraphicsConfiguration"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
@@ -46,18 +37,27 @@
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
     <fullyQualifiedTypeName name="imgSize.issacSize"/>
-    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="java.net.Socket"/>
     <fullyQualifiedTypeName name="sword.SwordControl"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="main.miniApp"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
-    <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
-    <fullyQualifiedTypeName name="imgSize.SwordSize"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
-    <fullyQualifiedTypeName name="imgSize.SwordMotionSize"/>
+    <fullyQualifiedTypeName name="lombok.Lombok"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
+    <fullyQualifiedTypeName name="org.w3c.dom.Text"/>
+    <fullyQualifiedTypeName name="testimg.test"/>
+    <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
+    <fullyQualifiedTypeName name="java.lang.Boolean"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="java.awt.TexturePaint"/>
+    <fullyQualifiedTypeName name="testimg.testcontorl"/>
+    <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
     <fullyQualifiedTypeName name="player.issac"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="imgSize.SwordSize"/>
+    <fullyQualifiedTypeName name="imgSize.SwordMotionSize"/>
 </qualifiedTypeNameHistroy>

@@ -53,9 +53,9 @@ public class SwordControl extends Sword{
 	}
 	public void batch() {
 		getApp().add(down_ssSword, 0);
-		getApp().add(left_ssSword,0);
+		getApp().add(left_ssSword,3);
 		getApp().add(up_ssSword,4);
-		getApp().add(right_ssSword,0);
+		getApp().add(right_ssSword,3);
 	}
 }
 
