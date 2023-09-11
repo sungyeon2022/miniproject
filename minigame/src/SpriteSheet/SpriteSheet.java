@@ -65,9 +65,7 @@ public class SpriteSheet extends JLabel{
 	}
 	
 	public void erase() {
-		setUrl(null);
-		setWidth(0);
-		setHeight(0);
+		setIcon(imgObj);
 	}
 	
 	/*
