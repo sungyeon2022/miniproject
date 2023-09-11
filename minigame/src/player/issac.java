@@ -205,7 +205,7 @@ public class issac extends Player{
 							break;
 						}
 						setYPlayer(getYPlayer()-1);
-						setXPlayerCenter(getXPlayerCenter()-1);
+						setYPlayerCenter(getYPlayerCenter()-1);
 						moveMotion();
 						try {
 							Thread.sleep(moveSpeed);

@@ -42,28 +42,28 @@ public class Monster extends Player{
 	}
 	public void moveRangeCheck() {
 		// 오른쪽
-		if((getXPlayer()==790) ) {
+		if((getXPlayer()>790) ) {
 			setRight(false);
 			setLeft(true);
 			setDown(false);
 			setUp(false);
 		}
 //		// 왼쪽
-		if((getXPlayer()==130)) {
+		if((getXPlayer()<130)) {
 			setLeft(false);
 			setRight(true);
 			setDown(false);
 			setUp(false);
 		}
 //		// 아래쪽
-		if((getYPlayer()==440)) {
+		if((getYPlayer()>440)) {
 			setLeft(false);
 			setRight(false);
 			setDown(false);
 			setUp(true);
 		}
 //		// 위쪽
-		if((getYPlayer()==100)) {
+		if((getYPlayer()<100)) {
 			setLeft(false);
 			setRight(false);
 			setUp(false);
@@ -71,10 +71,8 @@ public class Monster extends Player{
 		}	
 	}
 	public void moveDirectCheck() {
-		System.out.println("체크");
 		 Random rd = new Random();
 		 int directionSwitch = rd.nextInt(4);
-		 System.out.println(directionSwitch);
 		 switch(directionSwitch) {
 		 case 0:
 			 setUp(true);
