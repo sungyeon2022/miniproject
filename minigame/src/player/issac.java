@@ -131,7 +131,24 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
-						
+						boolean isRockCollision = false;
+						// 바위 충돌 검사.
+						for(int i = 0; i < walls.size(); i++) {
+							if(!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+								if(getXPlayerCenter() > walls.get(i).getXwall() && 
+									getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall() + RockSize.WIDTH && 
+									getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i).getYwall() && 
+									getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
+									isRockCollision = true;
+									break;
+								}
+							}
+						}
+						if(isRockCollision) {
+							setLeft(false);
+							refreshDirect();
+							break;
+						}
 						setXPlayer(getXPlayer()-1);
 						setXPlayerCenter(getXPlayerCenter()-1);
 						moveMotion();
@@ -199,7 +216,7 @@ public class issac extends Player{
 						
 						
 						setYPlayer(getYPlayer()-1);
-						setXPlayerCenter(getXPlayerCenter()-1);
+						setYPlayerCenter(getYPlayerCenter()-1);
 						moveMotion();
 						try {
 							Thread.sleep(moveSpeed);
