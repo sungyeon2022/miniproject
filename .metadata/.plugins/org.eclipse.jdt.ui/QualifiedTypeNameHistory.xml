@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.Appendable"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.Getter"/>
     <fullyQualifiedTypeName name="lombok.Setter"/>
     <fullyQualifiedTypeName name="org.jcp.xml.dsig.internal.dom.DOMSubTreeData"/>
     <fullyQualifiedTypeName name="java.io.File"/>
@@ -29,7 +26,6 @@
     <fullyQualifiedTypeName name="java.awt.GraphicsConfiguration"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
     <fullyQualifiedTypeName name="java.awt.geom.AffineTransform"/>
-    <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="java.awt.image.AffineTransformOp"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
@@ -39,25 +35,29 @@
     <fullyQualifiedTypeName name="sword.SwordControl"/>
     <fullyQualifiedTypeName name="main.miniApp"/>
     <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
-    <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
-    <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
-    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="org.w3c.dom.Text"/>
     <fullyQualifiedTypeName name="testimg.test"/>
     <fullyQualifiedTypeName name="java.lang.Boolean"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="java.awt.TexturePaint"/>
     <fullyQualifiedTypeName name="testimg.testcontorl"/>
-    <fullyQualifiedTypeName name="imgSize.SwordSize"/>
     <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="imgSize.SwordMotionSize"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
-    <fullyQualifiedTypeName name="monster.Monster"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.Lombok"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="monster.Monster"/>
+    <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
+    <fullyQualifiedTypeName name="imgSize.SwordSize"/>
+    <fullyQualifiedTypeName name="java.lang.FdLibm.Pow"/>
+    <fullyQualifiedTypeName name="imgSize.WormSize"/>
     <fullyQualifiedTypeName name="monster.Worm"/>
+    <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthInternalFrameUI"/>
+    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
 </qualifiedTypeNameHistroy>

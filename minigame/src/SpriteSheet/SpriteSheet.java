@@ -34,8 +34,6 @@ public class SpriteSheet extends JLabel{
 	private int height;
 	private ImageIcon imgObj;
 	
-	public SpriteSheet() {}
-	
 	public SpriteSheet(String url, String gubun, int xPos, int yPos, int width, int height) {
 		this.url = url;
 		this.gubun = gubun;
@@ -43,7 +41,6 @@ public class SpriteSheet extends JLabel{
 		this.yPos = yPos;
 		this.width = width;
 		this.height = height;
-		loadSpriteimage(url);
 	}
 	public void loadSpriteimage(String url) {
 		try {
@@ -54,7 +51,8 @@ public class SpriteSheet extends JLabel{
 	}//url을 통해 이미지 파일을 가져옴 없을경우 SpriteSheet: 이미지 로드 실패 출력
 	
 	
-	public BufferedImage getObjimg() {
+	public synchronized BufferedImage getObjimg() {
+		loadSpriteimage(url);
 		return imgSprite.getSubimage(xPos, yPos, width, height);
 	}//이미지 파일에서 가져온 이미지를 x,y좌표 기준 높이와 너비로 자른후 버퍼에 저장
 	
@@ -67,7 +65,9 @@ public class SpriteSheet extends JLabel{
 	}
 	
 	public void erase() {
-		setIcon(null);
+		setUrl(null);
+		setWidth(0);
+		setHeight(0);
 	}
 	
 	/*
