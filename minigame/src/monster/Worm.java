@@ -9,7 +9,10 @@ import SpriteSheet.SpriteSheet;
 import imgSize.Gap;
 import imgSize.ViewDirect;
 import imgSize.WormSize;
+import lombok.Data;
 import player.issac;
+
+@Data
 
 public class Worm extends Monster {
 	private final static String GUBUN = "Worm : ";
