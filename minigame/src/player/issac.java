@@ -30,6 +30,7 @@ public class issac extends Player {
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
 	private Worm worm;
+	private Vector<Monster> monsters;
 
 	private int xPlusBody = 7, yPlusBody = 30;
 	private int yTotalSize;
@@ -39,15 +40,15 @@ public class issac extends Player {
 	private int item4Count = 0;
 	private int moveSpeed = 7;
 
-	public issac(JFrame app) {
+	public issac(JFrame app, Vector<Monster> monsters) {
 		super(app);
 		System.out.println(TAG + "make issac");
-		init();
+		init(monsters);
 		setting();
 		batch();
 	}
 
-	public void init() {
+	public void init(Vector<Monster> monsters) {
 		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,
 				issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
@@ -56,6 +57,7 @@ public class issac extends Player {
 				issacSize.issacTOTALHEIGHT);
 		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
 		ssLife = new Vector<SpriteSheet>();
+		this.monsters = monsters;
 		for (int i = 0; i < getLife(); i++) {
 			this.ssLife.add(i,
 					new SpriteSheet("issac/life.png", "life", 0, 0, Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
@@ -120,6 +122,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					attack();
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -151,6 +154,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					attack();
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -182,6 +186,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					attack();
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -213,6 +218,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					attack();
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -227,7 +233,7 @@ public class issac extends Player {
 		new Thread(new Runnable() {
 
 			@Override
-			public void run() {
+			public synchronized void run() {
 				int motion = 0;
 				if (isPlayerMoveStart() == false) {
 					setPlayerMoveStart(true);
@@ -261,6 +267,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
+							attack();
 						} else if (isLeft() && getViewDirect() == ViewDirect.LEFT) {
 							if (motion > 9)
 								motion = 0;
@@ -284,6 +291,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
+							attack();
 						} else if (isUp() && getViewDirect() == ViewDirect.UP) {
 							if (motion > 9)
 								motion = 0;
@@ -305,6 +313,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
+							attack();
 						} else if (isRight() && getViewDirect() == ViewDirect.RIGHT) {
 							if (motion > 9)
 								motion = 0;
@@ -325,9 +334,10 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
+							attack();
 						}
 						try {
-							Thread.sleep(40);
+							Thread.sleep(15);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -501,34 +511,29 @@ public class issac extends Player {
 
 	@Override
 	public void attack() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				double swordXcenter;
-				double swordYcenter;
-				double monsterXcenter = worm.getSsMonster().getX() + (WormSize.WIDTH / 2);
-				double monsterYcenter = worm.getSsMonster().getY() + (WormSize.HEIGHT / 2);
-				double swordhalfdiagnoal = Math
-						.sqrt(Math.pow(SwordSize.SWORDWIDTH / 2, 2) + Math.pow(SwordSize.SWORDYHEIGHT / 2, 2));
-				double monsterhalfdiagnoal = Math.sqrt(Math.pow(worm.getSsMonster().getWidth() / 1, 2)
-						+ Math.pow(worm.getSsMonster().getHeight() / 2, 2));
-				if (isPlayerAttacking()) {
+		for (int i = 0; i < monsters.size(); i++) {
+			double swordXcenter = swordControl.getSsSword().getX() - (swordControl.getSsSword().getWidth() / 2);
+			double swordYcenter = swordControl.getSsSword().getY() - (swordControl.getSsSword().getHeight() / 2);
+			double monsterXcenter = monsters.get(i).getSsMonster().getX()
+					+ (monsters.get(i).getSsMonster().getWidth() / 2);
+			double monsterYcenter = monsters.get(i).getSsMonster().getY()
+					+ (monsters.get(i).getSsMonster().getHeight() / 2);
+			double swordhalfdiagnoal = Math
+					.sqrt(Math.pow(SwordSize.SWORDWIDTH / 2, 2) + Math.pow(SwordSize.SWORDYHEIGHT / 2, 2));
+			double monsterhalfdiagnoal = Math.sqrt(Math.pow(monsters.get(i).getSsMonster().getWidth() / 2, 2)
+					+ Math.pow(monsters.get(i).getSsMonster().getHeight() / 2, 2));
+			double distance = Math
+					.sqrt(Math.pow(swordXcenter - monsterYcenter, 2) + Math.pow(swordYcenter - monsterYcenter, 2));
+			if (isPlayerAttacking()) {
 
-				} else {
-					if (issac.getViewDirect() == ViewDirect.DOWN) {
-						swordXcenter = swordControl.getSsSword().getX() + (SwordSize.SWORDWIDTH / 2);
-						swordYcenter = swordControl.getSsSword().getY() + (SwordSize.SWORDYHEIGHT / 2);
-
-					} else if (issac.getViewDirect() == ViewDirect.UP) {
-
-					} else if (issac.getViewDirect() == ViewDirect.LEFT) {
-
-					} else if (issac.getViewDirect() == ViewDirect.RIGHT) {
-
-					}
-
+			} else {
+				if (swordhalfdiagnoal + monsterhalfdiagnoal >= distance) {
+					monsters.get(i).setLife(monsters.get(i).getLife() - 1);
+					System.out.println(monsterhalfdiagnoal + " " + swordhalfdiagnoal + " " + distance + " "
+							+ monsters.get(i).getSsMonster().getWidth());
+					break;
 				}
 			}
-		}).start();
+		}
 	}
 }

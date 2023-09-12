@@ -28,7 +28,7 @@ public class miniApp extends JFrame {
 	private SwordControl swordControl;
 	private testcontorl testcontorl;
 	private Worm worm;
-	private Vector<Monster> monster;
+	private Vector<Monster> monsters;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -49,9 +49,9 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		bg = new Background(app);
-		issac = new issac(app);
-		monster = new Vector<Monster>();
-		monster.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+		monsters = new Vector<Monster>();
+		issac = new issac(app,monsters);
+		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 	}
 
 	// JFrame을 통한 창출력
