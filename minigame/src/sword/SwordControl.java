@@ -39,12 +39,12 @@ public class SwordControl extends Sword{
 	}
 
 	public void init() {
-		ssSword = new SpriteSheet("sword/sword_down.png","sword",SwordSize.SWORDIMGWIDTH-SwordSize.SWORDXGAP-SwordSize.SWORDWIDTH,SwordSize.SWORDYGAP,SwordSize.SWORDWIDTH,SwordSize.SWORDYHEIGHT);
+		ssSword = new SpriteSheet("sword/sword_down.png","sword",SwordSize.SWORDIMGWIDTH-SwordSize.SWORDXGAP-SwordSize.SWORDWIDTH,SwordSize.SWORDYGAP,SwordSize.SWORDWIDTH,SwordSize.SWORDYHEIGHT-2);
 		
 	}
 	public void setting() {
 		setDirection(ViewDirect.DOWN);
-		setXSword(489);
+		setXSword(492);
 		setYSword(480);
 		ssSword.drawObj(getXSword(), getYSword());
 		

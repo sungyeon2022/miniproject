@@ -260,10 +260,10 @@ public class issac extends Player {
 											SwordSize.SWORDIMGWIDTH - SwordSize.SWORDXGAP - SwordSize.SWORDWIDTH);
 									swordControl.getSsSword().setYPos(SwordSize.SWORDYGAP);
 									swordControl.getSsSword().setWidth(SwordSize.SWORDWIDTH);
-									swordControl.getSsSword().setHeight(SwordSize.SWORDYHEIGHT);
+									swordControl.getSsSword().setHeight(SwordSize.SWORDYHEIGHT-2);
 									swordControl.getSsSword().setUrl("sword/sword_down.png");
 									if (swordControl.getSsSword().getUrl().equals("sword/sword_down.png"))
-										swordControl.getSsSword().drawObj(getXPlayer() + 9, getYPlayer() + 50);
+										swordControl.getSsSword().drawObj(getXPlayer() + 12, getYPlayer() + 50);
 								}
 								motion += 1;
 							}
@@ -280,14 +280,14 @@ public class issac extends Player {
 								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 								if (!isPlayerAttacking()) {
 									swordControl.getSsSword().setXPos(
-											SwordSize.SWORDIMGHEIGHT - SwordSize.SWORDYGAP - SwordSize.SWORDYHEIGHT);
+											SwordSize.SWORDIMGHEIGHT - SwordSize.SWORDYGAP - SwordSize.SWORDYHEIGHT+3);
 									swordControl.getSsSword().setYPos(
 											SwordSize.SWORDIMGWIDTH - SwordSize.SWORDXGAP - SwordSize.SWORDWIDTH);
-									swordControl.getSsSword().setWidth(SwordSize.SWORDYHEIGHT);
-									swordControl.getSsSword().setHeight(SwordSize.SWORDWIDTH);
+									swordControl.getSsSword().setWidth(SwordSize.SWORDYHEIGHT-3);
+									swordControl.getSsSword().setHeight(SwordSize.SWORDWIDTH-2);
 									swordControl.getSsSword().setUrl("sword/sword_left.png");
 									if (swordControl.getSsSword().getUrl().equals("sword/sword_left.png"))
-										swordControl.getSsSword().drawObj(getXPlayer() - 36, getYPlayer() + 27);
+										swordControl.getSsSword().drawObj(getXPlayer() - 36, getYPlayer() + 29);
 								}
 								motion += 1;
 							}
@@ -302,14 +302,14 @@ public class issac extends Player {
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 								if (!isPlayerAttacking()) {
-									swordControl.getSsSword().setXPos(SwordSize.SWORDXGAP);
+									swordControl.getSsSword().setXPos(SwordSize.SWORDXGAP+2);
 									swordControl.getSsSword().setYPos(
-											SwordSize.SWORDIMGHEIGHT - SwordSize.SWORDYGAP - SwordSize.SWORDYHEIGHT);
-									swordControl.getSsSword().setWidth(SwordSize.SWORDWIDTH);
+											SwordSize.SWORDIMGHEIGHT - SwordSize.SWORDYGAP - SwordSize.SWORDYHEIGHT+2);
+									swordControl.getSsSword().setWidth(SwordSize.SWORDWIDTH-1);
 									swordControl.getSsSword().setHeight(SwordSize.SWORDYHEIGHT);
 									swordControl.getSsSword().setUrl("sword/sword_up.png");
 									if (swordControl.getSsSword().getUrl().equals("sword/sword_up.png"))
-										swordControl.getSsSword().drawObj(getXPlayer() + 13, getYPlayer() - 25);
+										swordControl.getSsSword().drawObj(getXPlayer() + 12, getYPlayer() - 25);
 								}
 								motion += 1;
 							}
@@ -330,7 +330,7 @@ public class issac extends Player {
 									swordControl.getSsSword().setHeight(SwordSize.SWORDWIDTH);
 									swordControl.getSsSword().setUrl("sword/sword_right.png");
 									if (swordControl.getSsSword().getUrl().equals("sword/sword_right.png"))
-										swordControl.getSsSword().drawObj(getXPlayer() + 34, getYPlayer() + 32);
+										swordControl.getSsSword().drawObj(getXPlayer() + 34, getYPlayer() + 28);
 								}
 								motion += 1;
 							}
