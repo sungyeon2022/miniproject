@@ -6,6 +6,8 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 
+import org.w3c.dom.Text;
+
 import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
@@ -15,6 +17,7 @@ import monster.Monster;
 import monster.Worm;
 import player.issac;
 import sword.SwordControl;
+import testimg.testcontorl;
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -23,8 +26,9 @@ public class miniApp extends JFrame {
 	private Background bg;
 	private issac issac;
 	private SwordControl swordControl;
+	private testcontorl testcontorl;
 	private Worm worm;
-	private Vector<Monster> monster;
+	private Vector<Monster> monsters;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -45,10 +49,9 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		bg = new Background(app);
-		issac = new issac(app);
-		swordControl = new SwordControl(app);
-		monster = new Vector<Monster>();
-		monster.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+		monsters = new Vector<Monster>();
+		issac = new issac(app,monsters);
+		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 	}
 
 	// JFrame을 통한 창출력
@@ -88,7 +91,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					//휘두르는 모션
+					issac.attackMotion();
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_E) {
@@ -110,8 +113,9 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setUp(false);
 					issac.refreshDirect();
-				}else if(e.getKeyCode() == KeyEvent.VK_A) {
-					
+				} else if(e.getKeyCode() == KeyEvent.VK_A) {
+					System.out.println("a키 떨어짐");
+					issac.setPlayerAttack(false);
 				}
 
 			}
