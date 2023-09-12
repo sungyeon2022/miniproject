@@ -1,5 +1,6 @@
 package SpriteSheet;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfigTemplate;
@@ -16,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 
 import lombok.Data;
 
@@ -61,6 +63,7 @@ public class SpriteSheet extends JLabel{
 		setIcon(imgObj);
 		setSize(width,height);
 		setLocation(x,y);
+		setBorder(new LineBorder(Color.black));
 //		System.out.println(TAG + gubun + "그려짐");
 	}
 	
