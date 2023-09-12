@@ -54,10 +54,10 @@ public class issac extends Player{
 	
 	public void setting() {
 		setViewDirect(ViewDirect.DOWN);
-		setXPlayer(400);
-		setYPlayer(430);
+		setXPlayer(510);
+		setYPlayer(300);
 		setXPlayerCenter(getXPlayer()+issacSize.issacHEADWIDTH/2);
-		setYPlayerCenter(getXPlayer()+issacSize.issacHEADHEIGHT);
+		setYPlayerCenter(getYPlayer()+issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer()+xPlusBody, getYPlayer()+yPlusBody);
 	} 
@@ -80,9 +80,8 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
-						//시작
+						//돌 충돌 체크 시작
 						boolean isRockCollision = false;
-						// 바위 충돌 검사.
 						for(int i = 0; i < walls.size(); i++) {
 							if(!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
 								if(getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall() && 
@@ -99,7 +98,7 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
-						//끝
+						//돌 충돌 체크 끝
 						setXPlayer(getXPlayer()+1);
 						setXPlayerCenter(getXPlayerCenter()+1);
 						moveMotion();
@@ -132,13 +131,15 @@ public class issac extends Player{
 							break;
 						}
 						boolean isRockCollision = false;
-						// 바위 충돌 검사.
+						//돌 충돌 체크 시작
 						for(int i = 0; i < walls.size(); i++) {
 							if(!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+								
 								if(getXPlayerCenter() > walls.get(i).getXwall() && 
 									getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall() + RockSize.WIDTH && 
 									getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i).getYwall() && 
-									getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
+									getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT
+									) {
 									isRockCollision = true;
 									break;
 								}
@@ -149,6 +150,7 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
+						//돌 충돌 체크 끝
 						setXPlayer(getXPlayer()-1);
 						setXPlayerCenter(getXPlayerCenter()-1);
 						moveMotion();
@@ -181,7 +183,25 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
-						
+						//돌 충돌 체크 시작
+						boolean isRockCollision = false;
+						for(int i = 0; i < walls.size(); i++) {
+							if(!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+								if(getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall() + 5 && 
+									getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall() + RockSize.WIDTH - 5 && 
+									getYPlayerCenter() + (issacSize.issacHEADHEIGHT- yPlusBody) + 5 > walls.get(i).getYwall() && 
+									getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
+									isRockCollision = true;
+									break;
+								}
+							}
+						}
+						if(isRockCollision) {
+							setUp(false);
+							refreshDirect();
+							break;
+						}
+						//돌 충돌 체크 끝
 						setYPlayer(getYPlayer()+1);//플레이어 이동시 좌표값 변경
 						setYPlayerCenter(getYPlayerCenter()+1);//중앙
 						moveMotion();
@@ -213,8 +233,25 @@ public class issac extends Player{
 							refreshDirect();
 							break;
 						}
-						
-						
+						boolean isRockCollision = false;
+						//돌 충돌 체크 시작
+						for(int i = 0; i < walls.size(); i++) {
+							if(!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+								if(getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall() + 5 && 
+									getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall() + RockSize.WIDTH - 5 && 
+									getYPlayerCenter()> walls.get(i).getYwall() && 
+									getYPlayerCenter() + (issacSize.issacBODYHEIGHT - yPlusBody)  < walls.get(i).getYwall() + RockSize.HEIGHT ) {
+									isRockCollision = true;
+									break;
+								}
+							}
+						}
+						if(isRockCollision) {
+							setUp(false);
+							refreshDirect();
+							break;
+						}
+						//돌 충돌 체크 끝
 						setYPlayer(getYPlayer()-1);
 						setYPlayerCenter(getYPlayerCenter()-1);
 						moveMotion();

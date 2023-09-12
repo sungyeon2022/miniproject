@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import item.Bomb;
 import item.Heart;
 import item.Item;
-import item.Key;
 import item.Pill;
 import map.Background;
 import objectSetting.BombSize;
@@ -55,22 +54,22 @@ public class miniApp extends JFrame {
 		//아이템 시험 생성
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
-		items.add(new Key(app, "item/key.png", "key", 340, 400, KeySize.WIDTH,KeySize.HEIGHT));
 		items.add(new Pill(app, "item/pill1.png", "Power2", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
 		items.add(new Pill(app, "item/pill2.png", "PS1", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
 		items.add(new Pill(app, "item/pill3.png", "Speed2", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
 		//벽 시험 생성 및 10초후 제거
 		new Thread(new Runnable() {
 			@Override
+			
 			public void run() {
-				walls.add(new rock(app,455,100));
-				walls.add(new rock(app,455,150));
+				//walls.add(new rock(app,455,100));
+				//walls.add(new rock(app,455,150));
 				walls.add(new rock(app,455,200));
 				walls.add(new rock(app,455,250));
 				walls.add(new rock(app,455,300));
 				walls.add(new rock(app,455,350));
-				walls.add(new rock(app,455,400));
-				walls.add(new rock(app,455,450));
+				//walls.add(new rock(app,455,400));
+				//walls.add(new rock(app,455,450));
 				repaint();
 				for( int i = 0; i<30; i++) {
 					try {
@@ -79,7 +78,7 @@ public class miniApp extends JFrame {
 						e.printStackTrace();
 					}	
 				}
-				for (int i = 0; i<8; i++) {
+				for (int i = 0; i<walls.size(); i++) {
 					walls.get(i).setBroken(true);
 					remove(walls.get(i).getSswall());
 				}
@@ -88,7 +87,6 @@ public class miniApp extends JFrame {
 			
 			
 		}).start();
-		
 		
 		
 	}
