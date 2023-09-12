@@ -40,13 +40,17 @@ public class Monster extends Player{
 	public void batch() {
 		
 	}
-	public void moveRangeCheck() {
+	public void attack() {
+		
+	}
+	public void moveRangeCheck() { //맵 밖으로 나가려하면 강제 방향전환
 		// 오른쪽
 		if((getXPlayer()>790) ) {
 			setRight(false);
 			setLeft(true);
 			setDown(false);
 			setUp(false);
+			System.out.println("오른쪽 벽 충돌");
 		}
 //		// 왼쪽
 		if((getXPlayer()<130)) {
@@ -54,6 +58,7 @@ public class Monster extends Player{
 			setRight(true);
 			setDown(false);
 			setUp(false);
+			System.out.println("왼쪽 벽 충돌");
 		}
 //		// 아래쪽
 		if((getYPlayer()>440)) {
@@ -61,6 +66,7 @@ public class Monster extends Player{
 			setRight(false);
 			setDown(false);
 			setUp(true);
+			System.out.println("아래쪽 벽 충돌");
 		}
 //		// 위쪽
 		if((getYPlayer()<100)) {
@@ -68,6 +74,7 @@ public class Monster extends Player{
 			setRight(false);
 			setUp(false);
 			setDown(true);
+			System.out.println("위쪽 벽 충돌");
 		}	
 	}
 	public void moveDirectCheck() {

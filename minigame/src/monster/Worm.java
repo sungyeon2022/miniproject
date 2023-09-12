@@ -24,7 +24,9 @@ public class Worm extends Monster {
 					public void run() {
 						if(isPlayerAttacking() == false) {
 							System.out.println("방향전환");
-							moveDirectCheck();							
+							moveDirectCheck();		
+							getIssac().getXPlayerCenter();
+							getIssac().getYPlayerCenter();
 						}
 					}
 				};
@@ -37,6 +39,7 @@ public class Worm extends Monster {
 						break;
 					}
 					moveRangeCheck();
+					attack(); // 지속적으로 공격 조건 감시
 					moveUp();					
 					moveDown();
 					moveRight();
@@ -48,9 +51,6 @@ public class Worm extends Monster {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-						if(isPlayerAttacking() == false) {
-							attack();
-						}
 				}
 				//죽으면 루프멈추고끝
 				if(isDead()) {
@@ -79,100 +79,10 @@ public class Worm extends Monster {
 		getSsMonster().drawObj(getXPlayer(), getYPlayer());
 		getApp().add(getSsMonster(), 0);
 	}
-	
-	//공격 체크
-	public void attackCheck(int direct, int range) {
-//		int xDistance = getIssac().getXPlayerCenter() - getXPlayerCenter();
-//		int yDistance = getIssac().getYPlayerCenter() - getYPlayerCenter();
-//		System.out.println(getIssac().getXPlayerCenter() + "  " + range + " " + getYPlayer());
-		if(getIssac().getXPlayerCenter()-range < 30 || getIssac().getYPlayerCenter()-range < 30) {
-			System.out.println("공격");
-			System.out.println(direct);
-			System.out.println(range);
-			System.out.println(getIssac().getXPlayerCenter());
-			System.out.println(getIssac().getYPlayerCenter());
-			System.out.println(getXPlayerCenter());
-			System.out.println(getYPlayerCenter());
-			setPlayerAttacking(true);
-			switch(direct) {
-			 case 3:
-				 setUp(true);
-				 setDown(false);
-				 setLeft(false);
-				 setRight(false);
-				 break;
-			 case 1:
-				 setUp(false);
-				 setDown(true);
-				 setLeft(false);
-				 setRight(false);
-				 break;
-			 case 2:
-				 setUp(false);
-				 setDown(false);
-				 setLeft(true);
-				 setRight(false);
-				 break;
-			 case 4:
-				 setUp(false);
-				 setDown(false);
-				 setLeft(false);
-				 setRight(true);
-				 break;
-			}
-			monsterSpeed = 4;
-			attackMotion(direct - 1);
-			if(getXPlayer()>790 || getXPlayer()<130 || getYPlayer()>440 || getYPlayer()<100) {
-				monsterSpeed = 2;
-				setPlayerAttacking(false);
-			}
+	public void attack() { 
+		if (getIssac().getXPlayerCenter() - getXPlayerCenter() < 30) {
 			
 		}
 	}
+}
 	
-	//공격 체크
-	@Override
-	public void attack() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				switch (getViewDirect()) {
-				case ViewDirect.DOWN:
-					attackCheck(ViewDirect.DOWN, getXPlayerCenter());
-					break;	
-				case ViewDirect.LEFT:
-					attackCheck(ViewDirect.LEFT, getYPlayerCenter());
-					break;
-				case ViewDirect.UP:
-					attackCheck(ViewDirect.UP, getXPlayerCenter());
-					break;
-				case ViewDirect.RIGHT:
-					attackCheck(ViewDirect.RIGHT, getYPlayerCenter());
-					break;
-				}
-			} 
-		}).start();
-	}
-	public void attackMotion(int direct) {
-		getSsMonster().setXPos((WormSize.WIDTH * direct) + (Gap.COLUMGAP * direct));
-		getSsMonster().setYPos(WormSize.HEIGHT * 4 + Gap.ROWGAP * 4);
-		getSsMonster().drawObj(getXPlayer(), getYPlayer());
-		
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		getSsMonster().setXPos(0);
-		getSsMonster().setYPos(WormSize.HEIGHT * direct + Gap.ROWGAP * direct);
-		getSsMonster().drawObj(getXPlayer(), getYPlayer());
-		
-		
-		getIssac().setLife(getIssac().getLife() - 1);	// 플레이어 생명력 1감소
-		getIssac().dead();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}}
