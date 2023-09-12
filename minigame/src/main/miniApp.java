@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.JFrame;
+import javax.xml.stream.events.StartDocument;
 
 import org.w3c.dom.Text;
 
@@ -17,6 +18,7 @@ import monster.Monster;
 import monster.Worm;
 import player.issac;
 import sword.SwordControl;
+import sword.swordattackcontrol;
 import testimg.testcontorl;
 
 //JFrame 참조 
@@ -29,6 +31,7 @@ public class miniApp extends JFrame {
 	private testcontorl testcontorl;
 	private Worm worm;
 	private Vector<Monster> monsters;
+	private swordattackcontrol swordattackcontrol;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -36,12 +39,7 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-
-			}
-		}).start();
+		swordatmonster();
 		setVisible(true);
 	}
 
@@ -50,7 +48,7 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		monsters = new Vector<Monster>();
-		issac = new issac(app,monsters);
+		issac = new issac(app, monsters);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 	}
 
@@ -113,7 +111,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setUp(false);
 					issac.refreshDirect();
-				} else if(e.getKeyCode() == KeyEvent.VK_A) {
+				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					System.out.println("a키 떨어짐");
 					issac.setPlayerAttack(false);
 				}
@@ -121,5 +119,22 @@ public class miniApp extends JFrame {
 			}
 		});
 	}
-
+	public synchronized void swordatmonster() {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while (!issac.isDead()) {
+					if(!issac.isPlayerAttacking()) {
+					System.out.println("검사중");
+					}
+					try {
+						Thread.sleep(100);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
 }

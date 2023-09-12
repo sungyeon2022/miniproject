@@ -44,7 +44,7 @@ public class SpriteSheet extends JLabel{
 		this.width = width;
 		this.height = height;
 	}
-	public void loadSpriteimage(String url) {
+	public synchronized void loadSpriteimage(String url) {
 		try {
 			imgSprite = ImageIO.read(new File("images/"+url));
 		}catch (Exception e) {
@@ -58,7 +58,7 @@ public class SpriteSheet extends JLabel{
 		return imgSprite.getSubimage(xPos, yPos, width, height);
 	}//이미지 파일에서 가져온 이미지를 x,y좌표 기준 높이와 너비로 자른후 버퍼에 저장
 	
-	public void drawObj(int x, int y) {
+	public synchronized void drawObj(int x, int y) {
 		imgObj = new ImageIcon(getObjimg());
 		setIcon(imgObj);
 		setSize(width,height);
