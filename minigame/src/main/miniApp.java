@@ -5,9 +5,11 @@ import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.JFrame;
+import javax.xml.stream.events.StartDocument;
 
 import org.w3c.dom.Text;
 
+import imgSize.ViewDirect;
 import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
@@ -17,6 +19,7 @@ import monster.Monster;
 import monster.Worm;
 import player.issac;
 import sword.SwordControl;
+import sword.swordattackcontrol;
 import testimg.testcontorl;
 
 //JFrame 참조 
@@ -29,6 +32,7 @@ public class miniApp extends JFrame {
 	private testcontorl testcontorl;
 	private Worm worm;
 	private Vector<Monster> monsters;
+	private swordattackcontrol swordattackcontrol;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -36,12 +40,7 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-
-			}
-		}).start();
+		playerattack();
 		setVisible(true);
 	}
 
@@ -50,7 +49,7 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		monsters = new Vector<Monster>();
-		issac = new issac(app,monsters);
+		issac = new issac(app, monsters);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 	}
 
@@ -80,12 +79,16 @@ public class miniApp extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.moveDown();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
@@ -102,18 +105,22 @@ public class miniApp extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					issac.setIskeyPress(false);
 					issac.setRight(false);
 					issac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					issac.setIskeyPress(false);
 					issac.setLeft(false);
 					issac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					issac.setIskeyPress(false);
 					issac.setDown(false);
 					issac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					issac.setIskeyPress(false);
 					issac.setUp(false);
 					issac.refreshDirect();
-				} else if(e.getKeyCode() == KeyEvent.VK_A) {
+				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					System.out.println("a키 떨어짐");
 					issac.setPlayerAttack(false);
 				}
@@ -122,4 +129,32 @@ public class miniApp extends JFrame {
 		});
 	}
 
+	public synchronized void playerattack() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				while (!issac.isDead()) {
+					int monsterx;
+					int monstery;
+					int swordx;
+					int swordy;
+					int swordwidth;
+					int swordheight;
+					if (!issac.isPlayerAttacking()) {
+						for (int i = 0; i < monsters.size(); i++) {
+							if (issac.getSwordControl().getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
+								System.out.println("판단 성공");
+								try {
+									Thread.sleep(100);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+				}
+			}
+		}).start();
+	}
 }
