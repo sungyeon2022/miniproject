@@ -127,7 +127,7 @@ public class Worm extends Monster {
 				setLeft(false);
 				setRight(false);
 				setDown(false);
-				setUp(true);//check
+				setUp(true);
 			}
 //			attackMotion();
 			
