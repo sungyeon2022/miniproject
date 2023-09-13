@@ -15,8 +15,8 @@ import player.issac;
 
 public class Worm extends Monster {
 	private boolean monsterAttacking = false;
-	private int gapX = getIssac().getXPlayerCenter() - getXPlayerCenter(); //아이작 위치 - 몬스터 위치
-	private int gapY = getIssac().getYPlayerCenter() - getYPlayerCenter();
+	private static int gapX ;
+	private static int gapY;
 	private boolean checkAttackDirectX = false;
 	private boolean checkAttackDirectY = false;
 	private int attackDirect;
@@ -31,21 +31,29 @@ public class Worm extends Monster {
 				TimerTask task = new TimerTask() { //4초마다 방향전환
 					public void run() {
 						if(monsterAttacking == false) {
+//							System.out.println("아이작 X" + getIssac().getXPlayer());
+//							System.out.println("벌레 X" + getXPlayer());
+//							System.out.println("아이작 Y" + getIssac().getYPlayer());
+//							System.out.println("벌레 Y" + getYPlayer());
+//							System.out.println(gapX);
+//							System.out.println(gapY);
 							System.out.println("방향전환");
 							moveDirectCheck();	
-							attack(); // 지속적으로 공격 조건 감시
 						}
 					}
 				};
 				long delay = 500L;
 				long period = 4000L;
 				timer.schedule(task, delay, period);
-				while(!isDead() && monsterAttacking == false) {
+				while(!isDead()) {
+					System.out.print(".");
 					if(getLife() <= 0) {
 						setDead(true);
 						break;
 					}
+					gapCheck();
 					moveRangeCheck();
+					attack(); // 지속적으로 공격 조건 감시
 					moveUp();					
 					moveDown();
 					moveRight();
@@ -73,7 +81,10 @@ public class Worm extends Monster {
 	public void init() {
 		setSsMonster(new SpriteSheet(getUrl(), "monster", 0, 0, getImgWidth(), getImgHeight())); 
 	}
-	
+	public void gapCheck() {
+		gapX = getIssac().getXPlayer() - getXPlayer(); //아이작 위치 - 몬스터 위치
+		gapY = getIssac().getYPlayer() - getYPlayer();
+	}
 	//기본 세팅
 	public void setting() {
 		setViewDirect(ViewDirect.RIGHT);
@@ -91,44 +102,54 @@ public class Worm extends Monster {
 	
 	public void attack() { //아이작과 몬스터 겹치면 공격 시작
 
-		if (Math.abs(gapX) < 20 || Math.abs(gapY) < 20 ) {
-			if(gapX < 20 ) {
-				checkAttackDirectX = true;
-			}else {
+		if (Math.abs(gapX) < 10 || Math.abs(gapY) < 10 ) {
+			if(gapX < 10 ) {
 				checkAttackDirectY = true;
+			}else {
+				checkAttackDirectX = true;
 			}
 			attackOn();
 		}
 	}
 	public void attackOn() {
+		System.out.println("공격");
 		while(getXPlayer() > 130 && getXPlayer() < 790 && getYPlayer() > 100 && getYPlayer() <440) {
 			monsterAttacking = true;
 			monsterSpeed = 4;
 			if( checkAttackDirectX && (gapX > 0)) { //오른쪽 공격
+//				System.out.println("오른쪽");
 				setViewDirect(ViewDirect.RIGHT);
+//				moveRight();
 				setLeft(false);
 				setRight(true);
 				setDown(false);
 				setUp(false);
 			}else if ( checkAttackDirectX && (gapX <= 0)) { //왼쪽 공격
+//				System.out.println("왼쪽");
 				setViewDirect(ViewDirect.LEFT);
+//				moveLeft();
 				setRight(false);
 				setLeft(true);
 				setDown(false);
 				setUp(false);
 			}else if ( checkAttackDirectY && (gapY > 0)) {//아래로 공격
+//				System.out.println("아래쪽");
 				setViewDirect(ViewDirect.DOWN);
+//				moveDown();
 				setLeft(false);
 				setRight(false);
 				setUp(false);
 				setDown(true);
 			}else if ( checkAttackDirectY && (gapY <= 0)) { //위로 공격
+//				System.out.println("위쪽");
 				setViewDirect(ViewDirect.UP);
+//				moveUp();
 				setLeft(false);
 				setRight(false);
 				setDown(false);
 				setUp(true);
 			}
+			
 //			attackMotion();
 			
 		}
