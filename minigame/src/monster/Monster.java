@@ -14,6 +14,7 @@ import player.issac;//objectsetting에서 옮겨옴
 @Data
 
 public class Monster extends Player{
+	
 	private final static String TAG = "Monster : ";
 	public static int monsterSpeed = 2;
 	private issac issac;
