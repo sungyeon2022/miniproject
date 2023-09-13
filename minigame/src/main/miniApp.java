@@ -95,6 +95,13 @@ public class miniApp extends JFrame {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					issac.attackMotion();
+					for (int i = 0; i < monsters.size(); i++) {
+						if (issac.getSwordControl().getSsSword().getBounds()
+								.intersects(monsters.get(i).getSsMonster().getBounds())) {
+							System.out.println("공격시도");
+							monsters.get(i).setLife(monsters.get(i).getLife() - 1);
+						}
+					}
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_E) {
@@ -135,18 +142,14 @@ public class miniApp extends JFrame {
 			@Override
 			public void run() {
 				while (!issac.isDead()) {
-					int monsterx;
-					int monstery;
-					int swordx;
-					int swordy;
-					int swordwidth;
-					int swordheight;
-					if (!issac.isPlayerAttacking()) {
-						for (int i = 0; i < monsters.size(); i++) {
-							if (issac.getSwordControl().getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
+					for (int i = 0; i < monsters.size(); i++) {
+						if (!issac.isPlayerAttacking()) {
+							if (issac.getSwordControl().getSsSword().getBounds()
+									.intersects(monsters.get(i).getSsMonster().getBounds())) {
 								System.out.println("판단 성공");
+								monsters.get(i).setLife(monsters.get(i).getLife() - 1);
 								try {
-									Thread.sleep(100);
+									Thread.sleep(800);
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
