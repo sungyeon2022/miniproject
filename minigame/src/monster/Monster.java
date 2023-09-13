@@ -1,5 +1,6 @@
 package monster;
 
+import java.awt.Rectangle;
 import java.util.Random;
 
 import javax.swing.JFrame;

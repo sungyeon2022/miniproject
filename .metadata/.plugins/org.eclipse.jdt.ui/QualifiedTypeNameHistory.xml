@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.jar.JarFile"/>
     <fullyQualifiedTypeName name="java.time.chrono.IsoEra"/>
     <fullyQualifiedTypeName name="player.sword"/>
     <fullyQualifiedTypeName name="player.Player"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
+    <fullyQualifiedTypeName name="java.awt.Rectangle"/>
 </qualifiedTypeNameHistroy>
