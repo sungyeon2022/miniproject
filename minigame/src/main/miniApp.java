@@ -9,6 +9,7 @@ import javax.xml.stream.events.StartDocument;
 
 import org.w3c.dom.Text;
 
+import imgSize.ViewDirect;
 import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
@@ -39,7 +40,7 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
-		swordatmonster();
+		playerattack();
 		setVisible(true);
 	}
 
@@ -78,12 +79,16 @@ public class miniApp extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.moveDown();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
+					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
@@ -100,15 +105,19 @@ public class miniApp extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					issac.setIskeyPress(false);
 					issac.setRight(false);
 					issac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					issac.setIskeyPress(false);
 					issac.setLeft(false);
 					issac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					issac.setIskeyPress(false);
 					issac.setDown(false);
 					issac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					issac.setIskeyPress(false);
 					issac.setUp(false);
 					issac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
@@ -119,19 +128,30 @@ public class miniApp extends JFrame {
 			}
 		});
 	}
-	public synchronized void swordatmonster() {
+
+	public synchronized void playerattack() {
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				while (!issac.isDead()) {
-					if(!issac.isPlayerAttacking()) {
-					System.out.println("검사중");
-					}
-					try {
-						Thread.sleep(100);
-					} catch (Exception e) {
-						e.printStackTrace();
+					int monsterx;
+					int monstery;
+					int swordx;
+					int swordy;
+					int swordwidth;
+					int swordheight;
+					if (!issac.isPlayerAttacking()) {
+						for (int i = 0; i < monsters.size(); i++) {
+							if (issac.getSwordControl().getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
+								System.out.println("판단 성공");
+								try {
+									Thread.sleep(100);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
 					}
 				}
 			}

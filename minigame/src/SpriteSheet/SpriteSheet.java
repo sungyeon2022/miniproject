@@ -71,6 +71,10 @@ public class SpriteSheet extends JLabel{
 		setIcon(imgObj);
 	}
 	
+	public void imgverlap(SpriteSheet spriteSheet,SpriteSheet spriteSheet2) {
+		SpriteSheet.getDefaultLocale();
+	}
+	
 	/*
 	 * public static BufferedImage resize(InputStream image, int width, int height)
 	 * throws IOException { BufferedImage inputImage = ImageIO.read(image);

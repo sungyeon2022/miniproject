@@ -224,7 +224,7 @@ public class issac extends Player {
 	}
 
 	@Override // Override
-	public synchronized void moveMotion() { // 움직이는 동작중 이미지 갱신
+	public void moveMotion() { // 움직이는 동작중 이미지 갱신
 		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
 		new Thread(new Runnable() {
 

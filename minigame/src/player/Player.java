@@ -14,6 +14,7 @@ public class Player extends Lombok {
 	private double life=5;//생명,최대 생명
 	private double maxlife=8;
 	private boolean isUp, isDown, isRight, isLeft;
+	private boolean iskeyPress;
 	private int viewDirect;
 	private int xPlayer, yPlayer;
 	private int xPlayerCenter, yPlayerCenter;//플레이어 중심값
@@ -31,6 +32,7 @@ public class Player extends Lombok {
 		this.isRight = false;
 		this.isLeft = false;
 		this.dead = false;
+		this.iskeyPress = false;
 		this.PlayerAttack = false;
 	}
 	public void moveRight() {}

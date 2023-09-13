@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="player.attack"/>
     <fullyQualifiedTypeName name="java.util.jar.JarFile"/>
     <fullyQualifiedTypeName name="java.time.chrono.IsoEra"/>
     <fullyQualifiedTypeName name="player.sword"/>
@@ -34,14 +33,12 @@
     <fullyQualifiedTypeName name="testimg.testcontorl"/>
     <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
     <fullyQualifiedTypeName name="imgSize.SwordMotionSize"/>
-    <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
     <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
     <fullyQualifiedTypeName name="java.lang.FdLibm.Pow"/>
     <fullyQualifiedTypeName name="imgSize.WormSize"/>
     <fullyQualifiedTypeName name="monster.Worm"/>
-    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="imgSize.SwordSize"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
@@ -54,10 +51,13 @@
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthInternalFrameUI"/>
     <fullyQualifiedTypeName name="sword.SwordControl"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
     <fullyQualifiedTypeName name="sword.swordattackcontrol"/>
-    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
+    <fullyQualifiedTypeName name="player.issac"/>
+    <fullyQualifiedTypeName name="javax.security.auth.login.FailedLoginException"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
 </qualifiedTypeNameHistroy>
