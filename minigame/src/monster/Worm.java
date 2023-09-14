@@ -22,6 +22,11 @@ public class Worm extends Monster {
 	private boolean checkAttackDirectY = false;
 	private int attackDirect;
 	private final static String GUBUN = "Worm : ";
+	private boolean stop;
+	
+	public void setStop(boolean stop) {
+		this.stop = stop;
+	}
 
 	public Worm(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
@@ -34,6 +39,7 @@ public class Worm extends Monster {
 						if(monsterAttacking == false) {
 							System.out.println("방향전환");
 							moveDirectCheck();	
+							System.out.println(monsterSpeed);
 						}
 					}
 				};
@@ -52,12 +58,11 @@ public class Worm extends Monster {
 					moveDown();
 					moveRight();
 					moveLeft();
-					System.out.println(monsterAttacking);
-					if(monsterAttacking == false)
-					{
+					if(monsterAttacking == false){
+//						System.out.println(monsterAttacking);
 						moveMotion();
-					getSsMonster().drawObj(getXPlayer(), getYPlayer());
 					}
+					getSsMonster().drawObj(getXPlayer(), getYPlayer());
 						try {
 						Thread.sleep(30);
 					} catch (InterruptedException e) {
@@ -110,31 +115,23 @@ public class Worm extends Monster {
 			attackOn();
 		}
 	}
+	
 	public void attackMotion(int direct) {
-//		getSsMonster().setXPos((WormSize.WIDTH * direct) + (Gap.COLUMGAP * direct));
-//		getSsMonster().setYPos(WormSize.HEIGHT * 4 + Gap.ROWGAP * 4);
-//		getSsMonster().drawObj(getXPlayer(), getYPlayer());
-//		
-//
-//		getSsMonster().setXPos(0);
-//		getSsMonster().setYPos(WormSize.HEIGHT * direct + Gap.ROWGAP * direct);
-//		getSsMonster().drawObj(getXPlayer(), getYPlayer());
-//		
-//		
-//		getIssac().setLife(getIssac().getLife() - 1);	// 플레이어 생명력 1감소
-//		getIssac().dead();
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {		
+				while(monsterAttacking) {
+				getSsMonster().setXPos(((WormSize.WIDTH)* direct) + (Gap.COLUMGAP * direct));
+				getSsMonster().setYPos(WormSize.HEIGHT * 4 + Gap.ROWGAP * 4);
+				getSsMonster().drawObj(getXPlayer(), getYPlayer());
+				}
+				monsterAttacking = false;
+			}}).start();
 	}
+	
 	public void attackOn() {
-//		System.out.println(getLife());
-//		System.out.println(isDead());
-//		System.out.println("공격");
-		monsterSpeed = 4;
-		monsterAttacking = true;
+		monsterSpeed = 6;
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
@@ -142,10 +139,11 @@ public class Worm extends Monster {
 		}
 		
 		while(getXPlayer() > 130 && getXPlayer() < 790 && getYPlayer() > 100 && getYPlayer() <440) {
+			monsterAttacking = true;
 			
 			if( checkAttackDirectX && (gapX > 0)) { //오른쪽 공격
 				setViewDirect(ViewDirect.RIGHT);
-				attackMotion(ViewDirect.RIGHT);
+				attackMotion(ViewDirect.RIGHT-1);
 				moveRight();
 				setLeft(false);
 				setRight(true);
@@ -153,7 +151,7 @@ public class Worm extends Monster {
 				setUp(false);
 			}else if ( checkAttackDirectX && (gapX <= 0)) { //왼쪽 공격
 				setViewDirect(ViewDirect.LEFT);
-				attackMotion(ViewDirect.LEFT);
+				attackMotion(ViewDirect.LEFT-1);
 				moveLeft();
 				setRight(false);
 				setLeft(true);
@@ -161,7 +159,7 @@ public class Worm extends Monster {
 				setUp(false);
 			}else if ( checkAttackDirectY && (gapY > 0)) {//아래로 공격
 				setViewDirect(ViewDirect.DOWN);
-				attackMotion(ViewDirect.DOWN);
+				attackMotion(ViewDirect.DOWN-1);
 				moveDown();
 				setLeft(false);
 				setRight(false);
@@ -169,7 +167,7 @@ public class Worm extends Monster {
 				setDown(true);
 			}else if ( checkAttackDirectY && (gapY <= 0)) { //위로 공격
 				setViewDirect(ViewDirect.UP);
-				attackMotion(ViewDirect.UP);
+				attackMotion(ViewDirect.UP-1);
 				moveUp();
 				setLeft(false);
 				setRight(false);
@@ -177,18 +175,17 @@ public class Worm extends Monster {
 				setUp(true);
 			}
 			try {
-				Thread.sleep(20);
+				Thread.sleep(30);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			
-//			attackMotion();
-			
+			}			
 		}
 		monsterAttacking = false;
 		checkAttackDirectY = false;
 		checkAttackDirectX = false;
 		monsterSpeed = 2;
+		System.out.println(monsterAttacking);
+		moveMotion();
 		
 	
 		
@@ -238,6 +235,8 @@ public class Worm extends Monster {
 				if(isPlayerMoveStart() == false ) {
 					setPlayerMoveStart(true);
 					while(!isDead()) {
+						System.out.println(monsterAttacking);
+						if(monsterAttacking == true) continue;
 						if(isDown() && getViewDirect() == ViewDirect.DOWN) {
 							if(motion > 3)
 								motion = 0;
