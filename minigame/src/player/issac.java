@@ -18,7 +18,6 @@ import SpriteSheet.SpriteSheet;
 import imgSize.*;
 import lombok.Data;
 import monster.Monster;
-import monster.MonsterJo;
 import monster.Worm;
 
 @Data
@@ -31,7 +30,7 @@ public class issac extends Player {
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
 	private Worm worm;
-	private Vector<MonsterJo> monsters;
+	private Vector<Monster> monsters;
 
 	private int xPlusBody = 7, yPlusBody = 30;
 	private int yTotalSize;
@@ -41,7 +40,7 @@ public class issac extends Player {
 	private int item4Count = 0;
 	private int moveSpeed = 7;
 
-	public issac(JFrame app, Vector<MonsterJo> monsters) {
+	public issac(JFrame app, Vector<Monster> monsters) {
 		super(app);
 		System.out.println(TAG + "make issac");
 		init(monsters);
@@ -49,7 +48,7 @@ public class issac extends Player {
 		batch();
 	}
 
-	public void init(Vector<MonsterJo> monsters) {
+	public void init(Vector<Monster> monsters) {
 		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,
 				issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
