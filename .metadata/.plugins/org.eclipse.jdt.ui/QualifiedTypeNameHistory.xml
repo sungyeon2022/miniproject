@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.time.chrono.IsoEra"/>
-    <fullyQualifiedTypeName name="player.sword"/>
-    <fullyQualifiedTypeName name="player.Player"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
     <fullyQualifiedTypeName name="objectSetting.SwordSize"/>
     <fullyQualifiedTypeName name="sword.Sword"/>
@@ -32,8 +29,6 @@
     <fullyQualifiedTypeName name="testimg.testcontorl"/>
     <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
     <fullyQualifiedTypeName name="imgSize.SwordMotionSize"/>
-    <fullyQualifiedTypeName name="lombok.Lombok"/>
-    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
     <fullyQualifiedTypeName name="java.lang.FdLibm.Pow"/>
     <fullyQualifiedTypeName name="imgSize.WormSize"/>
@@ -47,7 +42,6 @@
     <fullyQualifiedTypeName name="javax.swing.text.TabStop"/>
     <fullyQualifiedTypeName name="javax.swing.border.LineBorder"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
-    <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthInternalFrameUI"/>
     <fullyQualifiedTypeName name="sword.SwordControl"/>
     <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
+    <fullyQualifiedTypeName name="lombok.Lombok"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="java.lang.Void"/>
+    <fullyQualifiedTypeName name="monster.MonsterJo"/>
+    <fullyQualifiedTypeName name="monster.WormJo"/>
 </qualifiedTypeNameHistroy>
