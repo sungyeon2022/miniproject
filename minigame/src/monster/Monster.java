@@ -1,13 +1,12 @@
 package monster;
 
-import java.awt.Rectangle;
 import java.util.Random;
 
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
+import imgSize.DeadSize;
 import imgSize.Gap;
-import imgSize.ViewDirect;
 import lombok.Data;
 import player.Player;
 import player.issac;//objectsetting에서 옮겨옴
@@ -44,6 +43,31 @@ public class Monster extends Player{
 	}
 	public void attack() {
 		
+	}
+
+	@Override
+	public void dead() {
+		int rowCount = 0;
+		getApp().remove(ssMonster);
+		getApp().repaint();
+		for(int i = 0; i < 11; i ++) {
+			if(i % 4 == 0 && i > 0) {
+				rowCount += 1;
+			}
+			int x = DeadSize.WIDTH * (i % 4) + Gap.COLUMGAP * (i % 4);
+			int y = DeadSize.HEIGHT * rowCount  + (Gap.ROWGAP * rowCount);
+			ssDead.setXPos(x);
+			ssDead.setYPos(y);
+			ssDead.drawObj(getXPlayer(), getYPlayer());
+			if(i == 0) {
+				getApp().add(ssDead, 2);
+			}
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	public void moveRangeCheck() { //맵 밖으로 나가려하면 강제 방향전환
 		// 오른쪽

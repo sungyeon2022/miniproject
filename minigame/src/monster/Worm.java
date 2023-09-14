@@ -15,7 +15,7 @@ import player.issac;
 @Data
 
 public class Worm extends Monster {
-	public static boolean monsterAttacking = false;
+	private boolean monsterAttacking = false;
 	private static int gapX ;
 	private static int gapY;
 	private boolean checkAttackDirectX = false;
