@@ -118,7 +118,7 @@ public class Worm extends Monster {
 				getSsMonster().setYPos(WormSize.HEIGHT * 4 + Gap.ROWGAP * 4);
 				getSsMonster().drawObj(getXPlayer(), getYPlayer());
 				try {
-					Thread.sleep(50);
+					Thread.sleep(100);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
