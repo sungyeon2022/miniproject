@@ -26,7 +26,6 @@ import testimg.testcontorl;
 import item.Bomb;
 import item.Heart;
 import item.Item;
-import item.Key;
 import item.Pill;
 import map.Background;
 import objectSetting.BombSize;
@@ -55,6 +54,7 @@ public class miniApp extends JFrame {
 	private Vector<wall> walls;
 >>>>>>> origin/최낙연
 
+	
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
 		init();
@@ -79,23 +79,42 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		monsters = new Vector<Monster>();
 		issac = new issac(app, monsters);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 =======
 		issac = new issac(app);
+=======
+		
+>>>>>>> origin/최낙연
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
+		issac = new issac(app,walls,items);
 		//아이템 시험 생성
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
-		items.add(new Key(app, "item/key.png", "key", 340, 400, KeySize.WIDTH,KeySize.HEIGHT));
-		items.add(new Pill(app, "item/pill1.png", "Power2", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
-		items.add(new Pill(app, "item/pill2.png", "PS1", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
-		items.add(new Pill(app, "item/pill3.png", "Speed2", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		//랜덤 아이템 생성
+		int witem = (int)(Math.random()*4);
+		switch(witem) {
+		case 0:
+			items.add(new Pill(app, "item/PowerUp.png", "Power", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			break;
+		case 1:
+			items.add(new Pill(app, "item/ASUp.png", "AttackSpeed", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			break;
+		case 2:
+			items.add(new Pill(app, "item/SpeedUp.png", "Speed", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			break;
+		case 3:
+			items.add(new Pill(app, "item/FullHp.png", "FullHp", 440, 300, PillSize.WIDTH,PillSize.HEIGHT));
+			break;		
+		}
+		
 		//벽 시험 생성 및 10초후 제거
 		new Thread(new Runnable() {
 			@Override
+			
 			public void run() {
 				walls.add(new rock(app,455,100));
 				walls.add(new rock(app,455,150));
@@ -103,8 +122,8 @@ public class miniApp extends JFrame {
 				walls.add(new rock(app,455,250));
 				walls.add(new rock(app,455,300));
 				walls.add(new rock(app,455,350));
-				walls.add(new rock(app,455,400));
-				walls.add(new rock(app,455,450));
+				//walls.add(new rock(app,455,400));
+				//walls.add(new rock(app,455,450));
 				repaint();
 				for( int i = 0; i<30; i++) {
 					try {
@@ -113,7 +132,7 @@ public class miniApp extends JFrame {
 						e.printStackTrace();
 					}	
 				}
-				for (int i = 0; i<8; i++) {
+				for (int i = 0; i<walls.size(); i++) {
 					walls.get(i).setBroken(true);
 					remove(walls.get(i).getSswall());
 				}
@@ -124,7 +143,10 @@ public class miniApp extends JFrame {
 		}).start();
 		
 		
+<<<<<<< HEAD
 		
+>>>>>>> origin/최낙연
+=======
 >>>>>>> origin/최낙연
 	}
 
