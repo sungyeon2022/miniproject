@@ -22,11 +22,6 @@ public class Worm extends Monster {
 	private boolean checkAttackDirectY = false;
 	private int attackDirect;
 	private final static String GUBUN = "Worm : ";
-	private boolean stop;
-	
-	public void setStop(boolean stop) {
-		this.stop = stop;
-	}
 
 	public Worm(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );

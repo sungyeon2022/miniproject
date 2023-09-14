@@ -12,20 +12,9 @@ import player.issac;
 @Data
 
 public class body extends Monster {
-	private boolean monsterAttacking = false;
-	private static int gapX ;
-	private static int gapY;
-	private boolean checkAttackDirectX = false;
-	private boolean checkAttackDirectY = false;
-	private int attackDirect;
 	private final static String GUBUN = "Body : ";
-	private boolean stop;
-	public int monsterSpeed = 3;
+	public int monsterSpeed = 1;
 	
-	public void setStop(boolean stop) {
-		this.stop = stop;
-	}
-
 	public body(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
 		new Thread(new Runnable() {
@@ -36,13 +25,16 @@ public class body extends Monster {
 						setDead(true);
 						break;
 					}
-					System.out.println("check");
 					moveRangeCheck();
 					moveUp();					
 					moveDown();
 					moveRight();
 					moveLeft();
 					moveMotion();
+//					System.out.print(isLeft());
+//					System.out.print(isRight());
+//					System.out.print(isUp());
+//					System.out.println(isDown());
 					getSsMonster().drawObj(getXPlayer(), getYPlayer());
 						try {
 						Thread.sleep(30);
@@ -79,44 +71,48 @@ public class body extends Monster {
 
 	@Override
 	public void moveRight() {
-		if(isRight()) {
-			setViewDirect(ViewDirect.RIGHT);
 			if(getXPlayer() < getIssac().getXPlayer()) {
+				setViewDirect(ViewDirect.RIGHT);
 				setXPlayer(getXPlayer() + monsterSpeed);
 				setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
+				setRight(true);
+			}else {
+				setRight(false);
 			}
-		}
 	}
 	@Override
 	public void moveLeft() {
-		if(isLeft()) {
-			setViewDirect(ViewDirect.LEFT);
 			if(getXPlayer() > getIssac().getXPlayer()) {
+				setViewDirect(ViewDirect.LEFT);
 				setXPlayer(getXPlayer() - monsterSpeed);
 				setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
+				setLeft(true);
+			}else {
+				setLeft(false);
 			}
-		}
 	}
 	@Override
 	public void moveUp() {
-		if(isUp()) {
-			setViewDirect(ViewDirect.UP);
 			if(getYPlayer() > getIssac().getYPlayer()) {
+				setViewDirect(ViewDirect.UP);
 				setYPlayer(getYPlayer() - monsterSpeed);
 				setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
+				setUp(true);
+			}else {
+				setUp(false);
 			}
-		}
 		
 	}
 	@Override
 	public void moveDown() {
-		if(isDown()) {
-			setViewDirect(ViewDirect.DOWN);
 			if(getYPlayer() < getIssac().getYPlayer()) {
+				setViewDirect(ViewDirect.DOWN);
 				setYPlayer(getYPlayer() + monsterSpeed);
 				setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
+				setDown(true);
+			}else {
+				setDown(false);
 			}
-		}
 	}
 	public void moveMotion() {
 		if(isPlayerMoveStart()) return;
@@ -127,7 +123,6 @@ public class body extends Monster {
 				if(isPlayerMoveStart() == false ) {
 					setPlayerMoveStart(true);
 					while(!isDead()) {
-						System.out.println("check");
 						if(isDown() && getViewDirect() == ViewDirect.DOWN) {
 							if(motion > 9)
 								motion = 0;
