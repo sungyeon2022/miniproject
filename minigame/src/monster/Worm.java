@@ -37,9 +37,7 @@ public class Worm extends Monster {
 				TimerTask task = new TimerTask() { //4초마다 방향전환
 					public void run() {
 						if(monsterAttacking == false) {
-							System.out.println("방향전환");
 							moveDirectCheck();	
-							System.out.println(monsterSpeed);
 						}
 					}
 				};
@@ -58,10 +56,7 @@ public class Worm extends Monster {
 					moveDown();
 					moveRight();
 					moveLeft();
-					if(monsterAttacking == false){
-//						System.out.println(monsterAttacking);
-						moveMotion();
-					}
+					moveMotion();
 					getSsMonster().drawObj(getXPlayer(), getYPlayer());
 						try {
 						Thread.sleep(30);
@@ -74,8 +69,6 @@ public class Worm extends Monster {
 					timer.cancel();
 					dead();
 				}
-				
-				
 			}
 		}).start();
 	}
@@ -118,15 +111,19 @@ public class Worm extends Monster {
 	
 	public void attackMotion(int direct) {
 		new Thread(new Runnable() {
-			
 			@Override
 			public void run() {		
-				while(monsterAttacking) {
+				while(monsterAttacking == true) {
 				getSsMonster().setXPos(((WormSize.WIDTH)* direct) + (Gap.COLUMGAP * direct));
 				getSsMonster().setYPos(WormSize.HEIGHT * 4 + Gap.ROWGAP * 4);
 				getSsMonster().drawObj(getXPlayer(), getYPlayer());
+				try {
+					Thread.sleep(50);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				monsterAttacking = false;
+				}
+				
 			}}).start();
 	}
 	
@@ -178,17 +175,12 @@ public class Worm extends Monster {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}			
+			}
 		}
 		monsterAttacking = false;
 		checkAttackDirectY = false;
 		checkAttackDirectX = false;
 		monsterSpeed = 2;
-		System.out.println(monsterAttacking);
-		moveMotion();
-		
-	
-		
 	}
 
 	@Override
@@ -228,14 +220,15 @@ public class Worm extends Monster {
 		}
 	}
 	public void moveMotion() {
+		if(isPlayerMoveStart()) return;
 		new Thread(new Runnable() {
 			@Override
-			public void run() {
+			public void run() {		
 				int motion = 0;
 				if(isPlayerMoveStart() == false ) {
 					setPlayerMoveStart(true);
 					while(!isDead()) {
-						System.out.println(monsterAttacking);
+						System.out.print("");
 						if(monsterAttacking == true) continue;
 						if(isDown() && getViewDirect() == ViewDirect.DOWN) {
 							if(motion > 3)
