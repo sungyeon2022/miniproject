@@ -32,7 +32,6 @@ import player.issac;
 import wall.rock;
 import wall.wall;
 
-
 //JFrame 참조 
 public class miniApp extends JFrame {
 	private JFrame app;
@@ -47,7 +46,6 @@ public class miniApp extends JFrame {
 	private Vector<Item> items;
 	private Vector<wall> walls;
 
-	
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
 		init();
@@ -71,58 +69,32 @@ public class miniApp extends JFrame {
 		monsters = new Vector<Monster>();
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
-		issac = new issac(app,monsters,walls,items);
+		issac = new issac(app, monsters, walls, items);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-		//아이템 시험 생성
+		// 아이템 시험 생성
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
-		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
-		//랜덤 아이템 생성
-		int witem = (int)(Math.random()*4);
-		switch(witem) {
+		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH, HeartSize.HEIGHT));
+		// 랜덤 아이템 생성
+		int witem = (int) (Math.random() * 4);
+		switch (witem) {
 		case 0:
-			items.add(new Pill(app, "item/PowerUp.png", "Power", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			items.add(new Pill(app, "item/PowerUp.png", "Power", 440, 400, PillSize.WIDTH, PillSize.HEIGHT));
 			break;
 		case 1:
-			items.add(new Pill(app, "item/ASUp.png", "AttackSpeed", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			items.add(new Pill(app, "item/ASUp.png", "AttackSpeed", 490, 400, PillSize.WIDTH, PillSize.HEIGHT));
 			break;
 		case 2:
-			items.add(new Pill(app, "item/SpeedUp.png", "Speed", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			items.add(new Pill(app, "item/SpeedUp.png", "Speed", 540, 400, PillSize.WIDTH, PillSize.HEIGHT));
 			break;
 		case 3:
-			items.add(new Pill(app, "item/FullHp.png", "FullHp", 440, 300, PillSize.WIDTH,PillSize.HEIGHT));
-			break;		
+			items.add(new Pill(app, "item/FullHp.png", "FullHp", 440, 300, PillSize.WIDTH, PillSize.HEIGHT));
+			break;
 		}
-		
-		//벽 시험 생성 및 10초후 제거
-		new Thread(new Runnable() {
-			@Override
-			
-			public void run() {
-				walls.add(new rock(app,455,100));
-				walls.add(new rock(app,455,150));
-				walls.add(new rock(app,455,200));
-				walls.add(new rock(app,455,250));
-				walls.add(new rock(app,455,300));
-				walls.add(new rock(app,455,350));
-				//walls.add(new rock(app,455,400));
-				//walls.add(new rock(app,455,450));
-				repaint();
-				for( int i = 0; i<30; i++) {
-					try {
-						Thread.sleep(300);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}	
-				}
-				for (int i = 0; i<walls.size(); i++) {
-					walls.get(i).setBroken(true);
-					remove(walls.get(i).getSswall());
-				}
-				repaint();
-			}
-			
-			
-		}).start();
+
+		// 벽 시험 생성 및 10초후 제거
+
+		walls.add(new rock(app, 455, 300));
+		repaint();
 
 	}
 
@@ -172,7 +144,7 @@ public class miniApp extends JFrame {
 						if (issac.getSwordControl().getSsSword().getBounds()
 								.intersects(monsters.get(i).getSsMonster().getBounds())) {
 							System.out.println("공격시도");
-							monsters.get(i).setLife(monsters.get(i).getLife() - 1);
+							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
 						}
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
@@ -208,6 +180,7 @@ public class miniApp extends JFrame {
 			}
 		});
 	}
+
 	public synchronized void playerattack() {
 		new Thread(new Runnable() {
 
@@ -219,7 +192,7 @@ public class miniApp extends JFrame {
 							if (issac.getSwordControl().getSsSword().getBounds()
 									.intersects(monsters.get(i).getSsMonster().getBounds())) {
 								System.out.println("판단 성공");
-								monsters.get(i).setLife(monsters.get(i).getLife() - 1);
+								monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
 								try {
 									Thread.sleep(800);
 								} catch (Exception e) {

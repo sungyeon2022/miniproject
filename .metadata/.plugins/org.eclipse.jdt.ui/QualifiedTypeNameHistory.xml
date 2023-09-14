@@ -42,9 +42,7 @@
     <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
     <fullyQualifiedTypeName name="sword.swordattackcontrol"/>
     <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
-    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="javax.security.auth.login.FailedLoginException"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
     <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
@@ -55,9 +53,11 @@
     <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="monster.Monster"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="objectSetting.RockSize"/>
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="player.issac"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
 </qualifiedTypeNameHistroy>

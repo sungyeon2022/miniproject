@@ -161,10 +161,6 @@ public class issac extends Player {
 							refreshDirect();
 							break;
 						}
-						setXPlayer(getXPlayer() + 1);
-						setXPlayerCenter(getXPlayerCenter() + 1);
-						setXPlayer(getXPlayer() + 1);
-						setXPlayerCenter(getXPlayerCenter() + 1);
 						// 돌 충돌 체크 시작
 						boolean isRockCollision = false;
 						for (int i = 0; i < walls.size(); i++) {
@@ -175,7 +171,6 @@ public class issac extends Player {
 												.getYwall()
 										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
 									isRockCollision = true;
-									break;
 								}
 							}
 						}
@@ -229,7 +224,6 @@ public class issac extends Player {
 												.getYwall()
 										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
 									isRockCollision = true;
-									break;
 								}
 							}
 						}
@@ -250,7 +244,6 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
-					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -273,8 +266,6 @@ public class issac extends Player {
 							refreshDirect();
 							break;
 						}
-						setYPlayer(getYPlayer() + 1);// 플레이어 이동시 좌표값 변경
-						setYPlayerCenter(getYPlayerCenter() + 1);// 중앙
 						// 돌 충돌 체크 시작
 						boolean isRockCollision = false;
 						for (int i = 0; i < walls.size(); i++) {
@@ -286,7 +277,6 @@ public class issac extends Player {
 												.get(i).getYwall()
 										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
 									isRockCollision = true;
-									break;
 								}
 							}
 						}
@@ -328,8 +318,6 @@ public class issac extends Player {
 							refreshDirect();
 							break;
 						}
-						setYPlayer(getYPlayer() - 1);
-						setYPlayerCenter(getYPlayerCenter() - 1);
 						boolean isRockCollision = false;
 						// 돌 충돌 체크 시작
 						for (int i = 0; i < walls.size(); i++) {
@@ -351,7 +339,6 @@ public class issac extends Player {
 							break;
 						}
 						getItem();
-						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() - 1);
 						setYPlayerCenter(getYPlayerCenter() - 1);
 						moveMotion();
@@ -370,10 +357,9 @@ public class issac extends Player {
 	}
 
 	@Override
-	public synchronized void moveMotion() { // 움직이는 동작중 이미지 갱신
+	public void moveMotion() { // 움직이는 동작중 이미지 갱신
 		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				int motion = 0;
@@ -384,10 +370,6 @@ public class issac extends Player {
 							if (motion > 9) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
 							ssBody.setXPos((issacSize.issacBODYWIDTH * motion) + (Gap.COLUMGAP * motion)); // XPos는 사진에서
-																											// // 가져올
-																											// 기준이
-							// 되는 X좌표가
-							// 됩니다
 							if (getViewDirect() == ViewDirect.DOWN) {
 								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
 								ssBody.setYPos(issacSize.issacHEADWIDTH + Gap.COLUMGAP);// X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과
@@ -409,6 +391,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
+							
 						} else if (isLeft() && getViewDirect() == ViewDirect.LEFT) {
 							if (motion > 9)
 								motion = 0;
@@ -432,6 +415,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
+							
 						} else if (isUp() && getViewDirect() == ViewDirect.UP) {
 							if (motion > 9)
 								motion = 0;
@@ -453,6 +437,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
+							
 						} else if (isRight() && getViewDirect() == ViewDirect.RIGHT) {
 							if (motion > 9)
 								motion = 0;
@@ -471,16 +456,14 @@ public class issac extends Player {
 									if (swordControl.getSsSword().getUrl().equals("sword/sword_right.png"))
 										swordControl.getSsSword().drawObj(getXPlayer() + 34, getYPlayer() + 28);
 								}
+								motion += 1;
 							}
+							
 						}
-						System.out.println("캐릭터생성");
-						ssBody.setXPos(0);
-						ssHead.drawObj(getXPlayer(), getYPlayer());
-						ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 						try {
-							Thread.sleep(100);
+							Thread.sleep(15);
 						} catch (Exception e) {
-							System.out.println("모션 에러");
+							e.printStackTrace();
 						}
 					}
 

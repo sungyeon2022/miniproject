@@ -25,6 +25,7 @@ public class Player extends Lombok {
 	private boolean PlayerMoveStart;
 	private boolean PlayerAttacking;
 	private boolean PlayerAttack;
+	private boolean isRock;
 	
 	public Player(JFrame app) {
 		this.app = app;
@@ -32,6 +33,7 @@ public class Player extends Lombok {
 		this.isDown = false;
 		this.isRight = false;
 		this.isLeft = false;
+		this.isRock = false;
 		this.dead = false;
 		this.iskeyPress = false;
 		this.PlayerAttack = false;

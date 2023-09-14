@@ -61,6 +61,7 @@ public class SpriteSheet extends JLabel{
 	
 
 	public synchronized BufferedImage getObjimg() {
+		loadSpriteimage(url);
 		return imgSprite.getSubimage(xPos, yPos, width, height);
 	}//이미지 파일에서 가져온 이미지를 x,y좌표 기준 높이와 너비로 자른후 버퍼에 저장
 	
