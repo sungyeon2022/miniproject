@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.xml.stream.events.StartDocument;
 
+<<<<<<< HEAD
 import org.w3c.dom.Text;
 
 import imgSize.ViewDirect;
@@ -21,6 +22,21 @@ import player.issac;
 import sword.SwordControl;
 import sword.swordattackcontrol;
 import testimg.testcontorl;
+=======
+import item.Bomb;
+import item.Heart;
+import item.Item;
+import item.Key;
+import item.Pill;
+import map.Background;
+import objectSetting.BombSize;
+import objectSetting.HeartSize;
+import objectSetting.KeySize;
+import objectSetting.PillSize;
+import player.issac;
+import wall.rock;
+import wall.wall;
+>>>>>>> origin/최낙연
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -28,11 +44,16 @@ public class miniApp extends JFrame {
 
 	private Background bg;
 	private issac issac;
+<<<<<<< HEAD
 	private SwordControl swordControl;
 	private testcontorl testcontorl;
 	private Worm worm;
 	private Vector<Monster> monsters;
 	private swordattackcontrol swordattackcontrol;
+=======
+	private Vector<Item> items;
+	private Vector<wall> walls;
+>>>>>>> origin/최낙연
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -40,7 +61,16 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
+<<<<<<< HEAD
 		playerattack();
+=======
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+			}
+		}).start();
+>>>>>>> origin/최낙연
 		setVisible(true);
 	}
 
@@ -48,9 +78,54 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		bg = new Background(app);
+<<<<<<< HEAD
 		monsters = new Vector<Monster>();
 		issac = new issac(app, monsters);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+=======
+		issac = new issac(app);
+		items = new Vector<Item>();
+		walls = new Vector<wall>();
+		//아이템 시험 생성
+		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
+		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
+		items.add(new Key(app, "item/key.png", "key", 340, 400, KeySize.WIDTH,KeySize.HEIGHT));
+		items.add(new Pill(app, "item/pill1.png", "Power2", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		items.add(new Pill(app, "item/pill2.png", "PS1", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		items.add(new Pill(app, "item/pill3.png", "Speed2", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		//벽 시험 생성 및 10초후 제거
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				walls.add(new rock(app,455,100));
+				walls.add(new rock(app,455,150));
+				walls.add(new rock(app,455,200));
+				walls.add(new rock(app,455,250));
+				walls.add(new rock(app,455,300));
+				walls.add(new rock(app,455,350));
+				walls.add(new rock(app,455,400));
+				walls.add(new rock(app,455,450));
+				repaint();
+				for( int i = 0; i<30; i++) {
+					try {
+						Thread.sleep(300);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}	
+				}
+				for (int i = 0; i<8; i++) {
+					walls.get(i).setBroken(true);
+					remove(walls.get(i).getSswall());
+				}
+				repaint();
+			}
+			
+			
+		}).start();
+		
+		
+		
+>>>>>>> origin/최낙연
 	}
 
 	// JFrame을 통한 창출력
@@ -79,6 +154,7 @@ public class miniApp extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
+<<<<<<< HEAD
 					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
@@ -89,11 +165,20 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
 					issac.setIskeyPress(true);
+=======
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					issac.moveLeft();
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					issac.moveDown();
+				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					issac.moveUp();
+>>>>>>> origin/최낙연
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
+<<<<<<< HEAD
 					issac.attackMotion();
 					for (int i = 0; i < monsters.size(); i++) {
 						if (issac.getSwordControl().getSsSword().getBounds()
@@ -102,6 +187,9 @@ public class miniApp extends JFrame {
 							monsters.get(i).setLife(monsters.get(i).getLife() - 1);
 						}
 					}
+=======
+
+>>>>>>> origin/최낙연
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_E) {
@@ -112,6 +200,7 @@ public class miniApp extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+<<<<<<< HEAD
 					issac.setIskeyPress(false);
 					issac.setRight(false);
 					issac.refreshDirect();
@@ -130,12 +219,26 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					System.out.println("a키 떨어짐");
 					issac.setPlayerAttack(false);
+=======
+					issac.setRight(false);
+					issac.refreshDirect();
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					issac.setLeft(false);
+					issac.refreshDirect();
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					issac.setDown(false);
+					issac.refreshDirect();
+				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					issac.setUp(false);
+					issac.refreshDirect();
+>>>>>>> origin/최낙연
 				}
 
 			}
 		});
 	}
 
+<<<<<<< HEAD
 	public synchronized void playerattack() {
 		new Thread(new Runnable() {
 
@@ -160,4 +263,6 @@ public class miniApp extends JFrame {
 			}
 		}).start();
 	}
+=======
+>>>>>>> origin/최낙연
 }
