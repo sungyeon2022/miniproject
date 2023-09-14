@@ -28,6 +28,7 @@ public class miniApp extends JFrame {
 	private Vector<Item> items;
 	private Vector<wall> walls;
 
+	
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
 		init();
@@ -50,20 +51,34 @@ public class miniApp extends JFrame {
 		
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
-		issac = new issac(app,walls);
+		issac = new issac(app,walls,items);
 		//아이템 시험 생성
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
-		items.add(new Pill(app, "item/pill1.png", "Power2", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
-		items.add(new Pill(app, "item/pill2.png", "PS1", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
-		items.add(new Pill(app, "item/pill3.png", "Speed2", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
+		//랜덤 아이템 생성
+		int witem = (int)(Math.random()*4);
+		switch(witem) {
+		case 0:
+			items.add(new Pill(app, "item/PowerUp.png", "Power", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			break;
+		case 1:
+			items.add(new Pill(app, "item/ASUp.png", "AttackSpeed", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			break;
+		case 2:
+			items.add(new Pill(app, "item/SpeedUp.png", "Speed", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
+			break;
+		case 3:
+			items.add(new Pill(app, "item/FullHp.png", "FullHp", 440, 300, PillSize.WIDTH,PillSize.HEIGHT));
+			break;		
+		}
+		
 		//벽 시험 생성 및 10초후 제거
 		new Thread(new Runnable() {
 			@Override
 			
 			public void run() {
-				//walls.add(new rock(app,455,100));
-				//walls.add(new rock(app,455,150));
+				walls.add(new rock(app,455,100));
+				walls.add(new rock(app,455,150));
 				walls.add(new rock(app,455,200));
 				walls.add(new rock(app,455,250));
 				walls.add(new rock(app,455,300));
