@@ -7,13 +7,13 @@ import java.util.Vector;
 import javax.swing.JFrame;
 
 import item.Bomb;
+import item.Createitem;
 import item.Heart;
 import item.Item;
 import item.Pill;
 import map.Background;
 import objectSetting.BombSize;
 import objectSetting.HeartSize;
-import objectSetting.KeySize;
 import objectSetting.PillSize;
 import player.issac;
 import wall.rock;
@@ -48,30 +48,11 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		bg = new Background(app);
-		
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app,walls,items);
-		//아이템 시험 생성
-		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
-		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
-		//랜덤 아이템 생성
-		int witem = (int)(Math.random()*4);
-		switch(witem) {
-		case 0:
-			items.add(new Pill(app, "item/PowerUp.png", "Power", 440, 400, PillSize.WIDTH,PillSize.HEIGHT));
-			break;
-		case 1:
-			items.add(new Pill(app, "item/ASUp.png", "AttackSpeed", 490, 400, PillSize.WIDTH,PillSize.HEIGHT));
-			break;
-		case 2:
-			items.add(new Pill(app, "item/SpeedUp.png", "Speed", 540, 400, PillSize.WIDTH,PillSize.HEIGHT));
-			break;
-		case 3:
-			items.add(new Pill(app, "item/FullHp.png", "FullHp", 440, 300, PillSize.WIDTH,PillSize.HEIGHT));
-			break;		
-		}
-		
+		//아이템 생성 클래스
+		new Createitem(app,items,500,450);
 		//벽 시험 생성 및 10초후 제거
 		new Thread(new Runnable() {
 			@Override
