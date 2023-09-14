@@ -6,10 +6,7 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.xml.stream.events.StartDocument;
-
-<<<<<<< HEAD
 import org.w3c.dom.Text;
-
 import imgSize.ViewDirect;
 import imgSize.WormSize;
 import map.Background;
@@ -22,7 +19,6 @@ import player.issac;
 import sword.SwordControl;
 import sword.swordattackcontrol;
 import testimg.testcontorl;
-=======
 import item.Bomb;
 import item.Heart;
 import item.Item;
@@ -35,7 +31,7 @@ import objectSetting.PillSize;
 import player.issac;
 import wall.rock;
 import wall.wall;
->>>>>>> origin/최낙연
+
 
 //JFrame 참조 
 public class miniApp extends JFrame {
@@ -43,16 +39,13 @@ public class miniApp extends JFrame {
 
 	private Background bg;
 	private issac issac;
-<<<<<<< HEAD
 	private SwordControl swordControl;
 	private testcontorl testcontorl;
 	private Worm worm;
 	private Vector<Monster> monsters;
 	private swordattackcontrol swordattackcontrol;
-=======
 	private Vector<Item> items;
 	private Vector<wall> walls;
->>>>>>> origin/최낙연
 
 	
 	// miniApp에서 필요한 시스템 정보 가져옴
@@ -61,16 +54,13 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
-<<<<<<< HEAD
 		playerattack();
-=======
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 
 			}
 		}).start();
->>>>>>> origin/최낙연
 		setVisible(true);
 	}
 
@@ -78,19 +68,11 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		bg = new Background(app);
-<<<<<<< HEAD
-<<<<<<< HEAD
 		monsters = new Vector<Monster>();
-		issac = new issac(app, monsters);
-		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-=======
-		issac = new issac(app);
-=======
-		
->>>>>>> origin/최낙연
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
-		issac = new issac(app,walls,items);
+		issac = new issac(app,monsters,walls,items);
+		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		//아이템 시험 생성
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH,HeartSize.HEIGHT));
@@ -141,13 +123,7 @@ public class miniApp extends JFrame {
 			
 			
 		}).start();
-		
-		
-<<<<<<< HEAD
-		
->>>>>>> origin/최낙연
-=======
->>>>>>> origin/최낙연
+
 	}
 
 	// JFrame을 통한 창출력
@@ -176,7 +152,6 @@ public class miniApp extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
-<<<<<<< HEAD
 					issac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
@@ -187,20 +162,11 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
 					issac.setIskeyPress(true);
-=======
-				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-					issac.moveLeft();
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					issac.moveDown();
-				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-					issac.moveUp();
->>>>>>> origin/최낙연
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-<<<<<<< HEAD
 					issac.attackMotion();
 					for (int i = 0; i < monsters.size(); i++) {
 						if (issac.getSwordControl().getSsSword().getBounds()
@@ -209,9 +175,6 @@ public class miniApp extends JFrame {
 							monsters.get(i).setLife(monsters.get(i).getLife() - 1);
 						}
 					}
-=======
-
->>>>>>> origin/최낙연
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_E) {
@@ -222,7 +185,6 @@ public class miniApp extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-<<<<<<< HEAD
 					issac.setIskeyPress(false);
 					issac.setRight(false);
 					issac.refreshDirect();
@@ -241,26 +203,11 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					System.out.println("a키 떨어짐");
 					issac.setPlayerAttack(false);
-=======
-					issac.setRight(false);
-					issac.refreshDirect();
-				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-					issac.setLeft(false);
-					issac.refreshDirect();
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					issac.setDown(false);
-					issac.refreshDirect();
-				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-					issac.setUp(false);
-					issac.refreshDirect();
->>>>>>> origin/최낙연
 				}
 
 			}
 		});
 	}
-
-<<<<<<< HEAD
 	public synchronized void playerattack() {
 		new Thread(new Runnable() {
 
@@ -285,6 +232,4 @@ public class miniApp extends JFrame {
 			}
 		}).start();
 	}
-=======
->>>>>>> origin/최낙연
 }
