@@ -16,7 +16,7 @@ import player.issac;//objectsetting에서 옮겨옴
 public class Monster extends Player{
 	
 	private final static String TAG = "Monster : ";
-	public static int monsterSpeed = 2;
+	public int monsterSpeed = 2;
 	private issac issac;
 	private SpriteSheet ssMonster;
 	private SpriteSheet ssDead;

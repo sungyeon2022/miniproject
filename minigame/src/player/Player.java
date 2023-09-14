@@ -2,7 +2,6 @@ package player;
 
 import javax.swing.JFrame;
 
-import imgSize.*;
 import lombok.Data;
 import lombok.Lombok;
 import sword.SwordControl;
@@ -16,6 +15,7 @@ public class Player extends Lombok {
 	private boolean isUp, isDown, isRight, isLeft;
 	private boolean iskeyPress;
 	private int viewDirect;
+	private int bodyViewDirect;
 	private int xPlayer, yPlayer;
 	private int xPlayerCenter, yPlayerCenter;//플레이어 중심값
 	private boolean dead;

@@ -5,16 +5,11 @@ import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.JFrame;
-import javax.xml.stream.events.StartDocument;
 
-import org.w3c.dom.Text;
-
-import imgSize.ViewDirect;
+import imgSize.BodySize;
 import imgSize.WormSize;
 import map.Background;
-import monster.Worm;
-import player.*;
-import sword.Sword;
+import monster.body;
 import monster.Monster;
 import monster.Worm;
 import player.issac;
@@ -31,6 +26,7 @@ public class miniApp extends JFrame {
 	private SwordControl swordControl;
 	private testcontorl testcontorl;
 	private Worm worm;
+	private body body;
 	private Vector<Monster> monsters;
 	private swordattackcontrol swordattackcontrol;
 
@@ -51,6 +47,7 @@ public class miniApp extends JFrame {
 		monsters = new Vector<Monster>();
 		issac = new issac(app, monsters);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 	}
 
 	// JFrame을 통한 창출력
