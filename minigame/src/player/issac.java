@@ -145,7 +145,6 @@ public class issac extends Player {
 			getApp().add(ssLife.get(i), 1);
 		}
 	}
-
 	// 상하 좌우 이동 모션
 	@Override
 	public void moveRight() {
@@ -171,6 +170,7 @@ public class issac extends Player {
 												.getYwall()
 										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
 									isRockCollision = true;
+									break;
 								}
 							}
 						}
@@ -190,6 +190,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -224,6 +225,7 @@ public class issac extends Player {
 												.getYwall()
 										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
 									isRockCollision = true;
+									break;
 								}
 							}
 						}
@@ -244,6 +246,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -277,6 +280,7 @@ public class issac extends Player {
 												.get(i).getYwall()
 										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
 									isRockCollision = true;
+									break;
 								}
 							}
 						}
@@ -296,6 +300,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -339,6 +344,7 @@ public class issac extends Player {
 							break;
 						}
 						getItem();
+						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() - 1);
 						setYPlayerCenter(getYPlayerCenter() - 1);
 						moveMotion();
@@ -348,6 +354,7 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
