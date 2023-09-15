@@ -79,31 +79,31 @@ public class Monster extends Player{
 			setLeft(true);
 			setDown(false);
 			setUp(false);
-//			System.out.println("오른쪽 벽 충돌");
+			System.out.println("오른쪽 벽 충돌");
 		}
-		// 왼쪽
+//		// 왼쪽
 		if((getXPlayer()<130)) {
 			setLeft(false);
 			setRight(true);
 			setDown(false);
 			setUp(false);
-//			System.out.println("왼쪽 벽 충돌");
+			System.out.println("왼쪽 벽 충돌");
 		}
-		// 아래쪽
+//		// 아래쪽
 		if((getYPlayer()>440)) {
 			setLeft(false);
 			setRight(false);
 			setDown(false);
 			setUp(true);
-//			System.out.println("아래쪽 벽 충돌");
+			System.out.println("아래쪽 벽 충돌");
 		}
-		// 위쪽
+//		// 위쪽
 		if((getYPlayer()<100)) {
 			setLeft(false);
 			setRight(false);
 			setUp(false);
 			setDown(true);
-//			System.out.println("위쪽 벽 충돌");
+			System.out.println("위쪽 벽 충돌");
 		}	
 	}
 	public void moveDirectCheck() {
