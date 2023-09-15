@@ -95,7 +95,7 @@ public class issac extends Player {
 		setViewDirect(ViewDirect.DOWN);
 		setXPlayer(480);
 		setYPlayer(430);
-		setAttackDamge(1);
+		setAttackDamage(1);
 		setLife(3);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
