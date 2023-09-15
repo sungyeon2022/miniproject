@@ -1,10 +1,25 @@
 package SpriteSheet;
 
+
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfigTemplate;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.Image;
+import java.awt.Transparency;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 
 import lombok.Data;
@@ -13,7 +28,10 @@ import lombok.Data;
 
 public class SpriteSheet extends JLabel{
 	private final static String TAG = "SpriteSheet:";
+	JFrame frame;
 	private BufferedImage imgSprite;
+	private BufferedImage newimg;
+
 	private String url;
 	private String gubun;
 	private int xPos;
@@ -33,24 +51,31 @@ public class SpriteSheet extends JLabel{
 		this.height = height;
 		loadSpriteimage(url);
 	}
-	public void loadSpriteimage(String url) {
-		try {
-			imgSprite = ImageIO.read(new File("images/"+url));
-		}catch (Exception e) {
-			System.out.println(TAG+"이미지 로드 실패");
-		}
+	public synchronized void loadSpriteimage(String url) {
+			try {
+				imgSprite = ImageIO.read(new File("images/"+url));
+			} catch (IOException e) {
+				System.out.println("이미지 로드 실패");
+			}
 	}//url을 통해 이미지 파일을 가져옴 없을경우 SpriteSheet: 이미지 로드 실패 출력
 	
-	public BufferedImage getObjimg() {
+
+	public synchronized BufferedImage getObjimg() {
+		loadSpriteimage(url);
 		return imgSprite.getSubimage(xPos, yPos, width, height);
 	}//이미지 파일에서 가져온 이미지를 x,y좌표 기준 높이와 너비로 자른후 버퍼에 저장
 	
-	public void drawObj(int x, int y) {
+	public synchronized void drawObj(int x, int y) {
 		imgObj = new ImageIcon(getObjimg());
 		setIcon(imgObj);
 		setSize(width,height);
 		setLocation(x,y);
-		System.out.println(TAG + gubun + "그려짐");
+		setBorder(new LineBorder(Color.black));
+//		System.out.println(TAG + gubun + "그려짐");
+	}
+	
+	public void erase() {
+		setIcon(imgObj);
 	}
 	/*
 	 * public static BufferedImage resize(InputStream image, int width, int height)

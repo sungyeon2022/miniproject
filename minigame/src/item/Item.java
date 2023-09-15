@@ -22,5 +22,6 @@ public class Item {
 			this.xItem = xItem;
 			this.yItem = yItem;
 		}
+		
 		public void drawItem() {}
 }
