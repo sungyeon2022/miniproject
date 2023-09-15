@@ -21,6 +21,10 @@ public class Item {
 			this.ssItem = new SpriteSheet(url, gubun, 0, 0, width, height);
 			this.xItem = xItem;
 			this.yItem = yItem;
+			drawItem();
 		}
-		public void drawItem() {}
+		public void drawItem() {
+			getSsItem().drawObj(getXItem(), getYItem());
+			getApp().add(getSsItem());
+		}
 }

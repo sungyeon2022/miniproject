@@ -10,9 +10,8 @@ public class Heart extends Item {
 		super(app, url, gubun, xItem, yItem, width, height);
 		drawItem();
 	}
-	@Override
-	public void drawItem() {
-		getSsItem().drawObj(getXItem(), getYItem());
-		getApp().add(getSsItem());
-	}
+	/*
+	 * @Override public void drawItem() { getSsItem().drawObj(getXItem(),
+	 * getYItem()); getApp().add(getSsItem()); }
+	 */
 }
