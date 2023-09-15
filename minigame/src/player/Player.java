@@ -2,6 +2,7 @@ package player;
 
 import javax.swing.JFrame;
 
+import imgSize.*;
 import lombok.Data;
 import lombok.Lombok;
 import sword.SwordControl;
@@ -14,8 +15,8 @@ public class Player extends Lombok {
 	private double maxlife=8;
 	private boolean isUp, isDown, isRight, isLeft;
 	private boolean iskeyPress;
+	private double attackDamage; //공격 데미지
 	private int viewDirect;
-	private int bodyViewDirect;
 	private int xPlayer, yPlayer;
 	private int xPlayerCenter, yPlayerCenter;//플레이어 중심값
 	private boolean dead;
@@ -24,6 +25,7 @@ public class Player extends Lombok {
 	private boolean PlayerMoveStart;
 	private boolean PlayerAttacking;
 	private boolean PlayerAttack;
+	private boolean isRock;
 	
 	public Player(JFrame app) {
 		this.app = app;
@@ -31,6 +33,7 @@ public class Player extends Lombok {
 		this.isDown = false;
 		this.isRight = false;
 		this.isLeft = false;
+		this.isRock = false;
 		this.dead = false;
 		this.iskeyPress = false;
 		this.PlayerAttack = false;
