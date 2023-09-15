@@ -148,12 +148,12 @@ public class Head extends Monster{
 					while(!isDead()) {
 						if(motion > 2)
 							motion =0;
-						getSsMonster().setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion) + 2);
+						getSsMonster().setXPos((getImgWidth() * motion) + (7 * motion) + 4);
 						getSsMonster().setYPos(getImgHeight() * 0 + Gap.ROWGAP * 0);	// 몸 이미지 y좌표
 						getSsMonster().drawObj(getXPlayer(), getYPlayer());
 						
 						try {
-							Thread.sleep(300);
+							Thread.sleep(200);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
