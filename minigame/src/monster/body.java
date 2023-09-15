@@ -31,10 +31,6 @@ public class body extends Monster {
 					moveRight();
 					moveLeft();
 					moveMotion();
-//					System.out.print(isLeft());
-//					System.out.print(isRight());
-//					System.out.print(isUp());
-//					System.out.println(isDown());
 					getSsMonster().drawObj(getXPlayer(), getYPlayer());
 						try {
 						Thread.sleep(30);
@@ -164,7 +160,7 @@ public class body extends Monster {
 							}
 						}
 							try {
-								Thread.sleep(100);
+								Thread.sleep(70);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
