@@ -9,9 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import imgSize.BombSize;
 import item.Bomb;
 import item.Item;
-import objectSetting.BombSize;
 
 public class Background {
 	private JLabel isBackground;

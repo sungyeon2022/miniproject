@@ -20,7 +20,6 @@ import imgSize.*;
 import lombok.Data;
 import monster.Monster;
 import monster.Worm;
-import objectSetting.RockSize;
 import wall.*;
 import item.*;
 
@@ -164,12 +163,17 @@ public class issac extends Player {
 						boolean isRockCollision = false;
 						for (int i = 0; i < walls.size(); i++) {
 							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall()
-										&& getXPlayerCenter() < walls.get(i).getXwall() + RockSize.WIDTH
-										&& getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i)
-												.getYwall()
+								if (getXPlayer()+issacSize.issacBODYWIDTH+10 >= walls.get(i).getXwall()
+										&& getXPlayerCenter()-5 < walls.get(i).getXwall() + RockSize.WIDTH
+										&& getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i).getYwall()
 										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
 									isRockCollision = true;
+									System.out.println(walls.get(i).getXwall());
+									System.out.println(getXPlayer()+issacSize.issacBODYWIDTH+10);
+									System.out.println(issacSize.issacBODYWIDTH);
+									System.out.println(getXPlayer());
+									
+									
 									break;
 								}
 							}
@@ -218,8 +222,8 @@ public class issac extends Player {
 						for (int i = 0; i < walls.size(); i++) {
 							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
 
-								if (getXPlayerCenter() > walls.get(i).getXwall()
-										&& getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall()
+								if (getXPlayerCenter()+4 > walls.get(i).getXwall()
+										&& getXPlayerCenter()+4 - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall()
 												+ RockSize.WIDTH
 										&& getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i)
 												.getYwall()

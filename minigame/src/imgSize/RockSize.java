@@ -1,4 +1,4 @@
-package objectSetting;
+package imgSize;
 
 public interface RockSize {
 	int WIDTH = 50;

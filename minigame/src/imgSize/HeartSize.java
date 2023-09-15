@@ -1,4 +1,4 @@
-package objectSetting;
+package imgSize;
 
 public interface HeartSize {
 	int WIDTH = 30;
