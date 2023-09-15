@@ -6,17 +6,12 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 
-import item.Bomb;
 import item.Createitem;
-import item.Heart;
 import item.Item;
-import item.Pill;
 import map.Background;
-import objectSetting.BombSize;
-import objectSetting.HeartSize;
-import objectSetting.PillSize;
+import map.Timer;
 import player.issac;
-import wall.rock;
+import wall.Centerwall;
 import wall.wall;
 
 //JFrame 참조 
@@ -24,6 +19,7 @@ public class miniApp extends JFrame {
 	private JFrame app;
 
 	private Background bg;
+	private Timer timer;
 	private issac issac;
 	private Vector<Item> items;
 	private Vector<wall> walls;
@@ -48,42 +44,20 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		bg = new Background(app);
+		//타이머
+		timer = new Timer(app);
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app,walls,items);
-		//아이템 생성 클래스
-		new Createitem(app,items,500,450);
-		//벽 시험 생성 및 10초후 제거
-		new Thread(new Runnable() {
-			@Override
-			
-			public void run() {
-				walls.add(new rock(app,455,100));
-				walls.add(new rock(app,455,150));
-				walls.add(new rock(app,455,200));
-				walls.add(new rock(app,455,250));
-				walls.add(new rock(app,455,300));
-				walls.add(new rock(app,455,350));
-				//walls.add(new rock(app,455,400));
-				//walls.add(new rock(app,455,450));
-				repaint();
-				for( int i = 0; i<30; i++) {
-					try {
-						Thread.sleep(300);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}	
-				}
-				for (int i = 0; i<walls.size(); i++) {
-					walls.get(i).setBroken(true);
-					remove(walls.get(i).getSswall());
-				}
-				repaint();
-			}
-			
-			
-		}).start();
+		//아이템 생성 클래스 
+		new Createitem(app,items,550,200);
+		new Createitem(app,items,550,300);
+		new Createitem(app,items,550,400);
+		new Createitem(app,items,550,500);
+		new Createitem(app,items,550,600);
 		
+		//중앙 벽
+		new Centerwall(app,walls);
 		
 	}
 

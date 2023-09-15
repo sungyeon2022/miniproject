@@ -23,6 +23,7 @@ public class issac extends Player {
 	private final static String TAG = "issac: ";
 	private issac issac = this;
 
+	private Vector<SpriteSheet> ssLifes;
 	private SpriteSheet ssHead, ssBody;
 	private SpriteSheet ssTotal;
 
@@ -45,6 +46,7 @@ public class issac extends Player {
 	private int speedNum = 11;
 	private int powerNum = 1;
 	private int attackspeedNum = 1;
+
 	public issac(JFrame app, Vector<wall> walls, Vector<Item> items) {
 		super(app);
 		System.out.println(TAG + "make issac");
@@ -57,6 +59,10 @@ public class issac extends Player {
 	public void init(Vector<wall> walls, Vector<Item> items) {
 		this.walls = walls;
 		this.items = items;
+		ssLifes = new Vector<SpriteSheet>();
+		for (int i = 0; i < 5; i++) {
+			this.ssLifes.add(new SpriteSheet("issac/life.png", "life", 0, 0, 30, 26));
+		}
 		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,
 				issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
@@ -71,6 +77,7 @@ public class issac extends Player {
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH,
 				issacSize.issacTOTALHEIGHT);
 		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
+
 		// 레이블 초기화
 		labomb = new JLabel(Integer.toString(bombCount));
 		laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
@@ -82,10 +89,17 @@ public class issac extends Player {
 		setViewDirect(ViewDirect.DOWN);
 		setXPlayer(510);
 		setYPlayer(300);
+		setLife(5);
+		setMaxlife(5);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+		// 체력 그리기
+		for (int i = 0; i < 5; i++) {
+			ssLifes.get(i).drawObj(10 + (i * 30), 10);
+		}
+
 		// 폭탄 레이블 설정
 		labomb.setSize(30, 30);
 		labomb.setLocation(65, 50);
@@ -102,17 +116,21 @@ public class issac extends Player {
 		laspeed.setFont(new Font("바탕", Font.ITALIC, 25));
 		laspeed.setForeground(Color.WHITE);
 		// 공속 레이블 설정
-		laattackspeed.setSize(40,30);
+		laattackspeed.setSize(40, 30);
 		laattackspeed.setLocation(65, 155);
 		laattackspeed.setFont(new Font("바탕", Font.ITALIC, 25));
 		laattackspeed.setForeground(Color.WHITE);
-		
 
 	}
 
 	public void batch() {
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
+		// 체력추가
+		for (int i = 0; i < 5; i++) {
+			getApp().add(ssLifes.get(i), 1);
+		}
+
 		// 폭탄 파워 속도 레이블 추가
 		getApp().add(labomb);
 		getApp().add(lapower);
@@ -428,7 +446,25 @@ public class issac extends Player {
 			issac.setViewDirect(ViewDirect.RIGHT);
 		}
 	}
-
+	//체력바 갱신
+	public void reDrawLife() {
+		double currentLife = getLife();
+		for(int i = 0; i < 5; i++) {
+			if(currentLife >= 1) {
+				ssLifes.get(i).setXPos(0);
+				currentLife -= 1;
+			} else if(currentLife > 0 && currentLife < 1) {
+				ssLifes.get(i).setXPos(30 + Gap.COLUMGAP);
+				currentLife -= 0.5;
+			} else {
+				ssLifes.get(i).setXPos(30 * 2 + Gap.COLUMGAP * 2);
+			}
+		}
+		for(int i = 0; i < 5; i++) {
+			ssLifes.get(i).drawObj(10 + (i * 30), 10);
+		}
+	}
+	
 	// 주변 아이템 여부 체크
 	public boolean nearItemCheck(Item item) {
 		if (getXPlayerCenter() > item.getXItem() && getXPlayerCenter() < item.getXItem() + item.getSsItem().getWidth()
@@ -461,15 +497,14 @@ public class issac extends Player {
 					} else if (items.get(i).getSsItem().getGubun() == "Power") {
 						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
 						if (luck == 1) {
-
-							powerNum+=2;
+							
+							powerNum += 2;
 							lapower.setText(Integer.toString(powerNum));
-								
-						}
-						else if(luck == 0) {
+
+						} else if (luck == 0) {
 							powerNum--;
 							lapower.setText(Integer.toString(powerNum));
-							
+
 						}
 						// Gubun String이 "Speed" 일때
 					} else if (items.get(i).getSsItem().getGubun() == "Speed") {
@@ -479,33 +514,77 @@ public class issac extends Player {
 							moveSpeed += 3;
 							laspeed.setText(Integer.toString(speedNum - moveSpeed));
 
-						}
-						else if ( luck == 0) {
-							moveSpeed --;
+						} else if (luck == 0) {
+							moveSpeed--;
 							laspeed.setText(Integer.toString(speedNum - moveSpeed));
-							
+
 						}
-					}
-					else if (items.get(i).getSsItem().getGubun() == "AttackSpeed") {
+					} else if (items.get(i).getSsItem().getGubun() == "AttackSpeed") {
 						if (luck == 1) {
 
-							attackspeedNum +=2;
+							attackspeedNum += 2;
+							laattackspeed.setText(Integer.toString(attackspeedNum));
+
+						} else if (luck == 0) {
+							attackspeedNum--;
 							laattackspeed.setText(Integer.toString(attackspeedNum));
 
 						}
-						else if ( luck == 0) {
-							attackspeedNum --;
-							laattackspeed.setText(Integer.toString(attackspeedNum));
-							
-						}
 					}
+					else if (items.get(i).getSsItem().getGubun() == "FullHp") {
+						setLife(getMaxlife());
+						reDrawLife();
+					}
+
+					else if (items.get(i).getSsItem().getGubun() == "heart") {
+						if (getLife() != getMaxlife()) {
+							setLife(getLife() + 1);
+							reDrawLife();
+						}
+
+					}
+
 					System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-					getApp().remove(items.get(i).getSsItem());
-					getApp().repaint();
+					getItemMotion(items.get(i));
 
 				}
 			}
 
 		}
 	}
+	//아이템 습득 모션
+	public void getItemMotion(Item item) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				getApp().remove(ssHead);
+				getApp().remove(ssBody);
+				int col = 2;
+				for(int i = 0; i < 2; i++) {
+					col += i;
+					for (int j = 0; j<200; j++) {
+						try {
+							Thread.sleep(1);
+							item.getSsItem().drawObj(getXPlayer() + 10, getYPlayer() - 21);
+							ssTotal.setXPos(issacSize.issacTOTALWIDTH * col + Gap.COLUMGAP * col);
+							ssTotal.setYPos(yTotalSize);
+							ssTotal.drawObj(getXPlayer()-5, getYPlayer()-6);
+							getApp().add(ssTotal);
+							getApp().repaint();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}	
+					}
+				}
+				getApp().remove(item.getSsItem());
+				getApp().remove(ssTotal);
+				getApp().repaint();
+				getApp().add(ssHead, 0);
+				getApp().add(ssBody, 1);
+			}
+		}).start();
+		
+	}
+	
+	
 }
