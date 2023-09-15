@@ -292,7 +292,12 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
+<<<<<<< HEAD
 							refreshDirect();
+=======
+							setDown(false);
+							refreshDirect(); 
+>>>>>>> origin/최낙연
 							break;
 						}
 						getItem();
@@ -346,6 +351,7 @@ public class issac extends Player {
 							refreshDirect();
 							break;
 						}
+						
 						getItem();
 						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() - 1);

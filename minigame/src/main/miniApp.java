@@ -75,9 +75,12 @@ public class miniApp extends JFrame {
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items);
-		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+		/*
+		 * monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH,
+		 * WormSize.HEIGHT)); monsters.add(new body(app, issac, "monster/body.png",
+		 * BodySize.WIDTH, BodySize.HEIGHT)); monsters.add(new Head(app, issac,
+		 * "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+		 */
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH, HeartSize.HEIGHT));
 		// 랜덤 아이템 생성
