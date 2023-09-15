@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
+    <fullyQualifiedTypeName name="objectSetting.SwordSize"/>
     <fullyQualifiedTypeName name="sword.Sword"/>
     <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
     <fullyQualifiedTypeName name="java.awt.Transparency"/>
@@ -33,6 +35,9 @@
     <fullyQualifiedTypeName name="monster.Worm"/>
     <fullyQualifiedTypeName name="imgSize.SwordSize"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="monster.Monster"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
     <fullyQualifiedTypeName name="javax.swing.text.TabStop"/>
     <fullyQualifiedTypeName name="javax.swing.border.LineBorder"/>
@@ -41,8 +46,13 @@
     <fullyQualifiedTypeName name="sword.SwordControl"/>
     <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
     <fullyQualifiedTypeName name="sword.swordattackcontrol"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
+    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="javax.security.auth.login.FailedLoginException"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
     <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
@@ -50,14 +60,4 @@
     <fullyQualifiedTypeName name="java.lang.Void"/>
     <fullyQualifiedTypeName name="monster.MonsterJo"/>
     <fullyQualifiedTypeName name="monster.WormJo"/>
-    <fullyQualifiedTypeName name="java.util.Vector"/>
-    <fullyQualifiedTypeName name="monster.Monster"/>
-    <fullyQualifiedTypeName name="java.io.IOException"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
-    <fullyQualifiedTypeName name="objectSetting.RockSize"/>
-    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
-    <fullyQualifiedTypeName name="player.issac"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
 </qualifiedTypeNameHistroy>

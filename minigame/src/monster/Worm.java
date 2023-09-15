@@ -15,18 +15,13 @@ import player.issac;
 @Data
 
 public class Worm extends Monster {
-	public static boolean monsterAttacking = false;
+	private boolean monsterAttacking = false;
 	private static int gapX ;
 	private static int gapY;
 	private boolean checkAttackDirectX = false;
 	private boolean checkAttackDirectY = false;
 	private int attackDirect;
 	private final static String GUBUN = "Worm : ";
-	private boolean stop;
-	
-	public void setStop(boolean stop) {
-		this.stop = stop;
-	}
 
 	public Worm(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
