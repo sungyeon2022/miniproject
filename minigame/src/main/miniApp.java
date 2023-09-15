@@ -151,6 +151,7 @@ public class miniApp extends JFrame {
 								.intersects(monsters.get(i).getSsMonster().getBounds())) {
 							System.out.println("공격시도");
 							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
+							System.out.println(monsters.get(i).getLife());
 						}
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {

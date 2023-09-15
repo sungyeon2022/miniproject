@@ -95,7 +95,7 @@ public class issac extends Player {
 		setViewDirect(ViewDirect.DOWN);
 		setXPlayer(480);
 		setYPlayer(430);
-		setAttackDamge(1);
+		setAttackDamage(1);
 		setLife(3);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
@@ -175,7 +175,6 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setRight(false);
 							refreshDirect();
 							break;
 						}
@@ -230,7 +229,6 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setLeft(false);
 							refreshDirect();
 							break;
 						}
@@ -285,7 +283,6 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setUp(false);
 							refreshDirect();
 							break;
 						}
@@ -319,7 +316,6 @@ public class issac extends Player {
 					setViewDirect(ViewDirect.UP);
 					while (isUp()) {
 						if (getYPlayer() < 100) {
-							setUp(false);
 							refreshDirect();
 							break;
 						}
@@ -339,7 +335,6 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setUp(false);
 							refreshDirect();
 							break;
 						}
