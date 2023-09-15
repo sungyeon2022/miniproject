@@ -7,12 +7,17 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.xml.stream.events.StartDocument;
 import org.w3c.dom.Text;
+
+import imgSize.BodySize;
+import imgSize.HeadSize;
 import imgSize.ViewDirect;
 import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
+import monster.body;
 import player.*;
 import sword.Sword;
+import monster.Head;
 import monster.Monster;
 import monster.Worm;
 import player.issac;
@@ -71,7 +76,8 @@ public class miniApp extends JFrame {
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-		// 아이템 시험 생성
+		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH, HeartSize.HEIGHT));
 		// 랜덤 아이템 생성
