@@ -68,7 +68,7 @@ public class SpriteSheet extends JLabel{
 	}
 	
 	public void erase() {
-		setIcon(imgObj);
+		setIcon(null);
 	}
 	
 	public void imgverlap(SpriteSheet spriteSheet,SpriteSheet spriteSheet2) {
