@@ -94,7 +94,7 @@ public class issac extends Player {
 		setViewDirect(ViewDirect.DOWN);
 		setXPlayer(480);
 		setYPlayer(430);
-		setAttackDamge(1);
+		setAttackDamage(1);
 		setLife(3);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
@@ -179,7 +179,6 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setRight(false);
 							refreshDirect();
 							break;
 						}
@@ -194,10 +193,20 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
-					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+//					int cnt = 0;
+//					while (true) { //생성이유 특정조건 벽이나 구석
+//						cnt++;
+//						System.out.println("moveRight Thread 유지중"+cnt);
+//						if(!isIskeyPress()) break;
+//						try {
+//							Thread.sleep(100);
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//						}
+//					}
 				}
 			}
 		}).start();
@@ -234,7 +243,6 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setLeft(false);
 							refreshDirect();
 							break;
 						}
@@ -250,7 +258,6 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
-					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -289,8 +296,7 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setDown(false);
-							refreshDirect(); 
+							refreshDirect();
 							break;
 						}
 						getItem();
@@ -304,7 +310,6 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
-					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
@@ -323,7 +328,6 @@ public class issac extends Player {
 					setViewDirect(ViewDirect.UP);
 					while (isUp()) {
 						if (getYPlayer() < 100) {
-							setUp(false);
 							refreshDirect();
 							break;
 						}
@@ -343,7 +347,6 @@ public class issac extends Player {
 							}
 						}
 						if (isRockCollision) {
-							setUp(false);
 							refreshDirect();
 							break;
 						}
@@ -359,7 +362,6 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
-					System.out.println("캐릭터생성");
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);

@@ -137,6 +137,10 @@ public class Worm extends Monster {
 		
 		while(getXPlayer() > 130 && getXPlayer() < 790 && getYPlayer() > 100 && getYPlayer() <440) {
 			monsterAttacking = true;
+			if(getLife() <= 0) {
+				setDead(true);
+				break;
+			}
 			
 			if( checkAttackDirectX && (gapX > 0)) { //오른쪽 공격
 				setViewDirect(ViewDirect.RIGHT);

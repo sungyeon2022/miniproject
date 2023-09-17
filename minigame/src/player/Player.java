@@ -21,7 +21,6 @@ public class Player extends Lombok {
 	private int xPlayerCenter, yPlayerCenter;//플레이어 중심값
 	private boolean dead;
 	private SwordControl swordControl;
-	private double attackDamge;
 	private boolean PlayerMoveStart;
 	private boolean PlayerAttacking;
 	private boolean PlayerAttack;
