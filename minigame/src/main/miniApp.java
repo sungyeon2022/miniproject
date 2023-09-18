@@ -8,11 +8,9 @@ import javax.swing.JFrame;
 import javax.xml.stream.events.StartDocument;
 import org.w3c.dom.Text;
 
+import enemy.EnemyIssac;
 import imgSize.BodySize;
-import imgSize.BombSize;
 import imgSize.HeadSize;
-import imgSize.HeartSize;
-import imgSize.PillSize;
 import imgSize.ViewDirect;
 import imgSize.WormSize;
 import map.Background;
@@ -25,14 +23,16 @@ import monster.Monster;
 import monster.Worm;
 import player.issac;
 import sword.SwordControl;
-import sword.swordattackcontrol;
 import testimg.testcontorl;
 import item.Bomb;
 import item.Heart;
 import item.Item;
 import item.Pill;
 import map.Background;
+import objectSetting.BombSize;
+import objectSetting.HeartSize;
 import objectSetting.KeySize;
+import objectSetting.PillSize;
 import player.issac;
 import wall.rock;
 import wall.wall;
@@ -43,11 +43,11 @@ public class miniApp extends JFrame {
 
 	private Background bg;
 	private issac issac;
+	private EnemyIssac enemyIssac;
 	private SwordControl swordControl;
 	private testcontorl testcontorl;
 	private Worm worm;
 	private Vector<Monster> monsters;
-	private swordattackcontrol swordattackcontrol;
 	private Vector<Item> items;
 	private Vector<wall> walls;
 
@@ -75,6 +75,7 @@ public class miniApp extends JFrame {
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items);
+		enemyIssac = new EnemyIssac(app, monsters, walls, items);
 
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
@@ -133,15 +134,23 @@ public class miniApp extends JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
 					issac.setIskeyPress(true);
+					enemyIssac.moveLeft();
+					enemyIssac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
 					issac.setIskeyPress(true);
+					enemyIssac.moveRight();
+					enemyIssac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.moveDown();
 					issac.setIskeyPress(true);
+					enemyIssac.moveUp();
+					enemyIssac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
 					issac.setIskeyPress(true);
+					enemyIssac.moveDown();
+					enemyIssac.setIskeyPress(true);
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
@@ -157,6 +166,7 @@ public class miniApp extends JFrame {
 						}
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
+					enemyIssac.attackMotion();
 
 				} else if (e.getKeyCode() == KeyEvent.VK_E) {
 
@@ -169,21 +179,36 @@ public class miniApp extends JFrame {
 					issac.setIskeyPress(false);
 					issac.setRight(false);
 					issac.refreshDirect();
+					enemyIssac.setIskeyPress(false);
+					enemyIssac.setLeft(false);
+					enemyIssac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.setIskeyPress(false);
 					issac.setLeft(false);
 					issac.refreshDirect();
+					enemyIssac.setIskeyPress(false);
+					enemyIssac.setRight(false);
+					enemyIssac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.setIskeyPress(false);
 					issac.setDown(false);
 					issac.refreshDirect();
+					enemyIssac.setIskeyPress(false);
+					enemyIssac.setUp(false);
+					enemyIssac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setIskeyPress(false);
 					issac.setUp(false);
 					issac.refreshDirect();
+					enemyIssac.setIskeyPress(false);
+					enemyIssac.setDown(false);
+					enemyIssac.refreshDirect();
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					System.out.println("a키 떨어짐");
 					issac.setPlayerAttack(false);
+				}else if (e.getKeyCode() == KeyEvent.VK_S) {
+					System.out.println("s키 떨어짐");
+					enemyIssac.setEnemyAttack(false);
 				}
 
 			}
