@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.event.KeyAdapter;
+
 import java.awt.event.KeyEvent;
 import java.util.Vector;
 
@@ -58,15 +59,13 @@ public class miniApp extends JFrame {
 		batch();
 		listener();
 		playerattack();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-
-			}
-		}).start();
 		setVisible(true);
 	}
 
+	public void connect() {
+		
+	}
+	
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
 		app = this;
@@ -124,7 +123,7 @@ public class miniApp extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new miniApp();
+		miniApp miniApp = new miniApp();
 	}
 
 	public void keyboardEvent() {
@@ -206,7 +205,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					System.out.println("a키 떨어짐");
 					issac.setPlayerAttack(false);
-				}else if (e.getKeyCode() == KeyEvent.VK_S) {
+				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 					System.out.println("s키 떨어짐");
 					enemyIssac.setEnemyAttack(false);
 				}
@@ -221,21 +220,25 @@ public class miniApp extends JFrame {
 			@Override
 			public void run() {
 				while (!issac.isDead()) {
-					for (int i = 0; i < monsters.size(); i++) {
-						if (!issac.isPlayerAttacking()) {
-							if (issac.getSwordControl().getSsSword().getBounds()
-									.intersects(monsters.get(i).getSsMonster().getBounds())) {
-								System.out.println("판단 성공");
-								monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
-								try {
-									Thread.sleep(800);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
+					if (issac.isPlayerAttacking())
+						break;
+					for (int i = 0; i < monsters.size(); i++) {	
+						if (issac.getSwordControl().getSsSword().getBounds()
+								.intersects(monsters.get(i).getSsMonster().getBounds())) {
+							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
+							try {
+								Thread.sleep(800);
+							} catch (Exception e) {
+								e.printStackTrace();
 							}
 						}
 					}
 				}
+			try {
+				
+			} finally {
+				playerattack();
+			}
 			}
 		}).start();
 	}

@@ -27,7 +27,7 @@ import item.*;
 
 public class EnemyIssac extends Enemy {
 	private final static String TAG = "issac: ";
-	private EnemyIssac issac = this;
+	private EnemyIssac enemyIssac = this;
 	private SpriteSheet ssHead, ssBody;
 	private SpriteSheet ssTotal;
 	private Vector<SpriteSheet> ssLife;
@@ -140,6 +140,13 @@ public class EnemyIssac extends Enemy {
 		getApp().add(laspeed);
 		getApp().add(laattackspeed);
 		swordControl = new SwordControl(getApp());
+		swordControl.getSsSword().setXPos(
+				SwordSize.SWORDIMGWIDTH - SwordSize.SWORDXGAP - SwordSize.SWORDWIDTH);
+		swordControl.getSsSword().setYPos(SwordSize.SWORDYGAP);
+		swordControl.getSsSword().setWidth(SwordSize.SWORDWIDTH);
+		swordControl.getSsSword().setHeight(SwordSize.SWORDYHEIGHT - 2);
+		swordControl.getSsSword().setUrl("sword/sword_down.png");
+		swordControl.getSsSword().drawObj(492, 160);
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
 		}
@@ -612,17 +619,17 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void refreshDirect() {
-		if (issac.isDown()) {
-			issac.setViewDirect(ViewDirect.DOWN);
+		if (enemyIssac.isDown()) {
+			enemyIssac.setViewDirect(ViewDirect.DOWN);
 		}
-		if (issac.isLeft()) {
-			issac.setViewDirect(ViewDirect.LEFT);
+		if (enemyIssac.isLeft()) {
+			enemyIssac.setViewDirect(ViewDirect.LEFT);
 		}
-		if (issac.isUp()) {
-			issac.setViewDirect(ViewDirect.UP);
+		if (enemyIssac.isUp()) {
+			enemyIssac.setViewDirect(ViewDirect.UP);
 		}
-		if (issac.isRight()) {
-			issac.setViewDirect(ViewDirect.RIGHT);
+		if (enemyIssac.isRight()) {
+			enemyIssac.setViewDirect(ViewDirect.RIGHT);
 		}
 	}
 

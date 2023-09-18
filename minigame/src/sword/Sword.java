@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.awt.print.Printable;
 
 import javax.swing.JFrame;
 
@@ -12,19 +13,18 @@ import imgSize.SwordSize;
 import lombok.Data;
 import lombok.Lombok;
 
-@Data //sword가 사용할 데이터의 집합
+@Data // sword가 사용할 데이터의 집합
 
-public class Sword extends Lombok{
+public class Sword extends Lombok {
 	private JFrame app;
-	private final static String TAG="sword";
+	private final static String TAG = "sword";
 	private int armleng = 10;
 	private int xSword, ySword;
 	private int direction;
 	private double attackDamage;
-	
-	
-	public Sword(JFrame app){ 
+
+	public Sword(JFrame app) {
 		this.app = app;
 	}
-	
+
 }

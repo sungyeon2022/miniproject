@@ -39,18 +39,16 @@ public class SwordControl extends Sword{
 	}
 
 	public void init() {
-		ssSword = new SpriteSheet("sword/sword_down.png","sword",SwordSize.SWORDIMGWIDTH-SwordSize.SWORDXGAP-SwordSize.SWORDWIDTH,SwordSize.SWORDYGAP,SwordSize.SWORDWIDTH,SwordSize.SWORDYHEIGHT-2);
-		
+		ssSword = new SpriteSheet("sword/sword_up.png","issac_sword",SwordSize.SWORDXGAP + 2,SwordSize.SWORDIMGHEIGHT - SwordSize.SWORDYGAP
+				- SwordSize.SWORDYHEIGHT + 2,SwordSize.SWORDWIDTH - 1,SwordSize.SWORDYHEIGHT);
 	}
 	public void setting() {
-		setDirection(ViewDirect.DOWN);
 		setXSword(492);
-		setYSword(480);
+		setYSword(405);
 		ssSword.drawObj(getXSword(), getYSword());
-		
 	}
 	public void batch() {
-		getApp().add(ssSword, 2);
+		getApp().add(ssSword, 3);
 		
 	}
 }

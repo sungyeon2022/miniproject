@@ -16,6 +16,7 @@ import javax.xml.stream.events.StartDocument;
 import player.Player;
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
+import enemy.EnemyIssac;
 import imgSize.*;
 import lombok.Data;
 import monster.Monster;
@@ -29,6 +30,7 @@ import item.*;
 public class issac extends Player {
 	private final static String TAG = "issac: ";
 	private issac issac = this;
+	private EnemyIssac enemyIssac;
 	private SpriteSheet ssHead, ssBody;
 	private SpriteSheet ssTotal;
 	private Vector<SpriteSheet> ssLife;
@@ -68,7 +70,7 @@ public class issac extends Player {
 		this.walls = walls;
 		this.items = items;
 		this.monsters = monsters;
-		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,
+		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", issacSize.issacHEADWIDTH * 4 + Gap.COLUMGAP * 4, 0, issacSize.issacHEADWIDTH,
 				issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
@@ -92,7 +94,7 @@ public class issac extends Player {
 	}
 
 	public void setting() {
-		setViewDirect(ViewDirect.DOWN);
+		setViewDirect(ViewDirect.UP);
 		setXPlayer(480);
 		setYPlayer(430);
 		setAttackDamage(1);
