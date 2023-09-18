@@ -68,6 +68,20 @@ public class miniApp extends JFrame {
 		issac = new issac(app, monsters, walls, items);
 		enemyIssac = new EnemyIssac(app, monsters, walls, items);
 
+		
+
+	}
+
+	// JFrame을 통한 창출력
+	public void setting() {
+		app.setTitle("miniApp");
+		app.setSize(960, 640);
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		app.setLocationRelativeTo(null);
+		app.setLayout(null);
+	}
+
+	public void batch() {
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
@@ -97,19 +111,6 @@ public class miniApp extends JFrame {
 
 		walls.add(new rock(app, 455, 300));
 		repaint();
-
-	}
-
-	// JFrame을 통한 창출력
-	public void setting() {
-		app.setTitle("miniApp");
-		app.setSize(960, 640);
-		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		app.setLocationRelativeTo(null);
-		app.setLayout(null);
-	}
-
-	public void batch() {
 	}
 
 	public void listener() {
