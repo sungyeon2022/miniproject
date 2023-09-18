@@ -2,26 +2,25 @@ package player;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.File;
-import java.io.IOException;
-import java.net.Socket;
 import java.util.Vector;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageTranscoder;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.xml.stream.events.StartDocument;
 
-import player.Player;
-import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
-import imgSize.*;
+import imgSize.Gap;
+import imgSize.Lifesize;
+import imgSize.RockSize;
+import imgSize.SwordMotionSize;
+import imgSize.SwordSize;
+import imgSize.ViewDirect;
+import imgSize.issacSize;
+import item.Item;
 import lombok.Data;
 import monster.Monster;
 import monster.Worm;
-import wall.*;
-import item.*;
+import sword.SwordControl;
+import wall.wall;
 
 @Data
 
