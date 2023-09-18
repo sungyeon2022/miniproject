@@ -73,11 +73,7 @@ public class issac extends Player {
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH,
 				issacSize.issacTOTALHEIGHT);
 		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
-		// 레이블 초기화
-		labomb = new JLabel(Integer.toString(bombCount));
-		laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
-		lapower = new JLabel(Integer.toString(powerNum));
-		laattackspeed = new JLabel(Integer.toString(attackspeedNum));
+		
 		ssLife = new Vector<SpriteSheet>();
 		for (int i = 0; i < getLife(); i++) {
 			this.ssLife.add(i,
@@ -99,6 +95,11 @@ public class issac extends Player {
 		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+		// 레이블 초기화
+				labomb = new JLabel(Integer.toString(bombCount));
+				laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
+				lapower = new JLabel(Integer.toString((int)getAttackDamage()));
+				laattackspeed = new JLabel(Integer.toString(attackspeedNum));
 		// 폭탄 레이블 설정
 		labomb.setSize(30, 30);
 		labomb.setLocation(65, 50);
@@ -669,36 +670,44 @@ public class issac extends Player {
 					if (items.get(i).getSsItem().getGubun() == "bomb") {
 						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
 						if (luck == 1) {
-							bombCount += 1;
-							labomb.setText(Integer.toString(bombCount));
-						} else if (luck == 0) {
-							bombCount -= 1;
-							labomb.setText(Integer.toString(bombCount));
+							if (bombCount < 5) {
+								bombCount += 1;
+								labomb.setText(Integer.toString(bombCount));	
+							}
+							} else if (luck == 0) {
+							if (bombCount != 0) {
+								bombCount -= 1;
+								labomb.setText(Integer.toString(bombCount));
+							}
 						} // Gubun String이 "Power" 일때
 					} else if (items.get(i).getSsItem().getGubun() == "Power") {
 						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
 						if (luck == 1) {
-
-							powerNum += 2;
-							lapower.setText(Integer.toString(powerNum));
-
+							if(getAttackDamage() < 5) {	
+							setAttackDamage(getAttackDamage()+1);
+							lapower.setText(Integer.toString((int)getAttackDamage()));
+							}
+							
 						} else if (luck == 0) {
-							powerNum--;
-							lapower.setText(Integer.toString(powerNum));
-
+							if(getAttackDamage() > 1) {
+							setAttackDamage(getAttackDamage()-1);
+							lapower.setText(Integer.toString((int)getAttackDamage()));
+							}
+							
 						}
 						// Gubun String이 "Speed" 일때
 					} else if (items.get(i).getSsItem().getGubun() == "Speed") {
 						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-						if (luck == 1) {
-
-							moveSpeed += 3;
+						if (luck == 0) {
+							if (moveSpeed<10) {
+							moveSpeed++;
 							laspeed.setText(Integer.toString(speedNum - moveSpeed));
-
-						} else if (luck == 0) {
-							moveSpeed--;
-							laspeed.setText(Integer.toString(speedNum - moveSpeed));
-
+							}
+						} else if (luck == 1) {
+							if (moveSpeed>5) {
+								moveSpeed --;
+								laspeed.setText(Integer.toString(speedNum - moveSpeed));
+							}
 						}
 					} else if (items.get(i).getSsItem().getGubun() == "AttackSpeed") {
 						if (luck == 1) {

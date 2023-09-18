@@ -5,35 +5,26 @@ import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.JFrame;
-import javax.xml.stream.events.StartDocument;
-import org.w3c.dom.Text;
 
 import enemy.EnemyIssac;
 import imgSize.BodySize;
+import imgSize.BombSize;
 import imgSize.HeadSize;
-import imgSize.ViewDirect;
+import imgSize.HeartSize;
+import imgSize.PillSize;
 import imgSize.WormSize;
-import map.Background;
-import monster.Worm;
-import monster.body;
-import player.*;
-import sword.Sword;
-import monster.Head;
-import monster.Monster;
-import monster.Worm;
-import player.issac;
-import sword.SwordControl;
-import testimg.testcontorl;
 import item.Bomb;
 import item.Heart;
 import item.Item;
 import item.Pill;
 import map.Background;
-import objectSetting.BombSize;
-import objectSetting.HeartSize;
-import objectSetting.KeySize;
-import objectSetting.PillSize;
+import monster.Head;
+import monster.Monster;
+import monster.Worm;
+import monster.body;
 import player.issac;
+import sword.SwordControl;
+import testimg.testcontorl;
 import wall.rock;
 import wall.wall;
 
@@ -84,7 +75,9 @@ public class miniApp extends JFrame {
 		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
 		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH, HeartSize.HEIGHT));
 		// 랜덤 아이템 생성
+		
 		int witem = (int) (Math.random() * 4);
+		
 		switch (witem) {
 		case 0:
 			items.add(new Pill(app, "item/PowerUp.png", "Power", 440, 400, PillSize.WIDTH, PillSize.HEIGHT));
@@ -99,7 +92,7 @@ public class miniApp extends JFrame {
 			items.add(new Pill(app, "item/FullHp.png", "FullHp", 440, 300, PillSize.WIDTH, PillSize.HEIGHT));
 			break;
 		}
-
+		
 		// 벽 시험 생성 및 10초후 제거
 
 		walls.add(new rock(app, 455, 300));
