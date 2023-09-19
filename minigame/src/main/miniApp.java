@@ -48,10 +48,10 @@ public class miniApp extends JFrame {
 	private Vector<Item> items;
 	private Vector<wall> walls;
 	private ConnectControl connectControl;
-	
+
 	private Socket socket;
-	private boolean Enemykeypress[] = {false,false,false,false,false,false,false};
- 
+	private static boolean Enemykeypress[] = { false, false, false, false, false, false, false };
+
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
 		init();
@@ -62,7 +62,6 @@ public class miniApp extends JFrame {
 		setVisible(true);
 	}
 
-	
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
 		app = this;
@@ -73,8 +72,7 @@ public class miniApp extends JFrame {
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items);
 		enemyIssac = new EnemyIssac(app, monsters, walls, items);
-		
-		
+
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
@@ -107,12 +105,12 @@ public class miniApp extends JFrame {
 
 	// JFrame을 통한 창출력
 	public void setting() {
-		app.setTitle("miniApp");
+		app.setTitle("miniapp");
 		app.setSize(960, 640);
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setLocationRelativeTo(null);
 		app.setLayout(null);
-		
+
 	}
 
 	public void batch() {
@@ -125,6 +123,7 @@ public class miniApp extends JFrame {
 	public static void main(String[] args) {
 		miniApp miniApp = new miniApp();
 		miniApp.connectControl.connect();
+		miniApp.EnemyControl();
 	}
 
 	public void keyboardEvent() {
@@ -148,6 +147,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
 					connectControl.DataSend(5);
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
+					connectControl.DataSend(6);
 					issac.attackMotion();
 					for (int i = 0; i < monsters.size(); i++) {
 						if (issac.getSwordControl().getSsSword().getBounds()
@@ -157,36 +157,37 @@ public class miniApp extends JFrame {
 							System.out.println(monsters.get(i).getLife());
 						}
 					}
-					connectControl.DataSend(6);
+
 				}
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					connectControl.DataSend(7);
 					issac.setRight(false);
 					issac.refreshDirect();
-					enemyIssac.setLeft(false);
-					enemyIssac.refreshDirect();
+
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					connectControl.DataSend(8);
 					issac.setLeft(false);
 					issac.refreshDirect();
-					enemyIssac.setRight(false);
-					enemyIssac.refreshDirect();
+
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					connectControl.DataSend(9);
 					issac.setDown(false);
 					issac.refreshDirect();
-					enemyIssac.setUp(false);
-					enemyIssac.refreshDirect();
+
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					connectControl.DataSend(10);
 					issac.setUp(false);
 					issac.refreshDirect();
-					enemyIssac.setDown(false);
-					enemyIssac.refreshDirect();
+
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					System.out.println("a키 떨어짐");
+					connectControl.DataSend(12);
 					issac.setPlayerAttack(false);
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
+					
 					System.out.println("s키 떨어짐");
 					enemyIssac.setEnemyAttack(false);
 				}
@@ -203,7 +204,7 @@ public class miniApp extends JFrame {
 				while (!issac.isDead()) {
 					if (issac.isPlayerAttacking())
 						break;
-					for (int i = 0; i < monsters.size(); i++) {	
+					for (int i = 0; i < monsters.size(); i++) {
 						if (issac.getSwordControl().getSsSword().getBounds()
 								.intersects(monsters.get(i).getSsMonster().getBounds())) {
 							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
@@ -215,18 +216,59 @@ public class miniApp extends JFrame {
 						}
 					}
 				}
-			try {
-				
-			} finally {
-				playerattack();
-			}
+				try {
+
+				} finally {
+					playerattack();
+				}
 			}
 		}).start();
 	}
-	public void enemyKeyPress(int index) {
+
+	public static void enemyKeyPress(int index) {
 		Enemykeypress[index] = true;
 	}
-	public void enemyKeyRelease(int index) {
+
+	public static void enemyKeyRelease(int index) {
 		Enemykeypress[index] = false;
 	}
+
+	public void EnemyControl() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				while (!enemyIssac.isDead()) {
+					int a = connectControl.DataReceive();
+					System.out.println(a);
+					if (a == 0) {
+						enemyIssac.moveLeft();
+					} else if (a == 1) {
+						enemyIssac.moveRight();
+					} else if (a == 2) {
+						enemyIssac.moveUp();
+					} else if (a == 3) {
+						enemyIssac.moveDown();
+					} else if (a == 6) {
+						enemyIssac.attackMotion();
+					} else if (a == 7) {
+						enemyIssac.setLeft(false);
+						enemyIssac.refreshDirect();
+					} else if (a == 8) {
+						enemyIssac.setRight(false);
+						enemyIssac.refreshDirect();
+					} else if (a == 9) {
+						enemyIssac.setUp(false);
+						enemyIssac.refreshDirect();
+					} else if (a == 10) {
+						enemyIssac.setDown(false);
+						enemyIssac.refreshDirect();
+					} else if (a==12) {
+						enemyIssac.setEnemyAttack(false);
+					}
+				}
+			}
+		}).start();
+	}
+
 }

@@ -371,6 +371,7 @@ public class issac extends Player {
 	@Override
 	public void moveMotion() { // 움직이는 동작중 이미지 갱신
 		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
+		// 상시작동 & 상태 검사 
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

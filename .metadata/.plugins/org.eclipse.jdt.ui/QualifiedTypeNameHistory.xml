@@ -58,6 +58,6 @@
     <fullyQualifiedTypeName name="java.io.DataInputStream"/>
     <fullyQualifiedTypeName name="java.io.DataOutputStream"/>
     <fullyQualifiedTypeName name="connect.Connect"/>
-    <fullyQualifiedTypeName name="main.miniApp"/>
     <fullyQualifiedTypeName name="connect.ConnectControl"/>
+    <fullyQualifiedTypeName name="main.miniApp"/>
 </qualifiedTypeNameHistroy>

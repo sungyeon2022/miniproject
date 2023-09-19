@@ -29,10 +29,6 @@ public class ConnectControl extends Connect {
 			
 			setDataInputStream(new DataInputStream(getInputStream()));
 			setDataOutputStream(new DataOutputStream(getOutputStream()));
-			
-			PrintStream printStream = new PrintStream(getOutputStream());
-			printStream.println(getName() + "접속");
-			printStream.flush();
 
 		} catch (UnknownHostException e) { // 호스트 확인실패
 			e.printStackTrace();
@@ -58,7 +54,7 @@ public class ConnectControl extends Connect {
 	public int DataReceive() {
 		int index = 0;
 		try {
-		 	index =  getDataInputStream().readInt();
+		 	index =  getDataInputStream().read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
