@@ -70,8 +70,8 @@ public class issac extends Player {
 		this.walls = walls;
 		this.items = items;
 		this.monsters = monsters;
-		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", issacSize.issacHEADWIDTH * 4 + Gap.COLUMGAP * 4, 0, issacSize.issacHEADWIDTH,
-				issacSize.issacHEADHEIGHT);
+		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", issacSize.issacHEADWIDTH * 4 + Gap.COLUMGAP * 4, 0,
+				issacSize.issacHEADWIDTH, issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH,
@@ -147,6 +147,7 @@ public class issac extends Player {
 			getApp().add(ssLife.get(i), 1);
 		}
 	}
+
 	// 상하 좌우 이동 모션
 	@Override
 	public void moveRight() {
@@ -348,7 +349,7 @@ public class issac extends Player {
 							refreshDirect();
 							break;
 						}
-						
+
 						getItem();
 						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() - 1);
@@ -371,7 +372,7 @@ public class issac extends Player {
 	@Override
 	public void moveMotion() { // 움직이는 동작중 이미지 갱신
 		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
-		// 상시작동 & 상태 검사 
+		// 상시작동 & 상태 검사
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -404,7 +405,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
-							
+
 						} else if (isLeft() && getViewDirect() == ViewDirect.LEFT) {
 							if (motion > 9)
 								motion = 0;
@@ -428,7 +429,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
-							
+
 						} else if (isUp() && getViewDirect() == ViewDirect.UP) {
 							if (motion > 9)
 								motion = 0;
@@ -450,7 +451,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
-							
+
 						} else if (isRight() && getViewDirect() == ViewDirect.RIGHT) {
 							if (motion > 9)
 								motion = 0;
@@ -471,7 +472,7 @@ public class issac extends Player {
 								}
 								motion += 1;
 							}
-							
+
 						}
 						try {
 							Thread.sleep(15);
@@ -495,7 +496,7 @@ public class issac extends Player {
 						int imgxlocation = 1;
 						int imgylocation = 0;
 						while (true) {
-							setPlayerAttacking(true);
+							setPlayerAttacking(true);// 어택 모션중 모션 검 생성 제한
 							if (getViewDirect() == ViewDirect.DOWN) {
 								if (imgxlocation == 1 && imgylocation > 3) {
 									imgylocation = 0;

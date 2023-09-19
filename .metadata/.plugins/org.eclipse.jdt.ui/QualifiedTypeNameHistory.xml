@@ -44,7 +44,6 @@
     <fullyQualifiedTypeName name="java.awt.print.Printable"/>
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="enemy.EnemyIssac"/>
-    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
     <fullyQualifiedTypeName name="java.net.Socket"/>
@@ -52,7 +51,6 @@
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.OutputStream"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="java.io.PrintStream"/>
     <fullyQualifiedTypeName name="java.io.DataInputStream"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="connect.Connect"/>
     <fullyQualifiedTypeName name="connect.ConnectControl"/>
     <fullyQualifiedTypeName name="main.miniApp"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="player.issac"/>
 </qualifiedTypeNameHistroy>

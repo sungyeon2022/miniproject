@@ -123,7 +123,8 @@ public class miniApp extends JFrame {
 	public static void main(String[] args) {
 		miniApp miniApp = new miniApp();
 		miniApp.connectControl.connect();
-		miniApp.EnemyControl();
+		if (miniApp.connectControl.isIsconnect())
+			miniApp.EnemyControl();
 	}
 
 	public void keyboardEvent() {
@@ -149,15 +150,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					connectControl.DataSend(6);
 					issac.attackMotion();
-					for (int i = 0; i < monsters.size(); i++) {
-						if (issac.getSwordControl().getSsSword().getBounds()
-								.intersects(monsters.get(i).getSsMonster().getBounds())) {
-							System.out.println("공격시도");
-							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
-							System.out.println(monsters.get(i).getLife());
-						}
-					}
-
+					issac.setAttackkeypress(true);
 				}
 			}
 
@@ -186,8 +179,9 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					connectControl.DataSend(12);
 					issac.setPlayerAttack(false);
+					issac.setAttackkeypress(false);
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					
+
 					System.out.println("s키 떨어짐");
 					enemyIssac.setEnemyAttack(false);
 				}
@@ -196,7 +190,7 @@ public class miniApp extends JFrame {
 		});
 	}
 
-	public synchronized void playerattack() {
+	public void playerattack() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -208,18 +202,24 @@ public class miniApp extends JFrame {
 						if (issac.getSwordControl().getSsSword().getBounds()
 								.intersects(monsters.get(i).getSsMonster().getBounds())) {
 							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
+							System.out.println("공격 적용");
 							try {
-								Thread.sleep(800);
+								Thread.sleep(1000); // 여기서 800mili 휴식 -----
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
 						}
+
 					}
 				}
 				try {
-
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				} finally {
 					playerattack();
+
 				}
 			}
 		}).start();
@@ -263,7 +263,7 @@ public class miniApp extends JFrame {
 					} else if (a == 10) {
 						enemyIssac.setDown(false);
 						enemyIssac.refreshDirect();
-					} else if (a==12) {
+					} else if (a == 12) {
 						enemyIssac.setEnemyAttack(false);
 					}
 				}

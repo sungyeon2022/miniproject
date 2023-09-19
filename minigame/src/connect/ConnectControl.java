@@ -18,7 +18,7 @@ import lombok.Data;
 public class ConnectControl extends Connect {
 
 	public void connect() {
-		try {	
+		try {
 			setSocket(new Socket("localhost", getSocketNum()));// 소켓 정보 초기화
 			System.out.println("서버 연결 성공");// 확인용
 			System.out.println("게임 시작");
@@ -26,7 +26,7 @@ public class ConnectControl extends Connect {
 
 			setInputStream(getSocket().getInputStream());
 			setOutputStream(getSocket().getOutputStream());
-			
+
 			setDataInputStream(new DataInputStream(getInputStream()));
 			setDataOutputStream(new DataOutputStream(getOutputStream()));
 
@@ -41,22 +41,26 @@ public class ConnectControl extends Connect {
 	}
 
 	public void DataSend(int index) {
-		try {
-			getDataOutputStream().write(index);
-			getDataOutputStream().flush();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (isIsconnect()) {
+			try {
+				getDataOutputStream().write(index);
+				getDataOutputStream().flush();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public int DataReceive() {
-		int index = 0;
-		try {
-		 	index =  getDataInputStream().read();
-		} catch (IOException e) {
-			e.printStackTrace();
+		int index = 99;
+		if (isIsconnect()) {
+			try {
+				index = getDataInputStream().read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return index;
 	}
