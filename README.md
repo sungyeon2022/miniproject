@@ -1,16 +1,20 @@
-# Miniproject
+<div align= "center">
+<h1>Miniproject</h1>
 
 아이작 그래픽 소스를 이용하여 1vs1 대전 게임 만들기
+</div><br />
 
 <div align="left">
  <h3> Korea IT Academy NCS class</h3><br />
- <h2 color="blue"> working period </h2>
+ <h2 color="blue"> Working Period </h2>
  September, 2023 - October, 2023 (for 1 month)<br />
- <h2 color="blue"> member </h2>
+ <h2 color="blue"> Member </h2>
  조성연(팀장)<br />
  최낙연<br />
  임강욱
- 
+
+ ## Tech Stack
+ <img src = "https://img.shields.io/badge/Java-2C2255?style=flat-square&logo=eclipseide&=white" />
 
 ## Getting Started
 
@@ -19,10 +23,6 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 What things you need to install the software and how to install them
-
-```
-Give examples
-```
 
 ### Installing
 
