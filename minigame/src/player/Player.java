@@ -26,6 +26,7 @@ public class Player extends Lombok {
 	private boolean PlayerAttack;
 	private boolean isRock;
 	private boolean attackkeypress;
+	private double[] PlayerData;
 	
 	public Player(JFrame app) {
 		this.app = app;

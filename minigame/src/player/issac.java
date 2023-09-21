@@ -91,6 +91,7 @@ public class issac extends Player {
 			this.ssLife.add(new SpriteSheet("issac/life.png", "life", Lifesize.LIFEWIDTH * 2, 0, Lifesize.LIFEWIDTH,
 					Lifesize.LIFEHEIGHT));
 		}
+		
 	}
 
 	public void setting() {
@@ -98,7 +99,7 @@ public class issac extends Player {
 		setXPlayer(480);
 		setYPlayer(430);
 		setAttackDamage(1);
-		setLife(3);
+		setLife(5);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
@@ -132,6 +133,7 @@ public class issac extends Player {
 			}
 
 		}
+		setPlayerData(new double[]{getAttackDamage(),getLife(),getMoveSpeed()});
 	}
 
 	public void batch() {

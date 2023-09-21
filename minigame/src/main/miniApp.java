@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 
+import Timer.TimerControl;
 import connect.Connect;
 import connect.ConnectControl;
 import enemy.EnemyIssac;
@@ -48,9 +49,9 @@ public class miniApp extends JFrame {
 	private Vector<Item> items;
 	private Vector<wall> walls;
 	private ConnectControl connectControl;
+	private TimerControl timerControl;
 
 	private Socket socket;
-	private static boolean Enemykeypress[] = { false, false, false, false, false, false, false };
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -60,13 +61,15 @@ public class miniApp extends JFrame {
 		listener();
 		playerattack();
 		setVisible(true);
+		
 	}
 
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
 		app = this;
-		connectControl = new ConnectControl();
 		bg = new Background(app);
+		connectControl = new ConnectControl();
+		timerControl = new TimerControl(app);
 		monsters = new Vector<Monster>();
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
@@ -122,9 +125,9 @@ public class miniApp extends JFrame {
 
 	public static void main(String[] args) {
 		miniApp miniApp = new miniApp();
-		miniApp.connectControl.connect();
-		if (miniApp.connectControl.isIsconnect())
-			miniApp.EnemyControl();
+//		if (miniApp.connectControl.isIsconnect());
+//		miniApp.printObject();
+//			miniApp.EnemyControl();
 	}
 
 	public void keyboardEvent() {
@@ -133,22 +136,22 @@ public class miniApp extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
-					connectControl.DataSend(0);
+//					connectControl.DataSend(0);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
-					connectControl.DataSend(1);
+//					connectControl.DataSend(1);
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.moveDown();
-					connectControl.DataSend(2);
+//					connectControl.DataSend(2);
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
-					connectControl.DataSend(3);
+//					connectControl.DataSend(3);
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
-					connectControl.DataSend(4);
+//					connectControl.DataSend(4);
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
-					connectControl.DataSend(5);
+//					connectControl.DataSend(5);
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					connectControl.DataSend(6);
+//					connectControl.DataSend(6);
 					issac.attackMotion();
 					issac.setAttackkeypress(true);
 				}
@@ -157,27 +160,27 @@ public class miniApp extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-					connectControl.DataSend(7);
+//					connectControl.DataSend(7);
 					issac.setRight(false);
 					issac.refreshDirect();
 
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-					connectControl.DataSend(8);
+//					connectControl.DataSend(8);
 					issac.setLeft(false);
 					issac.refreshDirect();
 
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					connectControl.DataSend(9);
+//					connectControl.DataSend(9);
 					issac.setDown(false);
 					issac.refreshDirect();
 
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-					connectControl.DataSend(10);
+//					connectControl.DataSend(10);
 					issac.setUp(false);
 					issac.refreshDirect();
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					connectControl.DataSend(12);
+//					connectControl.DataSend(12);
 					issac.setPlayerAttack(false);
 					issac.setAttackkeypress(false);
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
@@ -215,7 +218,6 @@ public class miniApp extends JFrame {
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} finally {
 					playerattack();
@@ -224,51 +226,55 @@ public class miniApp extends JFrame {
 			}
 		}).start();
 	}
-
-	public static void enemyKeyPress(int index) {
-		Enemykeypress[index] = true;
-	}
-
-	public static void enemyKeyRelease(int index) {
-		Enemykeypress[index] = false;
-	}
-
-	public void EnemyControl() {
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (!enemyIssac.isDead()) {
-					int a = connectControl.DataReceive();
-					System.out.println(a);
-					if (a == 0) {
-						enemyIssac.moveLeft();
-					} else if (a == 1) {
-						enemyIssac.moveRight();
-					} else if (a == 2) {
-						enemyIssac.moveUp();
-					} else if (a == 3) {
-						enemyIssac.moveDown();
-					} else if (a == 6) {
-						enemyIssac.attackMotion();
-					} else if (a == 7) {
-						enemyIssac.setLeft(false);
-						enemyIssac.refreshDirect();
-					} else if (a == 8) {
-						enemyIssac.setRight(false);
-						enemyIssac.refreshDirect();
-					} else if (a == 9) {
-						enemyIssac.setUp(false);
-						enemyIssac.refreshDirect();
-					} else if (a == 10) {
-						enemyIssac.setDown(false);
-						enemyIssac.refreshDirect();
-					} else if (a == 12) {
-						enemyIssac.setEnemyAttack(false);
-					}
-				}
-			}
-		}).start();
-	}
+//	public void printObject() {
+//		new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				Object receive = connectControl.DataReceive();
+//				while (true) {
+//					System.out.println(receive);
+//				}
+//				
+//			}
+//		}).start();
+//	}
+//	public void EnemyControl() {
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				while (!enemyIssac.isDead()) {
+//					int a = connectControl.DataReceive();
+//					System.out.println(a);
+//					if (a == 0) {
+//						enemyIssac.moveLeft();
+//					} else if (a == 1) {
+//						enemyIssac.moveRight();
+//					} else if (a == 2) {
+//						enemyIssac.moveUp();
+//					} else if (a == 3) {
+//						enemyIssac.moveDown();
+//					} else if (a == 6) {
+//						enemyIssac.attackMotion();
+//					} else if (a == 7) {
+//						enemyIssac.setLeft(false);
+//						enemyIssac.refreshDirect();
+//					} else if (a == 8) {
+//						enemyIssac.setRight(false);
+//						enemyIssac.refreshDirect();
+//					} else if (a == 9) {
+//						enemyIssac.setUp(false);
+//						enemyIssac.refreshDirect();
+//					} else if (a == 10) {
+//						enemyIssac.setDown(false);
+//						enemyIssac.refreshDirect();
+//					} else if (a == 12) {
+//						enemyIssac.setEnemyAttack(false);
+//					}
+//				}
+//			}
+//		}).start();
+//	}
 
 }

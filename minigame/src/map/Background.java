@@ -9,9 +9,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Timer.TimerControl;
 import item.Bomb;
 import item.Item;
 import objectSetting.BombSize;
+import objectSetting.MyFont;
 
 public class Background {
 	private JLabel isBackground;
@@ -38,28 +40,28 @@ public class Background {
 		JLabel label = new JLabel("X");
 		label.setSize(20, 30); // 라벨에 대한 사이즈
 		label.setLocation(50, 50);
-		label.setFont(new Font("바탕", Font.ITALIC, 15));
+		label.setFont(new Font(MyFont.font1, Font.ITALIC, 15));
 		label.setForeground(Color.WHITE);
 		JLabel label2 = new JLabel("=");
 		label2.setSize(20, 30); // 라벨에 대한 사이즈
 		label2.setLocation(50, 85);
-		label2.setFont(new Font("바탕", Font.ITALIC, 15));
+		label2.setFont(new Font(MyFont.font1, Font.ITALIC, 15));
 		label2.setForeground(Color.WHITE);
 		JLabel label3 = new JLabel("=");
 		label3.setSize(20, 30); // 라벨에 대한 사이즈
 		label3.setLocation(50, 120);
-		label3.setFont(new Font("바탕", Font.ITALIC, 15));
+		label3.setFont(new Font(MyFont.font1, Font.ITALIC, 15));
 		label3.setForeground(Color.WHITE);
 		JLabel label4 = new JLabel("=");
 		label4.setSize(20, 30); // 라벨에 대한 사이즈
 		label4.setLocation(50, 155);
-		label4.setFont(new Font("바탕", Font.ITALIC, 15));
+		label4.setFont(new Font(MyFont.font1, Font.ITALIC, 15));
 		label4.setForeground(Color.WHITE);
+		
 		
 		app.add(label);
 		app.add(label2);
 		app.add(label3);
 		app.add(label4);
-
 	}
 }

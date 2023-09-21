@@ -40,8 +40,6 @@ public class SpriteSheet extends JLabel{
 	private int height;
 	private ImageIcon imgObj;
 	
-	public SpriteSheet() {}
-	
 	public SpriteSheet(String url, String gubun, int xPos, int yPos, int width, int height) {
 		this.url = url;
 		this.gubun = gubun;
@@ -68,14 +66,13 @@ public class SpriteSheet extends JLabel{
 	public synchronized void drawObj(int x, int y) {
 		imgObj = new ImageIcon(getObjimg());
 		setIcon(imgObj);
-		setSize(width,height);
-		setLocation(x,y);
+		setBounds(x, y,width,height);
 		setBorder(new LineBorder(Color.black));
 //		System.out.println(TAG + gubun + "그려짐");
 	}
 	
 	public void erase() {
-		setIcon(imgObj);
+		setIcon(null);
 	}
 	/*
 	 * public static BufferedImage resize(InputStream image, int width, int height)
