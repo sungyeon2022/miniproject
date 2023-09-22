@@ -10,6 +10,9 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Handler;
 
 import lombok.Data;
 import player.issac;
@@ -27,7 +30,11 @@ public class Connect {
 	ObjectInputStream myObjectInputStream;
 	private boolean isconnect;
 	private Object Name;
+	private Object receiveObject;
+	private Object playerXY;
+	private Object PlayerStats;
 	private int socketNum;
+	private Map<String, Object> sendMap = new HashMap<String, Object>(); 
 	public Connect() {
 		this.socket = null;
 		this.myInputStream = null;
@@ -36,5 +43,8 @@ public class Connect {
 		this.myObjectOutputStream = null;
 		this.Name = "Player1";
 		this.socketNum = 8050;
+		
 	}
+	public void SendData(Map<String, Object> sendMap) {}
+	public void ReceiveData() {}
 }

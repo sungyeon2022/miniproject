@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="monster.Monster"/>
-    <fullyQualifiedTypeName name="java.util.Vector"/>
-    <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
-    <fullyQualifiedTypeName name="javax.swing.text.TabStop"/>
-    <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthInternalFrameUI"/>
-    <fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
-    <fullyQualifiedTypeName name="sword.swordattackcontrol"/>
-    <fullyQualifiedTypeName name="imgSize.ViewDirect"/>
     <fullyQualifiedTypeName name="javax.security.auth.login.FailedLoginException"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
-    <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="java.lang.Void"/>
     <fullyQualifiedTypeName name="monster.MonsterJo"/>
     <fullyQualifiedTypeName name="monster.WormJo"/>
@@ -21,7 +12,6 @@
     <fullyQualifiedTypeName name="sword.EnemySwordControl"/>
     <fullyQualifiedTypeName name="sword.SwordControl"/>
     <fullyQualifiedTypeName name="java.awt.print.Printable"/>
-    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="enemy.EnemyIssac"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
@@ -30,14 +20,10 @@
     <fullyQualifiedTypeName name="java.io.PrintStream"/>
     <fullyQualifiedTypeName name="java.io.DataInputStream"/>
     <fullyQualifiedTypeName name="java.io.DataOutputStream"/>
-    <fullyQualifiedTypeName name="connect.Connect"/>
-    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="monster.body"/>
     <fullyQualifiedTypeName name="Timer.Timer"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.Appendable"/>
     <fullyQualifiedTypeName name="Timer.TimerControl"/>
     <fullyQualifiedTypeName name="javax.swing.border.Border"/>
@@ -47,17 +33,31 @@
     <fullyQualifiedTypeName name="java.awt.Font"/>
     <fullyQualifiedTypeName name="objectSetting.MyFont"/>
     <fullyQualifiedTypeName name="imgSize.Gap"/>
-    <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="main.miniApp"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
     <fullyQualifiedTypeName name="double"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
-    <fullyQualifiedTypeName name="connect.ConnectControl"/>
     <fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.net.Socket"/>
     <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
+    <fullyQualifiedTypeName name="java.util.logging.Handler"/>
+    <fullyQualifiedTypeName name="connect.Connect"/>
+    <fullyQualifiedTypeName name="org.jcp.xml.dsig.internal.dom.DOMReference"/>
+    <fullyQualifiedTypeName name="java.lang.IndexOutOfBoundsException"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
+    <fullyQualifiedTypeName name="connect.ConnectControl"/>
+    <fullyQualifiedTypeName name="player.Player"/>
+    <fullyQualifiedTypeName name="int"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="player.issac"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
 </qualifiedTypeNameHistroy>

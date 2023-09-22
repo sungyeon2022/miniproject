@@ -25,8 +25,10 @@ public class Player extends Lombok {
 	private boolean PlayerAttacking;
 	private boolean PlayerAttack;
 	private boolean isRock;
+	private boolean isKeyRelease;
 	private boolean attackkeypress;
 	private double[] PlayerData;
+	private int[] PlayerXY = {xPlayer,yPlayer};
 	
 	public Player(JFrame app) {
 		this.app = app;
@@ -40,6 +42,7 @@ public class Player extends Lombok {
 		this.PlayerAttack = false;
 		this.attackkeypress = false;
 		this.PlayerAttacking = false;
+		this.isKeyRelease = false;
 	}
 	public void moveRight() {}
 	public void moveLeft() {}

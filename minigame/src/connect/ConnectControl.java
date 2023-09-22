@@ -12,107 +12,76 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
+import SpriteSheet.SpriteSheet;
 import lombok.Data;
+import player.issac;
 
 @Data
 
 public class ConnectControl extends Connect {
 	public ConnectControl() {
 		connect();
-		
 
 	}
-	
+
 	public void connect() {
 		try {
 			setSocket(new Socket("localhost", getSocketNum()));// 소켓 정보 초기화
 			System.out.println("서버 연결 성공");// 확인용
 			setIsconnect(true);
 			System.out.println("게임 시작");
-			
 
 			setMyInputStream(getSocket().getInputStream());
 			setMyOutputStream(getSocket().getOutputStream());
-			
 			setMyObjectInputStream(new ObjectInputStream(getMyInputStream()));
 			setMyObjectOutputStream(new ObjectOutputStream(getMyOutputStream()));
-			
-			SendString(getName());
+			getSendMap().put("Client name", getName());
+			SendData(getSendMap());
 		} catch (UnknownHostException e) { // 호스트 확인실패
-			System.out.println("서버 연결 실패");// 확인용
-			e.printStackTrace();
+			setIsconnect(false);
+			System.out.println("서버 확인 실패");// 확인용
 		} catch (IOException e) {// 정보 입출력 오류
-			System.out.println("데이터 전송 실패");// 확인용
-			e.printStackTrace();
+			setIsconnect(false);
+			System.out.println("서버 연결 실패");// 확인용
 		}
 	}
-
-	public void SendString(Object string) {
+	@Override
+	public void SendData(Map<String, Object> sendMap) {
 		if (isIsconnect()) {
 			try {
-				getMyObjectOutputStream().writeObject(string);
+				getMyObjectOutputStream().writeObject(sendMap);
 				getMyObjectOutputStream().flush();
-
+				System.out.println(getMyObjectOutputStream());
 			} catch (IOException e) {
 				e.printStackTrace();
+				setIsconnect(false);
 			}
 		}
-	}
-	public void SendData(Object doubleArr) {
-		if (isIsconnect()) {
-			try {
-				getMyObjectOutputStream().writeObject(doubleArr);
-				getMyObjectOutputStream().flush();
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
-	public void SendKey(Object key) {
-		if (isIsconnect()) {
-			try {
-				getMyObjectOutputStream().writeObject(key);
-				getMyObjectOutputStream().flush();
+	@Override
+	public void ReceiveData() {
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					if (isIsconnect()) {
+						try {
+							setReceiveObject(getMyObjectInputStream().readObject());
+						} catch (IOException | ClassNotFoundException e) {
+							System.out.println("서버 닫힘");
+							setIsconnect(false);
+						}
+					} else
+						break;
+				}
 
-	public Object StringReceive() {
-		Object index = null;
-		if (isIsconnect()) {
-			try {
-				index = getMyObjectInputStream().readObject();
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
 			}
-		}
-		return index;
-	}
-	public Object DataReceive() {
-		Object index = null;
-		if (isIsconnect()) {
-			try {
-				index = getMyObjectInputStream().readObject();
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		return index;
-	}
-	public Object KeyReceive() {
-		Object index = null;
-		if (isIsconnect()) {
-			try {
-				index = getMyObjectInputStream().readObject();
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		return index;
+		}).start();
+
 	}
 }

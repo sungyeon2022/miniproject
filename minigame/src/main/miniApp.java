@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 
+import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.Connect;
 import connect.ConnectControl;
@@ -38,7 +39,6 @@ import wall.wall;
 //JFrame 참조 
 public class miniApp extends JFrame {
 	private JFrame app;
-
 	private Background bg;
 	private issac issac;
 	private EnemyIssac enemyIssac;
@@ -52,7 +52,6 @@ public class miniApp extends JFrame {
 	private TimerControl timerControl;
 
 	private Socket socket;
-
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
 		init();
@@ -66,14 +65,14 @@ public class miniApp extends JFrame {
 
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
+		connectControl = new ConnectControl();
 		app = this;
 		bg = new Background(app);
-		connectControl = new ConnectControl();
 		timerControl = new TimerControl(app);
 		monsters = new Vector<Monster>();
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
-		issac = new issac(app, monsters, walls, items);
+		issac = new issac(app, monsters, walls, items, connectControl);
 		enemyIssac = new EnemyIssac(app, monsters, walls, items);
 
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
@@ -103,7 +102,7 @@ public class miniApp extends JFrame {
 
 		walls.add(new rock(app, 455, 300));
 		repaint();
-
+		
 	}
 
 	// JFrame을 통한 창출력
@@ -161,6 +160,7 @@ public class miniApp extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 //					connectControl.DataSend(7);
+					issac.setKeyRelease(true);
 					issac.setRight(false);
 					issac.refreshDirect();
 
