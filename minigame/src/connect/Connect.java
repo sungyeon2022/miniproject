@@ -39,10 +39,10 @@ public class Connect extends Lombok {
 		this.myOutputStream = null;
 		this.myObjectInputStream = null;
 		this.myObjectOutputStream = null;
-		this.Name = "Player1";
+		this.Name = "Beta1";
 		this.socketNum = 8050;
 		
 	}
 	public void SendDataThread() {}
-	public void ReceiveData() {}
+	public void ReceiveDataThread() {}
 }

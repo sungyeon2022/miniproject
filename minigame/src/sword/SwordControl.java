@@ -34,8 +34,6 @@ public class SwordControl extends Sword{
 		init();
 		setting();
 		batch();
-		
-		
 	}
 
 	public void init() {

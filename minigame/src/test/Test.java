@@ -1,4 +1,4 @@
-package testimg;
+package test;
 
 import javax.swing.JFrame;
 
@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.Lombok;
 
 @Data
-public class test extends Lombok{
+
+public class Test extends Lombok{
 	private JFrame app;
-	private final static String GUBUN_STRING = "Test : ";
 	private int Xtest;
 	private int Ytest;
-	
-	public test(JFrame app) {
+	public Test(JFrame app){
 		this.app = app;
 	}
 }

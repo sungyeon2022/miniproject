@@ -37,7 +37,6 @@ public class issac extends Player {
 	private issac issac = this;
 	private EnemyIssac enemyIssac;
 	private SpriteSheet ssHead, ssBody;
-	private SpriteSheet ssTotal;
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
 	private Worm worm;
@@ -84,8 +83,6 @@ public class issac extends Player {
 				issacSize.issacHEADWIDTH, issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
-		ssTotal = new SpriteSheet("issac/issac.png", "issacsBody", 0, yTotalSize, issacSize.issacTOTALWIDTH,
-				issacSize.issacTOTALHEIGHT);
 		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
 		// 레이블 초기화
 		labomb = new JLabel(Integer.toString(bombCount));

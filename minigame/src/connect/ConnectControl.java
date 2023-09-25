@@ -41,6 +41,7 @@ public class ConnectControl extends Connect {
 			setMyObjectOutputStream(new ObjectOutputStream(getMyOutputStream()));
 			getSendMap().put("Client name", getName());
 			SendDataThread();
+			ReceiveDataThread();
 		} catch (UnknownHostException e) { // 호스트 확인실패
 			setIsconnect(false);
 			System.out.println("서버 확인 실패");// 확인용
@@ -58,7 +59,8 @@ public class ConnectControl extends Connect {
 					try {
 						getMyObjectOutputStream().writeObject(getSendMap());
 						getMyObjectOutputStream().reset();
-					} catch (IOException e) {
+						Thread.sleep(100);
+					} catch (IOException | InterruptedException e) {
 						System.out.println("서버 강제 종료");
 						setIsconnect(false);
 					}
@@ -68,7 +70,7 @@ public class ConnectControl extends Connect {
 
 	}
 	@Override
-	public void ReceiveData() {
+	public void ReceiveDataThread() {
 
 		new Thread(new Runnable() {
 			@Override
@@ -76,13 +78,17 @@ public class ConnectControl extends Connect {
 				while (true) {
 					if (isIsconnect()) {
 						try {
+							System.out.println("작동중");
 							setReceiveObject(getMyObjectInputStream().readObject());
+							System.out.println(Arrays.toString((int[])((HashMap<String, Object>)getReceiveObject()).get("PlayerXY")));
 						} catch (IOException | ClassNotFoundException e) {
 							System.out.println("서버 닫힘");
 							setIsconnect(false);
 						}
-					} else
+					} else {
+						System.out.println("작동정지");
 						break;
+					}
 				}
 
 			}
