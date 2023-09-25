@@ -60,7 +60,7 @@ public class miniApp extends JFrame {
 		listener();
 		playerattack();
 		setVisible(true);
-		
+		checkUsedMomory();
 	}
 
 	// 앱에서 필요한 데이터정보 가져옴
@@ -276,5 +276,18 @@ public class miniApp extends JFrame {
 //			}
 //		}).start();
 //	}
-
+	public void checkUsedMomory() {
+		new Thread(()->{
+			while(true) {
+				Runtime.getRuntime().gc();
+				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+				System.out.println(usedMemory);
+				try {
+					Thread.sleep(1000);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}).start();
+	}
 }

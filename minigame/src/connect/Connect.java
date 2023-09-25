@@ -15,12 +15,12 @@ import java.util.Map;
 import java.util.logging.Handler;
 
 import lombok.Data;
+import lombok.Lombok;
 import player.issac;
 
 @Data
 
-public class Connect {
-	
+public class Connect extends Lombok {
 	private Socket socket;
 	private InputStream myInputStream;
 	private OutputStream myOutputStream;
@@ -31,8 +31,6 @@ public class Connect {
 	private boolean isconnect;
 	private Object Name;
 	private Object receiveObject;
-	private Object playerXY;
-	private Object PlayerStats;
 	private int socketNum;
 	private Map<String, Object> sendMap = new HashMap<String, Object>(); 
 	public Connect() {
@@ -45,6 +43,6 @@ public class Connect {
 		this.socketNum = 8050;
 		
 	}
-	public void SendData(Map<String, Object> sendMap) {}
+	public void SendDataThread() {}
 	public void ReceiveData() {}
 }

@@ -52,4 +52,5 @@ public class Player extends Lombok {
 	public void isDeadCheck() {}
 	public void dead() {}
 	public void attack() {}
+
 }

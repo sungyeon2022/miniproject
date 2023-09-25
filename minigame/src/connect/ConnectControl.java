@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class ConnectControl extends Connect {
 		connect();
 
 	}
-
+	
 	public void connect() {
 		try {
 			setSocket(new Socket("localhost", getSocketNum()));// 소켓 정보 초기화
@@ -39,7 +40,7 @@ public class ConnectControl extends Connect {
 			setMyObjectInputStream(new ObjectInputStream(getMyInputStream()));
 			setMyObjectOutputStream(new ObjectOutputStream(getMyOutputStream()));
 			getSendMap().put("Client name", getName());
-			SendData(getSendMap());
+			SendDataThread();
 		} catch (UnknownHostException e) { // 호스트 확인실패
 			setIsconnect(false);
 			System.out.println("서버 확인 실패");// 확인용
@@ -49,17 +50,21 @@ public class ConnectControl extends Connect {
 		}
 	}
 	@Override
-	public void SendData(Map<String, Object> sendMap) {
-		if (isIsconnect()) {
-			try {
-				getMyObjectOutputStream().writeObject(sendMap);
-				getMyObjectOutputStream().flush();
-				System.out.println(getMyObjectOutputStream());
-			} catch (IOException e) {
-				e.printStackTrace();
-				setIsconnect(false);
+	public void SendDataThread() {
+		new Thread(()->	{
+			
+			while (true) {
+				if (isIsconnect()) {
+					try {
+						getMyObjectOutputStream().writeObject(getSendMap());
+						getMyObjectOutputStream().reset();
+					} catch (IOException e) {
+						System.out.println("서버 강제 종료");
+						setIsconnect(false);
+					}
+				}else break;
 			}
-		}
+		}).start();
 
 	}
 	@Override
