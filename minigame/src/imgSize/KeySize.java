@@ -1,4 +1,4 @@
-package objectSetting;
+package imgSize;
 
 public interface KeySize {
 	int WIDTH = 24;

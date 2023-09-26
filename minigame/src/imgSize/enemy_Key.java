@@ -1,4 +1,4 @@
-package objectSetting;
+package imgSize;
 
 public interface enemy_Key {
 	int KEY_DOWN = 0;

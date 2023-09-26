@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
 import imgSize.Gap;
-import imgSize.ViewDirect;
+import objectSetting.*;
 import imgSize.WormSize;
 import lombok.Data;
 import player.issac;

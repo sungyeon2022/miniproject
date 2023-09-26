@@ -1,4 +1,4 @@
-package objectSetting;
+package imgSize;
 
 public interface PillSize {
 	int WIDTH = 23;

@@ -18,13 +18,18 @@ import lombok.Lombok;
 public class Sword extends Lombok {
 	private JFrame app;
 	private final static String TAG = "sword";
-	private int armleng = 10;
 	private int xSword, ySword;
-	private int direction;
-	private double attackDamage;
+	private boolean isAttack;
+	private boolean isAttackKeyPress;
+	private boolean isSwordAttacking;
 
 	public Sword(JFrame app) {
 		this.app = app;
+		this.isAttack = false;
+		this.isAttackKeyPress = false;
+		this.isSwordAttacking = false;
 	}
-
+	public synchronized void swordNomalForm() {}
+	public synchronized void swordAttackForm() {}
+	
 }

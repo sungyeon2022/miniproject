@@ -1,4 +1,4 @@
-package objectSetting;
+package imgSize;
 
 public interface BombSize {
 		int PICKWIDTH = 30;      // 폭탄 드롭 가로

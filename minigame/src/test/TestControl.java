@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
-import objectSetting.issacSize;
+import objectSetting.*;
+import imgSize.*;
 
 public class TestControl extends Test{
 	private TestControl testcontorl = this;
@@ -28,17 +29,8 @@ public class TestControl extends Test{
 		sstest.drawObj(100, 100);
 	}
 	public void batch() {
-		getApp().add(sstest,2);
+//		getApp().add(sstest,2);
 	}
 	public void imgrefreshThread() {
-		new Thread(()->{
-			while (true) {
-				if (connectControl.isIsconnect()) {
-					sstest.setIcon((ImageIcon)((HashMap<String, Object>)connectControl.getReceiveObject()).get("ssBody"));
-					System.out.println(((HashMap<String, Object>)connectControl.getReceiveObject()).get("ssBody"));
-					sstest.drawObj(100, 100);
-				}else break;
-			}
-		}).start();
 	}
 }

@@ -14,9 +14,12 @@ import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.Connect;
 import connect.ConnectControl;
-import enemy.EnemyIssac;
+//import enemy.EnemyIssac;
 import imgSize.BodySize;
+import imgSize.BombSize;
 import imgSize.HeadSize;
+import imgSize.HeartSize;
+import imgSize.PillSize;
 import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
@@ -24,14 +27,12 @@ import monster.body;
 import monster.Head;
 import monster.Monster;
 import player.issac;
+import sword.SwordControl;
 import test.TestControl;
 import item.Bomb;
 import item.Heart;
 import item.Item;
 import item.Pill;
-import objectSetting.BombSize;
-import objectSetting.HeartSize;
-import objectSetting.PillSize;
 import wall.rock;
 import wall.wall;
 
@@ -40,7 +41,8 @@ public class miniApp extends JFrame {
 	private JFrame app;
 	private Background bg;
 	private issac issac;
-	private EnemyIssac enemyIssac;
+	private SwordControl swordControl;
+//	private EnemyIssac enemyIssac;
 	private TestControl testControl;
 	private Vector<Monster> monsters;
 	private Vector<Item> items;
@@ -69,9 +71,9 @@ public class miniApp extends JFrame {
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
-		enemyIssac = new EnemyIssac(app, monsters, walls, items);
-		testControl = new TestControl(app, connectControl);
-		
+//		enemyIssac = new EnemyIssac(app, monsters, walls, items);
+//		testControl = new TestControl(app, connectControl);
+		swordControl = new SwordControl(app, issac);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
@@ -101,6 +103,7 @@ public class miniApp extends JFrame {
 		repaint();
 		
 	}
+	
 
 	// JFrame을 통한 창출력
 	public void setting() {
@@ -109,7 +112,6 @@ public class miniApp extends JFrame {
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setLocationRelativeTo(null);
 		app.setLayout(null);
-
 	}
 
 	public void batch() {
@@ -145,8 +147,8 @@ public class miniApp extends JFrame {
 //					connectControl.DataSend(5);
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 //					connectControl.DataSend(6);
-					issac.attackMotion();
-					issac.setAttackkeypress(true);
+					swordControl.swordAttackForm();
+					swordControl.setAttackKeyPress(true);
 				}
 			}
 
@@ -175,12 +177,11 @@ public class miniApp extends JFrame {
 
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 //					connectControl.DataSend(12);
-					issac.setPlayerAttack(false);
-					issac.setAttackkeypress(false);
+					swordControl.setAttackKeyPress(false);
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 
 					System.out.println("s키 떨어짐");
-					enemyIssac.setEnemyAttack(false);
+//					enemyIssac.setEnemyAttack(false);
 				}
 
 			}
@@ -196,7 +197,7 @@ public class miniApp extends JFrame {
 					if (issac.isPlayerAttacking())
 						break;
 					for (int i = 0; i < monsters.size(); i++) {
-						if (issac.getSwordControl().getSsSword().getBounds()
+						if (swordControl.getSsSword().getBounds()
 								.intersects(monsters.get(i).getSsMonster().getBounds())) {
 							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
 							System.out.println("공격 적용");

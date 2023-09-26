@@ -10,9 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Timer.TimerControl;
+import imgSize.BombSize;
 import item.Bomb;
 import item.Item;
-import objectSetting.BombSize;
 import objectSetting.MyFont;
 
 public class Background {

@@ -26,7 +26,6 @@ public class Player extends Lombok {
 	private boolean PlayerAttack;
 	private boolean isRock;
 	private boolean isKeyRelease;
-	private boolean attackkeypress;
 	private double[] PlayerData;
 	private int[] PlayerXY = {xPlayer,yPlayer};
 	
@@ -40,7 +39,6 @@ public class Player extends Lombok {
 		this.dead = false;
 		this.iskeyPress = false;
 		this.PlayerAttack = false;
-		this.attackkeypress = false;
 		this.PlayerAttacking = false;
 		this.isKeyRelease = false;
 	}
