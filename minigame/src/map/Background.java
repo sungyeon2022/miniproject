@@ -25,10 +25,7 @@ public class Background {
 		int compysize = app.getHeight();
 
 		ImageIcon back = new ImageIcon("images/structure/map.png");
-		Image temp = back.getImage().getScaledInstance(compxsize, compysize, back.getImage().SCALE_SMOOTH);
-
-		ImageIcon toIcon = new ImageIcon(temp);
-		isBackground = new JLabel(toIcon);
+		isBackground = new JLabel(back);
 		app.setContentPane(isBackground);
 		// 폭탄 개수 표시용 이미지 삽입 + X 글자 삽입
 		itemcount = new Vector<Item>();

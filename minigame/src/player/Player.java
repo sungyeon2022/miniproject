@@ -28,6 +28,8 @@ public class Player extends Lombok {
 	private boolean isKeyRelease;
 	private double[] PlayerData;
 	private int[] PlayerXY = {xPlayer,yPlayer};
+	private int sendViewDirect;
+	private boolean[] viewDirectInfo;
 	
 	public Player(JFrame app) {
 		this.app = app;
@@ -41,6 +43,7 @@ public class Player extends Lombok {
 		this.PlayerAttack = false;
 		this.PlayerAttacking = false;
 		this.isKeyRelease = false;
+		this.viewDirectInfo = new boolean[4];
 	}
 	public void moveRight() {}
 	public void moveLeft() {}

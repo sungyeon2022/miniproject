@@ -44,7 +44,6 @@ public class issac extends Player {
 	private Vector<wall> walls;
 	private Vector<Item> items;
 	private int xPlusBody = 8, yPlusBody = 30;
-	private int yTotalSize;
 	private int item1Count = 0;
 	private int item2Count = 0;
 	private int item3Count = 0;
@@ -82,7 +81,6 @@ public class issac extends Player {
 				issacSize.issacHEADWIDTH, issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
-		yTotalSize = issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 4 + Gap.ROWGAP * 5;
 		// 레이블 초기화
 		labomb = new JLabel(Integer.toString(bombCount));
 		laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
@@ -94,7 +92,7 @@ public class issac extends Player {
 					new SpriteSheet("issac/life.png", "life", 0, 0, Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
 		}
 		for (int i = (int) getLife(); i < getMaxlife(); i++) {
-			this.ssLife.add(new SpriteSheet("issac/life.png", "life", Lifesize.LIFEWIDTH * 2, 0, Lifesize.LIFEWIDTH,
+			this.ssLife.add(new SpriteSheet("issac/life.png", "life", Lifesize.LIFEWIDTH * 2+Gap.COLUMGAP*2, 0, Lifesize.LIFEWIDTH,
 					Lifesize.LIFEHEIGHT));
 		}
 
@@ -102,7 +100,7 @@ public class issac extends Player {
 
 	public void setting() {
 		setViewDirect(ViewDirect.UP);
-		setXPlayer(480);
+		setXPlayer(449);
 		setYPlayer(430);
 		setAttackDamage(1);
 		setLife(5);
@@ -139,7 +137,6 @@ public class issac extends Player {
 			}
 
 		}
-		setPlayerData(new double[] { getAttackDamage(), getLife(), getMoveSpeed() });
 	}
 
 	public void batch() {
@@ -164,34 +161,32 @@ public class issac extends Player {
 				if (!isRight()) {
 					setRight(true);
 					setViewDirect(ViewDirect.RIGHT);
+					issac.setSendViewDirect(ViewDirect.LEFT);
+					issac.getViewDirectInfo()[ViewDirect.LEFT] = true;
 					while (isRight()) {
+						
 						if (getXPlayer() + issacSize.issacBODYWIDTH > 810) { // 벽이상 움직임 제한
 							setRight(false);
 							refreshDirect();
 							break;
 						}
+						boolean isrock = false;
 						// 돌 충돌 체크 시작
-						boolean isRockCollision = false;
 						for (int i = 0; i < walls.size(); i++) {
 							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall()
-										&& getXPlayerCenter() < walls.get(i).getXwall() + RockSize.WIDTH
-										&& getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i)
-												.getYwall()
-										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
-									isRockCollision = true;
-									break;
+								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
+									setXPlayer(getXPlayer()-2);
+									isrock = true;
 								}
 							}
 						}
-						if (isRockCollision) {
-							refreshDirect();
-							break;
-						}
+						
 						getItem();
+						if(isrock) break;
 						// 돌 충돌 체크 끝
 						setXPlayer(getXPlayer() + 1);
 						setXPlayerCenter(getXPlayerCenter() + 1);
+						
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -225,34 +220,27 @@ public class issac extends Player {
 				if (isLeft() == false) {
 					setLeft(true);
 					setViewDirect(ViewDirect.LEFT);
+					issac.setSendViewDirect(ViewDirect.RIGHT);
+					issac.getViewDirectInfo()[ViewDirect.RIGHT] = true;
 					while (isLeft()) {
-						if (getXPlayer() < 130) {
+						if (getXPlayer() < 110) {
 							setLeft(false);
 							refreshDirect();
 							break;
 						}
-						boolean isRockCollision = false;
-						// 돌 충돌 체크 시작
+						boolean isrock = false;
 						for (int i = 0; i < walls.size(); i++) {
 							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-
-								if (getXPlayerCenter() > walls.get(i).getXwall()
-										&& getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall()
-												+ RockSize.WIDTH
-										&& getYPlayerCenter() + issacSize.issacHEADHEIGHT - yPlusBody > walls.get(i)
-												.getYwall()
-										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
-									isRockCollision = true;
-									break;
+								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
+									setXPlayer(getXPlayer()+2);
+									isrock = true;
 								}
 							}
 						}
-						if (isRockCollision) {
-							refreshDirect();
-							break;
-						}
+						
 						// 돌 충돌 체크 끝
 						getItem();
+						if(isrock) break;
 						setXPlayer(getXPlayer() - 1);
 						setXPlayerCenter(getXPlayerCenter() - 1);
 						try {
@@ -278,6 +266,8 @@ public class issac extends Player {
 				if (isDown() == false) {
 					setDown(true);
 					setViewDirect(ViewDirect.DOWN);
+					issac.setSendViewDirect(ViewDirect.UP);
+					issac.getViewDirectInfo()[ViewDirect.UP] = true;
 					while (isDown()) {
 						if (getYPlayer() > 440) {
 							setDown(false);
@@ -285,25 +275,18 @@ public class issac extends Player {
 							break;
 						}
 						// 돌 충돌 체크 시작
-						boolean isRockCollision = false;
+						boolean isrock = false;
 						for (int i = 0; i < walls.size(); i++) {
 							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall() + 5
-										&& getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall()
-												+ RockSize.WIDTH - 5
-										&& getYPlayerCenter() + (issacSize.issacHEADHEIGHT - yPlusBody) + 5 > walls
-												.get(i).getYwall()
-										&& getYPlayerCenter() < walls.get(i).getYwall() + RockSize.HEIGHT) {
-									isRockCollision = true;
-									break;
+								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
+									setYPlayer(getYPlayer()-2);
+									isrock = true;
 								}
 							}
 						}
-						if (isRockCollision) {
-							refreshDirect();
-							break;
-						}
+						
 						getItem();
+						if(isrock) break;
 						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() + 1);// 플레이어 이동시 좌표값 변경
 						setYPlayerCenter(getYPlayerCenter() + 1);// 중앙
@@ -329,32 +312,25 @@ public class issac extends Player {
 				if (isUp() == false) {
 					setUp(true);
 					setViewDirect(ViewDirect.UP);
+					issac.setSendViewDirect(ViewDirect.DOWN);
+					issac.getViewDirectInfo()[ViewDirect.DOWN] = true;
 					while (isUp()) {
 						if (getYPlayer() < 100) {
 							refreshDirect();
 							break;
 						}
-						boolean isRockCollision = false;
-						// 돌 충돌 체크 시작
+						boolean isrock = false;
 						for (int i = 0; i < walls.size(); i++) {
 							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (getXPlayerCenter() + (issacSize.issacHEADWIDTH / 2) > walls.get(i).getXwall() + 5
-										&& getXPlayerCenter() - (issacSize.issacHEADWIDTH / 2) < walls.get(i).getXwall()
-												+ RockSize.WIDTH - 5
-										&& getYPlayerCenter() > walls.get(i).getYwall() && getYPlayerCenter()
-												+ (issacSize.issacBODYHEIGHT - yPlusBody) < walls.get(i).getYwall()
-														+ RockSize.HEIGHT) {
-									isRockCollision = true;
-									break;
+								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
+									setYPlayer(getYPlayer()+2);
+									isrock = true;
 								}
 							}
 						}
-						if (isRockCollision) {
-							refreshDirect();
-							break;
-						}
 						getItem();
 						// 돌 충돌 체크 끝
+						if(isrock) break;
 						setYPlayer(getYPlayer() - 1);
 						setYPlayerCenter(getYPlayerCenter() - 1);
 						try {
@@ -452,15 +428,19 @@ public class issac extends Player {
 	public void refreshDirect() {
 		if (issac.isDown()) {
 			issac.setViewDirect(ViewDirect.DOWN);
+			issac.setSendViewDirect(ViewDirect.UP);
 		}
 		if (issac.isLeft()) {
 			issac.setViewDirect(ViewDirect.LEFT);
+			issac.setSendViewDirect(ViewDirect.RIGHT);
 		}
 		if (issac.isUp()) {
 			issac.setViewDirect(ViewDirect.UP);
+			issac.setSendViewDirect(ViewDirect.DOWN);
 		}
 		if (issac.isRight()) {
 			issac.setViewDirect(ViewDirect.RIGHT);
+			issac.setSendViewDirect(ViewDirect.LEFT);
 		}
 	}
 
@@ -558,9 +538,13 @@ public class issac extends Player {
 	public void issacInfoRefresh() {
 		new Thread(()->{
 			while (true) {
-				getPlayerXY()[0] = 960-getXPlayer();
-				getPlayerXY()[1] = 640-getYPlayer();
-				connectControl.getSendMap().put("PlayerXY", getPlayerXY());	
+				setPlayerData(new double[] { getAttackDamage(), getLife(), getMoveSpeed() });
+				connectControl.getSendMap().put("PlayerX", 960-getXPlayer());	
+				connectControl.getSendMap().put("PlayerY", 640-getYPlayer());
+				connectControl.getSendMap().put("PlayerStats", getPlayerData());
+				connectControl.getSendMap().put("booleanView",getViewDirectInfo());
+				connectControl.getSendMap().put("intView",getSendViewDirect());
+				
 			}
 		}).start();
 	}

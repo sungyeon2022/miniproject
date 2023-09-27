@@ -22,12 +22,16 @@ public class Sword extends Lombok {
 	private boolean isAttack;
 	private boolean isAttackKeyPress;
 	private boolean isSwordAttacking;
+	private int dotAttackDelay;
+	private boolean isEnemyAttackPress;
 
 	public Sword(JFrame app) {
 		this.app = app;
 		this.isAttack = false;
 		this.isAttackKeyPress = false;
 		this.isSwordAttacking = false;
+		this.dotAttackDelay = 2000;
+		this.isEnemyAttackPress = false;
 	}
 	public synchronized void swordNomalForm() {}
 	public synchronized void swordAttackForm() {}

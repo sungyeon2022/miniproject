@@ -14,6 +14,7 @@ import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.Connect;
 import connect.ConnectControl;
+import enemy.EnemyIssac;
 //import enemy.EnemyIssac;
 import imgSize.BodySize;
 import imgSize.BombSize;
@@ -24,9 +25,11 @@ import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
 import monster.body;
+import objectSetting.ViewDirect;
 import monster.Head;
 import monster.Monster;
 import player.issac;
+import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
 import item.Bomb;
@@ -42,13 +45,14 @@ public class miniApp extends JFrame {
 	private Background bg;
 	private issac issac;
 	private SwordControl swordControl;
-//	private EnemyIssac enemyIssac;
+	private EnemyIssac enemyIssac;
 	private TestControl testControl;
 	private Vector<Monster> monsters;
 	private Vector<Item> items;
 	private Vector<wall> walls;
 	private ConnectControl connectControl;
 	private TimerControl timerControl;
+	private EnemySwordControl enemySwordControl;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -56,7 +60,6 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
-		playerattack();
 		setVisible(true);
 		checkUsedMomory();
 	}
@@ -71,9 +74,10 @@ public class miniApp extends JFrame {
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
-//		enemyIssac = new EnemyIssac(app, monsters, walls, items);
+		enemyIssac = new EnemyIssac(app,walls, items, issac);
 //		testControl = new TestControl(app, connectControl);
-		swordControl = new SwordControl(app, issac);
+		swordControl = new SwordControl(app, issac, monsters);
+		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
@@ -99,7 +103,7 @@ public class miniApp extends JFrame {
 
 		// 벽 시험 생성 및 10초후 제거
 
-		walls.add(new rock(app, 455, 300));
+//		walls.add(new rock(app, 455, 300));
 		repaint();
 		
 	}
@@ -123,6 +127,7 @@ public class miniApp extends JFrame {
 
 	public static void main(String[] args) {
 		new miniApp();
+		
 	}
 
 	public void keyboardEvent() {
@@ -131,146 +136,59 @@ public class miniApp extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
-//					connectControl.DataSend(0);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
-//					connectControl.DataSend(1);
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.moveDown();
-//					connectControl.DataSend(2);
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
-//					connectControl.DataSend(3);
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
-//					connectControl.DataSend(4);
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
-//					connectControl.DataSend(5);
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-//					connectControl.DataSend(6);
 					swordControl.swordAttackForm();
 					swordControl.setAttackKeyPress(true);
+					swordControl.setEnemyAttackPress(true);
+					enemySwordControl.swordAttackForm();
+					enemySwordControl.setAttackKeyPress(true);
+					enemySwordControl.setEnemyAttackPress(true);
 				}
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//					connectControl.DataSend(7);
-					issac.setKeyRelease(true);
 					issac.setRight(false);
 					issac.refreshDirect();
+					issac.getViewDirectInfo()[ViewDirect.LEFT] = false;
 
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//					connectControl.DataSend(8);
 					issac.setLeft(false);
 					issac.refreshDirect();
+					issac.getViewDirectInfo()[ViewDirect.RIGHT] = false;
 
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//					connectControl.DataSend(9);
 					issac.setDown(false);
 					issac.refreshDirect();
-
+					issac.getViewDirectInfo()[ViewDirect.UP] = false;
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-//					connectControl.DataSend(10);
 					issac.setUp(false);
 					issac.refreshDirect();
-
+					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-//					connectControl.DataSend(12);
+					issac.setPlayerAttack(false);
 					swordControl.setAttackKeyPress(false);
+					swordControl.setEnemyAttackPress(false);
+					enemyIssac.setEnemyAttack(false);
+					enemySwordControl.setAttackKeyPress(false);
+					enemySwordControl.setEnemyAttackPress(false);
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-
 					System.out.println("s키 떨어짐");
-//					enemyIssac.setEnemyAttack(false);
 				}
 
 			}
 		});
 	}
-
-	public void playerattack() {
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (!issac.isDead()) {
-					if (issac.isPlayerAttacking())
-						break;
-					for (int i = 0; i < monsters.size(); i++) {
-						if (swordControl.getSsSword().getBounds()
-								.intersects(monsters.get(i).getSsMonster().getBounds())) {
-							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
-							System.out.println("공격 적용");
-							try {
-								Thread.sleep(1000); // 여기서 800mili 휴식 -----
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-
-					}
-				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} finally {
-					playerattack();
-
-				}
-			}
-		}).start();
-	}
-//	public void printObject() {
-//		new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				Object receive = connectControl.DataReceive();
-//				while (true) {
-//					System.out.println(receive);
-//				}
-//				
-//			}
-//		}).start();
-//	}
-//	public void EnemyControl() {
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				while (!enemyIssac.isDead()) {
-//					int a = connectControl.DataReceive();
-//					System.out.println(a);
-//					if (a == 0) {
-//						enemyIssac.moveLeft();
-//					} else if (a == 1) {
-//						enemyIssac.moveRight();
-//					} else if (a == 2) {
-//						enemyIssac.moveUp();
-//					} else if (a == 3) {
-//						enemyIssac.moveDown();
-//					} else if (a == 6) {
-//						enemyIssac.attackMotion();
-//					} else if (a == 7) {
-//						enemyIssac.setLeft(false);
-//						enemyIssac.refreshDirect();
-//					} else if (a == 8) {
-//						enemyIssac.setRight(false);
-//						enemyIssac.refreshDirect();
-//					} else if (a == 9) {
-//						enemyIssac.setUp(false);
-//						enemyIssac.refreshDirect();
-//					} else if (a == 10) {
-//						enemyIssac.setDown(false);
-//						enemyIssac.refreshDirect();
-//					} else if (a == 12) {
-//						enemyIssac.setEnemyAttack(false);
-//					}
-//				}
-//			}
-//		}).start();
-//	}
+	
 	public void checkUsedMomory() {
 		new Thread(()->{
 			while(true) {
