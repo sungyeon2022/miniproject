@@ -14,7 +14,6 @@ import player.issac;//objectsetting에서 옮겨옴
 @Data
 
 public class Monster extends Player{
-	
 	private final static String TAG = "Monster : ";
 	public int monsterSpeed = 2;
 	private issac issac;
@@ -22,7 +21,8 @@ public class Monster extends Player{
 	private SpriteSheet ssDead;
 	private String url;
 	private int imgWidth, imgHeight;
-
+	private String GUBUN;
+	
 	public Monster(JFrame app, issac issac, String url, int imgWidth, int imgHeight) {
 		super(app);
 		this.issac = issac;

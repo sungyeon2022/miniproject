@@ -12,11 +12,12 @@ import player.issac;
 @Data
 
 public class body extends Monster {
-	private final static String GUBUN = "Body : ";
+	private String GUBUN = "Body";
 	public int monsterSpeed = 1;
 	
 	public body(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
+		setGUBUN("Body");
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

@@ -21,7 +21,6 @@ public class Worm extends Monster {
 	private boolean checkAttackDirectX = false;
 	private boolean checkAttackDirectY = false;
 	private int attackDirect;
-	private final static String GUBUN = "Worm : ";
 	private boolean stop;
 	
 	public void setStop(boolean stop) {
@@ -30,6 +29,7 @@ public class Worm extends Monster {
 
 	public Worm(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
+		setGUBUN("Worm");
 		Timer timer = new Timer("Timer");
 		new Thread(new Runnable() {
 			@Override

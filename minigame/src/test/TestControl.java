@@ -1,36 +1,41 @@
 package test;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.border.LineBorder;
 
 import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
 import objectSetting.*;
 import imgSize.*;
 
-public class TestControl extends Test{
+public class TestControl extends Test {
 	private TestControl testcontorl = this;
 	private ConnectControl connectControl;
 	private SpriteSheet sstest;
+
 	public TestControl(JFrame app, ConnectControl connectControl) {
 		super(app);
-		init(app, connectControl);
+		init(app);
 		setting();
 		batch();
-		imgrefreshThread();
 	}
-	public void init(JFrame app,ConnectControl connectControl) {
-		this.connectControl = connectControl;
-		sstest = new SpriteSheet("issac/issac.png","Test",0,0,issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
+
+	public void init(JFrame app) {
+		sstest = new SpriteSheet("sword/sword.png", "Test", 7, 11, 20, 42);
 	}
+
 	public void setting() {
-		sstest.drawObj(100, 100);
+//		sstest.rotateDraw(200, 200, 270);
 	}
+
 	public void batch() {
-//		getApp().add(sstest,2);
+		getApp().add(sstest, 2);
 	}
-	public void imgrefreshThread() {
-	}
+	
 }

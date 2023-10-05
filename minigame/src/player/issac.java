@@ -37,6 +37,7 @@ public class issac extends Player {
 	private issac issac = this;
 //	private EnemyIssac enemyIssac;
 	private SpriteSheet ssHead, ssBody;
+	private SpriteSheet ssDead;
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
 	private Worm worm;
@@ -77,10 +78,11 @@ public class issac extends Player {
 		this.walls = walls;
 		this.items = items;
 		this.monsters = monsters;
-		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4, 0,
-				issacSize.issacHEADWIDTH, issacSize.issacHEADHEIGHT);
+		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4,
+				0, issacSize.issacHEADWIDTH, issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
+		ssDead = new SpriteSheet("issac/issac.png", "issacDead", 63, 215, 42, 48);
 		// 레이블 초기화
 		labomb = new JLabel(Integer.toString(bombCount));
 		laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
@@ -92,8 +94,8 @@ public class issac extends Player {
 					new SpriteSheet("issac/life.png", "life", 0, 0, Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
 		}
 		for (int i = (int) getLife(); i < getMaxlife(); i++) {
-			this.ssLife.add(new SpriteSheet("issac/life.png", "life", Lifesize.LIFEWIDTH * 2+Gap.COLUMGAP*2, 0, Lifesize.LIFEWIDTH,
-					Lifesize.LIFEHEIGHT));
+			this.ssLife.add(new SpriteSheet("issac/life.png", "life", Lifesize.LIFEWIDTH * 2 + Gap.COLUMGAP * 2, 0,
+					Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
 		}
 
 	}
@@ -142,6 +144,7 @@ public class issac extends Player {
 	public void batch() {
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
+		getApp().add(ssDead, 1);
 		// 폭탄 파워 속도 레이블 추가
 		getApp().add(labomb);
 		getApp().add(lapower);
@@ -164,7 +167,7 @@ public class issac extends Player {
 					issac.setSendViewDirect(ViewDirect.LEFT);
 					issac.getViewDirectInfo()[ViewDirect.LEFT] = true;
 					while (isRight()) {
-						
+
 						if (getXPlayer() + issacSize.issacBODYWIDTH > 810) { // 벽이상 움직임 제한
 							setRight(false);
 							refreshDirect();
@@ -172,21 +175,24 @@ public class issac extends Player {
 						}
 						boolean isrock = false;
 						// 돌 충돌 체크 시작
-						for (int i = 0; i < walls.size(); i++) {
-							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
-									setXPlayer(getXPlayer()-2);
-									isrock = true;
+						if (!walls.isEmpty()) {
+							for (int i = 0; i < walls.size(); i++) {
+								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+									if (issac.getSsBody().getBounds()
+											.intersects(walls.get(i).getSswall().getBounds())) {
+										setXPlayer(getXPlayer() - 2);
+										isrock = true;
+									}
 								}
 							}
 						}
-						
 						getItem();
-						if(isrock) break;
+						if (isrock)
+							break;
 						// 돌 충돌 체크 끝
 						setXPlayer(getXPlayer() + 1);
 						setXPlayerCenter(getXPlayerCenter() + 1);
-						
+
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -229,18 +235,21 @@ public class issac extends Player {
 							break;
 						}
 						boolean isrock = false;
-						for (int i = 0; i < walls.size(); i++) {
-							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
-									setXPlayer(getXPlayer()+2);
-									isrock = true;
+						if (!walls.isEmpty()) {
+							for (int i = 0; i < walls.size(); i++) {
+								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+									if (issac.getSsBody().getBounds()
+											.intersects(walls.get(i).getSswall().getBounds())) {
+										setXPlayer(getXPlayer() + 2);
+										isrock = true;
+									}
 								}
 							}
 						}
-						
 						// 돌 충돌 체크 끝
 						getItem();
-						if(isrock) break;
+						if (isrock)
+							break;
 						setXPlayer(getXPlayer() - 1);
 						setXPlayerCenter(getXPlayerCenter() - 1);
 						try {
@@ -276,17 +285,20 @@ public class issac extends Player {
 						}
 						// 돌 충돌 체크 시작
 						boolean isrock = false;
-						for (int i = 0; i < walls.size(); i++) {
-							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
-									setYPlayer(getYPlayer()-2);
-									isrock = true;
+						if (!walls.isEmpty()) {
+							for (int i = 0; i < walls.size(); i++) {
+								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+									if (issac.getSsBody().getBounds()
+											.intersects(walls.get(i).getSswall().getBounds())) {
+										setYPlayer(getYPlayer() - 2);
+										isrock = true;
+									}
 								}
 							}
 						}
-						
 						getItem();
-						if(isrock) break;
+						if (isrock)
+							break;
 						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() + 1);// 플레이어 이동시 좌표값 변경
 						setYPlayerCenter(getYPlayerCenter() + 1);// 중앙
@@ -320,17 +332,21 @@ public class issac extends Player {
 							break;
 						}
 						boolean isrock = false;
-						for (int i = 0; i < walls.size(); i++) {
-							if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
-								if (issac.getSsBody().getBounds().intersects(walls.get(i).getSswall().getBounds())) {
-									setYPlayer(getYPlayer()+2);
-									isrock = true;
+						if (!walls.isEmpty()) {
+							for (int i = 0; i < walls.size(); i++) {
+								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+									if (issac.getSsBody().getBounds()
+											.intersects(walls.get(i).getSswall().getBounds())) {
+										setYPlayer(getYPlayer() + 2);
+										isrock = true;
+									}
 								}
 							}
 						}
 						getItem();
 						// 돌 충돌 체크 끝
-						if(isrock) break;
+						if (isrock)
+							break;
 						setYPlayer(getYPlayer() - 1);
 						setYPlayerCenter(getYPlayerCenter() - 1);
 						try {
@@ -357,27 +373,28 @@ public class issac extends Player {
 				int motion = 0;
 				if (isPlayerMoveStart() == false) {
 					setPlayerMoveStart(true);
-					while (true) {
+					while (!isDead()) {
 						if (isDown() && getViewDirect() == ViewDirect.DOWN) {
-							if (motion > 9*4) // 상하좌우 방향 모션 개수와 동일 0~9 10개
+							if (motion > 9 * 4) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion/4)) + (Gap.COLUMGAP * (motion/4))); // XPos는 사진에서
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4))); // XPos는
+																														// 사진에서
 							if (getViewDirect() == ViewDirect.DOWN) {
 								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);// X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과
 																						// 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼
 																						// 더해서 좌표값을 내려줍니다
 								ssHead.drawObj(getXPlayer(), getYPlayer()); // 그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
-								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);// X와Y좌표를 기준으로 머리를
-								 // 생성하고 머리와 몸이 겹치지
+								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+								// X와Y좌표를 기준으로 머리를
+								// 생성하고 머리와 몸이 겹치지
 								// // 않게하기위해 사용합니다.
 								motion += 1;
 							}
-
 						} else if (isLeft() && getViewDirect() == ViewDirect.LEFT) {
-							if (motion > 9*4)
+							if (motion > 9 * 4)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion/4)) + (Gap.COLUMGAP * (motion/4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
 							if (getViewDirect() == ViewDirect.LEFT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
 								ssBody.setYPos(
@@ -386,12 +403,11 @@ public class issac extends Player {
 								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 								motion += 1;
 							}
-							
 
 						} else if (isUp() && getViewDirect() == ViewDirect.UP) {
-							if (motion > 9*4)
+							if (motion > 9 * 4)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion/4)) + (Gap.COLUMGAP * (motion/4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
 							if (getViewDirect() == ViewDirect.UP) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
@@ -401,9 +417,9 @@ public class issac extends Player {
 							}
 
 						} else if (isRight() && getViewDirect() == ViewDirect.RIGHT) {
-							if (motion > 9*4)
+							if (motion > 9 * 4)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion/4)) + (Gap.COLUMGAP * (motion/4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
 							if (getViewDirect() == ViewDirect.RIGHT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
@@ -418,12 +434,11 @@ public class issac extends Player {
 							e.printStackTrace();
 						}
 					}
+					deadMotion();
 				}
 			}
 		}).start();
 	}
-
-	
 
 	public void refreshDirect() {
 		if (issac.isDown()) {
@@ -535,16 +550,29 @@ public class issac extends Player {
 
 		}
 	}
+
+	public void deadMotion() {
+		getApp().remove(ssBody);
+		getApp().remove(ssHead);
+		ssDead.drawObj(getXPlayer(), getYPlayer());
+		getApp().add(ssDead);
+		int gap = 51;
+		for(int i = 0;i<2;i++) {
+			ssDead.setXPos(ssDead.getXPos()+gap*i);
+			ssDead.drawObj(getXPlayer(),getYPlayer());
+		}
+	}
+
 	public void issacInfoRefresh() {
-		new Thread(()->{
-			while (true) {
+		new Thread(() -> {
+			while (connectControl.isIsconnect()) {
 				setPlayerData(new double[] { getAttackDamage(), getLife(), getMoveSpeed() });
-				connectControl.getSendMap().put("PlayerX", 960-getXPlayer());	
-				connectControl.getSendMap().put("PlayerY", 640-getYPlayer());
+				connectControl.getSendMap().put("PlayerX", 960 - getXPlayer());
+				connectControl.getSendMap().put("PlayerY", 640 - getYPlayer());
 				connectControl.getSendMap().put("PlayerStats", getPlayerData());
-				connectControl.getSendMap().put("booleanView",getViewDirectInfo());
-				connectControl.getSendMap().put("intView",getSendViewDirect());
-				
+				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
+				connectControl.getSendMap().put("intView", getSendViewDirect());
+
 			}
 		}).start();
 	}

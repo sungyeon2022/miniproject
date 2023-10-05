@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.event.KeyAdapter;
 
 import java.awt.event.KeyEvent;
@@ -29,6 +30,7 @@ import objectSetting.ViewDirect;
 import monster.Head;
 import monster.Monster;
 import player.issac;
+import startPage.Page;
 import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
@@ -43,6 +45,7 @@ import wall.wall;
 public class miniApp extends JFrame {
 	private JFrame app;
 	private Background bg;
+	private Page page;
 	private issac issac;
 	private SwordControl swordControl;
 	private EnemyIssac enemyIssac;
@@ -60,62 +63,38 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
-		setVisible(true);
 		checkUsedMomory();
+		monsterDeadCheck();
 	}
 
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
-		connectControl = new ConnectControl();
 		app = this;
+
+//		page = new Page(app);
 		bg = new Background(app);
-		timerControl = new TimerControl(app);
 		monsters = new Vector<Monster>();
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
-		enemyIssac = new EnemyIssac(app,walls, items, issac);
-//		testControl = new TestControl(app, connectControl);
 		swordControl = new SwordControl(app, issac, monsters);
+		enemyIssac = new EnemyIssac(app, walls, items, issac);
 		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
+//		testControl = new TestControl(app, connectControl);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-
-		items.add(new Bomb(app, "item/bomb.png", "bomb", 140, 400, BombSize.PICKWIDTH, BombSize.PICKHEIGHT));
-		items.add(new Heart(app, "item/recoveryLife.png", "heart", 240, 400, HeartSize.WIDTH, HeartSize.HEIGHT));
-		// 랜덤 아이템 생성
-		int witem = (int) (Math.random() * 4);
-		switch (witem) {
-		case 0:
-			items.add(new Pill(app, "item/PowerUp.png", "Power", 440, 400, PillSize.WIDTH, PillSize.HEIGHT));
-			break;
-		case 1:
-			items.add(new Pill(app, "item/ASUp.png", "AttackSpeed", 490, 400, PillSize.WIDTH, PillSize.HEIGHT));
-			break;
-		case 2:
-			items.add(new Pill(app, "item/SpeedUp.png", "Speed", 540, 400, PillSize.WIDTH, PillSize.HEIGHT));
-			break;
-		case 3:
-			items.add(new Pill(app, "item/FullHp.png", "FullHp", 440, 300, PillSize.WIDTH, PillSize.HEIGHT));
-			break;
-		}
-
-		// 벽 시험 생성 및 10초후 제거
-
-//		walls.add(new rock(app, 455, 300));
-		repaint();
-		
+		timerControl = new TimerControl(app);
+		connectControl = new ConnectControl();
 	}
-	
 
 	// JFrame을 통한 창출력
 	public void setting() {
 		app.setTitle("betaapp");
-		app.setSize(960, 640);
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setLocationRelativeTo(null);
 		app.setLayout(null);
+		setVisible(true);
 	}
 
 	public void batch() {
@@ -127,7 +106,7 @@ public class miniApp extends JFrame {
 
 	public static void main(String[] args) {
 		new miniApp();
-		
+
 	}
 
 	public void keyboardEvent() {
@@ -147,10 +126,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					swordControl.swordAttackForm();
 					swordControl.setAttackKeyPress(true);
-					swordControl.setEnemyAttackPress(true);
-					enemySwordControl.swordAttackForm();
-					enemySwordControl.setAttackKeyPress(true);
-					enemySwordControl.setEnemyAttackPress(true);
+					enemySwordControl.setEnemyAttackKeyPress(true);
 				}
 			}
 
@@ -175,12 +151,8 @@ public class miniApp extends JFrame {
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					issac.setPlayerAttack(false);
 					swordControl.setAttackKeyPress(false);
-					swordControl.setEnemyAttackPress(false);
-					enemyIssac.setEnemyAttack(false);
-					enemySwordControl.setAttackKeyPress(false);
-					enemySwordControl.setEnemyAttackPress(false);
+					enemySwordControl.setEnemyAttackKeyPress(false);
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 					System.out.println("s키 떨어짐");
 				}
@@ -188,10 +160,10 @@ public class miniApp extends JFrame {
 			}
 		});
 	}
-	
+
 	public void checkUsedMomory() {
-		new Thread(()->{
-			while(true) {
+		new Thread(() -> {
+			while (true) {
 				Runtime.getRuntime().gc();
 				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 				System.out.println(usedMemory);
@@ -199,6 +171,39 @@ public class miniApp extends JFrame {
 					Thread.sleep(1000);
 				} catch (Exception e) {
 					// TODO: handle exception
+				}
+			}
+		}).start();
+	}
+
+	public void checkSinormul() {
+		try {
+			System.in.read();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void monsterDeadCheck() {
+		new Thread(() -> {
+			while (true) {
+//				System.out.println("실행중");
+				for (int i = 0; i < monsters.size(); i++) {
+					if (monsters.get(i).isDead()) {
+						String monName = monsters.get(i).getGUBUN();
+						monsters.remove(i);
+						if (monName.equals("Worm"))
+							monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+						if (monName.equals("Head"))
+							monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+						if (monName.equals("Body"))
+							monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+					}
+				}
+				try {
+					Thread.sleep(10);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}).start();

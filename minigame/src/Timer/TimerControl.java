@@ -21,19 +21,33 @@ public class TimerControl extends Timer {
 		init();
 		setting();
 		batch();
+		timerThread();
 	}
 	public void init() {
-		timerLabel = new JLabel(Integer.toString(getSec())+":"+Integer.toString(getMliSec()));
+		timerLabel = new JLabel(Integer.toString(getSec())+":"+"00");
 	}
 	public void setting() {
 		System.out.println("시계");
-		timerLabel.setSize(80,30);
-		timerLabel.setLocation(450,0);
-		timerLabel.setFont(new Font(MyFont.font1,Font.BOLD,30));
+		timerLabel.setSize(90,30);
+		timerLabel.setLocation(430,0);
+		timerLabel.setFont(new Font(MyFont.FONT2,Font.BOLD,30));
 		timerLabel.setForeground(Color.white);
 		timerLabel.setBorder(new LineBorder(Color.black));
 	}
 	public void batch() {
 		getApp().add(timerLabel);
+	}
+	public void timerThread() {
+		new Thread(()->{
+			while (true) {
+				setMliSec(((int)System.currentTimeMillis()/10)-getStartTime());
+				timerLabel.setText(Integer.toString(getMliSec()/100%60)+":"+Integer.toString(getMliSec()%100));
+//				try {
+//					Tre
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+			}
+		}).start();
 	}
 }

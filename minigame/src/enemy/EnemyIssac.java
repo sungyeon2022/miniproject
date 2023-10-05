@@ -78,8 +78,8 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void batch() {
-		getApp().add(ssHead, 1);
-		getApp().add(ssBody, 2);
+		getApp().add(ssHead, 0);
+		getApp().add(ssBody, 1);
 		// 폭탄 파워 속도 레이블 추가
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);

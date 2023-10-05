@@ -22,8 +22,6 @@ public class Player extends Lombok {
 	private boolean dead;
 	private SwordControl swordControl;
 	private boolean PlayerMoveStart;
-	private boolean PlayerAttacking;
-	private boolean PlayerAttack;
 	private boolean isRock;
 	private boolean isKeyRelease;
 	private double[] PlayerData;
@@ -40,8 +38,6 @@ public class Player extends Lombok {
 		this.isRock = false;
 		this.dead = false;
 		this.iskeyPress = false;
-		this.PlayerAttack = false;
-		this.PlayerAttacking = false;
 		this.isKeyRelease = false;
 		this.viewDirectInfo = new boolean[4];
 	}

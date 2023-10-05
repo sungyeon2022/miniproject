@@ -8,15 +8,15 @@ import lombok.Data;
 @Data
 
 public class Timer {
-	
 	private JFrame app;
 	private JLabel timerLabel;
 	private int sec;
 	private int mliSec;
+	private int startTime;
 	private boolean isStart;
 	public Timer(JFrame app) {
 		this.app = app;
-		sec = 30;
-		mliSec = 30;
+		startTime = (int)System.currentTimeMillis()/10; 
+		
 	}
 }
