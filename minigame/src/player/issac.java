@@ -357,7 +357,7 @@ public class issac extends Player {
 				int motion = 0;
 				if (isPlayerMoveStart() == false) {
 					setPlayerMoveStart(true);
-					while (true) {
+					while (!isDead()) {
 						if (isDown() && getViewDirect() == ViewDirect.DOWN) {
 							if (motion > 9*4) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
@@ -412,12 +412,15 @@ public class issac extends Player {
 								motion += 1;
 							}
 						}
+						if(getLife()<1) setDead(true);
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
+					getApp().remove(ssBody);
+					getApp().remove(ssHead);
 				}
 			}
 		}).start();

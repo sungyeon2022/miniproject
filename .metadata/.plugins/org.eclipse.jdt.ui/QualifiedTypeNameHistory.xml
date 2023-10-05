@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.io.DataInputStream"/>
     <fullyQualifiedTypeName name="java.io.DataOutputStream"/>
     <fullyQualifiedTypeName name="monster.body"/>
     <fullyQualifiedTypeName name="Timer.Timer"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
-    <fullyQualifiedTypeName name="java.lang.Appendable"/>
     <fullyQualifiedTypeName name="Timer.TimerControl"/>
     <fullyQualifiedTypeName name="javax.swing.border.Border"/>
     <fullyQualifiedTypeName name="javax.swing.border.LineBorder"/>
@@ -32,21 +30,14 @@
     <fullyQualifiedTypeName name="lombok.Lombok"/>
     <fullyQualifiedTypeName name="test.Test"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
-    <fullyQualifiedTypeName name="connect.ConnectControl"/>
     <fullyQualifiedTypeName name="objectSetting.issacSize"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="testimg.testcontorl"/>
     <fullyQualifiedTypeName name="test.TestControl"/>
-    <fullyQualifiedTypeName name="sword.SwordControl"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.Boolean"/>
-    <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="monster.Monster"/>
     <fullyQualifiedTypeName name="boolean"/>
@@ -54,10 +45,19 @@
     <fullyQualifiedTypeName name="imgSize.Gap"/>
     <fullyQualifiedTypeName name="imgSize.issacSize"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="imgSize.enemy_Key"/>
-    <fullyQualifiedTypeName name="enemy.EnemyIssac"/>
     <fullyQualifiedTypeName name="sword.EnemySwordControl"/>
     <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
+    <fullyQualifiedTypeName name="enemy.EnemyIssac"/>
+    <fullyQualifiedTypeName name="java.lang.Appendable"/>
     <fullyQualifiedTypeName name="player.issac"/>
+    <fullyQualifiedTypeName name="sword.SwordControl"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="connect.ConnectControl"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 </qualifiedTypeNameHistroy>

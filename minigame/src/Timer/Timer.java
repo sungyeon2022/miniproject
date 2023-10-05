@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 
 public class Timer {
-	
 	private JFrame app;
 	private JLabel timerLabel;
 	private int sec;
@@ -19,4 +18,5 @@ public class Timer {
 		sec = 30;
 		mliSec = 30;
 	}
+	public void timerRefresh() {}
 }

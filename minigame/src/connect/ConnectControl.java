@@ -53,25 +53,23 @@ public class ConnectControl extends Connect {
 	@Override
 	public void SendDataThread() {
 		new Thread(()->	{
-			
 			while (true) {
 				if (isIsconnect()) {
 					try {
 						getMyObjectOutputStream().writeObject(getSendMap());
 						getMyObjectOutputStream().reset();
-						Thread.sleep(100);
-					} catch (IOException | InterruptedException e) {
+					} catch (IOException e) {
 						System.out.println("서버 강제 종료");
 						setIsconnect(false);
 					}
 				}else break;
 			}
+			
 		}).start();
 
 	}
 	@Override
 	public void ReceiveDataThread() {
-
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -80,7 +78,8 @@ public class ConnectControl extends Connect {
 						try {
 							System.out.println("작동중");
 							setReceiveObject(getMyObjectInputStream().readObject());
-							System.out.println(Arrays.toString((int[])((HashMap<String, Object>)getReceiveObject()).get("PlayerXY")));
+							System.out.println(((HashMap<String, Object>)getReceiveObject()).get("PlayerX"));
+							System.out.println(((HashMap<String, Object>)getReceiveObject()).get("PlayerY"));
 						} catch (IOException | ClassNotFoundException e) {
 							System.out.println("서버 닫힘");
 							setIsconnect(false);

@@ -27,7 +27,6 @@ public class EnemySwordControl extends Sword {
 		setting();
 		batch();
 		swordNomalForm();
-		dotAttack();
 	}
 
 	public void init(issac issac, EnemyIssac enemyIssac) {
@@ -45,7 +44,7 @@ public class EnemySwordControl extends Sword {
 	}
 
 	public void batch() {
-		getApp().add(ssSword, 2);
+		getApp().add(ssSword);
 
 	}
 
@@ -110,6 +109,7 @@ public class EnemySwordControl extends Sword {
 							}
 						}
 					}
+					if(enemyIssac.isDead()) getApp().remove(ssSword);
 					try {
 						Thread.sleep(issac.getMoveSpeed());
 					} catch (Exception e) {
@@ -234,28 +234,11 @@ public class EnemySwordControl extends Sword {
 		}).start();
 	}
 
-	public void dotAttack() {
-//		new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				while (!issac.isDead()) {
-//					boolean ismonster = false;
-//					if (issac.isPlayerAttacking())
-//						break;
-//				}
-//				try {
-//					Thread.sleep(getDotAttackDelay());
-//				} catch (Exception e) {
-//
-//				} finally {
-//					dotAttack();
-//				}
-//			}
-//		}).start();
-	}
-
 	public void swingAttack() {
 		if (isSwordAttacking()) {
+			if(ssSword.getBounds().intersects(issac.getSsBody().getBounds())||ssSword.getBounds().intersects(issac.getSsHead().getBounds())) {
+				issac.setLife(issac.getLife()-enemyIssac.getAttackDamage());
+			}
 		}
 	}
 }

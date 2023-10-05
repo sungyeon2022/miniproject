@@ -95,7 +95,7 @@ public class EnemyIssac extends Enemy {
 				int motion = 0;
 				if (!isEnemyMoveStart()) {
 					setEnemyMoveStart(true);
-					while (true) {
+					while (!isDead()) {
 						if (issac.getViewDirectInfo()[ViewDirect.DOWN]
 								&& issac.getSendViewDirect() == ViewDirect.DOWN) {
 							if (motion > 9 * 4) // 상하좌우 방향 모션 개수와 동일 0~9 10개
@@ -161,13 +161,15 @@ public class EnemyIssac extends Enemy {
 							ssHead.drawObj(getXEnemy(), getYEnemy());
 							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 						}
+						if(getLife()<1) setDead(true);
 						try {
 							Thread.sleep(movespeed);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
-
+					getApp().remove(ssBody);
+					getApp().remove(ssHead);
 				}
 			}
 		}).start();

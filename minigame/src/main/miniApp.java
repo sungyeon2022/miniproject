@@ -69,14 +69,14 @@ public class miniApp extends JFrame {
 		connectControl = new ConnectControl();
 		app = this;
 		bg = new Background(app);
-		timerControl = new TimerControl(app);
+		timerControl = new TimerControl(app, connectControl);
 		monsters = new Vector<Monster>();
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
-		enemyIssac = new EnemyIssac(app,walls, items, issac);
+		enemyIssac = new EnemyIssac(app, walls, items, issac);
 //		testControl = new TestControl(app, connectControl);
-		swordControl = new SwordControl(app, issac, monsters);
+		swordControl = new SwordControl(app, issac, monsters, enemyIssac);
 		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
@@ -105,9 +105,8 @@ public class miniApp extends JFrame {
 
 //		walls.add(new rock(app, 455, 300));
 		repaint();
-		
+
 	}
-	
 
 	// JFrame을 통한 창출력
 	public void setting() {
@@ -127,7 +126,7 @@ public class miniApp extends JFrame {
 
 	public static void main(String[] args) {
 		new miniApp();
-		
+
 	}
 
 	public void keyboardEvent() {
@@ -188,10 +187,10 @@ public class miniApp extends JFrame {
 			}
 		});
 	}
-	
+
 	public void checkUsedMomory() {
-		new Thread(()->{
-			while(true) {
+		new Thread(() -> {
+			while (true) {
 				Runtime.getRuntime().gc();
 				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 				System.out.println(usedMemory);

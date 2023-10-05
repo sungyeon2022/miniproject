@@ -3,6 +3,7 @@ package sword;
 import java.util.Vector;
 import javax.swing.JFrame;
 import SpriteSheet.SpriteSheet;
+import enemy.EnemyIssac;
 import imgSize.SwordMotionSize;
 import imgSize.SwordSize;
 import objectSetting.*;
@@ -18,20 +19,22 @@ public class SwordControl extends Sword {
 	private Sword sword;
 	private issac issac;
 	private Vector<Monster> monsters;
+	private EnemyIssac enemyIssac;
 
-	public SwordControl(JFrame app, issac issac, Vector<Monster> monsters) {
+	public SwordControl(JFrame app, issac issac, Vector<Monster> monsters, EnemyIssac enemyIssac) {
 		super(app);
 		System.out.println(TAG + "makeSword");
-		init(issac, monsters);
+		init(issac, monsters, enemyIssac);
 		setting();
 		batch();
 		swordNomalForm();
 		dotAttack();
 	}
 
-	public void init(issac issac, Vector<Monster> monsters) {
+	public void init(issac issac, Vector<Monster> monsters, EnemyIssac enemyIssac) {
 		this.issac = issac;
 		this.monsters = monsters;
+		this.enemyIssac = enemyIssac;
 		ssSword = new SpriteSheet("sword/sword_up.png", "issac_sword", SwordSize.SWORDXGAP + 2,
 				SwordSize.SWORDIMGHEIGHT - SwordSize.SWORDYGAP - SwordSize.SWORDYHEIGHT + 2, SwordSize.SWORDWIDTH - 1,
 				SwordSize.SWORDYHEIGHT);
@@ -105,6 +108,7 @@ public class SwordControl extends Sword {
 							}
 						}
 					}
+					if(issac.isDead()) getApp().remove(ssSword);
 					try {
 						Thread.sleep(issac.getMoveSpeed());
 					} catch (Exception e) {
