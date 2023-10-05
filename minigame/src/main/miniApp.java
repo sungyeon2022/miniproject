@@ -111,7 +111,7 @@ public class miniApp extends JFrame {
 
 	// JFrame을 통한 창출력
 	public void setting() {
-		app.setTitle("betaapp");
+		app.setTitle("miniapp");
 		app.setSize(960, 640);
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setLocationRelativeTo(null);
