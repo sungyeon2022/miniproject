@@ -58,7 +58,8 @@ public class ConnectControl extends Connect {
 					try {
 						getMyObjectOutputStream().writeObject(getSendMap());
 						getMyObjectOutputStream().reset();
-					} catch (IOException e) {
+						Thread.sleep(10);
+					} catch (IOException | InterruptedException e) {
 						System.out.println("서버 강제 종료");
 						setIsconnect(false);
 					}
@@ -76,10 +77,7 @@ public class ConnectControl extends Connect {
 				while (true) {
 					if (isIsconnect()) {
 						try {
-							System.out.println("작동중");
 							setReceiveObject(getMyObjectInputStream().readObject());
-							System.out.println(((HashMap<String, Object>)getReceiveObject()).get("PlayerX"));
-							System.out.println(((HashMap<String, Object>)getReceiveObject()).get("PlayerY"));
 						} catch (IOException | ClassNotFoundException e) {
 							System.out.println("서버 닫힘");
 							setIsconnect(false);
