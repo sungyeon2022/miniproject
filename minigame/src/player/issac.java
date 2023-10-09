@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
@@ -37,7 +38,7 @@ public class issac extends Player {
 	private issac issac = this;
 //	private EnemyIssac enemyIssac;
 	private SpriteSheet ssHead, ssBody;
-	private SpriteSheet ssDead;
+	private SpriteSheet ssDead, ssHit;
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
 	private Worm worm;
@@ -71,6 +72,7 @@ public class issac extends Player {
 		batch();
 		issacInfoRefresh();
 		moveMotion();
+		MonsterCheckThread();
 	}
 
 	public void init(Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items, ConnectControl connectControl) {
@@ -557,12 +559,36 @@ public class issac extends Player {
 		ssDead.drawObj(getXPlayer(), getYPlayer());
 		getApp().add(ssDead);
 		int gap = 51;
-		for(int i = 0;i<2;i++) {
-			ssDead.setXPos(ssDead.getXPos()+gap*i);
-			ssDead.drawObj(getXPlayer(),getYPlayer());
+		for (int i = 0; i < 2; i++) {
+			ssDead.setXPos(ssDead.getXPos() + gap * i);
+			ssDead.drawObj(getXPlayer(), getYPlayer());
 		}
 	}
 
+	public void MonsterCheckThread() {
+		new Thread(() -> {
+			while (!isDead()) {
+				for(int i = 0; i<monsters.size();i++) {
+					if(ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds()) ||
+							ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
+						setLife(getLife()-0.5);
+						System.out.println(getLife());
+						try {
+							Thread.sleep(2000);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
+				}
+				try {
+					Thread.sleep(10);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}).start();
+	}
+	
 	public void issacInfoRefresh() {
 		new Thread(() -> {
 			while (connectControl.isIsconnect()) {

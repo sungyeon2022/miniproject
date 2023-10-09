@@ -30,7 +30,6 @@ import objectSetting.ViewDirect;
 import monster.Head;
 import monster.Monster;
 import player.issac;
-import startPage.Page;
 import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
@@ -45,7 +44,6 @@ import wall.wall;
 public class miniApp extends JFrame {
 	private JFrame app;
 	private Background bg;
-	private Page page;
 	private issac issac;
 	private SwordControl swordControl;
 	private EnemyIssac enemyIssac;
@@ -70,7 +68,7 @@ public class miniApp extends JFrame {
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
 		app = this;
-
+		connectControl = new ConnectControl();
 //		page = new Page(app);
 		bg = new Background(app);
 		monsters = new Vector<Monster>();
@@ -78,14 +76,14 @@ public class miniApp extends JFrame {
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
 		swordControl = new SwordControl(app, issac, monsters);
-		enemyIssac = new EnemyIssac(app, walls, items, issac);
-		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
+//		enemyIssac = new EnemyIssac(app, walls, items, issac);
+//		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 //		testControl = new TestControl(app, connectControl);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 		timerControl = new TimerControl(app);
-		connectControl = new ConnectControl();
+		
 	}
 
 	// JFrame을 통한 창출력
@@ -198,6 +196,7 @@ public class miniApp extends JFrame {
 							monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 						if (monName.equals("Body"))
 							monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+						
 					}
 				}
 				try {
