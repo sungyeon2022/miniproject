@@ -44,7 +44,7 @@ public class SwordControl extends Sword {
 	}
 
 	public void batch() {
-		getApp().add(ssSword, 2);
+		getApp().add(ssSword);
 
 	}
 
@@ -100,6 +100,7 @@ public class SwordControl extends Sword {
 							}
 
 						}
+						if(issac.isDead()) ssSword.setVisible(false);
 					}else break;
 					try {
 						Thread.sleep(issac.getMoveSpeed());

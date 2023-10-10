@@ -1,7 +1,10 @@
 package player;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
@@ -15,6 +18,8 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageTranscoder;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.xml.stream.events.StartDocument;
 
 import player.Player;
@@ -146,7 +151,7 @@ public class issac extends Player {
 	public void batch() {
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
-		getApp().add(ssDead, 1);
+		getApp().add(ssDead, 2);
 		// 폭탄 파워 속도 레이블 추가
 		getApp().add(labomb);
 		getApp().add(lapower);
@@ -169,7 +174,8 @@ public class issac extends Player {
 					issac.setSendViewDirect(ViewDirect.LEFT);
 					issac.getViewDirectInfo()[ViewDirect.LEFT] = true;
 					while (isRight()) {
-
+						if (isDead())
+							break;
 						if (getXPlayer() + issacSize.issacBODYWIDTH > 810) { // 벽이상 움직임 제한
 							setRight(false);
 							refreshDirect();
@@ -231,6 +237,8 @@ public class issac extends Player {
 					issac.setSendViewDirect(ViewDirect.RIGHT);
 					issac.getViewDirectInfo()[ViewDirect.RIGHT] = true;
 					while (isLeft()) {
+						if (isDead())
+							break;
 						if (getXPlayer() < 110) {
 							setLeft(false);
 							refreshDirect();
@@ -280,6 +288,8 @@ public class issac extends Player {
 					issac.setSendViewDirect(ViewDirect.UP);
 					issac.getViewDirectInfo()[ViewDirect.UP] = true;
 					while (isDown()) {
+						if (isDead())
+							break;
 						if (getYPlayer() > 440) {
 							setDown(false);
 							refreshDirect();
@@ -329,6 +339,8 @@ public class issac extends Player {
 					issac.setSendViewDirect(ViewDirect.DOWN);
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = true;
 					while (isUp()) {
+						if (isDead())
+							break;
 						if (getYPlayer() < 100) {
 							refreshDirect();
 							break;
@@ -466,14 +478,16 @@ public class issac extends Player {
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (currentLife >= 1) {
 				ssLife.get(i).setXPos(0);
+				ssLife.get(i).drawObj(10 + (i * 30), 10);
 				currentLife -= 1;
 			} else if (currentLife > 0 && currentLife < 1) {
 				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH + Gap.COLUMGAP);
+				ssLife.get(i).drawObj(10 + (i * 30), 10);
 				currentLife -= 0.5;
 			} else {
 				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH * 2 + Gap.COLUMGAP * 2);
+				ssLife.get(i).drawObj(10 + (i * 30), 10);
 			}
-
 		}
 	}
 
@@ -554,13 +568,20 @@ public class issac extends Player {
 	}
 
 	public void deadMotion() {
-		getApp().remove(ssBody);
-		getApp().remove(ssHead);
+		ssBody.setVisible(false);
+		ssHead.setVisible(false);
+		ssDead.setVisible(true);
 		ssDead.drawObj(getXPlayer(), getYPlayer());
-		getApp().add(ssDead);
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int gap = 51;
 		for (int i = 0; i < 2; i++) {
 			ssDead.setXPos(ssDead.getXPos() + gap * i);
+			ssDead.setWidth(55);
 			ssDead.drawObj(getXPlayer(), getYPlayer());
 		}
 	}
@@ -568,27 +589,65 @@ public class issac extends Player {
 	public void MonsterCheckThread() {
 		new Thread(() -> {
 			while (!isDead()) {
-				for(int i = 0; i<monsters.size();i++) {
-					if(ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds()) ||
-							ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
-						setLife(getLife()-0.5);
+				for (int i = 0; i < monsters.size(); i++) {
+					if (ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
+							|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
+						setLife(getLife() - 1);
+						
+						reDrawLife();
+						if (getLife() == 0)
+							setDead(true);
+						if(!isDead())
+						hitDelayMotion();
+						
 						System.out.println(getLife());
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(2600);
 						} catch (Exception e) {
 							// TODO: handle exception
 						}
 					}
 				}
+			}
+		}).start();
+	}
+
+	public void hitDelayMotion() {
+		new Thread(() -> {
+			ssBody.setVisible(false);
+			ssHead.setVisible(false);
+			ssDead.drawObj(getXPlayer(), getYPlayer());
+			ssDead.setVisible(true);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ssDead.setVisible(false);
+			ssBody.setVisible(true);
+			ssHead.setVisible(true);
+			for (int i = 300; i > 0; i -= 50) {
+				ssBody.setVisible(false);
+				ssHead.setVisible(false);
 				try {
-					Thread.sleep(10);
-				} catch (Exception e) {
-					// TODO: handle exception
+					Thread.sleep(i);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ssBody.setVisible(true);
+				ssHead.setVisible(true);
+				try {
+					Thread.sleep(i);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}).start();
 	}
-	
+
 	public void issacInfoRefresh() {
 		new Thread(() -> {
 			while (connectControl.isIsconnect()) {
@@ -598,7 +657,6 @@ public class issac extends Player {
 				connectControl.getSendMap().put("PlayerStats", getPlayerData());
 				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
 				connectControl.getSendMap().put("intView", getSendViewDirect());
-
 			}
 		}).start();
 	}

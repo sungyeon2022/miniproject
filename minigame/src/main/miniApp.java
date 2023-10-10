@@ -1,14 +1,20 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
@@ -54,6 +60,8 @@ public class miniApp extends JFrame {
 	private ConnectControl connectControl;
 	private TimerControl timerControl;
 	private EnemySwordControl enemySwordControl;
+	private JButton startButton;
+	private SpriteSheet ssButton;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -76,14 +84,15 @@ public class miniApp extends JFrame {
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
 		swordControl = new SwordControl(app, issac, monsters);
-//		enemyIssac = new EnemyIssac(app, walls, items, issac);
-//		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
+		enemyIssac = new EnemyIssac(app, walls, items, issac);
+		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 //		testControl = new TestControl(app, connectControl);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 		timerControl = new TimerControl(app);
-		
+		startButton = new JButton();
+		ssButton = new SpriteSheet("structure/namepaper.png", "Button", 0, 0, 91, 63);
 	}
 
 	// JFrame을 통한 창출력
@@ -94,7 +103,7 @@ public class miniApp extends JFrame {
 		app.setLayout(null);
 		setVisible(true);
 	}
-
+	
 	public void batch() {
 	}
 
@@ -124,7 +133,7 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					swordControl.swordAttackForm();
 					swordControl.setAttackKeyPress(true);
-					enemySwordControl.setEnemyAttackKeyPress(true);
+//					enemySwordControl.setEnemyAttackKeyPress(true);
 				}
 			}
 
@@ -150,7 +159,7 @@ public class miniApp extends JFrame {
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					swordControl.setAttackKeyPress(false);
-					enemySwordControl.setEnemyAttackKeyPress(false);
+//					enemySwordControl.setEnemyAttackKeyPress(false);
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 					System.out.println("s키 떨어짐");
 				}
