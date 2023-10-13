@@ -91,7 +91,7 @@ public class miniApp extends JFrame {
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 		timerControl = new TimerControl(app, connectControl);
-		startButton = new JButton();
+//		startButton = new JButton();
 		ssButton = new SpriteSheet("structure/namepaper.png", "Button", 0, 0, 91, 63);
 	}
 
@@ -104,7 +104,7 @@ public class miniApp extends JFrame {
 		app.setLayout(null);
 		setVisible(true);
 	}
-	
+
 	public void batch() {
 	}
 
@@ -184,13 +184,13 @@ public class miniApp extends JFrame {
 //		}).start();
 //	}
 
-//	public void checkSinormul() {
-//		try {
-//			System.in.read();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void checkSinormul() {
+		try {
+			System.in.read();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
@@ -200,12 +200,30 @@ public class miniApp extends JFrame {
 					if (monsters.get(i).isDead()) {
 						String monName = monsters.get(i).getGUBUN();
 						monsters.remove(i);
-						if (monName.equals("Worm"))
+						if (monName.equals("Worm")) {
+							try {
+								Thread.sleep(3000);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 							monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-						if (monName.equals("Head"))
+						}
+						if (monName.equals("Head")) {
+							try {
+								Thread.sleep(3000);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 							monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-						if (monName.equals("Body"))
+						}
+						if (monName.equals("Body")) {
+							try {
+								Thread.sleep(3000);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 							monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+						}
 					}
 				}
 				try {

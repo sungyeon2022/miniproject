@@ -37,8 +37,8 @@ public class EnemyIssac extends Enemy {
 		init(walls, items, issac, connectControl);
 		setting();
 		batch();
-		moveMotion();
 		ReceiveThread();
+		moveMotion();
 	}
 
 	public void init(Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
@@ -98,13 +98,12 @@ public class EnemyIssac extends Enemy {
 				if (!isEnemyMoveStart()) {
 					setEnemyMoveStart(true);
 					while (true) {
-						if (issac.getViewDirectInfo()[ViewDirect.DOWN]
-								&& issac.getSendViewDirect() == ViewDirect.DOWN) {
+						if (getViewDirectInfo()[ViewDirect.DOWN] && getViewDirect() == ViewDirect.DOWN) {
 							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
 							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5))); // XPos는
 																														// 사진에서
-							if (issac.getSendViewDirect() == ViewDirect.DOWN) {
+							if (getViewDirect() == ViewDirect.DOWN) {
 								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);// X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과
 																						// 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼
@@ -116,12 +115,11 @@ public class EnemyIssac extends Enemy {
 								motion += 1;
 							}
 
-						} else if (issac.getViewDirectInfo()[ViewDirect.LEFT]
-								&& issac.getSendViewDirect() == ViewDirect.LEFT) {
+						} else if (getViewDirectInfo()[ViewDirect.LEFT] && getViewDirect() == ViewDirect.LEFT) {
 							if (motion > 9 * 5)
 								motion = 0;
 							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
-							if (issac.getSendViewDirect() == ViewDirect.LEFT) {
+							if (getViewDirect() == ViewDirect.LEFT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
 								ssBody.setYPos(
 										issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 2 + Gap.ROWGAP * 3);
@@ -131,12 +129,11 @@ public class EnemyIssac extends Enemy {
 								motion += 1;
 							}
 
-						} else if (issac.getViewDirectInfo()[ViewDirect.UP]
-								&& issac.getSendViewDirect() == ViewDirect.UP) {
+						} else if (getViewDirectInfo()[ViewDirect.UP] && getViewDirect() == ViewDirect.UP) {
 							if (motion > 9 * 4)
 								motion = 0;
 							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
-							if (issac.getSendViewDirect() == ViewDirect.UP) {
+							if (getViewDirect() == ViewDirect.UP) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
 								ssHead.drawObj(getXEnemy(), getYEnemy());
@@ -145,12 +142,11 @@ public class EnemyIssac extends Enemy {
 								motion += 1;
 							}
 
-						} else if (issac.getViewDirectInfo()[ViewDirect.RIGHT]
-								&& issac.getSendViewDirect() == ViewDirect.RIGHT) {
+						} else if (getViewDirectInfo()[ViewDirect.RIGHT] && getViewDirect() == ViewDirect.RIGHT) {
 							if (motion > 9 * 4)
 								motion = 0;
 							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
-							if (issac.getSendViewDirect() == ViewDirect.RIGHT) {
+							if (getViewDirect() == ViewDirect.RIGHT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
 								ssHead.drawObj(getXEnemy(), getYEnemy());
@@ -176,16 +172,16 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void refreshDirect() {
-		if (isDown()) {
+		if (getViewDirectInfo()[ViewDirect.DOWN]) {
 			setViewDirect(ViewDirect.DOWN);
 		}
-		if (isLeft()) {
+		if (getViewDirectInfo()[ViewDirect.LEFT]) {
 			setViewDirect(ViewDirect.LEFT);
 		}
-		if (isUp()) {
+		if (getViewDirectInfo()[ViewDirect.UP]) {
 			setViewDirect(ViewDirect.UP);
 		}
-		if (isRight()) {
+		if (getViewDirectInfo()[ViewDirect.RIGHT]) {
 			setViewDirect(ViewDirect.RIGHT);
 		}
 	}
@@ -209,14 +205,20 @@ public class EnemyIssac extends Enemy {
 	public void ReceiveThread() {
 		new Thread(() -> {
 			while (!isDead()) {
-				setXEnemy(
-						960 - issac.getXPlayer() - issacSize.issacHEADWIDTH - issacSize.issacBODYWIDTH + xPlusBody + 1);
-				setYEnemy(640 - issac.getYPlayer() - (issacSize.issacBODYHEIGHT + issacSize.issacHEADHEIGHT) * 2
-						+ issacSize.issacBODYHEIGHT);
-				setViewDirect(issac.getSendViewDirect());
-				try {
-					Thread.sleep(movespeed);
-				} catch (Exception e) {
+				System.out.println(connectControl.getReciveMap());
+				if (!connectControl.getReciveMap().isEmpty()) {
+					setXEnemy(960 - (int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
+							- issacSize.issacBODYWIDTH + xPlusBody + 1);
+					setYEnemy(640 - (int) connectControl.getReciveMap().get("PlayerY")
+							- (issacSize.issacBODYHEIGHT + issacSize.issacHEADHEIGHT) * 2 + issacSize.issacBODYHEIGHT);
+					setViewDirect((int) connectControl.getReciveMap().get("intView"));
+					setViewDirectInfo(((boolean[]) connectControl.getReciveMap().get("booleanView")));
+				} else {
+					try {
+						Thread.sleep(10);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
 			}
 		}).start();

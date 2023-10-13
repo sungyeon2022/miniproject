@@ -12,7 +12,6 @@ public class Enemy extends Lombok {
 	private final static String GUBUN="enemy";
 	private double life=5;//생명,최대 생명
 	private double maxlife=8;
-	private boolean isUp, isDown, isRight, isLeft;
 	private double attackDamage; //공격 데미지
 	private int viewDirect;
 	private int xEnemy, yEnemy;
@@ -21,13 +20,10 @@ public class Enemy extends Lombok {
 	private SwordControl swordControl;
 	private boolean EnemyMoveStart;
 	private boolean isRock;
+	private boolean[] viewDirectInfo = new boolean[4];
 	
 	public Enemy(JFrame app) {
 		this.app = app;
-		this.isUp = false;
-		this.isDown = false;
-		this.isRight = false;
-		this.isLeft = false;
 		this.isRock = false;
 		this.dead = false;
 		

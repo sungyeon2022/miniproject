@@ -10332,3 +10332,820 @@ java.lang.NullPointerException
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2023-10-13 16:24:45.452
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): Boolean.class [in java.lang [in <module:java.base>]] does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:574)
+	at org.eclipse.jdt.internal.core.ClassFile.getBinaryTypeInfo(ClassFile.java:203)
+	at org.eclipse.jdt.internal.core.ClassFile.buildStructure(ClassFile.java:92)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:328)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:314)
+	at org.eclipse.jdt.internal.core.Openable.getBuffer(Openable.java:296)
+	at org.eclipse.jdt.internal.core.AbstractClassFile.getBuffer(AbstractClassFile.java:245)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContentFromSource(JavadocContentAccess2.java:640)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:521)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:93)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:78)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:63)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:583)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$Timer$2$1.run(AdditionalInfoController.java:116)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2023-10-13 16:24:45.453
+!MESSAGE Boolean.class [in java.lang [in <module:java.base>]] does not exist
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2023-10-13 16:24:46.929
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): Boolean.class [in java.lang [in <module:java.base>]] does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:574)
+	at org.eclipse.jdt.internal.core.ClassFile.getBinaryTypeInfo(ClassFile.java:203)
+	at org.eclipse.jdt.internal.core.ClassFile.buildStructure(ClassFile.java:92)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:328)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:314)
+	at org.eclipse.jdt.internal.core.Openable.getBuffer(Openable.java:296)
+	at org.eclipse.jdt.internal.core.AbstractClassFile.getBuffer(AbstractClassFile.java:245)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContentFromSource(JavadocContentAccess2.java:640)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:521)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:93)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:78)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:63)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:583)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$Timer$2$1.run(AdditionalInfoController.java:116)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2023-10-13 16:24:46.929
+!MESSAGE Boolean.class [in java.lang [in <module:java.base>]] does not exist
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2023-10-13 16:24:50.718
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): Boolean.class [in java.lang [in <module:java.base>]] does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:574)
+	at org.eclipse.jdt.internal.core.ClassFile.getBinaryTypeInfo(ClassFile.java:203)
+	at org.eclipse.jdt.internal.core.ClassFile.buildStructure(ClassFile.java:92)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:328)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:314)
+	at org.eclipse.jdt.internal.core.Openable.getBuffer(Openable.java:296)
+	at org.eclipse.jdt.internal.core.AbstractClassFile.getBuffer(AbstractClassFile.java:245)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContentFromSource(JavadocContentAccess2.java:640)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:521)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:93)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:78)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:63)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:583)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$Timer$2$1.run(AdditionalInfoController.java:116)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2023-10-13 16:24:50.718
+!MESSAGE Boolean.class [in java.lang [in <module:java.base>]] does not exist
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2023-10-13 16:25:39.366
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): Boolean.class [in java.lang [in <module:java.base>]] does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:574)
+	at org.eclipse.jdt.internal.core.ClassFile.getBinaryTypeInfo(ClassFile.java:203)
+	at org.eclipse.jdt.internal.core.ClassFile.buildStructure(ClassFile.java:92)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:328)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:314)
+	at org.eclipse.jdt.internal.core.Openable.getBuffer(Openable.java:296)
+	at org.eclipse.jdt.internal.core.AbstractClassFile.getBuffer(AbstractClassFile.java:245)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContentFromSource(JavadocContentAccess2.java:640)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:521)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:93)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:78)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:63)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:583)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$Timer$2$1.run(AdditionalInfoController.java:116)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2023-10-13 16:25:39.366
+!MESSAGE Boolean.class [in java.lang [in <module:java.base>]] does not exist
+
+!ENTRY org.eclipse.jdt.core 4 4 2023-10-13 16:40:46.277
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package enemy;
+
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+import SpriteSheet.SpriteSheet;
+import connect.ConnectControl;
+import imgSize.*;
+import lombok.Data;
+import objectSetting.ViewDirect;
+import wall.*;
+import item.*;
+import player.*;
+
+@Data
+
+public class EnemyIssac extends Enemy {
+	private final static String TAG = "issac: ";
+	private ConnectControl connectControl;
+	private SpriteSheet ssHead, ssBody;
+	private SpriteSheet ssTotal;
+	private Vector<SpriteSheet> ssLife;
+	private int xPlusBody = 8, yPlusBody = 30;
+	private issac issac;
+	private int movespeed = 5;
+	// 상하 좌우 이동 모션
+	// 개수 및 수치 표시용 레이블 + 변수 선언 및 초기화
+	private int bombCount = 0;
+	private int speedNum = 11;
+	private int powerNum = 1;
+	private int attackspeedNum = 1;
+
+	public EnemyIssac(JFrame app, Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
+		super(app);
+		System.out.println(TAG + "make issac");
+		init(walls, items, issac, connectControl);
+		setting();
+		batch();
+		ReceiveThread();
+		moveMotion();
+	}
+
+	public void init(Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
+		this.issac = issac;
+		this.connectControl = connectControl;
+		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,
+				issacSize.issacHEADHEIGHT);
+		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
+				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
+		ssLife = new Vector<SpriteSheet>();
+		for (int i = 0; i < getLife(); i++) {
+			this.ssLife.add(i,
+					new SpriteSheet("issac/life.png", "life", 0, 0, Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
+		}
+		for (int i = (int) getLife(); i < getMaxlife(); i++) {
+			this.ssLife.add(new SpriteSheet("issac/life.png", "life", Lifesize.LIFEWIDTH * 2 + Gap.COLUMGAP * 2, 0,
+					Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
+		}
+	}
+
+	public void setting() {
+		setViewDirect(ViewDirect.DOWN);
+		setXEnemy(449);
+		setYEnemy(110);
+		setAttackDamage(1);
+		setLife(3);
+		setXEnemyCenter(getXEnemy() + issacSize.issacHEADWIDTH / 2);
+		setYEnemyCenter(getYEnemy() + issacSize.issacHEADHEIGHT);
+		ssHead.drawObj(getXEnemy(), getYEnemy());
+		ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+		for (int i = 0; i < getMaxlife(); i++) {
+			if (i <= getLife()) {
+				ssLife.get(i).drawObj(680 + (i * 30), 10);
+			} else {
+				ssLife.get(i).drawObj(680 + (i * 30), 10);
+			}
+
+		}
+	}
+
+	public void batch() {
+		getApp().add(ssHead, 0);
+		getApp().add(ssBody, 1);
+		// 폭탄 파워 속도 레이블 추가
+		for (int i = 0; i < getMaxlife(); i++) {
+			getApp().add(ssLife.get(i), 1);
+		}
+	}
+
+	@Override
+	public void moveMotion() { // 움직이는 동작중 이미지 갱신
+		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int motion = 0;
+				if (!isEnemyMoveStart()) {
+					setEnemyMoveStart(true);
+					while (true) {
+						if (getViewDirectInfo()[ViewDirect.DOWN]
+								&& getViewDirect() == ViewDirect.DOWN) {
+							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
+								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5))); // XPos는
+																														// 사진에서
+							if (getViewDirect() == ViewDirect.DOWN) {
+								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
+								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);// X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과
+																						// 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼
+																						// 더해서 좌표값을 내려줍니다
+								ssHead.drawObj(getXEnemy(), getYEnemy()); // 그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);// X와Y좌표를 기준으로 머리를
+																									// 생성하고 머리와 몸이 겹치지
+																									// // 않게하기위해 사용합니다.
+								motion += 1;
+							}
+
+						} else if (getViewDirectInfo()[ViewDirect.LEFT]
+								&& getViewDirect() == ViewDirect.LEFT) {
+							if (motion > 9 * 5)
+								motion = 0;
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
+							if (getViewDirect() == ViewDirect.LEFT) {
+								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
+								ssBody.setYPos(
+										issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 2 + Gap.ROWGAP * 3);
+								ssHead.drawObj(getXEnemy(), getYEnemy());
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+
+								motion += 1;
+							}
+
+						} else if (getViewDirectInfo()[ViewDirect.UP]
+								&& getViewDirect() == ViewDirect.UP) {
+							if (motion > 9 * 4)
+								motion = 0;
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
+							if (getViewDirect() == ViewDirect.UP) {
+								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
+								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
+								ssHead.drawObj(getXEnemy(), getYEnemy());
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+
+								motion += 1;
+							}
+
+						} else if (getViewDirectInfo()[ViewDirect.RIGHT]
+								&& getViewDirect() == ViewDirect.RIGHT) {
+							if (motion > 9 * 4)
+								motion = 0;
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
+							if (getViewDirect() == ViewDirect.RIGHT) {
+								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
+								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
+								ssHead.drawObj(getXEnemy(), getYEnemy());
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+								motion += 1;
+							}
+
+						} else {
+							ssBody.setXPos(0);
+							ssHead.drawObj(getXEnemy(), getYEnemy());
+							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+						}
+						try {
+							Thread.sleep(movespeed);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+
+				}
+			}
+		}).start();
+	}
+
+	public void refreshDirect() {
+		if (getViewDirectInfo()[ViewDirect.DOWN]) {
+			setViewDirect(ViewDirect.DOWN);
+		}
+		if (getViewDirectInfo()[ViewDirect.LEFT]) {
+			setViewDirect(ViewDirect.LEFT);
+		}
+		if (getViewDirectInfo()[ViewDirect.UP]) {
+			setViewDirect(ViewDirect.UP);
+		}
+		if (getViewDirectInfo()[ViewDirect.RIGHT]) {
+			setViewDirect(ViewDirect.RIGHT);
+		}
+	}
+
+	public void reDrawLife() {
+		double currentLife = getLife();
+		for (int i = 0; i < getMaxlife(); i++) {
+			if (currentLife >= 1) {
+				ssLife.get(i).setXPos(0);
+				currentLife -= 1;
+			} else if (currentLife > 0 && currentLife < 1) {
+				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH + Gap.COLUMGAP);
+				currentLife -= 0.5;
+			} else {
+				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH * 2 + Gap.COLUMGAP * 2);
+			}
+
+		}
+	}
+
+	public void ReceiveThread() {
+		new Thread(() -> {
+			while (!isDead()) {
+				get
+				setXEnemy(
+						960 - (int)connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH - issacSize.issacBODYWIDTH + xPlusBody + 1);
+				setYEnemy(640 - (int)connectControl.getReciveMap().get("PlayerY") - (issacSize.issacBODYHEIGHT + issacSize.issacHEADHEIGHT) * 2
+						+ issacSize.issacBODYHEIGHT);
+				setViewDirect((int) connectControl.getReciveMap().get("intView"));
+				setViewDirectInfo(((boolean[])connectControl.getReciveMap().get("booleanView"))); 
+				
+			}
+		}).start();
+	}
+	// 주변 아이템 여부 체크
+
+}
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3919)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3079)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3570)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3153)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2624)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2068)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:849)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1969)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2557)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2059)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3456)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:584)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1148)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1325)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2023-10-13 16:40:46.278
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3919)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3079)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3570)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3153)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2624)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2068)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:849)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1969)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2557)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2059)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3456)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:584)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1148)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1325)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2023-10-13 16:40:46.279
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3919)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3079)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3570)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3153)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2624)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2068)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:849)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1969)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2557)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2059)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3456)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:584)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1148)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1325)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.core 4 4 2023-10-13 16:40:46.306
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package enemy;
+
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+import SpriteSheet.SpriteSheet;
+import connect.ConnectControl;
+import imgSize.*;
+import lombok.Data;
+import objectSetting.ViewDirect;
+import wall.*;
+import item.*;
+import player.*;
+
+@Data
+
+public class EnemyIssac extends Enemy {
+	private final static String TAG = "issac: ";
+	private ConnectControl connectControl;
+	private SpriteSheet ssHead, ssBody;
+	private SpriteSheet ssTotal;
+	private Vector<SpriteSheet> ssLife;
+	private int xPlusBody = 8, yPlusBody = 30;
+	private issac issac;
+	private int movespeed = 5;
+	// 상하 좌우 이동 모션
+	// 개수 및 수치 표시용 레이블 + 변수 선언 및 초기화
+	private int bombCount = 0;
+	private int speedNum = 11;
+	private int powerNum = 1;
+	private int attackspeedNum = 1;
+
+	public EnemyIssac(JFrame app, Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
+		super(app);
+		System.out.println(TAG + "make issac");
+		init(walls, items, issac, connectControl);
+		setting();
+		batch();
+		ReceiveThread();
+		moveMotion();
+	}
+
+	public void init(Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
+		this.issac = issac;
+		this.connectControl = connectControl;
+		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,
+				issacSize.issacHEADHEIGHT);
+		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
+				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
+		ssLife = new Vector<SpriteSheet>();
+		for (int i = 0; i < getLife(); i++) {
+			this.ssLife.add(i,
+					new SpriteSheet("issac/life.png", "life", 0, 0, Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
+		}
+		for (int i = (int) getLife(); i < getMaxlife(); i++) {
+			this.ssLife.add(new SpriteSheet("issac/life.png", "life", Lifesize.LIFEWIDTH * 2 + Gap.COLUMGAP * 2, 0,
+					Lifesize.LIFEWIDTH, Lifesize.LIFEHEIGHT));
+		}
+	}
+
+	public void setting() {
+		setViewDirect(ViewDirect.DOWN);
+		setXEnemy(449);
+		setYEnemy(110);
+		setAttackDamage(1);
+		setLife(3);
+		setXEnemyCenter(getXEnemy() + issacSize.issacHEADWIDTH / 2);
+		setYEnemyCenter(getYEnemy() + issacSize.issacHEADHEIGHT);
+		ssHead.drawObj(getXEnemy(), getYEnemy());
+		ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+		for (int i = 0; i < getMaxlife(); i++) {
+			if (i <= getLife()) {
+				ssLife.get(i).drawObj(680 + (i * 30), 10);
+			} else {
+				ssLife.get(i).drawObj(680 + (i * 30), 10);
+			}
+
+		}
+	}
+
+	public void batch() {
+		getApp().add(ssHead, 0);
+		getApp().add(ssBody, 1);
+		// 폭탄 파워 속도 레이블 추가
+		for (int i = 0; i < getMaxlife(); i++) {
+			getApp().add(ssLife.get(i), 1);
+		}
+	}
+
+	@Override
+	public void moveMotion() { // 움직이는 동작중 이미지 갱신
+		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int motion = 0;
+				if (!isEnemyMoveStart()) {
+					setEnemyMoveStart(true);
+					while (true) {
+						if (getViewDirectInfo()[ViewDirect.DOWN]
+								&& getViewDirect() == ViewDirect.DOWN) {
+							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
+								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5))); // XPos는
+																														// 사진에서
+							if (getViewDirect() == ViewDirect.DOWN) {
+								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
+								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);// X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과
+																						// 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼
+																						// 더해서 좌표값을 내려줍니다
+								ssHead.drawObj(getXEnemy(), getYEnemy()); // 그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);// X와Y좌표를 기준으로 머리를
+																									// 생성하고 머리와 몸이 겹치지
+																									// // 않게하기위해 사용합니다.
+								motion += 1;
+							}
+
+						} else if (getViewDirectInfo()[ViewDirect.LEFT]
+								&& getViewDirect() == ViewDirect.LEFT) {
+							if (motion > 9 * 5)
+								motion = 0;
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
+							if (getViewDirect() == ViewDirect.LEFT) {
+								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
+								ssBody.setYPos(
+										issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 2 + Gap.ROWGAP * 3);
+								ssHead.drawObj(getXEnemy(), getYEnemy());
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+
+								motion += 1;
+							}
+
+						} else if (getViewDirectInfo()[ViewDirect.UP]
+								&& getViewDirect() == ViewDirect.UP) {
+							if (motion > 9 * 4)
+								motion = 0;
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
+							if (getViewDirect() == ViewDirect.UP) {
+								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
+								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
+								ssHead.drawObj(getXEnemy(), getYEnemy());
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+
+								motion += 1;
+							}
+
+						} else if (getViewDirectInfo()[ViewDirect.RIGHT]
+								&& getViewDirect() == ViewDirect.RIGHT) {
+							if (motion > 9 * 4)
+								motion = 0;
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
+							if (getViewDirect() == ViewDirect.RIGHT) {
+								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
+								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
+								ssHead.drawObj(getXEnemy(), getYEnemy());
+								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+								motion += 1;
+							}
+
+						} else {
+							ssBody.setXPos(0);
+							ssHead.drawObj(getXEnemy(), getYEnemy());
+							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+						}
+						try {
+							Thread.sleep(movespeed);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+
+				}
+			}
+		}).start();
+	}
+
+	public void refreshDirect() {
+		if (getViewDirectInfo()[ViewDirect.DOWN]) {
+			setViewDirect(ViewDirect.DOWN);
+		}
+		if (getViewDirectInfo()[ViewDirect.LEFT]) {
+			setViewDirect(ViewDirect.LEFT);
+		}
+		if (getViewDirectInfo()[ViewDirect.UP]) {
+			setViewDirect(ViewDirect.UP);
+		}
+		if (getViewDirectInfo()[ViewDirect.RIGHT]) {
+			setViewDirect(ViewDirect.RIGHT);
+		}
+	}
+
+	public void reDrawLife() {
+		double currentLife = getLife();
+		for (int i = 0; i < getMaxlife(); i++) {
+			if (currentLife >= 1) {
+				ssLife.get(i).setXPos(0);
+				currentLife -= 1;
+			} else if (currentLife > 0 && currentLife < 1) {
+				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH + Gap.COLUMGAP);
+				currentLife -= 0.5;
+			} else {
+				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH * 2 + Gap.COLUMGAP * 2);
+			}
+
+		}
+	}
+
+	public void ReceiveThread() {
+		new Thread(() -> {
+			while (!isDead()) {
+				get
+				setXEnemy(
+						960 - (int)connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH - issacSize.issacBODYWIDTH + xPlusBody + 1);
+				setYEnemy(640 - (int)connectControl.getReciveMap().get("PlayerY") - (issacSize.issacBODYHEIGHT + issacSize.issacHEADHEIGHT) * 2
+						+ issacSize.issacBODYHEIGHT);
+				setViewDirect((int) connectControl.getReciveMap().get("intView"));
+				setViewDirectInfo(((boolean[])connectControl.getReciveMap().get("booleanView"))); 
+				
+			}
+		}).start();
+	}
+	// 주변 아이템 여부 체크
+
+}
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3919)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3079)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3570)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3153)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2624)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2068)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:849)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1969)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2557)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2059)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3456)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:344)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1272)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:294)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:286)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:199)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:189)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2023-10-13 16:40:46.307
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3919)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3079)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3570)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3153)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2624)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2068)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:849)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1969)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2557)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2059)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3456)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:344)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1272)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:294)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:286)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:199)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:189)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2023-10-13 16:40:46.308
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3919)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3079)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3570)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3153)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2624)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2068)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:849)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1969)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2557)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2059)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3161)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3456)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:344)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1272)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:294)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:286)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:199)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:189)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
