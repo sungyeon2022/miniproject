@@ -69,7 +69,7 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
-		checkUsedMomory();
+//		checkUsedMomory();
 		monsterDeadCheck();
 	}
 
@@ -169,20 +169,20 @@ public class miniApp extends JFrame {
 		});
 	}
 
-	public void checkUsedMomory() {
-		new Thread(() -> {
-			while (true) {
-				Runtime.getRuntime().gc();
-				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-				System.out.println(usedMemory);
-				try {
-					Thread.sleep(1000);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
-		}).start();
-	}
+//	public void checkUsedMomory() {
+//		new Thread(() -> {
+//			while (true) {
+//				Runtime.getRuntime().gc();
+//				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+//				System.out.println(usedMemory);
+//				try {
+//					Thread.sleep(1000);
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+//			}
+//		}).start();
+//	}
 
 //	public void checkSinormul() {
 //		try {

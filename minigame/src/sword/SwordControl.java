@@ -53,8 +53,10 @@ public class SwordControl extends Sword {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (true) {
-					if (!isSwordAttacking()) {
+				while (!isSwordAttacking()) {
+					if (isSwordAttacking())
+						break;
+					else {
 						if (issac.getViewDirect() == ViewDirect.LEFT) {
 							swordControl.getSsSword().setUrl("sword/sword_left.png");
 							swordControl.getSsSword().setXPos(
@@ -100,8 +102,9 @@ public class SwordControl extends Sword {
 							}
 
 						}
-						if(issac.isDead()) ssSword.setVisible(false);
-					}else break;
+						if (issac.isDead())
+							ssSword.setVisible(false);
+					}
 					try {
 						Thread.sleep(issac.getMoveSpeed());
 					} catch (Exception e) {
@@ -225,7 +228,7 @@ public class SwordControl extends Sword {
 			public void run() {
 				while (!issac.isDead()) {
 					boolean ismonster = false;
-					if (isSwordAttacking()||monsters.isEmpty())
+					if (isSwordAttacking() || monsters.isEmpty())
 						break;
 					for (int i = 0; i < monsters.size(); i++) {
 						if (swordControl.getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
@@ -254,7 +257,7 @@ public class SwordControl extends Sword {
 	}
 
 	public void swingAttack() {
-		if (isSwordAttacking()&&!monsters.isEmpty()) {
+		if (isSwordAttacking() && !monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
 				if (swordControl.getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
 					monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
