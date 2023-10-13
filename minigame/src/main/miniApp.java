@@ -99,6 +99,7 @@ public class miniApp extends JFrame {
 	public void setting() {
 		app.setTitle("betaapp");
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		app.setResizable(false);
 		app.setLocationRelativeTo(null);
 		app.setLayout(null);
 		setVisible(true);
@@ -183,13 +184,13 @@ public class miniApp extends JFrame {
 		}).start();
 	}
 
-	public void checkSinormul() {
-		try {
-			System.in.read();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public void checkSinormul() {
+//		try {
+//			System.in.read();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
@@ -205,7 +206,6 @@ public class miniApp extends JFrame {
 							monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 						if (monName.equals("Body"))
 							monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-						
 					}
 				}
 				try {

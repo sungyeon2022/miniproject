@@ -1,7 +1,5 @@
 package sword;
 
-import java.io.ObjectInputStream;
-import java.util.Vector;
 import javax.swing.JFrame;
 import SpriteSheet.SpriteSheet;
 import enemy.EnemyIssac;
@@ -9,7 +7,6 @@ import imgSize.SwordMotionSize;
 import imgSize.SwordSize;
 import objectSetting.*;
 import lombok.Data;
-import monster.Monster;
 import player.issac;
 
 @Data

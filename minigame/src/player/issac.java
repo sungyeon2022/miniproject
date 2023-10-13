@@ -1,33 +1,14 @@
 package player;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.io.File;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Vector;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageTranscoder;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.xml.stream.events.StartDocument;
 
-import player.Player;
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
-import connect.Connect;
 import connect.ConnectControl;
-//import enemy.EnemyIssac;
+
 import imgSize.*;
 import lombok.Data;
 import monster.Monster;
@@ -75,7 +56,7 @@ public class issac extends Player {
 		init(monsters, walls, items, connectControl);
 		setting();
 		batch();
-		issacInfoRefresh();
+//		issacInfoRefresh();
 		moveMotion();
 		MonsterCheckThread();
 	}
@@ -91,10 +72,10 @@ public class issac extends Player {
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssDead = new SpriteSheet("issac/issac.png", "issacDead", 63, 215, 42, 48);
 		// 레이블 초기화
-		labomb = new JLabel(Integer.toString(bombCount));
-		laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
-		lapower = new JLabel(Integer.toString(powerNum));
-		laattackspeed = new JLabel(Integer.toString(attackspeedNum));
+//		labomb = new JLabel(Integer.toString(bombCount));
+//		laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
+//		lapower = new JLabel(Integer.toString(powerNum));
+//		laattackspeed = new JLabel(Integer.toString(attackspeedNum));
 		ssLife = new Vector<SpriteSheet>();
 		for (int i = 0; i < getLife(); i++) {
 			this.ssLife.add(i,
@@ -118,25 +99,25 @@ public class issac extends Player {
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 		// 폭탄 레이블 설정
-		labomb.setSize(30, 30);
-		labomb.setLocation(65, 50);
-		labomb.setFont(new Font("바탕", Font.ITALIC, 25));
-		labomb.setForeground(Color.WHITE);
+//		labomb.setSize(30, 30);
+//		labomb.setLocation(65, 50);
+//		labomb.setFont(new Font("바탕", Font.ITALIC, 25));
+//		labomb.setForeground(Color.WHITE);
 		// 속도 레이블 설정
-		lapower.setSize(30, 30);
-		lapower.setLocation(65, 85);
-		lapower.setFont(new Font("바탕", Font.ITALIC, 25));
-		lapower.setForeground(Color.WHITE);
+//		lapower.setSize(30, 30);
+//		lapower.setLocation(65, 85);
+//		lapower.setFont(new Font("바탕", Font.ITALIC, 25));
+//		lapower.setForeground(Color.WHITE);
 		// 속도 레이블 설정
-		laspeed.setSize(40, 30);
-		laspeed.setLocation(65, 120);
-		laspeed.setFont(new Font("바탕", Font.ITALIC, 25));
-		laspeed.setForeground(Color.WHITE);
+//		laspeed.setSize(40, 30);
+//		laspeed.setLocation(65, 120);
+//		laspeed.setFont(new Font("바탕", Font.ITALIC, 25));
+//		laspeed.setForeground(Color.WHITE);
 		// 공속 레이블 설정
-		laattackspeed.setSize(40, 30);
-		laattackspeed.setLocation(65, 155);
-		laattackspeed.setFont(new Font("바탕", Font.ITALIC, 25));
-		laattackspeed.setForeground(Color.WHITE);
+//		laattackspeed.setSize(40, 30);
+//		laattackspeed.setLocation(65, 155);
+//		laattackspeed.setFont(new Font("바탕", Font.ITALIC, 25));
+//		laattackspeed.setForeground(Color.WHITE);
 
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (i <= getLife()) {
@@ -153,10 +134,10 @@ public class issac extends Player {
 		getApp().add(ssBody, 1);
 		getApp().add(ssDead, 2);
 		// 폭탄 파워 속도 레이블 추가
-		getApp().add(labomb);
-		getApp().add(lapower);
-		getApp().add(laspeed);
-		getApp().add(laattackspeed);
+//		getApp().add(labomb);
+//		getApp().add(lapower);
+//		getApp().add(laspeed);
+//		getApp().add(laattackspeed);
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
 		}
@@ -194,7 +175,6 @@ public class issac extends Player {
 								}
 							}
 						}
-						getItem();
 						if (isrock)
 							break;
 						// 돌 충돌 체크 끝
@@ -257,7 +237,6 @@ public class issac extends Player {
 							}
 						}
 						// 돌 충돌 체크 끝
-						getItem();
 						if (isrock)
 							break;
 						setXPlayer(getXPlayer() - 1);
@@ -308,7 +287,6 @@ public class issac extends Player {
 								}
 							}
 						}
-						getItem();
 						if (isrock)
 							break;
 						// 돌 충돌 체크 끝
@@ -357,7 +335,6 @@ public class issac extends Player {
 								}
 							}
 						}
-						getItem();
 						// 돌 충돌 체크 끝
 						if (isrock)
 							break;
@@ -378,7 +355,7 @@ public class issac extends Player {
 	}
 
 	@Override
-	public synchronized void moveMotion() { // 움직이는 동작중 이미지 갱신
+	public void moveMotion() { // 움직이는 동작중 이미지 갱신
 		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
 		// 상시작동 & 상태 검사
 		new Thread(new Runnable() {
@@ -389,9 +366,9 @@ public class issac extends Player {
 					setPlayerMoveStart(true);
 					while (!isDead()) {
 						if (isDown() && getViewDirect() == ViewDirect.DOWN) {
-							if (motion > 9 * 4) // 상하좌우 방향 모션 개수와 동일 0~9 10개
+							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4))); // XPos는
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5))); // XPos는
 																														// 사진에서
 							if (getViewDirect() == ViewDirect.DOWN) {
 								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
@@ -406,9 +383,9 @@ public class issac extends Player {
 								motion += 1;
 							}
 						} else if (isLeft() && getViewDirect() == ViewDirect.LEFT) {
-							if (motion > 9 * 4)
+							if (motion > 9 * 5)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
 							if (getViewDirect() == ViewDirect.LEFT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
 								ssBody.setYPos(
@@ -419,9 +396,9 @@ public class issac extends Player {
 							}
 
 						} else if (isUp() && getViewDirect() == ViewDirect.UP) {
-							if (motion > 9 * 4)
+							if (motion > 9 * 5)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
 							if (getViewDirect() == ViewDirect.UP) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
@@ -431,9 +408,9 @@ public class issac extends Player {
 							}
 
 						} else if (isRight() && getViewDirect() == ViewDirect.RIGHT) {
-							if (motion > 9 * 4)
+							if (motion > 9 * 5)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
 							if (getViewDirect() == ViewDirect.RIGHT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
@@ -503,69 +480,69 @@ public class issac extends Player {
 	}
 
 	// 아이템 획득 종류 확인
-	public void getItem() {
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).isDrop()) {
-				if (nearItemCheck(items.get(i))) {
-					items.get(i).setDrop(false);
-					// Gubun String이 "bomb" 일때
-					int luck = (int) (Math.random() * 2);
-
-					if (items.get(i).getSsItem().getGubun() == "bomb") {
-						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-						if (luck == 1) {
-							bombCount += 1;
-							labomb.setText(Integer.toString(bombCount));
-						} else if (luck == 0) {
-							bombCount -= 1;
-							labomb.setText(Integer.toString(bombCount));
-						} // Gubun String이 "Power" 일때
-					} else if (items.get(i).getSsItem().getGubun() == "Power") {
-						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-						if (luck == 1) {
-
-							powerNum += 2;
-							lapower.setText(Integer.toString(powerNum));
-
-						} else if (luck == 0) {
-							powerNum--;
-							lapower.setText(Integer.toString(powerNum));
-
-						}
-						// Gubun String이 "Speed" 일때
-					} else if (items.get(i).getSsItem().getGubun() == "Speed") {
-						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-						if (luck == 1) {
-
-							moveSpeed += 3;
-							laspeed.setText(Integer.toString(speedNum - moveSpeed));
-
-						} else if (luck == 0) {
-							moveSpeed--;
-							laspeed.setText(Integer.toString(speedNum - moveSpeed));
-
-						}
-					} else if (items.get(i).getSsItem().getGubun() == "AttackSpeed") {
-						if (luck == 1) {
-
-							attackspeedNum += 2;
-							laattackspeed.setText(Integer.toString(attackspeedNum));
-
-						} else if (luck == 0) {
-							attackspeedNum--;
-							laattackspeed.setText(Integer.toString(attackspeedNum));
-
-						}
-					}
-					System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-					getApp().remove(items.get(i).getSsItem());
-					getApp().repaint();
-
-				}
-			}
-
-		}
-	}
+//	public void getItem() {
+//		for (int i = 0; i < items.size(); i++) {
+//			if (items.get(i).isDrop()) {
+//				if (nearItemCheck(items.get(i))) {
+//					items.get(i).setDrop(false);
+//					// Gubun String이 "bomb" 일때
+//					int luck = (int) (Math.random() * 2);
+//
+//					if (items.get(i).getSsItem().getGubun() == "bomb") {
+//						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
+//						if (luck == 1) {
+//							bombCount += 1;
+//							labomb.setText(Integer.toString(bombCount));
+//						} else if (luck == 0) {
+//							bombCount -= 1;
+//							labomb.setText(Integer.toString(bombCount));
+//						} // Gubun String이 "Power" 일때
+//					} else if (items.get(i).getSsItem().getGubun() == "Power") {
+//						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
+//						if (luck == 1) {
+//
+//							powerNum += 2;
+//							lapower.setText(Integer.toString(powerNum));
+//
+//						} else if (luck == 0) {
+//							powerNum--;
+//							lapower.setText(Integer.toString(powerNum));
+//
+//						}
+//						// Gubun String이 "Speed" 일때
+//					} else if (items.get(i).getSsItem().getGubun() == "Speed") {
+//						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
+//						if (luck == 1) {
+//
+//							moveSpeed += 3;
+//							laspeed.setText(Integer.toString(speedNum - moveSpeed));
+//
+//						} else if (luck == 0) {
+//							moveSpeed--;
+//							laspeed.setText(Integer.toString(speedNum - moveSpeed));
+//
+//						}
+//					} else if (items.get(i).getSsItem().getGubun() == "AttackSpeed") {
+//						if (luck == 1) {
+//
+//							attackspeedNum += 2;
+//							laattackspeed.setText(Integer.toString(attackspeedNum));
+//
+//						} else if (luck == 0) {
+//							attackspeedNum--;
+//							laattackspeed.setText(Integer.toString(attackspeedNum));
+//
+//						}
+//					}
+//					System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
+//					getApp().remove(items.get(i).getSsItem());
+//					getApp().repaint();
+//
+//				}
+//			}
+//
+//		}
+//	}
 
 	public void deadMotion() {
 		ssBody.setVisible(false);
@@ -648,16 +625,16 @@ public class issac extends Player {
 		}).start();
 	}
 
-	public void issacInfoRefresh() {
-		new Thread(() -> {
-			while (connectControl.isIsconnect()) {
-				setPlayerData(new double[] { getAttackDamage(), getLife(), getMoveSpeed() });
-				connectControl.getSendMap().put("PlayerX", 960 - getXPlayer());
-				connectControl.getSendMap().put("PlayerY", 640 - getYPlayer());
-				connectControl.getSendMap().put("PlayerStats", getPlayerData());
-				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
-				connectControl.getSendMap().put("intView", getSendViewDirect());
-			}
-		}).start();
-	}
+//	public void issacInfoRefresh() {
+//		new Thread(() -> {
+//			while (connectControl.isIsconnect()) {
+//				setPlayerData(new double[] { getAttackDamage(), getLife(), getMoveSpeed() });
+//				connectControl.getSendMap().put("PlayerX", 960 - getXPlayer());
+//				connectControl.getSendMap().put("PlayerY", 640 - getYPlayer());
+//				connectControl.getSendMap().put("PlayerStats", getPlayerData());
+//				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
+//				connectControl.getSendMap().put("intView", getSendViewDirect());
+//			}
+//		}).start();
+//	}
 }

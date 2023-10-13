@@ -59,7 +59,7 @@ public class ConnectControl extends Connect {
 					try {
 						getMyObjectOutputStream().writeObject(getSendMap());
 						getMyObjectOutputStream().reset();
-						Thread.sleep(100);
+						Thread.sleep(20);
 					} catch (IOException | InterruptedException e) {
 						System.out.println("서버 강제 종료");
 						setIsconnect(false);
@@ -78,9 +78,7 @@ public class ConnectControl extends Connect {
 				while (true) {
 					if (isIsconnect()) {
 						try {
-							System.out.println("작동중");
 							setReceiveObject(getMyObjectInputStream().readObject());
-							System.out.println(Arrays.toString((int[])((HashMap<String, Object>)getReceiveObject()).get("PlayerXY")));
 						} catch (IOException | ClassNotFoundException e) {
 							System.out.println("서버 닫힘");
 							setIsconnect(false);

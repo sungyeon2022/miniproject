@@ -1,23 +1,26 @@
 package test;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.border.LineBorder;
+import javax.swing.JLabel;
 
 import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
-import objectSetting.*;
-import imgSize.*;
+import org.jocl.*;
 
 public class TestControl extends Test {
 	private TestControl testcontorl = this;
 	private ConnectControl connectControl;
 	private SpriteSheet sstest;
+	private JLabel testLabel;
+	private cl_image_format format;
+	private cl_image_desc outputDesc;
+	private cl_image_desc inputDesc;
+	private BufferedImage testImage;
 
 	public TestControl(JFrame app, ConnectControl connectControl) {
 		super(app);
@@ -27,12 +30,19 @@ public class TestControl extends Test {
 	}
 
 	public void init(JFrame app) {
-		sstest = new SpriteSheet("sword/sword.png", "Test", 7, 11, 20, 42);
+		testLabel = new JLabel();
+		format = new cl_image_format();
+		outputDesc = new cl_image_desc();
+		inputDesc = new cl_image_desc();
+		try {
+			testImage = ImageIO.read(new File("images/structure/namepaper.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setting() {
-//		sstest.rotateDraw(200, 200, 270);
-	}
+		}
 
 	public void batch() {
 		getApp().add(sstest, 2);

@@ -52,7 +52,7 @@ public class SpriteSheet extends JLabel {
 		loadSpriteimage(url);
 	}
 
-	public synchronized void loadSpriteimage(String url) {
+	public void loadSpriteimage(String url) {
 		try {
 			imgSprite = ImageIO.read(new File("images/" + url));
 		} catch (IOException e) {

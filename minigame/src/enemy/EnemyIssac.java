@@ -98,9 +98,9 @@ public class EnemyIssac extends Enemy {
 					while (true) {
 						if (issac.getViewDirectInfo()[ViewDirect.DOWN]
 								&& issac.getSendViewDirect() == ViewDirect.DOWN) {
-							if (motion > 9 * 4) // 상하좌우 방향 모션 개수와 동일 0~9 10개
+							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4))); // XPos는
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5))); // XPos는
 																														// 사진에서
 							if (issac.getSendViewDirect() == ViewDirect.DOWN) {
 								ssHead.setXPos(0); // 첫번째 사진이므로 0 다른 내용은 images/issac/issac.img에서 순서 확인하시면 됩니다.
@@ -116,9 +116,9 @@ public class EnemyIssac extends Enemy {
 
 						} else if (issac.getViewDirectInfo()[ViewDirect.LEFT]
 								&& issac.getSendViewDirect() == ViewDirect.LEFT) {
-							if (motion > 9 * 4)
+							if (motion > 9 * 5)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
 							if (issac.getSendViewDirect() == ViewDirect.LEFT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
 								ssBody.setYPos(
@@ -133,7 +133,7 @@ public class EnemyIssac extends Enemy {
 								&& issac.getSendViewDirect() == ViewDirect.UP) {
 							if (motion > 9 * 4)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
 							if (issac.getSendViewDirect() == ViewDirect.UP) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
@@ -147,7 +147,7 @@ public class EnemyIssac extends Enemy {
 								&& issac.getSendViewDirect() == ViewDirect.RIGHT) {
 							if (motion > 9 * 4)
 								motion = 0;
-							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 4)) + (Gap.COLUMGAP * (motion / 4)));
+							ssBody.setXPos((issacSize.issacBODYWIDTH * (motion / 5)) + (Gap.COLUMGAP * (motion / 5)));
 							if (issac.getSendViewDirect() == ViewDirect.RIGHT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);

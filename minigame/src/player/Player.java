@@ -2,7 +2,6 @@ package player;
 
 import javax.swing.JFrame;
 
-import imgSize.*;
 import lombok.Data;
 import lombok.Lombok;
 import sword.SwordControl;
