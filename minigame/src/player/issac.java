@@ -56,9 +56,9 @@ public class issac extends Player {
 		init(monsters, walls, items, connectControl);
 		setting();
 		batch();
-//		issacInfoRefresh();
+		issacInfoRefresh();
 		moveMotion();
-		MonsterCheckThread();
+//		MonsterCheckThread();
 	}
 
 	public void init(Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items, ConnectControl connectControl) {
@@ -625,16 +625,16 @@ public class issac extends Player {
 		}).start();
 	}
 
-//	public void issacInfoRefresh() {
-//		new Thread(() -> {
-//			while (connectControl.isIsconnect()) {
+	public void issacInfoRefresh() {
+		new Thread(() -> {
+			while (connectControl.isIsconnect()) {
 //				setPlayerData(new double[] { getAttackDamage(), getLife(), getMoveSpeed() });
-//				connectControl.getSendMap().put("PlayerX", 960 - getXPlayer());
-//				connectControl.getSendMap().put("PlayerY", 640 - getYPlayer());
-//				connectControl.getSendMap().put("PlayerStats", getPlayerData());
-//				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
-//				connectControl.getSendMap().put("intView", getSendViewDirect());
-//			}
-//		}).start();
-//	}
+				connectControl.getSendMap().put("PlayerX", 960 - getXPlayer());
+				connectControl.getSendMap().put("PlayerY", 640 - getYPlayer());
+				connectControl.getSendMap().put("PlayerStats", getPlayerData());
+				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
+				connectControl.getSendMap().put("intView", getSendViewDirect());
+			}
+		}).start();
+	}
 }

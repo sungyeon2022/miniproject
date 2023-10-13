@@ -1,24 +1,13 @@
 package connect;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
-import SpriteSheet.SpriteSheet;
 import lombok.Data;
-import player.issac;
 
 @Data
 
@@ -59,7 +48,7 @@ public class ConnectControl extends Connect {
 					try {
 						getMyObjectOutputStream().writeObject(getSendMap());
 						getMyObjectOutputStream().reset();
-						Thread.sleep(20);
+						Thread.sleep(10);
 					} catch (IOException | InterruptedException e) {
 						System.out.println("서버 강제 종료");
 						setIsconnect(false);
@@ -79,6 +68,8 @@ public class ConnectControl extends Connect {
 					if (isIsconnect()) {
 						try {
 							setReceiveObject(getMyObjectInputStream().readObject());
+							setReciveMap((Map<String, Object>) getReceiveObject());
+							System.out.println(getReciveMap());
 						} catch (IOException | ClassNotFoundException e) {
 							System.out.println("서버 닫힘");
 							setIsconnect(false);

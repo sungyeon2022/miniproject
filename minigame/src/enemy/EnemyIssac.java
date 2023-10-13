@@ -5,6 +5,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
+import connect.ConnectControl;
 import imgSize.*;
 import lombok.Data;
 import objectSetting.ViewDirect;
@@ -16,7 +17,7 @@ import player.*;
 
 public class EnemyIssac extends Enemy {
 	private final static String TAG = "issac: ";
-	private EnemyIssac enemyIssac = this;
+	private ConnectControl connectControl;
 	private SpriteSheet ssHead, ssBody;
 	private SpriteSheet ssTotal;
 	private Vector<SpriteSheet> ssLife;
@@ -30,18 +31,19 @@ public class EnemyIssac extends Enemy {
 	private int powerNum = 1;
 	private int attackspeedNum = 1;
 
-	public EnemyIssac(JFrame app, Vector<wall> walls, Vector<Item> items, issac issac) {
+	public EnemyIssac(JFrame app, Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
-		init(walls, items, issac);
+		init(walls, items, issac, connectControl);
 		setting();
 		batch();
 		moveMotion();
 		ReceiveThread();
 	}
 
-	public void init(Vector<wall> walls, Vector<Item> items, issac issac) {
+	public void init(Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
 		this.issac = issac;
+		this.connectControl = connectControl;
 		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,
 				issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
@@ -174,17 +176,17 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void refreshDirect() {
-		if (enemyIssac.isDown()) {
-			enemyIssac.setViewDirect(ViewDirect.DOWN);
+		if (isDown()) {
+			setViewDirect(ViewDirect.DOWN);
 		}
-		if (enemyIssac.isLeft()) {
-			enemyIssac.setViewDirect(ViewDirect.LEFT);
+		if (isLeft()) {
+			setViewDirect(ViewDirect.LEFT);
 		}
-		if (enemyIssac.isUp()) {
-			enemyIssac.setViewDirect(ViewDirect.UP);
+		if (isUp()) {
+			setViewDirect(ViewDirect.UP);
 		}
-		if (enemyIssac.isRight()) {
-			enemyIssac.setViewDirect(ViewDirect.RIGHT);
+		if (isRight()) {
+			setViewDirect(ViewDirect.RIGHT);
 		}
 	}
 

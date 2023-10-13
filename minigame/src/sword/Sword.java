@@ -32,6 +32,6 @@ public class Sword extends Lombok {
 		this.isEnemyAttackKeyPress = false;
 	}
 	public synchronized void swordNomalForm() {}
-	public synchronized void swordAttackForm() {}
+	public void swordAttackForm() {}
 	
 }

@@ -1,5 +1,7 @@
 package Timer;
 
+import java.net.Socket;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 

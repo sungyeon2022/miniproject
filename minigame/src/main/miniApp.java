@@ -84,13 +84,13 @@ public class miniApp extends JFrame {
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
 		swordControl = new SwordControl(app, issac, monsters);
-		enemyIssac = new EnemyIssac(app, walls, items, issac);
+		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
 		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 //		testControl = new TestControl(app, connectControl);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-		timerControl = new TimerControl(app);
+		timerControl = new TimerControl(app, connectControl);
 		startButton = new JButton();
 		ssButton = new SpriteSheet("structure/namepaper.png", "Button", 0, 0, 91, 63);
 	}

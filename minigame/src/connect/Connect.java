@@ -33,6 +33,7 @@ public class Connect extends Lombok {
 	private Object receiveObject;
 	private int socketNum;
 	private Map<String, Object> sendMap = new HashMap<String, Object>(); 
+	private Map<String, Object> reciveMap = new HashMap<String, Object>(); 	
 	public Connect() {
 		this.socket = null;
 		this.myInputStream = null;
