@@ -207,9 +207,9 @@ public class EnemyIssac extends Enemy {
 			while (!isDead()) {
 				System.out.println(connectControl.getReciveMap());
 				if (!connectControl.getReciveMap().isEmpty()) {
-					setXEnemy(960 - (int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
+					setXEnemy((int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
 							- issacSize.issacBODYWIDTH + xPlusBody + 1);
-					setYEnemy(640 - (int) connectControl.getReciveMap().get("PlayerY")
+					setYEnemy((int) connectControl.getReciveMap().get("PlayerY")
 							- (issacSize.issacBODYHEIGHT + issacSize.issacHEADHEIGHT) * 2 + issacSize.issacBODYHEIGHT);
 					setViewDirect((int) connectControl.getReciveMap().get("intView"));
 					setViewDirectInfo(((boolean[]) connectControl.getReciveMap().get("booleanView")));

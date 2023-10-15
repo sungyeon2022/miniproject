@@ -79,25 +79,25 @@ public class miniApp extends JFrame {
 		connectControl = new ConnectControl();
 //		page = new Page(app);
 		bg = new Background(app);
-		monsters = new Vector<Monster>();
+//		monsters = new Vector<Monster>();
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
-		swordControl = new SwordControl(app, issac, monsters);
+//		swordControl = new SwordControl(app, issac, monsters);
 		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
-		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
+//		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 //		testControl = new TestControl(app, connectControl);
-		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-		timerControl = new TimerControl(app, connectControl);
+//		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+//		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+//		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+//		timerControl = new TimerControl(app, connectControl);
 //		startButton = new JButton();
 		ssButton = new SpriteSheet("structure/namepaper.png", "Button", 0, 0, 91, 63);
 	}
 
 	// JFrame을 통한 창출력
 	public void setting() {
-		app.setTitle("betaapp");
+		app.setTitle("Player2");
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setResizable(false);
 		app.setLocationRelativeTo(null);
