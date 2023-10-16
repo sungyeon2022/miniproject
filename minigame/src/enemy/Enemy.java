@@ -21,6 +21,7 @@ public class Enemy extends Lombok {
 	private boolean EnemyMoveStart;
 	private boolean isRock;
 	private boolean[] viewDirectInfo = new boolean[4];
+	private boolean isKeyPress;
 	
 	public Enemy(JFrame app) {
 		this.app = app;

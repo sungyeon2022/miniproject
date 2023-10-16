@@ -13,6 +13,8 @@ import player.issac;
 
 public class Head extends Monster{
 	private String GUBUN = "Head";
+	private int defaultX = 300;
+	private int defaultY = 200;
 	
 	public Head(JFrame app, issac issac, String url, int imgWidth, int imgHeight) {
 		super(app, issac, url, imgWidth, imgHeight);

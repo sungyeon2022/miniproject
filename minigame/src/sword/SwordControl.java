@@ -3,6 +3,7 @@ package sword;
 import java.util.Vector;
 import javax.swing.JFrame;
 import SpriteSheet.SpriteSheet;
+import connect.ConnectControl;
 import imgSize.SwordMotionSize;
 import imgSize.SwordSize;
 import objectSetting.*;
@@ -18,20 +19,22 @@ public class SwordControl extends Sword {
 	private Sword sword;
 	private issac issac;
 	private Vector<Monster> monsters;
+	private ConnectControl connectControl;
 
-	public SwordControl(JFrame app, issac issac, Vector<Monster> monsters) {
+	public SwordControl(JFrame app, issac issac, Vector<Monster> monsters, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "makeSword");
-		init(issac, monsters);
+		init(issac, monsters, connectControl);
 		setting();
 		batch();
 		swordNomalForm();
 		dotAttack();
 	}
 
-	public void init(issac issac, Vector<Monster> monsters) {
+	public void init(issac issac, Vector<Monster> monsters, ConnectControl connectControl) {
 		this.issac = issac;
 		this.monsters = monsters;
+		this.connectControl = connectControl;
 		ssSword = new SpriteSheet("sword/sword_up.png", "issac_sword", SwordSize.SWORDXGAP + 2,
 				SwordSize.SWORDIMGHEIGHT - SwordSize.SWORDYGAP - SwordSize.SWORDYHEIGHT + 2, SwordSize.SWORDWIDTH - 1,
 				SwordSize.SWORDYHEIGHT);
@@ -54,7 +57,7 @@ public class SwordControl extends Sword {
 			@Override
 			public void run() {
 				while (!isSwordAttacking()) {
-					if(isAttackKeyPress()) {
+					if (issac.isKeyPress()) {
 						swordAttackForm();
 						break;
 					}
@@ -125,7 +128,7 @@ public class SwordControl extends Sword {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				if (isAttackKeyPress()) {
+				if (issac.isKeyPress()) {
 					int imgxlocation = 1;
 					int imgylocation = 0;
 					swingAttack();
@@ -230,11 +233,13 @@ public class SwordControl extends Sword {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (!issac.isDead()) {
+				while (!monsters.isEmpty() && !issac.isDead()) {
 					boolean ismonster = false;
-					if (isSwordAttacking() || monsters.isEmpty())
+					if (isSwordAttacking() || monsters.isEmpty() || connectControl.isStart())
 						break;
 					for (int i = 0; i < monsters.size(); i++) {
+						if (isSwordAttacking() || monsters.isEmpty())
+							break;
 						if (swordControl.getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
 								&& !isSwordAttacking()) {
 							System.out.println("공격 적용");
@@ -254,12 +259,14 @@ public class SwordControl extends Sword {
 				} catch (Exception e) {
 
 				} finally {
-					dotAttack();
+					if (!monsters.isEmpty() && !connectControl.isStart())
+						dotAttack();
 				}
 			}
 		}).start();
 	}
-	public void swingAttack() {		
+
+	public void swingAttack() {
 		if (!monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
 				if (swordControl.getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {

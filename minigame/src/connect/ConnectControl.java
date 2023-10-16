@@ -70,6 +70,7 @@ public class ConnectControl extends Connect {
 							setReceiveObject(getMyObjectInputStream().readObject());
 							setReciveMap((Map<String, Object>) getReceiveObject());
 							setStart((boolean) getReciveMap().get("isStart"));
+							setReady((boolean) getReciveMap().get("isReady"));
 						} catch (IOException | ClassNotFoundException e) {
 							System.out.println("서버 닫힘");
 							setIsconnect(false);

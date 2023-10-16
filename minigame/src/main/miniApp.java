@@ -71,7 +71,7 @@ public class miniApp extends JFrame {
 		listener();
 //		checkUsedMomory();
 		monsterDeadCheck();
-		
+		gameStartCheck();
 	}
 
 	// 앱에서 필요한 데이터정보 가져옴
@@ -84,7 +84,7 @@ public class miniApp extends JFrame {
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
-		swordControl = new SwordControl(app, issac, monsters);
+		swordControl = new SwordControl(app, issac, monsters, connectControl);
 		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
 		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 //		testControl = new TestControl(app, connectControl);
@@ -98,7 +98,7 @@ public class miniApp extends JFrame {
 
 	// JFrame을 통한 창출력
 	public void setting() {
-		app.setTitle("Player2");
+		app.setTitle("Player1");
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setResizable(false);
 		app.setLocationRelativeTo(null);
@@ -130,11 +130,8 @@ public class miniApp extends JFrame {
 					issac.moveDown();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
-				} else if (e.getKeyCode() == KeyEvent.VK_W) {
-				} else if (e.getKeyCode() == KeyEvent.VK_D) {
-				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					swordControl.setAttackKeyPress(true);
-//					enemySwordControl.setEnemyAttackKeyPress(true);
+				}else if (e.getKeyCode() == KeyEvent.VK_A) {
+					issac.setKeyPress(true);
 				}
 			}
 
@@ -159,12 +156,8 @@ public class miniApp extends JFrame {
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					swordControl.setAttackKeyPress(false);
-//					enemySwordControl.setEnemyAttackKeyPress(false);
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					System.out.println("s키 떨어짐");
+					issac.setKeyPress(false);
 				}
-
 			}
 		});
 	}
@@ -194,8 +187,7 @@ public class miniApp extends JFrame {
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
-			while (!connectControl.isStart()&&!monsters.isEmpty()) {
-//				System.out.println("실행중");
+			while (!connectControl.isStart() && !monsters.isEmpty()) {
 				for (int i = 0; i < monsters.size(); i++) {
 					if (monsters.get(i).isDead()) {
 						String monName = monsters.get(i).getGUBUN();
@@ -234,16 +226,47 @@ public class miniApp extends JFrame {
 			}
 		}).start();
 	}
+
 	public void gameStartCheck() {
-		new Thread(()->{
+		new Thread(() -> {
 			while (true) {
-				if(connectControl.isStart()) {
+				if (connectControl.isStart() && connectControl.isReady()) {
+					for (int i = 0; i < monsters.size(); i++) {
+						monsters.get(i).getSsMonster().setVisible(false);
+						app.remove(monsters.get(i).getSsMonster());
+						System.out.println(monsters.size());
+					}
 					monsters.removeAllElements();
-					issac.setXPlayer(449);
-					issac.setYPlayer(430);
 					enemyIssac.batch();
 					enemySwordControl.batch();
+					issac.setXPlayer(449);
+					issac.setYPlayer(430);
+					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
+							issac.getYPlayer() + issac.getYPlusBody());
+					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
+
 					break;
+				} else if (!connectControl.isStart() && connectControl.isReady()) {
+					if (!monsters.isEmpty()) {
+						for (int i = 0; i < monsters.size(); i++) {
+							monsters.get(i).setXPlayer(monsters.get(i).getDefaultX());
+							monsters.get(i).setYPlayer(monsters.get(i).getDefaultY());
+							monsters.get(i).getSsMonster().drawObj(monsters.get(i).getXPlayer(),
+									monsters.get(i).getYPlayer());
+
+						}
+					}
+					issac.setXPlayer(issac.getDefaultX());
+					issac.setYPlayer(issac.getDefaultY());
+					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
+							issac.getYPlayer() + issac.getYPlusBody());
+					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
+				} else {
+//					for (int i = 0; i < monsters.size(); i++) {
+//						monsters.get(i).getSsMonster().setVisible(false);
+//						app.remove(monsters.get(i).getSsMonster());
+//						System.out.println(monsters.size());
+//					}
 				}
 				try {
 					Thread.sleep(50);

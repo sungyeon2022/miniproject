@@ -93,32 +93,10 @@ public class issac extends Player {
 		setXPlayer(449);
 		setYPlayer(430);
 		setAttackDamage(1);
-		setLife(5);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
-		// 폭탄 레이블 설정
-//		labomb.setSize(30, 30);
-//		labomb.setLocation(65, 50);
-//		labomb.setFont(new Font("바탕", Font.ITALIC, 25));
-//		labomb.setForeground(Color.WHITE);
-		// 속도 레이블 설정
-//		lapower.setSize(30, 30);
-//		lapower.setLocation(65, 85);
-//		lapower.setFont(new Font("바탕", Font.ITALIC, 25));
-//		lapower.setForeground(Color.WHITE);
-		// 속도 레이블 설정
-//		laspeed.setSize(40, 30);
-//		laspeed.setLocation(65, 120);
-//		laspeed.setFont(new Font("바탕", Font.ITALIC, 25));
-//		laspeed.setForeground(Color.WHITE);
-		// 공속 레이블 설정
-//		laattackspeed.setSize(40, 30);
-//		laattackspeed.setLocation(65, 155);
-//		laattackspeed.setFont(new Font("바탕", Font.ITALIC, 25));
-//		laattackspeed.setForeground(Color.WHITE);
-
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (i <= getLife()) {
 				ssLife.get(i).drawObj(10 + (i * 30), 10);
@@ -133,11 +111,6 @@ public class issac extends Player {
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
 		getApp().add(ssDead, 2);
-		// 폭탄 파워 속도 레이블 추가
-//		getApp().add(labomb);
-//		getApp().add(lapower);
-//		getApp().add(laspeed);
-//		getApp().add(laattackspeed);
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
 		}
@@ -190,17 +163,6 @@ public class issac extends Player {
 					ssBody.setXPos(0);
 					ssHead.drawObj(getXPlayer(), getYPlayer());
 					ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
-//					int cnt = 0;
-//					while (true) { //생성이유 특정조건 벽이나 구석
-//						cnt++;
-//						System.out.println("moveRight Thread 유지중"+cnt);
-//						if(!isIskeyPress()) break;
-//						try {
-//							Thread.sleep(100);
-//						} catch (Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
 				}
 			}
 		}).start();
@@ -479,71 +441,6 @@ public class issac extends Player {
 		}
 	}
 
-	// 아이템 획득 종류 확인
-//	public void getItem() {
-//		for (int i = 0; i < items.size(); i++) {
-//			if (items.get(i).isDrop()) {
-//				if (nearItemCheck(items.get(i))) {
-//					items.get(i).setDrop(false);
-//					// Gubun String이 "bomb" 일때
-//					int luck = (int) (Math.random() * 2);
-//
-//					if (items.get(i).getSsItem().getGubun() == "bomb") {
-//						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-//						if (luck == 1) {
-//							bombCount += 1;
-//							labomb.setText(Integer.toString(bombCount));
-//						} else if (luck == 0) {
-//							bombCount -= 1;
-//							labomb.setText(Integer.toString(bombCount));
-//						} // Gubun String이 "Power" 일때
-//					} else if (items.get(i).getSsItem().getGubun() == "Power") {
-//						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-//						if (luck == 1) {
-//
-//							powerNum += 2;
-//							lapower.setText(Integer.toString(powerNum));
-//
-//						} else if (luck == 0) {
-//							powerNum--;
-//							lapower.setText(Integer.toString(powerNum));
-//
-//						}
-//						// Gubun String이 "Speed" 일때
-//					} else if (items.get(i).getSsItem().getGubun() == "Speed") {
-//						// System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-//						if (luck == 1) {
-//
-//							moveSpeed += 3;
-//							laspeed.setText(Integer.toString(speedNum - moveSpeed));
-//
-//						} else if (luck == 0) {
-//							moveSpeed--;
-//							laspeed.setText(Integer.toString(speedNum - moveSpeed));
-//
-//						}
-//					} else if (items.get(i).getSsItem().getGubun() == "AttackSpeed") {
-//						if (luck == 1) {
-//
-//							attackspeedNum += 2;
-//							laattackspeed.setText(Integer.toString(attackspeedNum));
-//
-//						} else if (luck == 0) {
-//							attackspeedNum--;
-//							laattackspeed.setText(Integer.toString(attackspeedNum));
-//
-//						}
-//					}
-//					System.out.println(items.get(i).getSsItem().getGubun() + " 발견");
-//					getApp().remove(items.get(i).getSsItem());
-//					getApp().repaint();
-//
-//				}
-//			}
-//
-//		}
-//	}
-
 	public void deadMotion() {
 		ssBody.setVisible(false);
 		ssHead.setVisible(false);
@@ -565,7 +462,7 @@ public class issac extends Player {
 
 	public void MonsterCheckThread() {
 		new Thread(() -> {
-			while (!isDead()&&!connectControl.isStart()&&!monsters.isEmpty()) {
+			while (!isDead()&&!connectControl.isStart()) {
 				for (int i = 0; i < monsters.size(); i++) {
 					if (ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
 							|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
@@ -585,6 +482,17 @@ public class issac extends Player {
 						}
 					}
 				}
+			}
+		}).start();
+	}
+	
+	public void hitByEnemy() {
+		new Thread(()->{
+			while (!isDead()) {
+				if(connectControl.isStart()) {
+					 
+				}
+				
 			}
 		}).start();
 	}
@@ -628,17 +536,20 @@ public class issac extends Player {
 	public void issacInfoRefresh() {
 		new Thread(() -> {
 			while (connectControl.isIsconnect()) {
-//				setPlayerData(new double[] { getAttackDamage(), getLife(), getMoveSpeed() });
 				connectControl.getSendMap().put("PlayerX", 960 - getXPlayer());
 				connectControl.getSendMap().put("PlayerY", 640 - getYPlayer());
 				connectControl.getSendMap().put("PlayerStats", getPlayerData());
 				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
 				connectControl.getSendMap().put("intView", getSendViewDirect());
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				connectControl.getSendMap().put("isKeyPress", isKeyPress());
+				connectControl.getSendMap().put("AttackDamage", getAttackDamage());
+				connectControl.getSendMap().put("Life", getLife());
+				connectControl.getSendMap().put("MoveSpeed", getMoveSpeed());
+//				try {
+//					Thread.sleep(0);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}).start();
 	}

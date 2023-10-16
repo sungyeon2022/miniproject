@@ -13,7 +13,7 @@ public class Player extends Lombok {
 	private double life=5;//생명,최대 생명
 	private double maxlife=8;
 	private boolean isUp, isDown, isRight, isLeft;
-	private boolean iskeyPress;
+	private boolean isKeyPress;
 	private double attackDamage; //공격 데미지
 	private int viewDirect;
 	private int xPlayer, yPlayer;
@@ -22,11 +22,12 @@ public class Player extends Lombok {
 	private SwordControl swordControl;
 	private boolean PlayerMoveStart;
 	private boolean isRock;
-	private boolean isKeyRelease;
 	private double[] PlayerData;
 	private int[] PlayerXY = {xPlayer,yPlayer};
 	private int sendViewDirect;
 	private boolean[] viewDirectInfo;
+	private int defaultX;
+	private int defaultY;
 	
 	public Player(JFrame app) {
 		this.app = app;
@@ -36,9 +37,10 @@ public class Player extends Lombok {
 		this.isLeft = false;
 		this.isRock = false;
 		this.dead = false;
-		this.iskeyPress = false;
-		this.isKeyRelease = false;
+		this.isKeyPress = false;
 		this.viewDirectInfo = new boolean[4];
+		this.defaultX = 449;
+		this.defaultY = 430;
 	}
 	public void moveRight() {}
 	public void moveLeft() {}

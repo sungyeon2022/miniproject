@@ -63,11 +63,9 @@ public class EnemyIssac extends Enemy {
 		setXEnemy(449);
 		setYEnemy(110);
 		setAttackDamage(1);
-		setLife(3);
 		setXEnemyCenter(getXEnemy() + issacSize.issacHEADWIDTH / 2);
 		setYEnemyCenter(getYEnemy() + issacSize.issacHEADHEIGHT);
-		ssHead.drawObj(getXEnemy(), getYEnemy());
-		ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
+		
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (i <= getLife()) {
 				ssLife.get(i).drawObj(680 + (i * 30), 10);
@@ -79,11 +77,15 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void batch() {
+		ssHead.drawObj(getXEnemy(), getYEnemy());
+		ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
 		// 폭탄 파워 속도 레이블 추가
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
+			ssLife.get(i).setVisible(false);
+			ssLife.get(i).setVisible(true);
 		}
 	}
 
@@ -205,19 +207,18 @@ public class EnemyIssac extends Enemy {
 		new Thread(() -> {
 			while (!isDead()) {
 //				System.out.println(connectControl.getReciveMap());
-				if (!connectControl.getReciveMap().isEmpty()) {
+				if (!connectControl.getReciveMap().isEmpty()
+						&& (boolean) connectControl.getReciveMap().get("isStart")) {
 					setXEnemy((int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
 							- issacSize.issacBODYWIDTH + xPlusBody + 1);
 					setYEnemy((int) connectControl.getReciveMap().get("PlayerY")
 							- (issacSize.issacBODYHEIGHT + issacSize.issacHEADHEIGHT) * 2 + issacSize.issacBODYHEIGHT);
 					setViewDirect((int) connectControl.getReciveMap().get("intView"));
 					setViewDirectInfo(((boolean[]) connectControl.getReciveMap().get("booleanView")));
-				} else {
-					try {
-						Thread.sleep(10);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+					setKeyPress((boolean) connectControl.getReciveMap().get("isKeyPress"));
+					setLife((double) connectControl.getReciveMap().get("Life"));
+					setMovespeed((int) connectControl.getReciveMap().get("MoveSpeed"));
+					setAttackDamage((double) connectControl.getReciveMap().get("AttackDamage"));
 				}
 			}
 		}).start();

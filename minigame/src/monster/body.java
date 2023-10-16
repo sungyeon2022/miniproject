@@ -14,6 +14,8 @@ import player.issac;
 public class body extends Monster {
 	private String GUBUN = "Body";
 	public int monsterSpeed = 1;
+	private int defaultX = 400;
+	private int defaultY = 200;
 	
 	public body(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
@@ -54,7 +56,7 @@ public class body extends Monster {
 	//기본 세팅
 	public void setting() {
 		setViewDirect(ViewDirect.RIGHT);
-		setXPlayer(300);
+		setXPlayer(400);
 		setYPlayer(200);
 		setXPlayerCenter(getXPlayer() + BodySize.WIDTH / 2); 
 		setYPlayerCenter(getYPlayer() + BodySize.HEIGHT / 2); 

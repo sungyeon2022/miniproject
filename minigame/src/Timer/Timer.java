@@ -17,10 +17,8 @@ public class Timer {
 	private String min;
 	private String hour;
 	private int startTime;
-	private boolean isStart;
 	public Timer(JFrame app) {
 		this.app = app;
-		startTime = (int)System.currentTimeMillis()/10; 
 		
 	}
 }

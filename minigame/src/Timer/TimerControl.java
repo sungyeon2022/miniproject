@@ -26,10 +26,11 @@ public class TimerControl extends Timer {
 		setting();
 		batch();
 		timerThread();
+//		imsi();
 	}
 
 	public void init(ConnectControl connectControl) {
-		timerLabel = new JLabel();
+		timerLabel = new JLabel("Singel");
 		this.connectControl = connectControl;
 	}
 
@@ -58,6 +59,19 @@ public class TimerControl extends Timer {
 //				setHour(String.format("%02d", getMliSec()/360000%60));
 //				timerLabel.setText(getHour()+":"+getMin()+":"+getSec()+":"+getMliSec()%100);
 			}
+		}).start();
+	}
+	public void imsi() {
+		new Thread(()->{
+			connectControl.setReady(true);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connectControl.setReady(false);
+			connectControl.setStart(true);
 		}).start();
 	}
 }

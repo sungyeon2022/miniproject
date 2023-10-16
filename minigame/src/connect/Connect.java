@@ -35,6 +35,7 @@ public class Connect extends Lombok {
 	private Map<String, Object> sendMap = new HashMap<String, Object>(); 
 	private Map<String, Object> reciveMap = new HashMap<String, Object>(); 	
 	private boolean isStart;
+	private boolean isReady;
 	public Connect() {
 		this.socket = null;
 		this.myInputStream = null;
@@ -44,7 +45,7 @@ public class Connect extends Lombok {
 		this.Name = "Beta1";
 		this.socketNum = 8050;
 		this.isStart = false;
-		
+		this.isReady = false;
 	}
 	public void SendDataThread() {}
 	public void ReceiveDataThread() {}

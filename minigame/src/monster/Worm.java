@@ -22,6 +22,8 @@ public class Worm extends Monster {
 	private boolean checkAttackDirectY = false;
 	private int attackDirect;
 	private boolean stop;
+	private int defaultX = 180;
+	private int defaultY = 130;
 	
 	public void setStop(boolean stop) {
 		this.stop = stop;
