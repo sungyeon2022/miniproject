@@ -18,7 +18,7 @@ import player.*;
 public class EnemyIssac extends Enemy {
 	private final static String TAG = "issac: ";
 	private ConnectControl connectControl;
-	private SpriteSheet ssHead, ssBody;
+	private SpriteSheet ssHead, ssBody, ssDead;
 	private SpriteSheet ssTotal;
 	private Vector<SpriteSheet> ssLife;
 	private int xPlusBody = 8, yPlusBody = 30;
@@ -47,6 +47,7 @@ public class EnemyIssac extends Enemy {
 				issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
+		ssDead = new SpriteSheet("issac/issac.png", "issacDead", 63, 215, 42, 48);
 		ssLife = new Vector<SpriteSheet>();
 		for (int i = 0; i < getLife(); i++) {
 			this.ssLife.add(i,
@@ -81,6 +82,7 @@ public class EnemyIssac extends Enemy {
 		ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
+		getApp().add(ssDead, 2);
 		// 폭탄 파워 속도 레이블 추가
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
@@ -192,23 +194,65 @@ public class EnemyIssac extends Enemy {
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (currentLife >= 1) {
 				ssLife.get(i).setXPos(0);
+				ssLife.get(i).drawObj(680 + (i * 30), 10);
 				currentLife -= 1;
 			} else if (currentLife > 0 && currentLife < 1) {
 				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH + Gap.COLUMGAP);
+				ssLife.get(i).drawObj(680 + (i * 30), 10);
 				currentLife -= 0.5;
 			} else {
 				ssLife.get(i).setXPos(Lifesize.LIFEWIDTH * 2 + Gap.COLUMGAP * 2);
+				ssLife.get(i).drawObj(680 + (i * 30), 10);
 			}
 
 		}
 	}
-
+	
+	public void hitCheck() {
+		new Thread(()->{
+			while (!isDead()) {
+				if(isInvincible()) {
+					ssBody.setVisible(false);
+					ssHead.setVisible(false);
+					ssDead.drawObj(getXEnemy(), getYEnemy());
+					ssDead.setVisible(true);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					ssDead.setVisible(false);
+					ssBody.setVisible(true);
+					ssHead.setVisible(true);
+					for (int i = 300; i > 0; i -= 50) {
+						ssBody.setVisible(false);
+						ssHead.setVisible(false);
+						try {
+							Thread.sleep(i);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						ssBody.setVisible(true);
+						ssHead.setVisible(true);
+						try {
+							Thread.sleep(i);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}).start();
+	}
+	
 	public void ReceiveThread() {
 		new Thread(() -> {
 			while (!isDead()) {
 //				System.out.println(connectControl.getReciveMap());
 				if (!connectControl.getReciveMap().isEmpty()
-						&& (boolean) connectControl.getReciveMap().get("isStart")) {
+						&& (boolean) connectControl.getReciveMap().get("isStart")&&connectControl.getReciveMap().get("PlayerX")!=null) {
 					setXEnemy((int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
 							- issacSize.issacBODYWIDTH + xPlusBody + 1);
 					setYEnemy((int) connectControl.getReciveMap().get("PlayerY")
@@ -217,9 +261,17 @@ public class EnemyIssac extends Enemy {
 					setViewDirectInfo(((boolean[]) connectControl.getReciveMap().get("booleanView")));
 					setKeyPress((boolean) connectControl.getReciveMap().get("isKeyPress"));
 					setLife((double) connectControl.getReciveMap().get("Life"));
+					setInvincible((boolean) connectControl.getReciveMap().get("isInvincible"));
 					setMovespeed((int) connectControl.getReciveMap().get("MoveSpeed"));
 					setAttackDamage((double) connectControl.getReciveMap().get("AttackDamage"));
+					reDrawLife();
 				}
+//				try {
+//					Thread.sleep(10);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 		}).start();
 	}

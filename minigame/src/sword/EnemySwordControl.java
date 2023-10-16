@@ -26,7 +26,6 @@ public class EnemySwordControl extends Sword {
 		init(issac, enemyIssac);
 		setting();
 		swordNomalForm();
-		dotAttack();
 	}
 
 	public void init(issac issac, EnemyIssac enemyIssac) {
@@ -51,7 +50,7 @@ public class EnemySwordControl extends Sword {
 	@Override
 	public synchronized void swordNomalForm() {
 		new Thread(() -> {
-			while (!isSwordAttacking()) {
+			while (!isSwordAttacking()&&!enemyIssac.isDead()) {
 				if (enemyIssac.isKeyPress()) {
 					swordAttackForm();
 					break;
@@ -220,37 +219,19 @@ public class EnemySwordControl extends Sword {
 			}
 		}).start();
 	}
-	public void dotAttack() {
-		new Thread(()->{
-			while (!enemyIssac.isDead()&&!issac.isDead()) {
-				boolean isEnemy = false;
-				if(isSwordAttacking()) break;
-				if(ssSword.getBounds().intersects(issac.getSsBody().getBounds())||ssSword.getBounds().intersects(issac.getSsHead().getBounds())) {
-					isEnemy = true;
-				}
-				try {
-					if(isEnemy && !isSwordAttacking()) {
-						issac.setLife(issac.getLife()-enemyIssac.getAttackDamage());
-						issac.reDrawLife();
-						System.out.println("실행중");
-						Thread.sleep(1000);
-					}
-				} catch (Exception e) {
-				}
-			}
-			try {
-				Thread.sleep(getDotAttackDelay());
-			} catch (Exception e) {
-			}finally {
-				dotAttack();
-			}
-			
-		}).start();
-	}
+
 	public void swingAttack() {
-		if(ssSword.getBounds().intersects(issac.getSsBody().getBounds())||ssSword.getBounds().intersects(issac.getSsHead().getBounds())) {
-			issac.setLife(issac.getLife()-enemyIssac.getAttackDamage());
+		if ((ssSword.getBounds().intersects(issac.getSsBody().getBounds())
+				|| ssSword.getBounds().intersects(issac.getSsHead().getBounds()))&&!issac.isInvincible()) {
+			issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
 			issac.reDrawLife();
+			if(issac.getLife()==0) {
+				issac.setDead(true);
+			}
+			if (!issac.isDead()) {
+				issac.hitDelayMotion();
+			}
+			System.out.println(issac.getLife());
 		}
 	}
 }

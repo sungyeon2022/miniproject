@@ -462,43 +462,35 @@ public class issac extends Player {
 
 	public void MonsterCheckThread() {
 		new Thread(() -> {
-			while (!isDead()&&!connectControl.isStart()) {
+			while (!isDead() && !connectControl.isStart()) {
 				for (int i = 0; i < monsters.size(); i++) {
-					if (ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
-							|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
+					if ((ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
+							|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds()))
+							&& !isInvincible()) {
 						setLife(getLife() - 1);
-
 						reDrawLife();
-						if (getLife() == 0)
+						if (getLife() == 0) {
 							setDead(true);
+						}
 						if (!isDead())
 							hitDelayMotion();
-
 						System.out.println(getLife());
-						try {
-							Thread.sleep(2600);
-						} catch (Exception e) {
-							// TODO: handle exception
-						}
 					}
 				}
-			}
-		}).start();
-	}
-	
-	public void hitByEnemy() {
-		new Thread(()->{
-			while (!isDead()) {
-				if(connectControl.isStart()) {
-					 
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 			}
 		}).start();
 	}
-
+	
 	public void hitDelayMotion() {
 		new Thread(() -> {
+			setInvincible(true);
 			ssBody.setVisible(false);
 			ssHead.setVisible(false);
 			ssDead.drawObj(getXPlayer(), getYPlayer());
@@ -506,7 +498,6 @@ public class issac extends Player {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ssDead.setVisible(false);
@@ -530,6 +521,7 @@ public class issac extends Player {
 					e.printStackTrace();
 				}
 			}
+			setInvincible(false);
 		}).start();
 	}
 
@@ -545,6 +537,7 @@ public class issac extends Player {
 				connectControl.getSendMap().put("AttackDamage", getAttackDamage());
 				connectControl.getSendMap().put("Life", getLife());
 				connectControl.getSendMap().put("MoveSpeed", getMoveSpeed());
+				connectControl.getSendMap().put("isInvincible", isInvincible());
 //				try {
 //					Thread.sleep(0);
 //				} catch (InterruptedException e) {

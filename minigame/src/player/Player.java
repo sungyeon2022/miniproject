@@ -28,6 +28,7 @@ public class Player extends Lombok {
 	private boolean[] viewDirectInfo;
 	private int defaultX;
 	private int defaultY;
+	private boolean isInvincible;
 	
 	public Player(JFrame app) {
 		this.app = app;
