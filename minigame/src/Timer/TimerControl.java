@@ -29,7 +29,7 @@ public class TimerControl extends Timer {
 	}
 
 	public void init(ConnectControl connectControl) {
-		timerLabel = new JLabel("SOL");
+		timerLabel = new JLabel();
 		this.connectControl = connectControl;
 	}
 

@@ -54,6 +54,10 @@ public class SwordControl extends Sword {
 			@Override
 			public void run() {
 				while (!isSwordAttacking()) {
+					if(isAttackKeyPress()) {
+						swordAttackForm();
+						break;
+					}
 					if (isSwordAttacking())
 						break;
 					else {
@@ -255,9 +259,8 @@ public class SwordControl extends Sword {
 			}
 		}).start();
 	}
-
-	public void swingAttack() {
-		if (isSwordAttacking() && !monsters.isEmpty()) {
+	public void swingAttack() {		
+		if (!monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
 				if (swordControl.getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
 					monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());

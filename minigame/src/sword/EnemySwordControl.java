@@ -25,7 +25,6 @@ public class EnemySwordControl extends Sword {
 		System.out.println(TAG + "makeSword");
 		init(issac, enemyIssac);
 		setting();
-		batch();
 		swordNomalForm();
 		checkSwordForm();
 	}

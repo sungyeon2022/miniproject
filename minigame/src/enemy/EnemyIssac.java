@@ -36,7 +36,6 @@ public class EnemyIssac extends Enemy {
 		System.out.println(TAG + "make issac");
 		init(walls, items, issac, connectControl);
 		setting();
-		batch();
 		ReceiveThread();
 		moveMotion();
 	}
@@ -205,7 +204,7 @@ public class EnemyIssac extends Enemy {
 	public void ReceiveThread() {
 		new Thread(() -> {
 			while (!isDead()) {
-				System.out.println(connectControl.getReciveMap());
+//				System.out.println(connectControl.getReciveMap());
 				if (!connectControl.getReciveMap().isEmpty()) {
 					setXEnemy((int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
 							- issacSize.issacBODYWIDTH + xPlusBody + 1);

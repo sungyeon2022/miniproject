@@ -71,6 +71,7 @@ public class miniApp extends JFrame {
 		listener();
 //		checkUsedMomory();
 		monsterDeadCheck();
+		
 	}
 
 	// 앱에서 필요한 데이터정보 가져옴
@@ -79,18 +80,18 @@ public class miniApp extends JFrame {
 		connectControl = new ConnectControl();
 //		page = new Page(app);
 		bg = new Background(app);
-//		monsters = new Vector<Monster>();
+		monsters = new Vector<Monster>();
 		items = new Vector<Item>();
 		walls = new Vector<wall>();
 		issac = new issac(app, monsters, walls, items, connectControl);
-//		swordControl = new SwordControl(app, issac, monsters);
+		swordControl = new SwordControl(app, issac, monsters);
 		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
-//		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
+		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
 //		testControl = new TestControl(app, connectControl);
-//		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-//		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-//		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-//		timerControl = new TimerControl(app, connectControl);
+		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+		timerControl = new TimerControl(app, connectControl);
 //		startButton = new JButton();
 		ssButton = new SpriteSheet("structure/namepaper.png", "Button", 0, 0, 91, 63);
 	}
@@ -132,7 +133,6 @@ public class miniApp extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_W) {
 				} else if (e.getKeyCode() == KeyEvent.VK_D) {
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					swordControl.swordAttackForm();
 					swordControl.setAttackKeyPress(true);
 //					enemySwordControl.setEnemyAttackKeyPress(true);
 				}
@@ -194,7 +194,7 @@ public class miniApp extends JFrame {
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
-			while (true) {
+			while (!connectControl.isStart()&&!monsters.isEmpty()) {
 //				System.out.println("실행중");
 				for (int i = 0; i < monsters.size(); i++) {
 					if (monsters.get(i).isDead()) {
@@ -229,6 +229,25 @@ public class miniApp extends JFrame {
 				try {
 					Thread.sleep(10);
 				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+	public void gameStartCheck() {
+		new Thread(()->{
+			while (true) {
+				if(connectControl.isStart()) {
+					monsters.removeAllElements();
+					issac.setXPlayer(449);
+					issac.setYPlayer(430);
+					enemyIssac.batch();
+					enemySwordControl.batch();
+					break;
+				}
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}

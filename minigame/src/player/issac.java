@@ -58,7 +58,7 @@ public class issac extends Player {
 		batch();
 		issacInfoRefresh();
 		moveMotion();
-//		MonsterCheckThread();
+		MonsterCheckThread();
 	}
 
 	public void init(Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items, ConnectControl connectControl) {
@@ -565,18 +565,18 @@ public class issac extends Player {
 
 	public void MonsterCheckThread() {
 		new Thread(() -> {
-			while (!isDead()) {
+			while (!isDead()&&!connectControl.isStart()&&!monsters.isEmpty()) {
 				for (int i = 0; i < monsters.size(); i++) {
 					if (ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
 							|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
 						setLife(getLife() - 1);
-						
+
 						reDrawLife();
 						if (getLife() == 0)
 							setDead(true);
-						if(!isDead())
-						hitDelayMotion();
-						
+						if (!isDead())
+							hitDelayMotion();
+
 						System.out.println(getLife());
 						try {
 							Thread.sleep(2600);
@@ -634,6 +634,11 @@ public class issac extends Player {
 				connectControl.getSendMap().put("PlayerStats", getPlayerData());
 				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
 				connectControl.getSendMap().put("intView", getSendViewDirect());
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}
