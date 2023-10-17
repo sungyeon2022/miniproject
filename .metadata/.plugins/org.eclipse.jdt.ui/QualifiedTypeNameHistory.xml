@@ -5,7 +5,6 @@
     <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
     <fullyQualifiedTypeName name="sword.EnemySwordControl"/>
     <fullyQualifiedTypeName name="java.lang.Void"/>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="imgSize.SwordSize"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
@@ -58,6 +57,7 @@
     <fullyQualifiedTypeName name="sword.SwordControl"/>
     <fullyQualifiedTypeName name="javax.swing.SwingConstants"/>
     <fullyQualifiedTypeName name="connect.ConnectControl"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="player.issac"/>
 </qualifiedTypeNameHistroy>

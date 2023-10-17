@@ -13,7 +13,7 @@ import player.issac;
 
 public class body extends Monster {
 	private String GUBUN = "Body";
-	public int monsterSpeed = 1;
+	public int monsterSpeed = 2;
 	private int defaultX = 400;
 	private int defaultY = 200;
 	

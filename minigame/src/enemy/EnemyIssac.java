@@ -38,6 +38,7 @@ public class EnemyIssac extends Enemy {
 		setting();
 		ReceiveThread();
 		moveMotion();
+		hitCheck();
 	}
 
 	public void init(Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
@@ -66,7 +67,7 @@ public class EnemyIssac extends Enemy {
 		setAttackDamage(1);
 		setXEnemyCenter(getXEnemy() + issacSize.issacHEADWIDTH / 2);
 		setYEnemyCenter(getYEnemy() + issacSize.issacHEADHEIGHT);
-		
+
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (i <= getLife()) {
 				ssLife.get(i).drawObj(680 + (i * 30), 10);
@@ -100,7 +101,7 @@ public class EnemyIssac extends Enemy {
 				int motion = 0;
 				if (!isEnemyMoveStart()) {
 					setEnemyMoveStart(true);
-					while (true) {
+					while (!isDead()) {
 						if (getViewDirectInfo()[ViewDirect.DOWN] && getViewDirect() == ViewDirect.DOWN) {
 							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
@@ -162,18 +163,21 @@ public class EnemyIssac extends Enemy {
 							ssHead.drawObj(getXEnemy(), getYEnemy());
 							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 						}
+						if(getLife()==0) {
+							setDead(true);
+						}
 						try {
 							Thread.sleep(movespeed);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
-
+					deadMotion();
 				}
 			}
 		}).start();
 	}
-
+	
 	public void refreshDirect() {
 		if (getViewDirectInfo()[ViewDirect.DOWN]) {
 			setViewDirect(ViewDirect.DOWN);
@@ -207,11 +211,11 @@ public class EnemyIssac extends Enemy {
 
 		}
 	}
-	
+
 	public void hitCheck() {
-		new Thread(()->{
-			while (!isDead()) {
-				if(isInvincible()) {
+		new Thread(() -> {
+			while (!Thread.interrupted()) {
+				if (isInvincible()) {
 					ssBody.setVisible(false);
 					ssHead.setVisible(false);
 					ssDead.drawObj(getXEnemy(), getYEnemy());
@@ -242,17 +246,39 @@ public class EnemyIssac extends Enemy {
 							e.printStackTrace();
 						}
 					}
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}).start();
+	}
+
+	public void deadMotion() {
+		ssBody.setVisible(false);
+		ssHead.setVisible(false);
+		ssDead.setVisible(true);
+		ssDead.drawObj(getXEnemy(), getYEnemy());
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int gap = 51;
+		for (int i = 0; i < 2; i++) {
+			ssDead.setXPos(ssDead.getXPos() + gap * i);
+			ssDead.setWidth(55);
+			ssDead.drawObj(getXEnemy(), getYEnemy());
+		}
 	}
 	
 	public void ReceiveThread() {
 		new Thread(() -> {
 			while (!isDead()) {
-//				System.out.println(connectControl.getReciveMap());
-				if (!connectControl.getReciveMap().isEmpty()
-						&& (boolean) connectControl.getReciveMap().get("isStart")&&connectControl.getReciveMap().get("PlayerX")!=null) {
+				if (!connectControl.getReciveMap().isEmpty() && connectControl.getReciveMap().get("PlayerX") != null) {
 					setXEnemy((int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
 							- issacSize.issacBODYWIDTH + xPlusBody + 1);
 					setYEnemy((int) connectControl.getReciveMap().get("PlayerY")
@@ -260,18 +286,18 @@ public class EnemyIssac extends Enemy {
 					setViewDirect((int) connectControl.getReciveMap().get("intView"));
 					setViewDirectInfo(((boolean[]) connectControl.getReciveMap().get("booleanView")));
 					setKeyPress((boolean) connectControl.getReciveMap().get("isKeyPress"));
-					setLife((double) connectControl.getReciveMap().get("Life"));
 					setInvincible((boolean) connectControl.getReciveMap().get("isInvincible"));
+					setLife((double) connectControl.getReciveMap().get("Life"));
+					reDrawLife();
 					setMovespeed((int) connectControl.getReciveMap().get("MoveSpeed"));
 					setAttackDamage((double) connectControl.getReciveMap().get("AttackDamage"));
-					reDrawLife();
 				}
-//				try {
-//					Thread.sleep(10);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				try {
+					Thread.sleep(1);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}

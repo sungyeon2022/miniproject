@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 
 import Timer.TimerControl;
 import imgSize.BombSize;
-import item.Bomb;
 import item.Item;
 import objectSetting.MyFont;
 

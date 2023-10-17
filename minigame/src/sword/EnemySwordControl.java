@@ -26,6 +26,7 @@ public class EnemySwordControl extends Sword {
 		init(issac, enemyIssac);
 		setting();
 		swordNomalForm();
+		dotAttackThread();
 	}
 
 	public void init(issac issac, EnemyIssac enemyIssac) {
@@ -50,7 +51,7 @@ public class EnemySwordControl extends Sword {
 	@Override
 	public synchronized void swordNomalForm() {
 		new Thread(() -> {
-			while (!isSwordAttacking()&&!enemyIssac.isDead()) {
+			while (!isSwordAttacking() && !enemyIssac.isDead()) {
 				if (enemyIssac.isKeyPress()) {
 					swordAttackForm();
 					break;
@@ -107,14 +108,14 @@ public class EnemySwordControl extends Sword {
 						}
 
 					}
-					if (issac.isDead())
-						ssSword.setVisible(false);
 				}
 				try {
 					Thread.sleep(enemyIssac.getMovespeed());
 				} catch (Exception e) {
 				}
 			}
+			if (enemyIssac.isDead())
+				enemySwordControl.ssSword.setVisible(false);
 		}).start();
 
 	}
@@ -126,7 +127,7 @@ public class EnemySwordControl extends Sword {
 				int imgxlocation = 1;
 				int imgylocation = 0;
 				swingAttack();
-				while (true) {
+				while (!enemyIssac.isDead()) {
 					setSwordAttacking(true);
 					if (enemyIssac.getViewDirect() == ViewDirect.DOWN) {
 						if (imgxlocation == 1 && imgylocation > 3) {
@@ -222,10 +223,10 @@ public class EnemySwordControl extends Sword {
 
 	public void swingAttack() {
 		if ((ssSword.getBounds().intersects(issac.getSsBody().getBounds())
-				|| ssSword.getBounds().intersects(issac.getSsHead().getBounds()))&&!issac.isInvincible()) {
+				|| ssSword.getBounds().intersects(issac.getSsHead().getBounds())) && !issac.isInvincible()) {
 			issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
 			issac.reDrawLife();
-			if(issac.getLife()==0) {
+			if (issac.getLife() == 0) {
 				issac.setDead(true);
 			}
 			if (!issac.isDead()) {
@@ -233,5 +234,33 @@ public class EnemySwordControl extends Sword {
 			}
 			System.out.println(issac.getLife());
 		}
+	}
+
+	public void dotAttackThread() {
+		new Thread(() -> {
+			while (!Thread.interrupted() && !enemyIssac.isDead()) {
+				boolean isIssac = false;
+				if (!isSwordAttacking()) {
+					if ((enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds())
+							|| enemySwordControl.ssSword.getBounds().intersects(issac.getSsHead().getBounds()))&& !issac.isInvincible()) {
+						issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
+						issac.reDrawLife();
+						if(!issac.isDead()) issac.hitDelayMotion();
+						isIssac = true;
+					}
+				}
+				if(issac.getLife()==0) {
+					issac.setDead(true);
+				}
+				try {
+					if (isIssac && !isSwordAttacking()) {
+						Thread.sleep(1000);
+					} else {
+						Thread.sleep(500);
+					}
+				} catch (Exception e) {
+				}
+			}
+		}).start();
 	}
 }

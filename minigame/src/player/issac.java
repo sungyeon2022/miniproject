@@ -58,7 +58,7 @@ public class issac extends Player {
 		batch();
 		issacInfoRefresh();
 		moveMotion();
-		MonsterCheckThread();
+//		MonsterCheckThread();
 	}
 
 	public void init(Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items, ConnectControl connectControl) {
@@ -71,11 +71,6 @@ public class issac extends Player {
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssDead = new SpriteSheet("issac/issac.png", "issacDead", 63, 215, 42, 48);
-		// 레이블 초기화
-//		labomb = new JLabel(Integer.toString(bombCount));
-//		laspeed = new JLabel(Integer.toString(speedNum - moveSpeed));
-//		lapower = new JLabel(Integer.toString(powerNum));
-//		laattackspeed = new JLabel(Integer.toString(attackspeedNum));
 		ssLife = new Vector<SpriteSheet>();
 		for (int i = 0; i < getLife(); i++) {
 			this.ssLife.add(i,
@@ -538,11 +533,11 @@ public class issac extends Player {
 				connectControl.getSendMap().put("Life", getLife());
 				connectControl.getSendMap().put("MoveSpeed", getMoveSpeed());
 				connectControl.getSendMap().put("isInvincible", isInvincible());
-//				try {
-//					Thread.sleep(0);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}

@@ -39,7 +39,6 @@ import player.issac;
 import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
-import item.Bomb;
 import item.Heart;
 import item.Item;
 import item.Pill;

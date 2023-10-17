@@ -110,7 +110,7 @@ public class SwordControl extends Sword {
 
 						}
 						if (issac.isDead())
-							ssSword.setVisible(false);
+							swordControl.ssSword.setVisible(false);
 					}
 					try {
 						Thread.sleep(issac.getMoveSpeed());
@@ -118,6 +118,7 @@ public class SwordControl extends Sword {
 						e.printStackTrace();
 					}
 				}
+
 			}
 		}).start();
 
@@ -142,8 +143,6 @@ public class SwordControl extends Sword {
 							if (imgxlocation == 0 && imgylocation > 2) {
 								imgxlocation = 1;
 								imgylocation = 0;
-								setSwordAttacking(false);
-								swordNomalForm();
 								break;
 							}
 							swordControl.getSsSword().setUrl("sword/sword_down.png");
@@ -162,8 +161,6 @@ public class SwordControl extends Sword {
 							if (imgxlocation == 0 && imgylocation > 2) {
 								imgxlocation = 1;
 								imgylocation = 0;
-								setSwordAttacking(false);
-								swordNomalForm();
 								break;
 							}
 							swordControl.getSsSword().setUrl("sword/sword_up.png");
@@ -183,8 +180,6 @@ public class SwordControl extends Sword {
 							if (imgxlocation == 0 && imgylocation > 2) {
 								imgxlocation = 1;
 								imgylocation = 0;
-								setSwordAttacking(false);
-								swordNomalForm();
 								break;
 							}
 							swordControl.getSsSword().setUrl("sword/sword_left.png");
@@ -204,8 +199,6 @@ public class SwordControl extends Sword {
 							if (imgxlocation == 0 && imgylocation > 2) {
 								imgxlocation = 1;
 								imgylocation = 0;
-								setSwordAttacking(false);
-								swordNomalForm();
 								break;
 							}
 							swordControl.getSsSword().setUrl("sword/sword_right.png");
@@ -224,6 +217,8 @@ public class SwordControl extends Sword {
 							e.printStackTrace();
 						}
 					}
+					setSwordAttacking(false);
+					swordNomalForm();
 				}
 			}
 		}).start();
@@ -233,34 +228,27 @@ public class SwordControl extends Sword {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (!monsters.isEmpty() && !issac.isDead()) {
+				while (!Thread.interrupted() && !issac.isDead()) {
 					boolean ismonster = false;
-					if (isSwordAttacking() || monsters.isEmpty() || connectControl.isStart())
-						break;
-					for (int i = 0; i < monsters.size(); i++) {
-						if (isSwordAttacking() || monsters.isEmpty())
-							break;
-						if (swordControl.getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
-								&& !isSwordAttacking()) {
-							System.out.println("공격 적용");
-							monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
-							ismonster = true;
+						if (!monsters.isEmpty() && !isSwordAttacking()) {
+							for (int i = 0; i < monsters.size(); i++) {
+								if (swordControl.getSsSword().getBounds().intersects(
+										monsters.get(i).getSsMonster().getBounds()) && !isSwordAttacking()) {
+									System.out.println(isSwordAttacking());
+									System.out.println("공격 적용");
+									monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
+									ismonster = true;
+								}
+							}
 						}
-					}
 					try {
 						if (ismonster && !isSwordAttacking()) {
 							Thread.sleep(1000);
+						}else {
+							Thread.sleep(500);
 						}
 					} catch (Exception e) {
 					}
-				}
-				try {
-					Thread.sleep(getDotAttackDelay());
-				} catch (Exception e) {
-
-				} finally {
-					if (!monsters.isEmpty() && !connectControl.isStart())
-						dotAttack();
 				}
 			}
 		}).start();

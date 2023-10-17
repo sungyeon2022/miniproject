@@ -30,12 +30,5 @@ public class Enemy extends Lombok {
 		this.dead = false;
 		
 	}
-	public void moveRight() {}
-	public void moveLeft() {}
-	public void moveUp() {}
-	public void moveDown() {}
 	public void moveMotion() {}
-	public void isDeadCheck() {}
-	public void dead() {}
-	public void attack() {}
 }
