@@ -21,6 +21,7 @@ import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.Connect;
 import connect.ConnectControl;
+import connect.DataClass;
 import enemy.EnemyIssac;
 //import enemy.EnemyIssac;
 import imgSize.BodySize;
@@ -36,6 +37,7 @@ import objectSetting.ViewDirect;
 import monster.Head;
 import monster.Monster;
 import player.issac;
+import startButton.StartButtonControl;
 import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
@@ -59,8 +61,8 @@ public class miniApp extends JFrame {
 	private ConnectControl connectControl;
 	private TimerControl timerControl;
 	private EnemySwordControl enemySwordControl;
-	private JButton startButton;
-	private SpriteSheet ssButton;
+	private StartButtonControl startButtonControl;
+	private DataClass dataClass;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -85,14 +87,13 @@ public class miniApp extends JFrame {
 		issac = new issac(app, monsters, walls, items, connectControl);
 		swordControl = new SwordControl(app, issac, monsters, connectControl);
 		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
-		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac);
+		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac, connectControl);
 //		testControl = new TestControl(app, connectControl);
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 		timerControl = new TimerControl(app, connectControl);
-//		startButton = new JButton();
-		ssButton = new SpriteSheet("structure/namepaper.png", "Button", 0, 0, 91, 63);
+		startButtonControl = new StartButtonControl(app, issac, connectControl);
 	}
 
 	// JFrame을 통한 창출력

@@ -277,26 +277,18 @@ public class EnemyIssac extends Enemy {
 	
 	public void ReceiveThread() {
 		new Thread(() -> {
-			while (!isDead()) {
-				if (!connectControl.getReciveMap().isEmpty() && connectControl.getReciveMap().get("PlayerX") != null) {
-					setXEnemy((int) connectControl.getReciveMap().get("PlayerX") - issacSize.issacHEADWIDTH
-							- issacSize.issacBODYWIDTH + xPlusBody + 1);
-					setYEnemy((int) connectControl.getReciveMap().get("PlayerY")
-							- (issacSize.issacBODYHEIGHT + issacSize.issacHEADHEIGHT) * 2 + issacSize.issacBODYHEIGHT);
-					setViewDirect((int) connectControl.getReciveMap().get("intView"));
-					setViewDirectInfo(((boolean[]) connectControl.getReciveMap().get("booleanView")));
-					setKeyPress((boolean) connectControl.getReciveMap().get("isKeyPress"));
-					setInvincible((boolean) connectControl.getReciveMap().get("isInvincible"));
-					setLife((double) connectControl.getReciveMap().get("Life"));
+			while (!isDead()&&!Thread.interrupted()) {
+				if (connectControl.isIsconnect()) {
+					setXEnemy(connectControl.getReciveDataClass().getXPlayer());
+					setYEnemy(connectControl.getReciveDataClass().getYPlayer());
+					setViewDirect(connectControl.getReciveDataClass().getIntView());
+					setViewDirectInfo(connectControl.getReciveDataClass().getBooleanView());
+					setKeyPress(connectControl.getReciveDataClass().isAttack());
+					setInvincible(connectControl.getReciveDataClass().isInvincible());
+					setLife(connectControl.getReciveDataClass().getLife());
 					reDrawLife();
-					setMovespeed((int) connectControl.getReciveMap().get("MoveSpeed"));
-					setAttackDamage((double) connectControl.getReciveMap().get("AttackDamage"));
-				}
-				try {
-					Thread.sleep(1);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
+					setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
 				}
 			}
 		}).start();

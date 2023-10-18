@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
 import SpriteSheet.SpriteSheet;
+import connect.ConnectControl;
 import enemy.EnemyIssac;
 import imgSize.SwordMotionSize;
 import imgSize.SwordSize;
@@ -12,6 +13,7 @@ import lombok.Data;
 import player.issac;
 
 @Data
+
 public class EnemySwordControl extends Sword {
 	private final static String TAG = "SwordControl : ";
 	private EnemySwordControl enemySwordControl = this;
@@ -19,19 +21,21 @@ public class EnemySwordControl extends Sword {
 	private Sword sword;
 	private issac issac;
 	private EnemyIssac enemyIssac;
+	private ConnectControl connectControl;
 
-	public EnemySwordControl(JFrame app, issac issac, EnemyIssac enemyIssac) {
+	public EnemySwordControl(JFrame app, issac issac, EnemyIssac enemyIssac, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "makeSword");
-		init(issac, enemyIssac);
+		init(issac, enemyIssac, connectControl);
 		setting();
 		swordNomalForm();
 		dotAttackThread();
 	}
 
-	public void init(issac issac, EnemyIssac enemyIssac) {
+	public void init(issac issac, EnemyIssac enemyIssac, ConnectControl connectControl) {
 		this.issac = issac;
 		this.enemyIssac = enemyIssac;
+		this.connectControl = connectControl;
 		ssSword = new SpriteSheet("sword/sword_down.png", "issac_sword",
 				SwordSize.SWORDIMGWIDTH - SwordSize.SWORDXGAP - SwordSize.SWORDWIDTH, SwordSize.SWORDYGAP,
 				SwordSize.SWORDWIDTH, SwordSize.SWORDYHEIGHT - 2);
@@ -242,7 +246,7 @@ public class EnemySwordControl extends Sword {
 				boolean isIssac = false;
 				if (!isSwordAttacking()) {
 					if ((enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds())
-							|| enemySwordControl.ssSword.getBounds().intersects(issac.getSsHead().getBounds()))&& !issac.isInvincible()) {
+							|| enemySwordControl.ssSword.getBounds().intersects(issac.getSsHead().getBounds()))&& !issac.isInvincible() && connectControl.isStart()) {
 						issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
 						issac.reDrawLife();
 						if(!issac.isDead()) issac.hitDelayMotion();

@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
-
+import connect.DataClass;
 import imgSize.*;
 import lombok.Data;
 import monster.Monster;
@@ -276,7 +276,8 @@ public class issac extends Player {
 					while (isUp()) {
 						if (isDead())
 							break;
-						if (getYPlayer() < 100) {
+						if (getYPlayer() < 80) {
+							setUp(false);
 							refreshDirect();
 							break;
 						}
@@ -522,21 +523,21 @@ public class issac extends Player {
 
 	public void issacInfoRefresh() {
 		new Thread(() -> {
-			while (connectControl.isIsconnect()) {
-				connectControl.getSendMap().put("PlayerX", 960 - getXPlayer());
-				connectControl.getSendMap().put("PlayerY", 640 - getYPlayer());
-				connectControl.getSendMap().put("PlayerStats", getPlayerData());
-				connectControl.getSendMap().put("booleanView", getViewDirectInfo());
-				connectControl.getSendMap().put("intView", getSendViewDirect());
-				connectControl.getSendMap().put("isKeyPress", isKeyPress());
-				connectControl.getSendMap().put("AttackDamage", getAttackDamage());
-				connectControl.getSendMap().put("Life", getLife());
-				connectControl.getSendMap().put("MoveSpeed", getMoveSpeed());
-				connectControl.getSendMap().put("isInvincible", isInvincible());
+			while (connectControl.isIsconnect()&&!Thread.interrupted()) {
+				connectControl.getSendDataClass().setXPlayer(960-getXPlayer());
+				connectControl.getSendDataClass().setYPlayer(640-getYPlayer());
+				connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
+				connectControl.getSendDataClass().setIntView(getSendViewDirect());
+				connectControl.getSendDataClass().setAttack(isKeyPress());
+				connectControl.getSendDataClass().setAttackDamage(getAttackDamage());
+				connectControl.getSendDataClass().setLife(getLife());
+				connectControl.getSendDataClass().setMoveSpeed(getMoveSpeed());
+				connectControl.getSendDataClass().setInvincible(isInvincible());
+				System.out.println(connectControl.getSendDataClass().toString());
 				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+					Thread.sleep(10);
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 			}
 		}).start();

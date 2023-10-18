@@ -16,19 +16,21 @@ public class ConnectControl extends Connect {
 		connect();
 
 	}
-	
+
 	public void connect() {
 		try {
 			setSocket(new Socket("localhost", getSocketNum()));// 소켓 정보 초기화
 			System.out.println("서버 연결 성공");// 확인용
 			setIsconnect(true);
 			System.out.println("게임 시작");
-
+			setSendDataClass(new DataClass());
 			setMyInputStream(getSocket().getInputStream());
 			setMyOutputStream(getSocket().getOutputStream());
 			setMyObjectInputStream(new ObjectInputStream(getMyInputStream()));
 			setMyObjectOutputStream(new ObjectOutputStream(getMyOutputStream()));
-			getSendMap().put("Client name", getName());
+			getSendDataClass().setClientName(getName());
+			getMyObjectOutputStream().writeObject(getSendDataClass());
+			getMyObjectOutputStream().reset();
 			SendDataThread();
 			ReceiveDataThread();
 		} catch (UnknownHostException e) { // 호스트 확인실패
@@ -39,45 +41,46 @@ public class ConnectControl extends Connect {
 			System.out.println("서버 연결 실패");// 확인용
 		}
 	}
+
 	@Override
 	public void SendDataThread() {
-		new Thread(()->	{
-			
-			while (true) {
+		new Thread(() -> {
+			while (!Thread.interrupted()) {
 				if (isIsconnect()) {
 					try {
-						getMyObjectOutputStream().writeObject(getSendMap());
-						getMyObjectOutputStream().reset();
-						Thread.sleep(10);
-					} catch (IOException | InterruptedException e) {
+						if (isMulti()) {
+							getMyObjectOutputStream().writeObject(getSendDataClass());
+							getMyObjectOutputStream().reset();
+						}
+					} catch (IOException e) {
 						System.out.println("서버 강제 종료");
 						setIsconnect(false);
 					}
-				}else break;
+				} else
+					break;
 			}
 		}).start();
 
 	}
+
 	@Override
 	public void ReceiveDataThread() {
 
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (true) {
+				while (!Thread.interrupted()) {
 					if (isIsconnect()) {
 						try {
-							setReceiveObject(getMyObjectInputStream().readObject());
-							setReciveMap((Map<String, Object>) getReceiveObject());
-							setStart((boolean) getReciveMap().get("isStart"));
-							setReady((boolean) getReciveMap().get("isReady"));
+							if (isMulti()) {
+								setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
+								setStart(getReciveDataClass().isStart());
+								setReady(getReciveDataClass().isReady());
+							}
 						} catch (IOException | ClassNotFoundException e) {
 							System.out.println("서버 닫힘");
 							setIsconnect(false);
 						}
-					} else {
-						System.out.println("작동정지");
-						break;
 					}
 				}
 

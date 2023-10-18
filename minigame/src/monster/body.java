@@ -70,7 +70,7 @@ public class body extends Monster {
 
 	@Override
 	public void moveRight() {
-			if(getXPlayer() < getIssac().getXPlayer()) {
+			if(getXPlayer() < getIssac().getXPlayerCenter()-getSsMonster().getWidth()/2) {
 				setViewDirect(ViewDirect.RIGHT);
 				setXPlayer(getXPlayer() + monsterSpeed);
 				setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
@@ -81,7 +81,7 @@ public class body extends Monster {
 	}
 	@Override
 	public void moveLeft() {
-			if(getXPlayer() > getIssac().getXPlayer()) {
+			if(getXPlayer() > getIssac().getXPlayerCenter()-getSsMonster().getWidth()/2) {
 				setViewDirect(ViewDirect.LEFT);
 				setXPlayer(getXPlayer() - monsterSpeed);
 				setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
@@ -92,7 +92,7 @@ public class body extends Monster {
 	}
 	@Override
 	public void moveUp() {
-			if(getYPlayer() > getIssac().getYPlayer()) {
+			if(getYPlayer() > getIssac().getYPlayerCenter()-getSsMonster().getHeight()/2) {
 				setViewDirect(ViewDirect.UP);
 				setYPlayer(getYPlayer() - monsterSpeed);
 				setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
@@ -104,7 +104,7 @@ public class body extends Monster {
 	}
 	@Override
 	public void moveDown() {
-			if(getYPlayer() < getIssac().getYPlayer()) {
+			if(getYPlayer() < getIssac().getYPlayerCenter()-getSsMonster().getHeight()/2) {
 				setViewDirect(ViewDirect.DOWN);
 				setYPlayer(getYPlayer() + monsterSpeed);
 				setYPlayerCenter(getYPlayerCenter() + monsterSpeed);

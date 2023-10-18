@@ -50,8 +50,8 @@ public class TimerControl extends Timer {
 	public void timerThread() {
 		new Thread(() -> {
 			while (true) {
-				if (!(connectControl.getReciveMap().get("Timer") == null)) {
-					timerLabel.setText((String) connectControl.getReciveMap().get("Timer"));
+				if (!connectControl.isIsconnect()) {
+					timerLabel.setText(connectControl.getReciveDataClass().getTimer());
 				}else timerLabel.setText("Single");
 //				setMliSec(((int)System.currentTimeMillis()/10)-getStartTime());
 //				setSec(String.format("%02d", getMliSec()/100%60));
