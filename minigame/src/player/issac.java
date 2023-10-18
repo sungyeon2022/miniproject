@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
-import connect.DataClass;
+import data.DataClass;
 import imgSize.*;
 import lombok.Data;
 import monster.Monster;
@@ -479,11 +479,11 @@ public class issac extends Player {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		}).start();
 	}
-	
+
 	public void hitDelayMotion() {
 		new Thread(() -> {
 			setInvincible(true);
@@ -523,21 +523,23 @@ public class issac extends Player {
 
 	public void issacInfoRefresh() {
 		new Thread(() -> {
-			while (connectControl.isIsconnect()&&!Thread.interrupted()) {
-				connectControl.getSendDataClass().setXPlayer(960-getXPlayer());
-				connectControl.getSendDataClass().setYPlayer(640-getYPlayer());
-				connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
-				connectControl.getSendDataClass().setIntView(getSendViewDirect());
-				connectControl.getSendDataClass().setAttack(isKeyPress());
-				connectControl.getSendDataClass().setAttackDamage(getAttackDamage());
-				connectControl.getSendDataClass().setLife(getLife());
-				connectControl.getSendDataClass().setMoveSpeed(getMoveSpeed());
-				connectControl.getSendDataClass().setInvincible(isInvincible());
-				System.out.println(connectControl.getSendDataClass().toString());
-				try {
-					Thread.sleep(10);
-				} catch (Exception e) {
-					// TODO: handle exception
+			while (connectControl.isIsconnect() && !Thread.interrupted()) {
+				if (connectControl.isMulti()) {
+					connectControl.getSendDataClass().setXPlayer(960 - getXPlayer());
+					connectControl.getSendDataClass().setYPlayer(640 - getYPlayer());
+					connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
+					connectControl.getSendDataClass().setIntView(getSendViewDirect());
+					connectControl.getSendDataClass().setAttack(isKeyPress());
+					connectControl.getSendDataClass().setAttackDamage(getAttackDamage());
+					connectControl.getSendDataClass().setLife(getLife());
+					connectControl.getSendDataClass().setMoveSpeed(getMoveSpeed());
+					connectControl.getSendDataClass().setInvincible(isInvincible());
+					try {
+						Thread.sleep(20);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}).start();

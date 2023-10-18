@@ -1,4 +1,4 @@
-package connect;
+package data;
 
 import java.io.Serializable;
 import java.util.Arrays;

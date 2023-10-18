@@ -21,7 +21,7 @@ import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.Connect;
 import connect.ConnectControl;
-import connect.DataClass;
+import data.DataClass;
 import enemy.EnemyIssac;
 //import enemy.EnemyIssac;
 import imgSize.BodySize;

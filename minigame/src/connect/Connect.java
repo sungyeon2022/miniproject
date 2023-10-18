@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Handler;
 
+import data.DataClass;
 import lombok.Data;
 import lombok.Lombok;
 import player.issac;

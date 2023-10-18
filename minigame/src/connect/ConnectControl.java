@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Map;
 
+import data.DataClass;
 import lombok.Data;
 
 @Data
@@ -29,6 +30,7 @@ public class ConnectControl extends Connect {
 			setMyObjectInputStream(new ObjectInputStream(getMyInputStream()));
 			setMyObjectOutputStream(new ObjectOutputStream(getMyOutputStream()));
 			getSendDataClass().setClientName(getName());
+			System.out.println(getSendDataClass().getClass());
 			getMyObjectOutputStream().writeObject(getSendDataClass());
 			getMyObjectOutputStream().reset();
 			SendDataThread();

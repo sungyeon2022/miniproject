@@ -278,7 +278,7 @@ public class EnemyIssac extends Enemy {
 	public void ReceiveThread() {
 		new Thread(() -> {
 			while (!isDead()&&!Thread.interrupted()) {
-				if (connectControl.isIsconnect()) {
+				if (connectControl.isIsconnect()&&connectControl.getReciveDataClass()!=null) {
 					setXEnemy(connectControl.getReciveDataClass().getXPlayer());
 					setYEnemy(connectControl.getReciveDataClass().getYPlayer());
 					setViewDirect(connectControl.getReciveDataClass().getIntView());
