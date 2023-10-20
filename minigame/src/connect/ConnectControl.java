@@ -33,8 +33,10 @@ public class ConnectControl extends Connect {
 			System.out.println(getSendDataClass().getClass());
 			getMyObjectOutputStream().writeObject(getSendDataClass());
 			getMyObjectOutputStream().reset();
-			SendDataThread();
-			ReceiveDataThread();
+			if (isIsconnect()) {
+				SendDataThread();
+				ReceiveDataThread();
+			}
 		} catch (UnknownHostException e) { // 호스트 확인실패
 			setIsconnect(false);
 			System.out.println("서버 확인 실패");// 확인용
@@ -47,19 +49,21 @@ public class ConnectControl extends Connect {
 	@Override
 	public void SendDataThread() {
 		new Thread(() -> {
-			while (!Thread.interrupted()) {
-				if (isIsconnect()) {
-					try {
-						if (isMulti()) {
-							getMyObjectOutputStream().writeObject(getSendDataClass());
-							getMyObjectOutputStream().reset();
-						}
-					} catch (IOException e) {
-						System.out.println("서버 강제 종료");
-						setIsconnect(false);
+			while (isIsconnect()) {
+				try {
+					if (isMulti()) {
+						getMyObjectOutputStream().writeObject(getSendDataClass());
+						getMyObjectOutputStream().reset();
 					}
-				} else
-					break;
+				} catch (IOException e) {
+					System.out.println("서버 강제 종료");
+					setIsconnect(false);
+				}
+				try {
+					Thread.sleep(5);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 
@@ -71,21 +75,21 @@ public class ConnectControl extends Connect {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (!Thread.interrupted()) {
-					if (isIsconnect()) {
-						try {
-							if (isMulti()) {
-								setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
-								setStart(getReciveDataClass().isStart());
-								setReady(getReciveDataClass().isReady());
-							}
-						} catch (IOException | ClassNotFoundException e) {
-							System.out.println("서버 닫힘");
-							setIsconnect(false);
-						}
+				while (isIsconnect()) {
+					try {
+						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
+						setStart(getReciveDataClass().isStart());
+						setReady(getReciveDataClass().isReady());
+					} catch (IOException | ClassNotFoundException e) {
+						System.out.println("서버 닫힘");
+						setIsconnect(false);
+					}
+					try {
+						Thread.sleep(5);
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 				}
-
 			}
 		}).start();
 

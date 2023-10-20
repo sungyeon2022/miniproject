@@ -36,9 +36,6 @@ public class EnemyIssac extends Enemy {
 		System.out.println(TAG + "make issac");
 		init(walls, items, issac, connectControl);
 		setting();
-		ReceiveThread();
-		moveMotion();
-		hitCheck();
 	}
 
 	public void init(Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
@@ -60,7 +57,7 @@ public class EnemyIssac extends Enemy {
 		}
 	}
 
-	public void setting() {
+	public synchronized void setting() {
 		setViewDirect(ViewDirect.DOWN);
 		setXEnemy(449);
 		setYEnemy(110);
@@ -74,7 +71,6 @@ public class EnemyIssac extends Enemy {
 			} else {
 				ssLife.get(i).drawObj(680 + (i * 30), 10);
 			}
-
 		}
 	}
 
@@ -84,6 +80,7 @@ public class EnemyIssac extends Enemy {
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
 		getApp().add(ssDead, 2);
+		moveMotion();
 		// 폭탄 파워 속도 레이블 추가
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
@@ -93,7 +90,7 @@ public class EnemyIssac extends Enemy {
 	}
 
 	@Override
-	public void moveMotion() { // 움직이는 동작중 이미지 갱신
+	public synchronized void moveMotion() { // 움직이는 동작중 이미지 갱신
 		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
 		new Thread(new Runnable() {
 			@Override
@@ -102,6 +99,7 @@ public class EnemyIssac extends Enemy {
 				if (!isEnemyMoveStart()) {
 					setEnemyMoveStart(true);
 					while (!isDead()) {
+						receiveData();
 						if (getViewDirectInfo()[ViewDirect.DOWN] && getViewDirect() == ViewDirect.DOWN) {
 							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
@@ -163,8 +161,12 @@ public class EnemyIssac extends Enemy {
 							ssHead.drawObj(getXEnemy(), getYEnemy());
 							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 						}
-						if(getLife()==0) {
+						if (getLife() == 0) {
 							setDead(true);
+							break;
+						}
+						if (isInvincible()) {
+							hitCheck();
 						}
 						try {
 							Thread.sleep(movespeed);
@@ -177,7 +179,7 @@ public class EnemyIssac extends Enemy {
 			}
 		}).start();
 	}
-	
+
 	public void refreshDirect() {
 		if (getViewDirectInfo()[ViewDirect.DOWN]) {
 			setViewDirect(ViewDirect.DOWN);
@@ -212,46 +214,42 @@ public class EnemyIssac extends Enemy {
 		}
 	}
 
-	public void hitCheck() {
+	public synchronized void hitCheck() {
 		new Thread(() -> {
-			while (!Thread.interrupted()) {
-				if (isInvincible()) {
-					ssBody.setVisible(false);
-					ssHead.setVisible(false);
-					ssDead.drawObj(getXEnemy(), getYEnemy());
-					ssDead.setVisible(true);
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					ssDead.setVisible(false);
-					ssBody.setVisible(true);
-					ssHead.setVisible(true);
-					for (int i = 300; i > 0; i -= 50) {
-						ssBody.setVisible(false);
-						ssHead.setVisible(false);
-						try {
-							Thread.sleep(i);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						ssBody.setVisible(true);
-						ssHead.setVisible(true);
-						try {
-							Thread.sleep(i);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+			ssBody.setVisible(false);
+			ssHead.setVisible(false);
+			ssDead.drawObj(getXEnemy(), getYEnemy());
+			ssDead.setVisible(true);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			ssDead.setVisible(false);
+			ssBody.setVisible(true);
+			ssHead.setVisible(true);
+			for (int i = 300; i > 0; i -= 50) {
+				ssBody.setVisible(false);
+				ssHead.setVisible(false);
+				try {
+					Thread.sleep(i);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+				ssBody.setVisible(true);
+				ssHead.setVisible(true);
+				try {
+					Thread.sleep(i);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}).start();
 	}
@@ -274,25 +272,19 @@ public class EnemyIssac extends Enemy {
 			ssDead.drawObj(getXEnemy(), getYEnemy());
 		}
 	}
-	
-	public void ReceiveThread() {
-		new Thread(() -> {
-			while (!isDead()&&!Thread.interrupted()) {
-				if (connectControl.isIsconnect()&&connectControl.getReciveDataClass()!=null) {
-					setXEnemy(connectControl.getReciveDataClass().getXPlayer());
-					setYEnemy(connectControl.getReciveDataClass().getYPlayer());
-					setViewDirect(connectControl.getReciveDataClass().getIntView());
-					setViewDirectInfo(connectControl.getReciveDataClass().getBooleanView());
-					setKeyPress(connectControl.getReciveDataClass().isAttack());
-					setInvincible(connectControl.getReciveDataClass().isInvincible());
-					setLife(connectControl.getReciveDataClass().getLife());
-					reDrawLife();
-					setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
-					setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
-				}
-			}
-		}).start();
-	}
-	// 주변 아이템 여부 체크
 
+	public void receiveData() {
+		if (connectControl.isIsconnect() && connectControl.getReciveDataClass() != null) {
+			setXEnemy(connectControl.getReciveDataClass().getXPlayer());
+			setYEnemy(connectControl.getReciveDataClass().getYPlayer());
+			setViewDirect(connectControl.getReciveDataClass().getIntView());
+			setViewDirectInfo(connectControl.getReciveDataClass().getBooleanView());
+			setKeyPress(connectControl.getReciveDataClass().isAttack());
+			setInvincible(connectControl.getReciveDataClass().isInvincible());
+			setLife(connectControl.getReciveDataClass().getLife());
+			reDrawLife();
+			setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
+			setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
+		}
+	}
 }

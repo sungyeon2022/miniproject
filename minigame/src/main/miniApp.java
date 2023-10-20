@@ -79,12 +79,13 @@ public class miniApp extends JFrame {
 	public void init() {
 		app = this;
 		connectControl = new ConnectControl();
-//		page = new Page(app);
 		bg = new Background(app);
+		startButtonControl = new StartButtonControl(app, connectControl);
+//		page = new Page(app);
 		monsters = new Vector<Monster>();
-		items = new Vector<Item>();
+//		items = new Vector<Item>();
 		walls = new Vector<wall>();
-		issac = new issac(app, monsters, walls, items, connectControl);
+		issac = new issac(app, monsters, walls, items, startButtonControl, connectControl);
 		swordControl = new SwordControl(app, issac, monsters, connectControl);
 		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
 		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac, connectControl);
@@ -93,7 +94,7 @@ public class miniApp extends JFrame {
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 		timerControl = new TimerControl(app, connectControl);
-		startButtonControl = new StartButtonControl(app, issac, connectControl);
+		
 	}
 
 	// JFrame을 통한 창출력
@@ -176,14 +177,6 @@ public class miniApp extends JFrame {
 //			}
 //		}).start();
 //	}
-
-	public void checkSinormul() {
-		try {
-			System.in.read();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {

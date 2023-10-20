@@ -60,10 +60,7 @@ public class SwordControl extends Sword {
 					if (issac.isKeyPress()) {
 						swordAttackForm();
 						break;
-					}
-					if (isSwordAttacking())
-						break;
-					else {
+					} else {
 						if (issac.getViewDirect() == ViewDirect.LEFT) {
 							swordControl.getSsSword().setUrl("sword/sword_left.png");
 							swordControl.getSsSword().setXPos(
@@ -118,7 +115,6 @@ public class SwordControl extends Sword {
 						e.printStackTrace();
 					}
 				}
-
 			}
 		}).start();
 
@@ -126,102 +122,93 @@ public class SwordControl extends Sword {
 
 	@Override
 	public synchronized void swordAttackForm() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				if (issac.isKeyPress()) {
-					int imgxlocation = 1;
-					int imgylocation = 0;
-					swingAttack();
-					while (true) {
-						setSwordAttacking(true);// 어택 모션중 모션 검 생성 제한
-						if (issac.getViewDirect() == ViewDirect.DOWN) {
-							if (imgxlocation == 1 && imgylocation > 3) {
-								imgylocation = 0;
-								imgxlocation--;
-							}
-							if (imgxlocation == 0 && imgylocation > 2) {
-								imgxlocation = 1;
-								imgylocation = 0;
-								break;
-							}
-							swordControl.getSsSword().setUrl("sword/sword_down.png");
-							swordControl.getSsSword().setWidth(SwordMotionSize.WIDTH);
-							swordControl.getSsSword().setHeight(SwordMotionSize.HEIGHT);
-							swordControl.getSsSword().setXPos(SwordMotionSize.WIDTH * imgxlocation);
-							swordControl.getSsSword().setYPos(SwordSize.SWORDIMGHEIGHT - (SwordMotionSize.IMGHEIGHT)
-									+ (SwordMotionSize.HEIGHT * imgylocation));
-							swordControl.getSsSword().drawObj(issac.getXPlayer() - 28, issac.getYPlayer() + 25);
-							imgylocation++;
-						} else if (issac.getViewDirect() == ViewDirect.UP) {
-							if (imgxlocation == 1 && imgylocation > 3) {
-								imgylocation = 0;
-								imgxlocation--;
-							}
-							if (imgxlocation == 0 && imgylocation > 2) {
-								imgxlocation = 1;
-								imgylocation = 0;
-								break;
-							}
-							swordControl.getSsSword().setUrl("sword/sword_up.png");
-							swordControl.getSsSword().setWidth(SwordMotionSize.WIDTH);
-							swordControl.getSsSword().setHeight(SwordMotionSize.HEIGHT);
-							swordControl.getSsSword()
-									.setXPos(SwordMotionSize.WIDTH - (SwordMotionSize.WIDTH * imgxlocation));
-							swordControl.getSsSword().setYPos(SwordMotionSize.IMGHEIGHT - SwordMotionSize.HEIGHT
-									- (SwordMotionSize.HEIGHT * imgylocation));
-							swordControl.getSsSword().drawObj(issac.getXPlayer() - 28, issac.getYPlayer() - 50);
-							imgylocation++;
-						} else if (issac.getViewDirect() == ViewDirect.LEFT) {
-							if (imgxlocation == 1 && imgylocation > 3) {
-								imgylocation = 0;
-								imgxlocation--;
-							}
-							if (imgxlocation == 0 && imgylocation > 2) {
-								imgxlocation = 1;
-								imgylocation = 0;
-								break;
-							}
-							swordControl.getSsSword().setUrl("sword/sword_left.png");
-							swordControl.getSsSword().setWidth(SwordMotionSize.HEIGHT);
-							swordControl.getSsSword().setHeight(SwordMotionSize.WIDTH);
-							swordControl.getSsSword().setXPos((SwordMotionSize.IMGHEIGHT) - SwordMotionSize.HEIGHT
-									- (SwordMotionSize.HEIGHT * imgylocation));
-							swordControl.getSsSword().setYPos(SwordMotionSize.WIDTH * imgxlocation);
-							swordControl.getSsSword().drawObj(issac.getXPlayer() - 60, issac.getYPlayer() - 10);
-
-							imgylocation++;
-						} else if (issac.getViewDirect() == ViewDirect.RIGHT) {
-							if (imgxlocation == 1 && imgylocation > 3) {
-								imgylocation = 0;
-								imgxlocation--;
-							}
-							if (imgxlocation == 0 && imgylocation > 2) {
-								imgxlocation = 1;
-								imgylocation = 0;
-								break;
-							}
-							swordControl.getSsSword().setUrl("sword/sword_right.png");
-							swordControl.getSsSword().setWidth(SwordMotionSize.HEIGHT);
-							swordControl.getSsSword().setHeight(SwordMotionSize.WIDTH);
-							swordControl.getSsSword().setXPos(SwordSize.SWORDIMGHEIGHT - SwordMotionSize.IMGHEIGHT
-									+ (SwordMotionSize.HEIGHT * imgylocation));
-							swordControl.getSsSword()
-									.setYPos(SwordMotionSize.WIDTH - (SwordMotionSize.WIDTH * imgxlocation));
-							swordControl.getSsSword().drawObj(issac.getXPlayer() + 20, issac.getYPlayer() - 10);
-							imgylocation++;
-						}
-						try {
-							Thread.sleep(30);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					setSwordAttacking(false);
-					swordNomalForm();
+		int imgxlocation = 1;
+		int imgylocation = 0;
+		swingAttack();
+		while (true) {
+			setSwordAttacking(true);// 어택 모션중 모션 검 생성 제한
+			if (issac.getViewDirect() == ViewDirect.DOWN) {
+				if (imgxlocation == 1 && imgylocation > 3) {
+					imgylocation = 0;
+					imgxlocation--;
 				}
+				if (imgxlocation == 0 && imgylocation > 2) {
+					imgxlocation = 1;
+					imgylocation = 0;
+					break;
+				}
+				swordControl.getSsSword().setUrl("sword/sword_down.png");
+				swordControl.getSsSword().setWidth(SwordMotionSize.WIDTH);
+				swordControl.getSsSword().setHeight(SwordMotionSize.HEIGHT);
+				swordControl.getSsSword().setXPos(SwordMotionSize.WIDTH * imgxlocation);
+				swordControl.getSsSword().setYPos(SwordSize.SWORDIMGHEIGHT - (SwordMotionSize.IMGHEIGHT)
+						+ (SwordMotionSize.HEIGHT * imgylocation));
+				swordControl.getSsSword().drawObj(issac.getXPlayer() - 28, issac.getYPlayer() + 25);
+				imgylocation++;
+			} else if (issac.getViewDirect() == ViewDirect.UP) {
+				if (imgxlocation == 1 && imgylocation > 3) {
+					imgylocation = 0;
+					imgxlocation--;
+				}
+				if (imgxlocation == 0 && imgylocation > 2) {
+					imgxlocation = 1;
+					imgylocation = 0;
+					break;
+				}
+				swordControl.getSsSword().setUrl("sword/sword_up.png");
+				swordControl.getSsSword().setWidth(SwordMotionSize.WIDTH);
+				swordControl.getSsSword().setHeight(SwordMotionSize.HEIGHT);
+				swordControl.getSsSword().setXPos(SwordMotionSize.WIDTH - (SwordMotionSize.WIDTH * imgxlocation));
+				swordControl.getSsSword().setYPos(
+						SwordMotionSize.IMGHEIGHT - SwordMotionSize.HEIGHT - (SwordMotionSize.HEIGHT * imgylocation));
+				swordControl.getSsSword().drawObj(issac.getXPlayer() - 28, issac.getYPlayer() - 50);
+				imgylocation++;
+			} else if (issac.getViewDirect() == ViewDirect.LEFT) {
+				if (imgxlocation == 1 && imgylocation > 3) {
+					imgylocation = 0;
+					imgxlocation--;
+				}
+				if (imgxlocation == 0 && imgylocation > 2) {
+					imgxlocation = 1;
+					imgylocation = 0;
+					break;
+				}
+				swordControl.getSsSword().setUrl("sword/sword_left.png");
+				swordControl.getSsSword().setWidth(SwordMotionSize.HEIGHT);
+				swordControl.getSsSword().setHeight(SwordMotionSize.WIDTH);
+				swordControl.getSsSword().setXPos(
+						(SwordMotionSize.IMGHEIGHT) - SwordMotionSize.HEIGHT - (SwordMotionSize.HEIGHT * imgylocation));
+				swordControl.getSsSword().setYPos(SwordMotionSize.WIDTH * imgxlocation);
+				swordControl.getSsSword().drawObj(issac.getXPlayer() - 60, issac.getYPlayer() - 10);
+
+				imgylocation++;
+			} else if (issac.getViewDirect() == ViewDirect.RIGHT) {
+				if (imgxlocation == 1 && imgylocation > 3) {
+					imgylocation = 0;
+					imgxlocation--;
+				}
+				if (imgxlocation == 0 && imgylocation > 2) {
+					imgxlocation = 1;
+					imgylocation = 0;
+					break;
+				}
+				swordControl.getSsSword().setUrl("sword/sword_right.png");
+				swordControl.getSsSword().setWidth(SwordMotionSize.HEIGHT);
+				swordControl.getSsSword().setHeight(SwordMotionSize.WIDTH);
+				swordControl.getSsSword().setXPos(
+						SwordSize.SWORDIMGHEIGHT - SwordMotionSize.IMGHEIGHT + (SwordMotionSize.HEIGHT * imgylocation));
+				swordControl.getSsSword().setYPos(SwordMotionSize.WIDTH - (SwordMotionSize.WIDTH * imgxlocation));
+				swordControl.getSsSword().drawObj(issac.getXPlayer() + 20, issac.getYPlayer() - 10);
+				imgylocation++;
 			}
-		}).start();
+			try {
+				Thread.sleep(30);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		setSwordAttacking(false);
+		swordNomalForm();
 	}
 
 	public void dotAttack() {
@@ -230,21 +217,21 @@ public class SwordControl extends Sword {
 			public void run() {
 				while (!Thread.interrupted() && !issac.isDead()) {
 					boolean ismonster = false;
-						if (!monsters.isEmpty() && !isSwordAttacking()) {
-							for (int i = 0; i < monsters.size(); i++) {
-								if (swordControl.getSsSword().getBounds().intersects(
-										monsters.get(i).getSsMonster().getBounds()) && !isSwordAttacking()) {
-									System.out.println(isSwordAttacking());
-									System.out.println("공격 적용");
-									monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
-									ismonster = true;
-								}
+					if (!monsters.isEmpty() && !isSwordAttacking()) {
+						for (int i = 0; i < monsters.size(); i++) {
+							if (swordControl.getSsSword().getBounds()
+									.intersects(monsters.get(i).getSsMonster().getBounds()) && !isSwordAttacking()) {
+								System.out.println(isSwordAttacking());
+								System.out.println("공격 적용");
+								monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());
+								ismonster = true;
 							}
 						}
+					}
 					try {
 						if (ismonster && !isSwordAttacking()) {
 							Thread.sleep(1000);
-						}else {
+						} else {
 							Thread.sleep(500);
 						}
 					} catch (Exception e) {

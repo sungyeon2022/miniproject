@@ -14,6 +14,7 @@ import lombok.Data;
 import monster.Monster;
 import monster.Worm;
 import objectSetting.ViewDirect;
+import startButton.StartButtonControl;
 import wall.*;
 import item.*;
 
@@ -23,6 +24,7 @@ public class issac extends Player {
 	private final static String TAG = "issac: ";
 	private issac issac = this;
 //	private EnemyIssac enemyIssac;
+	private StartButtonControl startButtonControl;
 	private SpriteSheet ssHead, ssBody;
 	private SpriteSheet ssDead, ssHit;
 	private Vector<SpriteSheet> ssLife;
@@ -50,19 +52,19 @@ public class issac extends Player {
 	private ConnectControl connectControl;
 
 	public issac(JFrame app, Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items,
-			ConnectControl connectControl) {
+			StartButtonControl startButtonControl, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
-		init(monsters, walls, items, connectControl);
+		init(monsters, walls, items, startButtonControl, connectControl);
 		setting();
 		batch();
-		issacInfoRefresh();
 		moveMotion();
-//		MonsterCheckThread();
 	}
 
-	public void init(Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items, ConnectControl connectControl) {
+	public void init(Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items,
+			StartButtonControl startButtonControl, ConnectControl connectControl) {
 		this.connectControl = connectControl;
+		this.startButtonControl = startButtonControl;
 		this.walls = walls;
 		this.items = items;
 		this.monsters = monsters;
@@ -89,7 +91,7 @@ public class issac extends Player {
 		setYPlayer(430);
 		setAttackDamage(1);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
-		setYPlayerCenter(getYPlayer() + issacSize.issacHEADHEIGHT);
+		setYPlayerCenter(getYPlayer() + (issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT)/2);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 		for (int i = 0; i < getMaxlife(); i++) {
@@ -377,6 +379,11 @@ public class issac extends Player {
 								motion += 1;
 							}
 						}
+						if (!connectControl.isMulti()) {
+							startCheck();
+						}
+						MonsterCheck();
+						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -445,7 +452,6 @@ public class issac extends Player {
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int gap = 51;
@@ -456,32 +462,20 @@ public class issac extends Player {
 		}
 	}
 
-	public void MonsterCheckThread() {
-		new Thread(() -> {
-			while (!isDead() && !connectControl.isStart()) {
-				for (int i = 0; i < monsters.size(); i++) {
-					if ((ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
-							|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds()))
-							&& !isInvincible()) {
-						setLife(getLife() - 1);
-						reDrawLife();
-						if (getLife() == 0) {
-							setDead(true);
-						}
-						if (!isDead())
-							hitDelayMotion();
-						System.out.println(getLife());
-					}
+	public void MonsterCheck() {
+		for (int i = 0; i < monsters.size(); i++) {
+			if ((ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
+					|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) && !isInvincible()) {
+				setLife(getLife() - 1);
+				reDrawLife();
+				if (getLife() == 0) {
+					setDead(true);
 				}
-				try {
-					Thread.sleep(30);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				if (!isDead())
+					hitDelayMotion();
+				System.out.println(getLife());
 			}
-		}).start();
+		}
 	}
 
 	public void hitDelayMotion() {
@@ -521,27 +515,27 @@ public class issac extends Player {
 		}).start();
 	}
 
+	public void startCheck() {
+		if (startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())
+				&& connectControl.isIsconnect()) {
+			startButtonControl.getSsStartButton().setXPos(ButtonSize.XPos + ButtonSize.Width + ButtonSize.Gap);
+			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
+					startButtonControl.getYButton());
+			connectControl.setMulti(true);
+		}
+	}
+
 	public void issacInfoRefresh() {
-		new Thread(() -> {
-			while (connectControl.isIsconnect() && !Thread.interrupted()) {
-				if (connectControl.isMulti()) {
-					connectControl.getSendDataClass().setXPlayer(960 - getXPlayer());
-					connectControl.getSendDataClass().setYPlayer(640 - getYPlayer());
-					connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
-					connectControl.getSendDataClass().setIntView(getSendViewDirect());
-					connectControl.getSendDataClass().setAttack(isKeyPress());
-					connectControl.getSendDataClass().setAttackDamage(getAttackDamage());
-					connectControl.getSendDataClass().setLife(getLife());
-					connectControl.getSendDataClass().setMoveSpeed(getMoveSpeed());
-					connectControl.getSendDataClass().setInvincible(isInvincible());
-					try {
-						Thread.sleep(20);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}).start();
+		if (connectControl.isMulti()) {
+			connectControl.getSendDataClass().setXPlayer(960 - getXPlayer());
+			connectControl.getSendDataClass().setYPlayer(640 - getYPlayer());
+			connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
+			connectControl.getSendDataClass().setIntView(getSendViewDirect());
+			connectControl.getSendDataClass().setAttack(isKeyPress());
+			connectControl.getSendDataClass().setAttackDamage(getAttackDamage());
+			connectControl.getSendDataClass().setLife(getLife());
+			connectControl.getSendDataClass().setMoveSpeed(getMoveSpeed());
+			connectControl.getSendDataClass().setInvincible(isInvincible());
+		}
 	}
 }

@@ -50,14 +50,14 @@ public class TimerControl extends Timer {
 	public void timerThread() {
 		new Thread(() -> {
 			while (true) {
-				if (!connectControl.isIsconnect()) {
-					timerLabel.setText(connectControl.getReciveDataClass().getTimer());
-				}else timerLabel.setText("Single");
-//				setMliSec(((int)System.currentTimeMillis()/10)-getStartTime());
-//				setSec(String.format("%02d", getMliSec()/100%60));
-//				setMin(String.format("%02d", getMliSec()/6000%60));
-//				setHour(String.format("%02d", getMliSec()/360000%60));
-//				timerLabel.setText(getHour()+":"+getMin()+":"+getSec()+":"+getMliSec()%100);
+				try {
+					if (connectControl.isIsconnect()&&connectControl.getReciveDataClass()!=null) {
+						timerLabel.setText(connectControl.getReciveDataClass().getTimer());
+					}else timerLabel.setText("Single");
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}
