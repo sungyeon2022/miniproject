@@ -22,6 +22,7 @@ public class Enemy extends Lombok {
 	private boolean isRock;
 	private boolean[] viewDirectInfo = new boolean[4];
 	private boolean isKeyPress;
+	private boolean isSendInvincible;
 	private boolean isInvincible;
 	
 	public Enemy(JFrame app) {

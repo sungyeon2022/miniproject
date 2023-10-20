@@ -10,7 +10,7 @@ public class DataClass implements Serializable {
 	private static final long serialVersionUID = 1L; // 중요
 
 	/* 사용자 정보 */
-	private String clientName = "Beta1";
+	private String clientName;
 	private int xPlayer;
 	private int yPlayer;
 	private int moveSpeed;

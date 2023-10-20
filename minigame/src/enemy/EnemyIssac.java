@@ -165,7 +165,7 @@ public class EnemyIssac extends Enemy {
 							setDead(true);
 							break;
 						}
-						if (isInvincible()) {
+						if (isSendInvincible()) {
 							hitCheck();
 						}
 						try {
@@ -216,40 +216,44 @@ public class EnemyIssac extends Enemy {
 
 	public synchronized void hitCheck() {
 		new Thread(() -> {
-			ssBody.setVisible(false);
-			ssHead.setVisible(false);
-			ssDead.drawObj(getXEnemy(), getYEnemy());
-			ssDead.setVisible(true);
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			ssDead.setVisible(false);
-			ssBody.setVisible(true);
-			ssHead.setVisible(true);
-			for (int i = 300; i > 0; i -= 50) {
+			if (!isInvincible()) {
+				setInvincible(true);
 				ssBody.setVisible(false);
 				ssHead.setVisible(false);
+				ssDead.drawObj(getXEnemy(), getYEnemy());
+				ssDead.setVisible(true);
 				try {
-					Thread.sleep(i);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				ssDead.setVisible(false);
 				ssBody.setVisible(true);
 				ssHead.setVisible(true);
+				for (int i = 300; i > 0; i -= 50) {
+					ssBody.setVisible(false);
+					ssHead.setVisible(false);
+					try {
+						Thread.sleep(i);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					ssBody.setVisible(true);
+					ssHead.setVisible(true);
+					try {
+						Thread.sleep(i);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				try {
-					Thread.sleep(i);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				setInvincible(false);
 			}
 		}).start();
 	}
@@ -274,17 +278,19 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void receiveData() {
-		if (connectControl.isIsconnect() && connectControl.getReciveDataClass() != null) {
+		if (connectControl.isIsconnect() && connectControl.getReciveDataClass() != null
+				&& connectControl.getReciveDataClass().getLife() != 0) {
 			setXEnemy(connectControl.getReciveDataClass().getXPlayer());
 			setYEnemy(connectControl.getReciveDataClass().getYPlayer());
 			setViewDirect(connectControl.getReciveDataClass().getIntView());
 			setViewDirectInfo(connectControl.getReciveDataClass().getBooleanView());
 			setKeyPress(connectControl.getReciveDataClass().isAttack());
-			setInvincible(connectControl.getReciveDataClass().isInvincible());
+			setSendInvincible(connectControl.getReciveDataClass().isInvincible());
 			setLife(connectControl.getReciveDataClass().getLife());
 			reDrawLife();
 			setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
 			setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
+//			System.out.println(connectControl.getReciveDataClass().toString());
 		}
 	}
 }

@@ -2,6 +2,7 @@ package player;
 
 import javax.swing.JFrame;
 
+import imgSize.issacSize;
 import lombok.Data;
 import lombok.Lombok;
 import sword.SwordControl;
@@ -40,8 +41,8 @@ public class Player extends Lombok {
 		this.dead = false;
 		this.isKeyPress = false;
 		this.viewDirectInfo = new boolean[4];
-		this.defaultX = 449;
-		this.defaultY = 430;
+		this.defaultX = 960/2-issacSize.issacHEADWIDTH/2;
+		this.defaultY = 500-(issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT);
 	}
 	public void moveRight() {}
 	public void moveLeft() {}

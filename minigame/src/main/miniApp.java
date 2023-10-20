@@ -232,8 +232,8 @@ public class miniApp extends JFrame {
 					monsters.removeAllElements();
 					enemyIssac.batch();
 					enemySwordControl.batch();
-					issac.setXPlayer(449);
-					issac.setYPlayer(430);
+					issac.setXPlayer(issac.getDefaultX());
+					issac.setYPlayer(issac.getDefaultY());
 					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
 							issac.getYPlayer() + issac.getYPlusBody());
 					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
@@ -255,11 +255,6 @@ public class miniApp extends JFrame {
 							issac.getYPlayer() + issac.getYPlusBody());
 					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
 				} else {
-//					for (int i = 0; i < monsters.size(); i++) {
-//						monsters.get(i).getSsMonster().setVisible(false);
-//						app.remove(monsters.get(i).getSsMonster());
-//						System.out.println(monsters.size());
-//					}
 				}
 				try {
 					Thread.sleep(50);

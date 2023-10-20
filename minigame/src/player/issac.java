@@ -87,8 +87,8 @@ public class issac extends Player {
 
 	public void setting() {
 		setViewDirect(ViewDirect.UP);
-		setXPlayer(449);
-		setYPlayer(430);
+		setXPlayer(getDefaultX());
+		setYPlayer(getDefaultY());
 		setAttackDamage(1);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + (issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT)/2);
@@ -527,8 +527,8 @@ public class issac extends Player {
 
 	public void issacInfoRefresh() {
 		if (connectControl.isMulti()) {
-			connectControl.getSendDataClass().setXPlayer(960 - getXPlayer());
-			connectControl.getSendDataClass().setYPlayer(640 - getYPlayer());
+			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer()-issacSize.issacHEADWIDTH);
+			connectControl.getSendDataClass().setYPlayer(520 - getYPlayer());
 			connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
 			connectControl.getSendDataClass().setIntView(getSendViewDirect());
 			connectControl.getSendDataClass().setAttack(isKeyPress());

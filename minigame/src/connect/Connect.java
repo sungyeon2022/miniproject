@@ -37,7 +37,7 @@ public class Connect extends Lombok {
 	private DataClass reciveDataClass;
 	private boolean isStart;
 	private boolean isReady;
-	private boolean isMulti;
+	private boolean isMulti = true;
 	public Connect() {
 		this.socket = null;
 		this.myInputStream = null;
