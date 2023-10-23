@@ -165,7 +165,7 @@ public class EnemyIssac extends Enemy {
 							setDead(true);
 							break;
 						}
-						if (isSendInvincible()) {
+						if (isSendInvincible()&&!isDead()) {
 							hitCheck();
 						}
 						try {

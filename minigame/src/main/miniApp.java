@@ -125,14 +125,19 @@ public class miniApp extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					issac.moveRight();
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.moveLeft();
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.moveDown();
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.moveUp();
+					issac.issacInfoRefresh();
 				}else if (e.getKeyCode() == KeyEvent.VK_A) {
 					issac.setKeyPress(true);
+					issac.issacInfoRefresh();
 				}
 			}
 
@@ -142,22 +147,25 @@ public class miniApp extends JFrame {
 					issac.setRight(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.LEFT] = false;
-
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.setLeft(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.RIGHT] = false;
-
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.setDown(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.UP] = false;
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setUp(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					issac.setKeyPress(false);
+					issac.issacInfoRefresh();
 				}
 			}
 		});
@@ -237,7 +245,7 @@ public class miniApp extends JFrame {
 					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
 							issac.getYPlayer() + issac.getYPlusBody());
 					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
-
+					issac.issacInfoRefresh();
 					break;
 				} else if (!connectControl.isStart() && connectControl.isReady()) {
 					if (!monsters.isEmpty()) {

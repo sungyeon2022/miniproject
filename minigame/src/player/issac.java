@@ -150,7 +150,7 @@ public class issac extends Player {
 						// 돌 충돌 체크 끝
 						setXPlayer(getXPlayer() + 1);
 						setXPlayerCenter(getXPlayerCenter() + 1);
-
+						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -200,6 +200,7 @@ public class issac extends Player {
 							break;
 						setXPlayer(getXPlayer() - 1);
 						setXPlayerCenter(getXPlayerCenter() - 1);
+						issacInfoRefresh();
 						try {
 
 							Thread.sleep(moveSpeed);
@@ -251,6 +252,7 @@ public class issac extends Player {
 						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() + 1);// 플레이어 이동시 좌표값 변경
 						setYPlayerCenter(getYPlayerCenter() + 1);// 중앙
+						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -300,6 +302,7 @@ public class issac extends Player {
 							break;
 						setYPlayer(getYPlayer() - 1);
 						setYPlayerCenter(getYPlayerCenter() - 1);
+						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -384,9 +387,9 @@ public class issac extends Player {
 						}
 						if(getLife()==0) {
 							setDead(true);
+							issacInfoRefresh();
 						}
 						MonsterCheck();
-						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -483,6 +486,7 @@ public class issac extends Player {
 	public void hitDelayMotion() {
 		new Thread(() -> {
 			setInvincible(true);
+			issacInfoRefresh();
 			ssBody.setVisible(false);
 			ssHead.setVisible(false);
 			ssDead.drawObj(getXPlayer(), getYPlayer());
@@ -514,6 +518,7 @@ public class issac extends Player {
 				}
 			}
 			setInvincible(false);
+			issacInfoRefresh();
 		}).start();
 	}
 
@@ -524,10 +529,11 @@ public class issac extends Player {
 			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 					startButtonControl.getYButton());
 			connectControl.setMulti(true);
+			issacInfoRefresh();
 		}
 	}
 
-	public void issacInfoRefresh() {
+	public synchronized void issacInfoRefresh() {
 		if (connectControl.isMulti()&&connectControl.getSendDataClass()!=null){
 			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer()-issacSize.issacHEADWIDTH);
 			connectControl.getSendDataClass().setYPlayer(520 - getYPlayer());

@@ -221,6 +221,8 @@ public class EnemySwordControl extends Sword {
 	public void swingAttack() {
 		if (ssSword.getBounds().intersects(issac.getSsBody().getBounds()) && !issac.isInvincible()) {
 			issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
+			issac.getConnectControl().getSendDataClass().setLife(issac.getLife());
+			issac.issacInfoRefresh();
 			issac.reDrawLife();
 			if (issac.getLife() == 0) {
 				issac.setDead(true);
@@ -240,15 +242,18 @@ public class EnemySwordControl extends Sword {
 					if (enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds())
 							&& !issac.isInvincible() && connectControl.isStart()) {
 						issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
+						issac.getConnectControl().getSendDataClass().setLife(issac.getLife());
+						issac.issacInfoRefresh();
 						issac.reDrawLife();
 						if (!issac.isDead())
 							issac.hitDelayMotion();
 						isIssac = true;
+						if (issac.getLife() == 0) {
+							issac.setDead(true);
+						}
 					}
 				}
-				if (issac.getLife() == 0) {
-					issac.setDead(true);
-				}
+				
 				try {
 					if (isIssac && !isSwordAttacking()) {
 						Thread.sleep(1000);
