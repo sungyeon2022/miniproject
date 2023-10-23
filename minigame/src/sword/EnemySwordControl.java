@@ -29,7 +29,6 @@ public class EnemySwordControl extends Sword {
 		init(issac, enemyIssac, connectControl);
 		setting();
 		swordNomalForm();
-		dotAttackThread();
 	}
 
 	public void init(issac issac, EnemyIssac enemyIssac, ConnectControl connectControl) {
@@ -53,9 +52,10 @@ public class EnemySwordControl extends Sword {
 	}
 
 	@Override
-	public synchronized void swordNomalForm() {
+	public void swordNomalForm() {
 		new Thread(() -> {
 			while (!isSwordAttacking() && !enemyIssac.isDead()) {
+				dotAttack();
 				if (enemyIssac.isKeyPress()) {
 					swordAttackForm();
 					break;
@@ -122,12 +122,12 @@ public class EnemySwordControl extends Sword {
 	}
 
 	@Override
-	public synchronized void swordAttackForm() {
+	public void swordAttackForm() {
 		int imgxlocation = 1;
 		int imgylocation = 0;
-		swingAttack();
 		while (!enemyIssac.isDead()) {
 			setSwordAttacking(true);
+			swingAttack();
 			if (enemyIssac.getViewDirect() == ViewDirect.DOWN) {
 				if (imgxlocation == 1 && imgylocation > 3) {
 					imgylocation = 0;
@@ -234,35 +234,21 @@ public class EnemySwordControl extends Sword {
 		}
 	}
 
-	public void dotAttackThread() {
-		new Thread(() -> {
-			while (!Thread.interrupted() && !enemyIssac.isDead()) {
-				boolean isIssac = false;
-				if (!isSwordAttacking()) {
-					if (enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds())
-							&& !issac.isInvincible() && connectControl.isStart()) {
-						issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
-						issac.getConnectControl().getSendDataClass().setLife(issac.getLife());
-						issac.issacInfoRefresh();
-						issac.reDrawLife();
-						if (!issac.isDead())
-							issac.hitDelayMotion();
-						isIssac = true;
-						if (issac.getLife() == 0) {
-							issac.setDead(true);
-						}
-					}
+	public void dotAttack() {
+		if (!isSwordAttacking()) {
+			if (enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds()) && !issac.isInvincible()
+					&& connectControl.isStart()) {
+				issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
+				issac.getConnectControl().getSendDataClass().setLife(issac.getLife());
+				issac.issacInfoRefresh();
+				issac.reDrawLife();
+				if (issac.getLife() == 0) {
+					issac.setDead(true);
 				}
-				
-				try {
-					if (isIssac && !isSwordAttacking()) {
-						Thread.sleep(1000);
-					} else {
-						Thread.sleep(500);
-					}
-				} catch (Exception e) {
+				if (!issac.isDead()) {
+					issac.hitDelayMotion();
 				}
 			}
-		}).start();
+		}
 	}
 }

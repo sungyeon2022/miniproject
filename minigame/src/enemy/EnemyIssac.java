@@ -110,6 +110,7 @@ public class EnemyIssac extends Enemy {
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);// X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과
 																						// 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼
 																						// 더해서 좌표값을 내려줍니다
+								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy()); // 그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);// X와Y좌표를 기준으로 머리를
 																									// 생성하고 머리와 몸이 겹치지
@@ -125,6 +126,7 @@ public class EnemyIssac extends Enemy {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
 								ssBody.setYPos(
 										issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 2 + Gap.ROWGAP * 3);
+								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy());
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 
@@ -138,9 +140,9 @@ public class EnemyIssac extends Enemy {
 							if (getViewDirect() == ViewDirect.UP) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
+								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy());
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
-
 								motion += 1;
 							}
 
@@ -151,6 +153,7 @@ public class EnemyIssac extends Enemy {
 							if (getViewDirect() == ViewDirect.RIGHT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
+								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy());
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 								motion += 1;
@@ -161,12 +164,13 @@ public class EnemyIssac extends Enemy {
 							ssHead.drawObj(getXEnemy(), getYEnemy());
 							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 						}
+						receiveData();
+						if (isSendInvincible()&&!isDead()) {
+							hitCheck();
+						}
 						if (getLife() == 0) {
 							setDead(true);
 							break;
-						}
-						if (isSendInvincible()&&!isDead()) {
-							hitCheck();
 						}
 						try {
 							Thread.sleep(movespeed);
@@ -214,7 +218,7 @@ public class EnemyIssac extends Enemy {
 		}
 	}
 
-	public synchronized void hitCheck() {
+	public void hitCheck() {
 		new Thread(() -> {
 			if (!isInvincible()) {
 				setInvincible(true);

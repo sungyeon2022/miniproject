@@ -150,7 +150,7 @@ public class issac extends Player {
 						// 돌 충돌 체크 끝
 						setXPlayer(getXPlayer() + 1);
 						setXPlayerCenter(getXPlayerCenter() + 1);
-						issacInfoRefresh();
+
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -200,7 +200,6 @@ public class issac extends Player {
 							break;
 						setXPlayer(getXPlayer() - 1);
 						setXPlayerCenter(getXPlayerCenter() - 1);
-						issacInfoRefresh();
 						try {
 
 							Thread.sleep(moveSpeed);
@@ -252,7 +251,6 @@ public class issac extends Player {
 						// 돌 충돌 체크 끝
 						setYPlayer(getYPlayer() + 1);// 플레이어 이동시 좌표값 변경
 						setYPlayerCenter(getYPlayerCenter() + 1);// 중앙
-						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -302,7 +300,6 @@ public class issac extends Player {
 							break;
 						setYPlayer(getYPlayer() - 1);
 						setYPlayerCenter(getYPlayerCenter() - 1);
-						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -340,6 +337,7 @@ public class issac extends Player {
 																						// 더해서 좌표값을 내려줍니다
 								ssHead.drawObj(getXPlayer(), getYPlayer()); // 그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
 								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+								issacInfoRefresh();
 								// X와Y좌표를 기준으로 머리를
 								// 생성하고 머리와 몸이 겹치지
 								// // 않게하기위해 사용합니다.
@@ -355,6 +353,7 @@ public class issac extends Player {
 										issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 2 + Gap.ROWGAP * 3);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+								issacInfoRefresh();
 								motion += 1;
 							}
 
@@ -367,6 +366,7 @@ public class issac extends Player {
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+								issacInfoRefresh();
 								motion += 1;
 							}
 
@@ -379,6 +379,7 @@ public class issac extends Player {
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
 								ssHead.drawObj(getXPlayer(), getYPlayer());
 								ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+								issacInfoRefresh();
 								motion += 1;
 							}
 						}
@@ -386,10 +387,11 @@ public class issac extends Player {
 							startCheck();
 						}
 						if(getLife()==0) {
-							setDead(true);
 							issacInfoRefresh();
+							setDead(true);
 						}
 						MonsterCheck();
+						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -486,7 +488,6 @@ public class issac extends Player {
 	public void hitDelayMotion() {
 		new Thread(() -> {
 			setInvincible(true);
-			issacInfoRefresh();
 			ssBody.setVisible(false);
 			ssHead.setVisible(false);
 			ssDead.drawObj(getXPlayer(), getYPlayer());
@@ -518,7 +519,6 @@ public class issac extends Player {
 				}
 			}
 			setInvincible(false);
-			issacInfoRefresh();
 		}).start();
 	}
 
@@ -529,11 +529,10 @@ public class issac extends Player {
 			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 					startButtonControl.getYButton());
 			connectControl.setMulti(true);
-			issacInfoRefresh();
 		}
 	}
 
-	public synchronized void issacInfoRefresh() {
+	public void issacInfoRefresh() {
 		if (connectControl.isMulti()&&connectControl.getSendDataClass()!=null){
 			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer()-issacSize.issacHEADWIDTH);
 			connectControl.getSendDataClass().setYPlayer(520 - getYPlayer());
