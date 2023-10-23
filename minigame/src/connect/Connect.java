@@ -44,7 +44,7 @@ public class Connect extends Lombok {
 		this.myOutputStream = null;
 		this.myObjectInputStream = null;
 		this.myObjectOutputStream = null;
-		this.Name = "Beta1";
+		this.Name = "Beta2";
 		this.socketNum = 8050;
 		this.isStart = false;
 		this.isReady = false;

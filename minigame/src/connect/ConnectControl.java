@@ -54,7 +54,7 @@ public class ConnectControl extends Connect {
 					if (isMulti()) {
 						getMyObjectOutputStream().writeObject(getSendDataClass());
 						getMyObjectOutputStream().reset();
-						Thread.sleep(10);
+						Thread.sleep(5);
 					}
 				} catch (Exception e) {
 					System.out.println("서버 강제 종료");
@@ -76,7 +76,7 @@ public class ConnectControl extends Connect {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
 						setStart(getReciveDataClass().isStart());
 						setReady(getReciveDataClass().isReady());
-						Thread.sleep(10);
+						Thread.sleep(5);
 					} catch (Exception e) {
 						System.out.println("서버 닫힘");
 						setIsconnect(false);
