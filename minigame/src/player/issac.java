@@ -526,7 +526,7 @@ public class issac extends Player {
 	}
 
 	public void issacInfoRefresh() {
-		if (connectControl.isMulti()) {
+		if (connectControl.isMulti()&&connectControl.getSendDataClass()!=null){
 			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer()-issacSize.issacHEADWIDTH);
 			connectControl.getSendDataClass().setYPlayer(520 - getYPlayer());
 			connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
