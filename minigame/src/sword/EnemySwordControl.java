@@ -219,8 +219,7 @@ public class EnemySwordControl extends Sword {
 	}
 
 	public void swingAttack() {
-		if ((ssSword.getBounds().intersects(issac.getSsBody().getBounds())
-				|| ssSword.getBounds().intersects(issac.getSsHead().getBounds())) && !issac.isInvincible()) {
+		if (ssSword.getBounds().intersects(issac.getSsBody().getBounds()) && !issac.isInvincible()) {
 			issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
 			issac.reDrawLife();
 			if (issac.getLife() == 0) {
@@ -238,8 +237,7 @@ public class EnemySwordControl extends Sword {
 			while (!Thread.interrupted() && !enemyIssac.isDead()) {
 				boolean isIssac = false;
 				if (!isSwordAttacking()) {
-					if ((enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds())
-							|| enemySwordControl.ssSword.getBounds().intersects(issac.getSsHead().getBounds()))
+					if (enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds())
 							&& !issac.isInvincible() && connectControl.isStart()) {
 						issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
 						issac.reDrawLife();

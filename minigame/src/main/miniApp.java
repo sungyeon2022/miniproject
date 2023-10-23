@@ -99,7 +99,7 @@ public class miniApp extends JFrame {
 
 	// JFrame을 통한 창출력
 	public void setting() {
-		app.setTitle("Player2");
+		app.setTitle("Player1");
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setResizable(false);
 		app.setLocationRelativeTo(null);

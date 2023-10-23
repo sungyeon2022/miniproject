@@ -382,6 +382,9 @@ public class issac extends Player {
 						if (!connectControl.isMulti()) {
 							startCheck();
 						}
+						if(getLife()==0) {
+							setDead(true);
+						}
 						MonsterCheck();
 						issacInfoRefresh();
 						try {
@@ -464,8 +467,7 @@ public class issac extends Player {
 
 	public void MonsterCheck() {
 		for (int i = 0; i < monsters.size(); i++) {
-			if ((ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())
-					|| ssHead.getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) && !isInvincible()) {
+			if (ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds()) && !isInvincible()) {
 				setLife(getLife() - 1);
 				reDrawLife();
 				if (getLife() == 0) {
