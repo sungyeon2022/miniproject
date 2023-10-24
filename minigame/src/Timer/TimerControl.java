@@ -36,11 +36,12 @@ public class TimerControl extends Timer {
 
 	public void setting() {
 		System.out.println("시계");
-		timerLabel.setSize(120, 30);
-		timerLabel.setLocation(420, 0);
+		timerLabel.setSize(300, 30);
+		timerLabel.setLocation(330, 0);
 		timerLabel.setFont(new Font(MyFont.FONT2, Font.BOLD, 20));
 		timerLabel.setForeground(Color.white);
 		timerLabel.setBorder(new LineBorder(Color.black));
+		timerLabel.setHorizontalAlignment(JLabel.CENTER);
 	}
 
 	public void batch() {
@@ -52,26 +53,13 @@ public class TimerControl extends Timer {
 			while (true) {
 				try {
 					if (connectControl.isIsconnect()&&connectControl.getReciveDataClass()!=null) {
-						timerLabel.setText(connectControl.getReciveDataClass().getTimer());
+						
 					}else timerLabel.setText("Single");
-					Thread.sleep(20);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-		}).start();
-	}
-	public void imsi() {
-		new Thread(()->{
-			connectControl.setReady(true);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			connectControl.setReady(false);
-			connectControl.setStart(true);
 		}).start();
 	}
 }

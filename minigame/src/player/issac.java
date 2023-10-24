@@ -543,6 +543,8 @@ public class issac extends Player {
 			connectControl.getSendDataClass().setLife(getLife());
 			connectControl.getSendDataClass().setMoveSpeed(getMoveSpeed());
 			connectControl.getSendDataClass().setInvincible(isInvincible());
+			connectControl.getSendDataClass().setDead(isDead());
+			connectControl.SendDataThread();
 		}
 	}
 }

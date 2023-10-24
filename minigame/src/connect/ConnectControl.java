@@ -30,7 +30,6 @@ public class ConnectControl extends Connect {
 			setMyObjectInputStream(new ObjectInputStream(getMyInputStream()));
 			setMyObjectOutputStream(new ObjectOutputStream(getMyOutputStream()));
 			getSendDataClass().setClientName(getName());
-			System.out.println(getSendDataClass().getClass());
 			getMyObjectOutputStream().writeObject(getSendDataClass());
 			getMyObjectOutputStream().reset();
 			if (isIsconnect()) {
@@ -47,22 +46,16 @@ public class ConnectControl extends Connect {
 	}
 
 	@Override
-	public void SendDataThread() {
-		new Thread(() -> {
-			while (isIsconnect()) {
-				try {
-					if (isMulti()) {
-						getMyObjectOutputStream().writeObject(getSendDataClass());
-						getMyObjectOutputStream().reset();
-						Thread.sleep(5);
-					}
-				} catch (Exception e) {
-					System.out.println("서버 강제 종료");
-					setIsconnect(false);
-				}
+	public synchronized void SendDataThread() {
+		try {
+			if (isMulti()) {
+				getMyObjectOutputStream().writeObject(getSendDataClass());
+				getMyObjectOutputStream().reset();
 			}
-		}).start();
-
+		} catch (Exception e) {
+			System.out.println("서버 강제 종료");
+			setIsconnect(false);
+		}
 	}
 
 	@Override
@@ -74,8 +67,6 @@ public class ConnectControl extends Connect {
 				while (isIsconnect()) {
 					try {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
-						setStart(getReciveDataClass().isStart());
-						setReady(getReciveDataClass().isReady());
 						Thread.sleep(5);
 					} catch (Exception e) {
 						System.out.println("서버 닫힘");

@@ -240,7 +240,6 @@ public class EnemyIssac extends Enemy {
 					try {
 						Thread.sleep(i);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					ssBody.setVisible(true);
@@ -248,7 +247,6 @@ public class EnemyIssac extends Enemy {
 					try {
 						Thread.sleep(i);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -270,7 +268,6 @@ public class EnemyIssac extends Enemy {
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int gap = 51;
@@ -289,11 +286,12 @@ public class EnemyIssac extends Enemy {
 			setViewDirect(connectControl.getReciveDataClass().getIntView());
 			setViewDirectInfo(connectControl.getReciveDataClass().getBooleanView());
 			setKeyPress(connectControl.getReciveDataClass().isAttack());
-			setSendInvincible(connectControl.getReciveDataClass().isInvincible());
 			setLife(connectControl.getReciveDataClass().getLife());
 			reDrawLife();
+			setSendInvincible(connectControl.getReciveDataClass().isInvincible());
 			setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
 			setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
+			setDead(connectControl.getReciveDataClass().isDead());
 //			System.out.println(connectControl.getReciveDataClass().toString());
 		}
 	}

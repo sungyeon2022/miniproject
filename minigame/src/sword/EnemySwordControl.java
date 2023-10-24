@@ -222,7 +222,6 @@ public class EnemySwordControl extends Sword {
 		if (ssSword.getBounds().intersects(issac.getSsBody().getBounds()) && !issac.isInvincible()) {
 			issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
 			issac.getConnectControl().getSendDataClass().setLife(issac.getLife());
-			issac.issacInfoRefresh();
 			issac.reDrawLife();
 			if (issac.getLife() == 0) {
 				issac.setDead(true);
@@ -237,10 +236,9 @@ public class EnemySwordControl extends Sword {
 	public void dotAttack() {
 		if (!isSwordAttacking()) {
 			if (enemySwordControl.ssSword.getBounds().intersects(issac.getSsBody().getBounds()) && !issac.isInvincible()
-					&& connectControl.isStart()) {
+					&& connectControl.getReciveDataClass()!=null && connectControl.getReciveDataClass().isStart()) {
 				issac.setLife(issac.getLife() - enemyIssac.getAttackDamage());
 				issac.getConnectControl().getSendDataClass().setLife(issac.getLife());
-				issac.issacInfoRefresh();
 				issac.reDrawLife();
 				if (issac.getLife() == 0) {
 					issac.setDead(true);

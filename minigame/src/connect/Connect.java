@@ -35,9 +35,7 @@ public class Connect extends Lombok {
 	private int socketNum;
 	private DataClass sendDataClass;
 	private DataClass reciveDataClass;
-	private boolean isStart;
-	private boolean isReady;
-	private boolean isMulti = true;
+	private boolean isMulti;
 	public Connect() {
 		this.socket = null;
 		this.myInputStream = null;
@@ -46,8 +44,6 @@ public class Connect extends Lombok {
 		this.myObjectOutputStream = null;
 		this.Name = "Beta1";
 		this.socketNum = 8050;
-		this.isStart = false;
-		this.isReady = false;
 	}
 	public void SendDataThread() {}
 	public void ReceiveDataThread() {}
