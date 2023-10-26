@@ -30,12 +30,12 @@ public class TimerControl extends Timer {
 	}
 
 	public void init(ConnectControl connectControl) {
-		timerLabel = new JLabel("Singel");
+		timerLabel = new JLabel();
 		this.connectControl = connectControl;
 	}
 
 	public void setting() {
-		System.out.println("시계");
+		setStartTime((int)System.currentTimeMillis()/10);
 		timerLabel.setSize(300, 30);
 		timerLabel.setLocation(330, 0);
 		timerLabel.setFont(new Font(MyFont.FONT2, Font.BOLD, 20));
@@ -47,14 +47,23 @@ public class TimerControl extends Timer {
 	public void batch() {
 		getApp().add(timerLabel);
 	}
-
+	
 	public void timerThread() {
 		new Thread(() -> {
 			while (true) {
 				try {
 					if (connectControl.isIsconnect()&&connectControl.getReciveDataClass()!=null) {
-						
-					}else timerLabel.setText("Single");
+						setStartTime(connectControl.getReciveDataClass().getStartTime());
+					}else if(connectControl.isIsconnect()&& connectControl.getReciveDataClass()==null &&connectControl.isMulti()) {
+						timerLabel.setText("Wait Enemy");
+					}
+					else {
+						setMliSec((int)System.currentTimeMillis()/10-(getStartTime()));
+						setSec(getMliSec()/100);
+						setMin(getSec()/60);
+						setHour(getMin()/60);
+						timerLabel.setText(String.format("%02d:%02d:%02d:%02d", getHour()%60,getMin()%60,getSec()%60,getMliSec()%100));
+					}
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

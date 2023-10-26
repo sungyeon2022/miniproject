@@ -279,8 +279,7 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void receiveData() {
-		if (connectControl.isIsconnect() && connectControl.getReciveDataClass() != null
-				&& connectControl.getReciveDataClass().getLife() != 0) {
+		if (connectControl.isIsconnect() && connectControl.getReciveDataClass() != null) {
 			setXEnemy(connectControl.getReciveDataClass().getXPlayer());
 			setYEnemy(connectControl.getReciveDataClass().getYPlayer());
 			setViewDirect(connectControl.getReciveDataClass().getIntView());

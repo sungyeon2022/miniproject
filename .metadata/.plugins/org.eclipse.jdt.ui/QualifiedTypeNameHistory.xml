@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.awt.Rectangle"/>
     <fullyQualifiedTypeName name="java.awt.Point"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="map.Background"/>
@@ -34,7 +33,6 @@
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="java.io.InterruptedIOException"/>
     <fullyQualifiedTypeName name="java.lang.Appendable"/>
-    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="imgSize.ButtonSize"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageTranscoder"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="imgSize.issacSize"/>
     <fullyQualifiedTypeName name="imgSize.Gap"/>
     <fullyQualifiedTypeName name="java.security.KeyStore.TrustedCertificateEntry"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+    <fullyQualifiedTypeName name="data.DataClass"/>
 </qualifiedTypeNameHistroy>

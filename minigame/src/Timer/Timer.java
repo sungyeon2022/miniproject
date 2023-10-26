@@ -12,10 +12,10 @@ import lombok.Data;
 public class Timer {
 	private JFrame app;
 	private JLabel timerLabel;
-	private String sec;
+	private int sec;
 	private int mliSec;
-	private String min;
-	private String hour;
+	private int min;
+	private int hour;
 	private int startTime;
 	public Timer(JFrame app) {
 		this.app = app;

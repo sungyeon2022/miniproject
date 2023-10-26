@@ -315,7 +315,7 @@ public class issac extends Player {
 	}
 
 	@Override
-	public void moveMotion() { // 움직이는 동작중 이미지 갱신
+	public synchronized void moveMotion() { // 움직이는 동작중 이미지 갱신
 		// Down을 기준으로 설명하겠습니다 나머지 내용은 ColumGap과 RowGap, HEIGHT, WIDTH로 상하 좌우가 구분됩니다
 		// 상시작동 & 상태 검사
 		new Thread(new Runnable() {
@@ -390,7 +390,7 @@ public class issac extends Player {
 							issacInfoRefresh();
 							setDead(true);
 						}
-						MonsterCheck();
+//						MonsterCheck();
 						issacInfoRefresh();
 						try {
 							Thread.sleep(moveSpeed);
@@ -485,7 +485,7 @@ public class issac extends Player {
 		}
 	}
 
-	public void hitDelayMotion() {
+	public synchronized void hitDelayMotion() {
 		new Thread(() -> {
 			setInvincible(true);
 			ssBody.setVisible(false);
@@ -506,7 +506,6 @@ public class issac extends Player {
 				try {
 					Thread.sleep(i);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				ssBody.setVisible(true);
@@ -514,7 +513,6 @@ public class issac extends Player {
 				try {
 					Thread.sleep(i);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
