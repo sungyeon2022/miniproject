@@ -52,9 +52,9 @@ public class TimerControl extends Timer {
 		new Thread(() -> {
 			while (true) {
 				try {
-					if (connectControl.isIsconnect()&&connectControl.getReciveDataClass()!=null) {
+					if (connectControl!=null&&connectControl.isIsconnect()&&connectControl.getReciveDataClass()!=null) {
 						setStartTime(connectControl.getReciveDataClass().getStartTime());
-					}else if(connectControl.isIsconnect()&& connectControl.getReciveDataClass()==null &&connectControl.isMulti()) {
+					}else if(connectControl!=null && connectControl.isIsconnect()&& connectControl.getReciveDataClass()==null &&connectControl.isMulti()) {
 						timerLabel.setText("Wait Enemy");
 					}
 					else {

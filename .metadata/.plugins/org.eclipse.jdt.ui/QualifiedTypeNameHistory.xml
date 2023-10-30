@@ -45,13 +45,11 @@
     <fullyQualifiedTypeName name="connect.ReciveDataClass"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="java.lang.Long"/>
-    <fullyQualifiedTypeName name="connect.ConnectControl"/>
     <fullyQualifiedTypeName name="connect.SendDataClass"/>
     <fullyQualifiedTypeName name="connect.DataClass"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="startButton.StartButtonControl"/>
-    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="imgSize.issacSize"/>
     <fullyQualifiedTypeName name="imgSize.Gap"/>
     <fullyQualifiedTypeName name="java.security.KeyStore.TrustedCertificateEntry"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="player.issac"/>
+    <fullyQualifiedTypeName name="connect.ConnectControl"/>
 </qualifiedTypeNameHistroy>

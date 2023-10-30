@@ -390,9 +390,7 @@ public class issac extends Player {
 								motion += 1;
 							}
 						}
-						if (!connectControl.isMulti()) {
-							startCheck();
-						}
+						startCheck();
 						if(getLife()==0) {
 							setDead(true);
 						}
@@ -532,17 +530,17 @@ public class issac extends Player {
 	}
 
 	public void startCheck() {
-		if (startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())
-				&& connectControl.isIsconnect()) {
+		if (connectControl==null&&startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())) {
 			startButtonControl.getSsStartButton().setXPos(ButtonSize.XPos + ButtonSize.Width + ButtonSize.Gap);
 			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 					startButtonControl.getYButton());
-			connectControl.setMulti(true);
+			connectControl = new ConnectControl();
+			connectControl.setIsconnect(true);
 		}
 	}
 
 	public void issacInfoRefresh() {
-		if (connectControl.isMulti()&&connectControl.getSendDataClass()!=null){
+		if (connectControl!=null&&connectControl.getSendDataClass()!=null){
 			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer()-issacSize.issacHEADWIDTH);
 			connectControl.getSendDataClass().setYPlayer(520 - getYPlayer());
 			connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
@@ -554,6 +552,7 @@ public class issac extends Player {
 			connectControl.getSendDataClass().setInvincible(isInvincible());
 			connectControl.getSendDataClass().setDead(isDead());
 			connectControl.SendData();
+			System.out.println("실행");
 		}
 	}
 }

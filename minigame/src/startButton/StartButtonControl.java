@@ -12,11 +12,11 @@ public class StartButtonControl extends StartButton {
 	private ConnectControl connectControl;
 	public StartButtonControl(JFrame app, ConnectControl connectControl) {
 		super(app);
-		init( connectControl);
+		init(connectControl);
 		setting();
 		batch();
 	}
-	public void init( ConnectControl connectControl) {
+	public void init(ConnectControl connectControl) {
 		this.connectControl = connectControl;
 		setSsStartButton(new SpriteSheet("structure/button.png", "button", ButtonSize.XPos, ButtonSize.YPos, ButtonSize.Width, ButtonSize.Height));
 	}
@@ -26,6 +26,6 @@ public class StartButtonControl extends StartButton {
 		getSsStartButton().drawObj(getXButton(), getYButton());
 	}
 	public void batch() {
-		if(connectControl.isIsconnect()) getApp().add(getSsStartButton());
+		getApp().add(getSsStartButton());
 	}
 }

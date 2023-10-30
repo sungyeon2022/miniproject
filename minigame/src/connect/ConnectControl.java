@@ -66,7 +66,6 @@ public class ConnectControl extends Connect {
 				while (isIsconnect()) {
 					try {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
-						Thread.sleep(5);
 					} catch (Exception e) {
 						System.out.println("서버 닫힘");
 						setIsconnect(false);

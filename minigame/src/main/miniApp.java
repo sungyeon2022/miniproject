@@ -78,7 +78,6 @@ public class miniApp extends JFrame {
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
 		app = this;
-		connectControl = new ConnectControl();
 		bg = new Background(app);
 		startButtonControl = new StartButtonControl(app, connectControl);
 //		page = new Page(app);
@@ -178,7 +177,7 @@ public class miniApp extends JFrame {
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
-			while (!connectControl.isMulti() && !monsters.isEmpty()) {
+			while (connectControl!=null && !connectControl.isMulti() && !monsters.isEmpty()) {
 				for (int i = 0; i < monsters.size(); i++) {
 					if (monsters.get(i).isDead()) {
 						String monName = monsters.get(i).getGUBUN();
@@ -220,7 +219,7 @@ public class miniApp extends JFrame {
 	}
 
 	public void gameStartCheck() {
-		if (connectControl.isMulti()) {
+		if (connectControl!=null && connectControl.isMulti()) {
 			for (int i = 0; i < monsters.size(); i++) {
 				monsters.get(i).getSsMonster().setVisible(false);
 				app.remove(monsters.get(i).getSsMonster());
