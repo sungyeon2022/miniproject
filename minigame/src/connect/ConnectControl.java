@@ -33,7 +33,6 @@ public class ConnectControl extends Connect {
 			getMyObjectOutputStream().writeObject(getSendDataClass());
 			getMyObjectOutputStream().reset();
 			if (isIsconnect()) {
-				SendDataThread();
 				ReceiveDataThread();
 			}
 		} catch (UnknownHostException e) { // 호스트 확인실패
@@ -46,9 +45,9 @@ public class ConnectControl extends Connect {
 	}
 
 	@Override
-	public synchronized void SendDataThread() {
+	public synchronized void SendData() {
 		try {
-			if (isMulti()) {
+			if (isIsconnect()&&isMulti()) {
 				getMyObjectOutputStream().writeObject(getSendDataClass());
 				getMyObjectOutputStream().reset();
 			}

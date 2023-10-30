@@ -45,6 +45,6 @@ public class Connect extends Lombok {
 		this.Name = "Beta1";
 		this.socketNum = 8050;
 	}
-	public void SendDataThread() {}
+	public void SendData() {}
 	public void ReceiveDataThread() {}
 }
