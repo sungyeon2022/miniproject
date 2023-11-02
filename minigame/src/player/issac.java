@@ -535,11 +535,10 @@ public class issac extends Player {
 			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 					startButtonControl.getYButton());
 			connectControl = new ConnectControl();
-			connectControl.setIsconnect(true);
 		}
 	}
 
-	public void issacInfoRefresh() {
+	public synchronized void issacInfoRefresh() {
 		if (connectControl!=null&&connectControl.getSendDataClass()!=null){
 			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer()-issacSize.issacHEADWIDTH);
 			connectControl.getSendDataClass().setYPlayer(520 - getYPlayer());
