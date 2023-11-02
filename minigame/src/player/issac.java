@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
+import Timer.TimerControl;
 import connect.ConnectControl;
 import data.DataClass;
 import imgSize.*;
@@ -50,21 +51,23 @@ public class issac extends Player {
 	private int powerNum = 1;
 	private int attackspeedNum = 1;
 	private ConnectControl connectControl;
+	private TimerControl timerControl;
 
 	public issac(JFrame app, Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items,
-			StartButtonControl startButtonControl, ConnectControl connectControl) {
+			StartButtonControl startButtonControl, ConnectControl connectControl, TimerControl timerControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
-		init(monsters, walls, items, startButtonControl, connectControl);
+		init(monsters, walls, items, startButtonControl, connectControl, timerControl);
 		setting();
 		batch();
 		moveMotion();
 	}
 
 	public void init(Vector<Monster> monsters, Vector<wall> walls, Vector<Item> items,
-			StartButtonControl startButtonControl, ConnectControl connectControl) {
+			StartButtonControl startButtonControl, ConnectControl connectControl, TimerControl timerControl) {
 		this.connectControl = connectControl;
 		this.startButtonControl = startButtonControl;
+		this.timerControl = timerControl;
 		this.walls = walls;
 		this.items = items;
 		this.monsters = monsters;
@@ -535,6 +538,7 @@ public class issac extends Player {
 			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 					startButtonControl.getYButton());
 			connectControl = new ConnectControl();
+			timerControl.getTimerLabel().setText("Wait Enemy");
 		}
 	}
 
@@ -551,7 +555,6 @@ public class issac extends Player {
 			connectControl.getSendDataClass().setInvincible(isInvincible());
 			connectControl.getSendDataClass().setDead(isDead());
 			connectControl.SendData();
-			System.out.println("실행");
 		}
 	}
 }

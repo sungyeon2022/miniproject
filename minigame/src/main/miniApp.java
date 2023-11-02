@@ -80,11 +80,12 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		startButtonControl = new StartButtonControl(app, connectControl);
+		timerControl = new TimerControl(app, connectControl);
 //		page = new Page(app);
 		monsters = new Vector<Monster>();
 //		items = new Vector<Item>();
 		walls = new Vector<wall>();
-		issac = new issac(app, monsters, walls, items, startButtonControl, connectControl);
+		issac = new issac(app, monsters, walls, items, startButtonControl, connectControl, timerControl);
 		swordControl = new SwordControl(app, issac, monsters, connectControl);
 		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
 		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac, connectControl);
@@ -92,7 +93,7 @@ public class miniApp extends JFrame {
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-		timerControl = new TimerControl(app, connectControl);
+		
 
 	}
 

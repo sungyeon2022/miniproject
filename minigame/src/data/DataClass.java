@@ -23,6 +23,7 @@ public class DataClass implements Serializable {
 	
 	/* 시스템 정보 */
 	private int startTime;
+	private boolean isMulti;
 	private boolean isStart;
 	
 	public DataClass() {} 

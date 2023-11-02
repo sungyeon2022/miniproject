@@ -47,7 +47,7 @@ public class ConnectControl extends Connect {
 	@Override
 	public synchronized void SendData() {
 		try {
-			if (isIsconnect()&&isMulti()) {
+			if (isIsconnect()) {
 				getMyObjectOutputStream().writeObject(getSendDataClass());
 				getMyObjectOutputStream().reset();
 			}
@@ -66,6 +66,7 @@ public class ConnectControl extends Connect {
 				while (isIsconnect()) {
 					try {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
+						setMulti(getReciveDataClass().isMulti());
 					} catch (Exception e) {
 						System.out.println("서버 닫힘");
 						setIsconnect(false);
