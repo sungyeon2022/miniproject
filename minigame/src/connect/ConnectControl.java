@@ -15,7 +15,6 @@ import lombok.Data;
 public class ConnectControl extends Connect {
 	public ConnectControl() {
 		connect();
-
 	}
 
 	public void connect() {
@@ -47,12 +46,13 @@ public class ConnectControl extends Connect {
 	@Override
 	public synchronized void SendData() {
 		try {
-			if (isIsconnect()) {
+			if (isIsconnect()&&isMulti()) {
 				getMyObjectOutputStream().writeObject(getSendDataClass());
 				getMyObjectOutputStream().reset();
 			}
 		} catch (Exception e) {
-			System.out.println("서버 강제 종료");
+			e.printStackTrace();
+			System.out.println("데이터 출력 오류");
 			setIsconnect(false);
 		}
 	}
@@ -65,8 +65,9 @@ public class ConnectControl extends Connect {
 				while (isIsconnect()) {
 					try {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
+						setReciveMulti(getReciveDataClass().isMulti()); 
 					} catch (Exception e) {
-						System.out.println("서버 닫힘");
+						System.out.println("데이터 입력 오류");
 						setIsconnect(false);
 					}
 				}

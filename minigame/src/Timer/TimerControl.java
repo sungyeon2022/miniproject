@@ -53,11 +53,11 @@ public class TimerControl extends Timer {
 			while (true) {
 				try {
 					if (connectControl != null && connectControl.isIsconnect()
-							&& connectControl.getReciveDataClass() == null && connectControl.isMulti()
+							&& connectControl.getReciveDataClass() != null && connectControl.isReciveMulti()
 							&& !connectControl.getReciveDataClass().isStart()) {
 						getTimerLabel().setText(Integer.toString(connectControl.getReciveDataClass().getStartTime()));
 					}else if(connectControl != null && connectControl.isIsconnect()
-							&& connectControl.getReciveDataClass() == null && connectControl.isMulti()
+							&& connectControl.getReciveDataClass() != null && connectControl.isReciveMulti()
 							&& connectControl.getReciveDataClass().isStart()) {
 						setStartTime(connectControl.getReciveDataClass().getStartTime());
 						setMliSec((int) System.currentTimeMillis() / 10 - (getStartTime()));

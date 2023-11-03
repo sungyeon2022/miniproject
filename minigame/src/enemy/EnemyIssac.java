@@ -291,7 +291,7 @@ public class EnemyIssac extends Enemy {
 			setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
 			setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
 			setDead(connectControl.getReciveDataClass().isDead());
-//			System.out.println(connectControl.getReciveDataClass().toString());
+			System.out.println(connectControl.getReciveDataClass().toString());
 		}
 	}
 }

@@ -42,10 +42,6 @@ public class issac extends Player {
 	private int moveSpeed = 5;
 	// 상하 좌우 이동 모션
 	// 개수 및 수치 표시용 레이블 + 변수 선언 및 초기화
-	private JLabel labomb;
-	private JLabel laspeed;
-	private JLabel lapower;
-	private JLabel laattackspeed;
 	private int bombCount = 0;
 	private int speedNum = 11;
 	private int powerNum = 1;
@@ -94,7 +90,7 @@ public class issac extends Player {
 		setYPlayer(getDefaultY());
 		setAttackDamage(1);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
-		setYPlayerCenter(getYPlayer() + (issacSize.issacHEADHEIGHT+issacSize.issacBODYHEIGHT)/2);
+		setYPlayerCenter(getYPlayer() + (issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT) / 2);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 		for (int i = 0; i < getMaxlife(); i++) {
@@ -394,7 +390,7 @@ public class issac extends Player {
 							}
 						}
 						startCheck();
-						if(getLife()==0) {
+						if (getLife() == 0) {
 							setDead(true);
 						}
 //						MonsterCheck();
@@ -533,19 +529,20 @@ public class issac extends Player {
 	}
 
 	public void startCheck() {
-		if (connectControl==null&&startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())) {
+		if (connectControl.isIsconnect()&&startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())) {
 			startButtonControl.getSsStartButton().setXPos(ButtonSize.XPos + ButtonSize.Width + ButtonSize.Gap);
 			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 					startButtonControl.getYButton());
-			connectControl = new ConnectControl();
 			issacInfoRefresh();
 			timerControl.getTimerLabel().setText("Wait Enemy");
+			connectControl.setMulti(true);
+			connectControl.getSendDataClass().setMulti(true);
 		}
 	}
 
 	public synchronized void issacInfoRefresh() {
-		if (connectControl!=null&&connectControl.getSendDataClass()!=null){
-			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer()-issacSize.issacHEADWIDTH);
+		if (connectControl.isIsconnect() && connectControl.getSendDataClass() != null) {
+			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer() - issacSize.issacHEADWIDTH);
 			connectControl.getSendDataClass().setYPlayer(520 - getYPlayer());
 			connectControl.getSendDataClass().setBooleanView(getViewDirectInfo());
 			connectControl.getSendDataClass().setIntView(getSendViewDirect());

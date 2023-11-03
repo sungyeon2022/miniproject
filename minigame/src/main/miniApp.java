@@ -62,7 +62,6 @@ public class miniApp extends JFrame {
 	private TimerControl timerControl;
 	private EnemySwordControl enemySwordControl;
 	private StartButtonControl startButtonControl;
-	private DataClass dataClass;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -72,13 +71,13 @@ public class miniApp extends JFrame {
 		listener();
 //		checkUsedMomory();
 		monsterDeadCheck();
-		gameStartCheck();
 	}
 
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
 		app = this;
 		bg = new Background(app);
+		connectControl = new ConnectControl();
 		startButtonControl = new StartButtonControl(app, connectControl);
 		timerControl = new TimerControl(app, connectControl);
 //		page = new Page(app);
@@ -93,7 +92,6 @@ public class miniApp extends JFrame {
 		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-		
 
 	}
 
@@ -178,7 +176,7 @@ public class miniApp extends JFrame {
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
-			while (!monsters.isEmpty()) {
+			while (connectControl.isIsconnect()) {
 				for (int i = 0; i < monsters.size(); i++) {
 					if (monsters.get(i).isDead()) {
 						String monName = monsters.get(i).getGUBUN();
@@ -209,32 +207,29 @@ public class miniApp extends JFrame {
 						}
 					}
 				}
-				gameStartCheck();
 				try {
 					Thread.sleep(10);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+//				gameStartCheck();
 			}
 		}).start();
 	}
 
 	public void gameStartCheck() {
-		if (connectControl!=null && connectControl.isMulti()) {
-			for (int i = 0; i < monsters.size(); i++) {
-				monsters.get(i).getSsMonster().setVisible(false);
-				app.remove(monsters.get(i).getSsMonster());
-				System.out.println(monsters.size());
-			}
-			monsters.removeAllElements();
-			enemyIssac.batch();
-			enemySwordControl.batch();
-			issac.setXPlayer(issac.getDefaultX());
-			issac.setYPlayer(issac.getDefaultY());
-			issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
-					issac.getYPlayer() + issac.getYPlusBody());
-			issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
-			
+		for (int i = 0; i < monsters.size(); i++) {
+			monsters.get(i).getSsMonster().setVisible(false);
+			app.remove(monsters.get(i).getSsMonster());
+			System.out.println(monsters.size());
 		}
+		monsters.removeAllElements();
+		issac.setXPlayer(issac.getDefaultX());
+		issac.setYPlayer(issac.getDefaultY());
+		issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(), issac.getYPlayer() + issac.getYPlusBody());
+		issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
+		enemyIssac.batch();
+		enemySwordControl.batch();
+		
 	}
 }
