@@ -47,7 +47,6 @@ public class ConnectControl extends Connect {
 	public synchronized void SendData() {
 		try {
 			if (isIsconnect()&&isMulti()) {
-				getSendDataClass().setStart(isStart());
 				getMyObjectOutputStream().writeObject(getSendDataClass());
 				getMyObjectOutputStream().reset();
 			}

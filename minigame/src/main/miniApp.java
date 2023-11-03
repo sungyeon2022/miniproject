@@ -281,7 +281,11 @@ public class miniApp extends JFrame {
 				}
 			}
 			connectControl.getSendDataClass().setStart(true);
-			connectControl.getSendDataClass().setStartTime((int)System.currentTimeMillis()/10);
+			int time=(int)System.currentTimeMillis()/10;
+			connectControl.getSendDataClass().setStartTime(time);
+			timerControl.setStartTime(time);
+			connectControl.SendData();
+			connectControl.setStart(true);
 		}).start();
 	}
 }
