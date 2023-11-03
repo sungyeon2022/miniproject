@@ -131,6 +131,7 @@ public class miniApp extends JFrame {
 					issac.moveUp();
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					issac.setKeyPress(true);
+					issac.issacInfoRefresh();
 				}
 			}
 
@@ -154,6 +155,7 @@ public class miniApp extends JFrame {
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					issac.setKeyPress(false);
+					issac.issacInfoRefresh();
 				}
 			}
 		});
@@ -176,7 +178,7 @@ public class miniApp extends JFrame {
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
-			while (connectControl.isIsconnect()) {
+			while (!monsters.isEmpty()) {
 				for (int i = 0; i < monsters.size(); i++) {
 					if (monsters.get(i).isDead()) {
 						String monName = monsters.get(i).getGUBUN();
@@ -207,12 +209,14 @@ public class miniApp extends JFrame {
 						}
 					}
 				}
+				if (connectControl.isMulti()) {
+					gameStartCheck();
+				}
 				try {
 					Thread.sleep(10);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-//				gameStartCheck();
 			}
 		}).start();
 	}
@@ -224,12 +228,24 @@ public class miniApp extends JFrame {
 			System.out.println(monsters.size());
 		}
 		monsters.removeAllElements();
-		issac.setXPlayer(issac.getDefaultX());
-		issac.setYPlayer(issac.getDefaultY());
-		issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(), issac.getYPlayer() + issac.getYPlusBody());
-		issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
-		enemyIssac.batch();
-		enemySwordControl.batch();
-		
+		connectCheck();
+	}
+
+	public void connectCheck() {
+		new Thread(() -> {
+			while (!Thread.interrupted()) {
+				if (connectControl.isReciveMulti()) {
+					enemyIssac.batch();
+					enemySwordControl.batch();
+					break;
+				}else {
+					issac.setXPlayer(issac.getDefaultX());
+					issac.setYPlayer(issac.getDefaultY());
+					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
+							issac.getYPlayer() + issac.getYPlusBody());
+					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
+				}
+			}
+		}).start();
 	}
 }

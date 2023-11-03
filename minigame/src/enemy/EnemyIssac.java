@@ -279,7 +279,7 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void receiveData() {
-		if (connectControl.isIsconnect() && connectControl.getReciveDataClass() != null) {
+		if (connectControl.isIsconnect() && connectControl.isReciveMulti()) {
 			setXEnemy(connectControl.getReciveDataClass().getXPlayer());
 			setYEnemy(connectControl.getReciveDataClass().getYPlayer());
 			setViewDirect(connectControl.getReciveDataClass().getIntView());
@@ -291,7 +291,6 @@ public class EnemyIssac extends Enemy {
 			setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
 			setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
 			setDead(connectControl.getReciveDataClass().isDead());
-			System.out.println(connectControl.getReciveDataClass().toString());
 		}
 	}
 }

@@ -409,23 +409,15 @@ public class issac extends Player {
 	public void refreshDirect() {
 		if (issac.isDown()) {
 			issac.setViewDirect(ViewDirect.DOWN);
-			issac.setSendViewDirect(ViewDirect.UP);
-			issacInfoRefresh();
 		}
 		if (issac.isLeft()) {
 			issac.setViewDirect(ViewDirect.LEFT);
-			issac.setSendViewDirect(ViewDirect.RIGHT);
-			issacInfoRefresh();
 		}
 		if (issac.isUp()) {
 			issac.setViewDirect(ViewDirect.UP);
-			issac.setSendViewDirect(ViewDirect.DOWN);
-			issacInfoRefresh();
 		}
 		if (issac.isRight()) {
 			issac.setViewDirect(ViewDirect.RIGHT);
-			issac.setSendViewDirect(ViewDirect.LEFT);
-			issacInfoRefresh();
 		}
 	}
 
