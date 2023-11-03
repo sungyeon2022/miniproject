@@ -47,6 +47,7 @@ public class ConnectControl extends Connect {
 	public synchronized void SendData() {
 		try {
 			if (isIsconnect()&&isMulti()) {
+				getSendDataClass().setStart(isStart());
 				getMyObjectOutputStream().writeObject(getSendDataClass());
 				getMyObjectOutputStream().reset();
 			}
@@ -66,6 +67,7 @@ public class ConnectControl extends Connect {
 					try {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
 						setReciveMulti(getReciveDataClass().isMulti()); 
+						setStart(getReciveDataClass().isStart());
 					} catch (Exception e) {
 						System.out.println("데이터 입력 오류");
 						setIsconnect(false);

@@ -24,8 +24,6 @@ public class TimerControl extends Timer {
 		init(connectControl);
 		setting();
 		batch();
-		timerThread();
-//		imsi();
 	}
 
 	public void init(ConnectControl connectControl) {
@@ -52,13 +50,7 @@ public class TimerControl extends Timer {
 		new Thread(() -> {
 			while (true) {
 				try {
-					if (connectControl != null && connectControl.isIsconnect()
-							&& connectControl.getReciveDataClass() != null && connectControl.isReciveMulti()
-							&& !connectControl.getReciveDataClass().isStart()) {
-						getTimerLabel().setText(Integer.toString(connectControl.getReciveDataClass().getStartTime()));
-					}else if(connectControl != null && connectControl.isIsconnect()
-							&& connectControl.getReciveDataClass() != null && connectControl.isReciveMulti()
-							&& connectControl.getReciveDataClass().isStart()) {
+					if (connectControl.isIsconnect() && connectControl.isStart()) {
 						setStartTime(connectControl.getReciveDataClass().getStartTime());
 						setMliSec((int) System.currentTimeMillis() / 10 - (getStartTime()));
 						setSec(getMliSec() / 100);

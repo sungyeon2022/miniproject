@@ -141,18 +141,22 @@ public class miniApp extends JFrame {
 					issac.setRight(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.LEFT] = false;
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.setLeft(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.RIGHT] = false;
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.setDown(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.UP] = false;
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setUp(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
+					issac.issacInfoRefresh();
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					issac.setKeyPress(false);
 					issac.issacInfoRefresh();
@@ -233,11 +237,30 @@ public class miniApp extends JFrame {
 
 	public void connectCheck() {
 		new Thread(() -> {
+			boolean wait = false;
 			while (!Thread.interrupted()) {
-				if (connectControl.isReciveMulti()) {
+				if (connectControl.isReciveMulti()&&connectControl.isStart()) {
+					issac.setXPlayer(issac.getDefaultX());
+					issac.setYPlayer(issac.getDefaultY());
+					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
+							issac.getYPlayer() + issac.getYPlusBody());
+					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
+					issac.setViewDirect(ViewDirect.UP);
+					issac.setUp(true);
+					issac.issacInfoRefresh();
 					enemyIssac.batch();
 					enemySwordControl.batch();
 					break;
+				}else if (connectControl.isReciveMulti()&&!connectControl.isStart()) {
+					if(!wait) {
+						waitting();
+						wait = true;
+					}
+					issac.setXPlayer(issac.getDefaultX());
+					issac.setYPlayer(issac.getDefaultY());
+					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
+							issac.getYPlayer() + issac.getYPlusBody());
+					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
 				}else {
 					issac.setXPlayer(issac.getDefaultX());
 					issac.setYPlayer(issac.getDefaultY());
@@ -246,6 +269,19 @@ public class miniApp extends JFrame {
 					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
 				}
 			}
+		}).start();
+	}
+	public void waitting() {
+		new Thread(()->{
+			for(int i = 3;i>0;i--) {
+				timerControl.getTimerLabel().setText(Integer.toString(i));
+				try {
+					Thread.sleep(1000);
+				} catch (Exception e) {
+				}
+			}
+			connectControl.getSendDataClass().setStart(true);
+			connectControl.getSendDataClass().setStartTime((int)System.currentTimeMillis()/10);
 		}).start();
 	}
 }
