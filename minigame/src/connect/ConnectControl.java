@@ -59,14 +59,12 @@ public class ConnectControl extends Connect {
 
 	@Override
 	public void ReceiveDataThread() {
-
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (isIsconnect()) {
 					try {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
-						setMulti(getReciveDataClass().isMulti());
 					} catch (Exception e) {
 						System.out.println("서버 닫힘");
 						setIsconnect(false);

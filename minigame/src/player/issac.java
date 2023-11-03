@@ -538,6 +538,7 @@ public class issac extends Player {
 			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 					startButtonControl.getYButton());
 			connectControl = new ConnectControl();
+			issacInfoRefresh();
 			timerControl.getTimerLabel().setText("Wait Enemy");
 		}
 	}

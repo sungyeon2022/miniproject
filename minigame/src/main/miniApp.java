@@ -178,7 +178,7 @@ public class miniApp extends JFrame {
 
 	public void monsterDeadCheck() {
 		new Thread(() -> {
-			while (connectControl!=null && !connectControl.isMulti() && !monsters.isEmpty()) {
+			while (!monsters.isEmpty()) {
 				for (int i = 0; i < monsters.size(); i++) {
 					if (monsters.get(i).isDead()) {
 						String monName = monsters.get(i).getGUBUN();
@@ -234,6 +234,7 @@ public class miniApp extends JFrame {
 			issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
 					issac.getYPlayer() + issac.getYPlusBody());
 			issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
+			
 		}
 	}
 }
