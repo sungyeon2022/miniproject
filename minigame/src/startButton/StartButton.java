@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 
 import SpriteSheet.SpriteSheet;
 import lombok.Data;
+import main.miniApp;
 
 @Data
 
@@ -12,9 +13,9 @@ public class StartButton {
 	private int xButton;
 	private int yButton;
 	private SpriteSheet ssStartButton;
-	private JFrame app;
+	private miniApp app;
 	private boolean isMulti;
-	public StartButton(JFrame app){
+	public StartButton(miniApp app){
 		this.app = app;
 	}
 	

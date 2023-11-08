@@ -12,12 +12,16 @@ import javax.swing.JLabel;
 import Timer.TimerControl;
 import imgSize.BombSize;
 import item.Item;
+import lombok.Data;
+import main.miniApp;
 import objectSetting.MyFont;
+
+@Data
 
 public class Background {
 	private JLabel isBackground;
 
-	public Background(JFrame app) {
+	public Background(miniApp app) {
 		app.setSize(960, 640);
 
 		ImageIcon back = new ImageIcon("images/structure/map.png");

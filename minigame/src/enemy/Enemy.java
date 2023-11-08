@@ -4,11 +4,12 @@ import javax.swing.JFrame;
 
 import lombok.Data;
 import lombok.Lombok;
+import main.miniApp;
 import sword.SwordControl;
 
 @Data
 public class Enemy extends Lombok {
-	private JFrame app;
+	private miniApp app;
 	private final static String GUBUN="enemy";
 	private double life=5;//생명,최대 생명
 	private double maxlife=8;
@@ -25,7 +26,7 @@ public class Enemy extends Lombok {
 	private boolean isSendInvincible;
 	private boolean isInvincible;
 	
-	public Enemy(JFrame app) {
+	public Enemy(miniApp app) {
 		this.app = app;
 		this.isRock = false;
 		this.dead = false;

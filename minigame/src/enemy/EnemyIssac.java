@@ -8,6 +8,7 @@ import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
 import imgSize.*;
 import lombok.Data;
+import main.miniApp;
 import objectSetting.ViewDirect;
 import wall.*;
 import item.*;
@@ -31,7 +32,7 @@ public class EnemyIssac extends Enemy {
 	private int powerNum = 1;
 	private int attackspeedNum = 1;
 
-	public EnemyIssac(JFrame app, Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
+	public EnemyIssac(miniApp app, Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
 		init(walls, items, issac, connectControl);

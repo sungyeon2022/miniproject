@@ -7,6 +7,7 @@ import imgSize.BodySize;
 import imgSize.Gap;
 import objectSetting.*;
 import lombok.Data;
+import main.miniApp;
 import player.issac;
 
 @Data
@@ -17,7 +18,7 @@ public class body extends Monster {
 	private int defaultX = 400;
 	private int defaultY = 200;
 	
-	public body(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
+	public body(miniApp app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
 		setGUBUN("Body");
 		new Thread(new Runnable() {

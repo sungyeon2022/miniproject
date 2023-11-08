@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
+import main.miniApp;
 
 public class TestControl extends Test {
 	private TestControl testcontorl = this;
@@ -18,7 +19,7 @@ public class TestControl extends Test {
 	private JLabel testLabel;
 
 
-	public TestControl(JFrame app, ConnectControl connectControl) {
+	public TestControl(miniApp app, ConnectControl connectControl) {
 		super(app);
 		init(app);
 		setting();

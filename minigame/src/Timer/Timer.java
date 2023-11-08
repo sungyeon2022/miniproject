@@ -6,18 +6,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import lombok.Data;
+import main.miniApp;
 
 @Data
 
 public class Timer {
-	private JFrame app;
+	private miniApp app;
 	private JLabel timerLabel;
 	private int sec;
 	private int mliSec;
 	private int min;
 	private int hour;
 	private int startTime;
-	public Timer(JFrame app) {
+	public Timer(miniApp app) {
 		this.app = app;
 		
 	}

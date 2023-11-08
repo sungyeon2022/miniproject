@@ -8,6 +8,7 @@ import imgSize.SwordMotionSize;
 import imgSize.SwordSize;
 import objectSetting.*;
 import lombok.Data;
+import main.miniApp;
 import monster.Monster;
 import player.issac;
 
@@ -21,7 +22,7 @@ public class SwordControl extends Sword {
 	private Vector<Monster> monsters;
 	private ConnectControl connectControl;
 
-	public SwordControl(JFrame app, issac issac, Vector<Monster> monsters, ConnectControl connectControl) {
+	public SwordControl(miniApp app, issac issac, Vector<Monster> monsters, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "makeSword");
 		init(issac, monsters, connectControl);

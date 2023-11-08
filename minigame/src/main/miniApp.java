@@ -1,16 +1,21 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Vector;
+import java.util.PrimitiveIterator.OfDouble;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -33,6 +38,7 @@ import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
 import monster.body;
+import objectSetting.MyFont;
 import objectSetting.ViewDirect;
 import monster.Head;
 import monster.Monster;
@@ -44,12 +50,20 @@ import test.TestControl;
 import item.Heart;
 import item.Item;
 import item.Pill;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import mainPage.EndPage;
+import mainPage.StartPage;
 import wall.rock;
 import wall.wall;
 
+@Getter
+@Setter
 //JFrame 참조 
 public class miniApp extends JFrame {
-	private JFrame app;
+	private miniApp app;
+	private StartPage startPage;
 	private Background bg;
 	private issac issac;
 	private SwordControl swordControl;
@@ -62,6 +76,7 @@ public class miniApp extends JFrame {
 	private TimerControl timerControl;
 	private EnemySwordControl enemySwordControl;
 	private StartButtonControl startButtonControl;
+	private EndPage endPage;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -70,28 +85,27 @@ public class miniApp extends JFrame {
 		batch();
 		listener();
 //		checkUsedMomory();
-		monsterDeadCheck();
 	}
 
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
 		app = this;
 		bg = new Background(app);
-		connectControl = new ConnectControl();
-		startButtonControl = new StartButtonControl(app, connectControl);
-		timerControl = new TimerControl(app, connectControl);
-//		page = new Page(app);
-		monsters = new Vector<Monster>();
+		startPage = new StartPage(app);
+//		connectControl = new ConnectControl();
+//		startButtonControl = new StartButtonControl(app, connectControl);
+//		timerControl = new TimerControl(app, connectControl);
+//		monsters = new Vector<Monster>();
 //		items = new Vector<Item>();
-		walls = new Vector<wall>();
-		issac = new issac(app, monsters, walls, items, startButtonControl, connectControl, timerControl);
-		swordControl = new SwordControl(app, issac, monsters, connectControl);
-		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
-		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac, connectControl);
+//		walls = new Vector<wall>();
+//		issac = new issac(app, monsters, walls, startButtonControl, connectControl, timerControl);
+//		swordControl = new SwordControl(app, issac, monsters, connectControl);
+//		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
+//		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac, connectControl);
 //		testControl = new TestControl(app, connectControl);
-		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+//		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+//		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+//		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 
 	}
 
@@ -109,12 +123,7 @@ public class miniApp extends JFrame {
 	}
 
 	public void listener() {
-		keyboardEvent();
-	}
-
-	public static void main(String[] args) {
-		new miniApp();
-
+		MouseListener();
 	}
 
 	public void keyboardEvent() {
@@ -239,7 +248,7 @@ public class miniApp extends JFrame {
 		new Thread(() -> {
 			boolean wait = false;
 			while (!Thread.interrupted()) {
-				if (connectControl.isReciveMulti()&&connectControl.isStart()) {
+				if (connectControl.isReciveMulti() && connectControl.isStart()) {
 					issac.setXPlayer(issac.getDefaultX());
 					issac.setYPlayer(issac.getDefaultY());
 					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
@@ -251,8 +260,8 @@ public class miniApp extends JFrame {
 					enemyIssac.batch();
 					enemySwordControl.batch();
 					break;
-				}else if (connectControl.isReciveMulti()&&!connectControl.isStart()) {
-					if(!wait) {
+				} else if (connectControl.isReciveMulti() && !connectControl.isStart()) {
+					if (!wait) {
 						waitting();
 						wait = true;
 					}
@@ -261,7 +270,7 @@ public class miniApp extends JFrame {
 					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
 							issac.getYPlayer() + issac.getYPlusBody());
 					issac.getSsHead().drawObj(issac.getXPlayer(), issac.getYPlayer());
-				}else {
+				} else {
 					issac.setXPlayer(issac.getDefaultX());
 					issac.setYPlayer(issac.getDefaultY());
 					issac.getSsBody().drawObj(issac.getXPlayer() + issac.getXPlusBody(),
@@ -271,9 +280,10 @@ public class miniApp extends JFrame {
 			}
 		}).start();
 	}
+
 	public void waitting() {
-		new Thread(()->{
-			for(int i = 3;i>0;i--) {
+		new Thread(() -> {
+			for (int i = 3; i > 0; i--) {
 				timerControl.getTimerLabel().setText(Integer.toString(i));
 				try {
 					Thread.sleep(1000);
@@ -281,11 +291,79 @@ public class miniApp extends JFrame {
 				}
 			}
 			connectControl.getSendDataClass().setStart(true);
-			int time=(int)System.currentTimeMillis()/10;
+			int time = (int) System.currentTimeMillis() / 10;
 			connectControl.getSendDataClass().setStartTime(time);
 			timerControl.setStartTime(time);
 			connectControl.SendData();
 			connectControl.setStart(true);
 		}).start();
+	}
+
+	private void MouseListener() {
+		startPage.getStartSingleButton().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				startPage.getStartSingleButton().setFont(new Font(MyFont.FONT3, Font.BOLD, 42));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				startPage.getStartSingleButton().setFont(new Font(MyFont.FONT3, Font.BOLD, 40));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (startPage != null) {
+					startPage.getPagePanel().removeAll();
+					app.remove(startPage.getPagePanel());
+					app.repaint();
+					monsters = new Vector<Monster>();
+					walls = new Vector<wall>();
+					issac = new issac(app, monsters, walls, startButtonControl, connectControl, timerControl);
+					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+				}
+				startPage = null;
+				app.setFocusable(true);
+				app.requestFocus();
+				keyboardEvent();
+			}
+		});
+		startPage.getStartMultiButton().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				startPage.getStartMultiButton().setFont(new Font(MyFont.FONT3, Font.BOLD, 42));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				startPage.getStartMultiButton().setFont(new Font(MyFont.FONT3, Font.BOLD, 40));
+			}
+		});
+		startPage.getEndButton().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				startPage.getEndButton().setFont(new Font(MyFont.FONT3, Font.BOLD, 42));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				startPage.getEndButton().setFont(new Font(MyFont.FONT3, Font.BOLD, 40));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+//				System.exit(0);
+				if (startPage != null) {
+					app.remove(startPage.getPagePanel());
+					app.repaint();
+					endPage = new EndPage(app);		
+				}
+				startPage = null;
+			}
+		});
+			
+		
 	}
 }

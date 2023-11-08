@@ -10,6 +10,7 @@ import imgSize.Gap;
 import objectSetting.*;
 import imgSize.WormSize;
 import lombok.Data;
+import main.miniApp;
 import player.issac;
 
 @Data
@@ -29,7 +30,7 @@ public class Worm extends Monster {
 		this.stop = stop;
 	}
 
-	public Worm(JFrame app, issac Issac, String url, int imgWidth, int imgHeight) {
+	public Worm(miniApp app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
 		setGUBUN("Worm");
 		Timer timer = new Timer("Timer");

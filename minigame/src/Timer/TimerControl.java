@@ -14,12 +14,13 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import connect.ConnectControl;
+import main.miniApp;
 import objectSetting.MyFont;
 
 public class TimerControl extends Timer {
 	private ConnectControl connectControl;
 
-	public TimerControl(JFrame app, ConnectControl connectControl) {
+	public TimerControl(miniApp app, ConnectControl connectControl) {
 		super(app);
 		init(connectControl);
 		setting();

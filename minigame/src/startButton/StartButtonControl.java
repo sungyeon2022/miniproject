@@ -6,12 +6,13 @@ import javax.swing.JLabel;
 import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
 import imgSize.ButtonSize;
+import main.miniApp;
 import player.issac;
 
 public class StartButtonControl extends StartButton {
 	private ConnectControl connectControl;
 
-	public StartButtonControl(JFrame app, ConnectControl connectControl) {
+	public StartButtonControl(miniApp app, ConnectControl connectControl) {
 		super(app);
 		init(connectControl);
 		setting();

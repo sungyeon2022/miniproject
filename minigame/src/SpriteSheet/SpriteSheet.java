@@ -22,12 +22,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 
 import lombok.Data;
+import main.miniApp;
 
 @Data
 
 public class SpriteSheet extends JLabel {
 	private final static String TAG = "SpriteSheet:";
-	private JFrame app;
+	private miniApp app;
 	private BufferedImage imgSprite;
 	private BufferedImage originImg;
 	private Graphics2D graphics;

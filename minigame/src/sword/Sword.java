@@ -7,16 +7,18 @@ import java.awt.image.BufferedImage;
 import java.awt.print.Printable;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import SpriteSheet.SpriteSheet;
 import imgSize.SwordSize;
 import lombok.Data;
 import lombok.Lombok;
+import main.miniApp;
 
 @Data // sword가 사용할 데이터의 집합
 
-public class Sword extends Lombok {
-	private JFrame app;
+public class Sword {
+	private miniApp app;
 	private final static String TAG = "sword";
 	private int xSword, ySword;
 	private boolean isAttackKeyPress;
@@ -24,7 +26,7 @@ public class Sword extends Lombok {
 	private int dotAttackDelay;
 	private boolean isEnemyAttackKeyPress;
 
-	public Sword(JFrame app) {
+	public Sword(miniApp app) {
 		this.app = app;
 		this.isAttackKeyPress = false;
 		this.isSwordAttacking = false;

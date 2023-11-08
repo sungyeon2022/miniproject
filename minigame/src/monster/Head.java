@@ -7,6 +7,7 @@ import imgSize.Gap;
 import imgSize.HeadSize;
 import objectSetting.*;
 import lombok.Data;
+import main.miniApp;
 import player.issac;
 
 @Data
@@ -16,7 +17,7 @@ public class Head extends Monster{
 	private int defaultX = 300;
 	private int defaultY = 200;
 	
-	public Head(JFrame app, issac issac, String url, int imgWidth, int imgHeight) {
+	public Head(miniApp app, issac issac, String url, int imgWidth, int imgHeight) {
 		super(app, issac, url, imgWidth, imgHeight);
 		setGUBUN("Head");
 		new Thread(new Runnable() {

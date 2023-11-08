@@ -10,6 +10,7 @@ import imgSize.SwordMotionSize;
 import imgSize.SwordSize;
 import objectSetting.*;
 import lombok.Data;
+import main.miniApp;
 import player.issac;
 
 @Data
@@ -23,7 +24,7 @@ public class EnemySwordControl extends Sword {
 	private EnemyIssac enemyIssac;
 	private ConnectControl connectControl;
 
-	public EnemySwordControl(JFrame app, issac issac, EnemyIssac enemyIssac, ConnectControl connectControl) {
+	public EnemySwordControl(miniApp app, issac issac, EnemyIssac enemyIssac, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "makeSword");
 		init(issac, enemyIssac, connectControl);

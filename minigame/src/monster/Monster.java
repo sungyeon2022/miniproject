@@ -8,6 +8,7 @@ import SpriteSheet.SpriteSheet;
 import imgSize.DeadSize;
 import imgSize.Gap;
 import lombok.Data;
+import main.miniApp;
 import player.Player;
 import player.issac;//objectsetting에서 옮겨옴
 
@@ -23,7 +24,7 @@ public class Monster extends Player{
 	private int imgWidth, imgHeight;
 	private String GUBUN;
 	
-	public Monster(JFrame app, issac issac, String url, int imgWidth, int imgHeight) {
+	public Monster(miniApp app, issac issac, String url, int imgWidth, int imgHeight) {
 		super(app);
 		this.issac = issac;
 		this.imgWidth = imgWidth;

@@ -2,11 +2,13 @@ package item;
 
 import javax.swing.JFrame;
 
+import main.miniApp;
+
 public class Pill extends Item {
 	private final static String TAG = "Key : ";
 	private Pill pill = this;
    
-	public Pill(JFrame app, String url, String gubun, int xItem, int yItem, int width, int height) {
+	public Pill(miniApp app, String url, String gubun, int xItem, int yItem, int width, int height) {
 		super(app, url, gubun, xItem, yItem, width, height);
 		drawItem();
 	}

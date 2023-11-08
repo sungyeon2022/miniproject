@@ -1,17 +1,19 @@
 package player;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import imgSize.issacSize;
 import lombok.Data;
 import lombok.Lombok;
+import main.miniApp;
 import sword.SwordControl;
 
 @Data
-public class Player extends Lombok {
-	private JFrame app;
+public class Player {
+	private miniApp app;
 	private final static String GUBUN="player";
-	private double life=5;//생명,최대 생명
+	private double life=1;//생명,최대 생명
 	private double maxlife=8;
 	private boolean isUp, isDown, isRight, isLeft;
 	private boolean isKeyPress;
@@ -31,7 +33,7 @@ public class Player extends Lombok {
 	private int defaultY;
 	private boolean isInvincible;
 	
-	public Player(JFrame app) {
+	public Player(miniApp app) {
 		this.app = app;
 		this.isUp = false;
 		this.isDown = false;
