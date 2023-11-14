@@ -36,7 +36,7 @@ public class issac extends Player {
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
 	private Vector<Monster> monsters;
-	private Vector<wall> walls;
+	private Vector<structure> structures;
 	private Vector<Item> items;
 	private int xPlusBody = 8, yPlusBody = 30;
 	private int item1Count = 0;
@@ -54,7 +54,7 @@ public class issac extends Player {
 	private TimerControl timerControl;
 	private EndPage endPage;
 
-	public issac(miniApp app, Vector<Monster> monsters, Vector<wall> walls,
+	public issac(miniApp app, Vector<Monster> monsters, Vector<structure> structures,
 			StartButtonControl startButtonControl, ConnectControl connectControl, TimerControl timerControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
@@ -138,11 +138,11 @@ public class issac extends Player {
 						}
 						boolean isrock = false;
 						// 돌 충돌 체크 시작
-						if (walls!=null) {
-							for (int i = 0; i < walls.size(); i++) {
-								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+						if (structures!=null) {
+							for (int i = 0; i < structures.size(); i++) {
+								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
-											.intersects(walls.get(i).getSswall().getBounds())) {
+											.intersects(structures.get(i).getSsStructure().getBounds())) {
 										setXPlayer(getXPlayer() - 2);
 										issacInfoRefresh();
 										isrock = true;
@@ -190,11 +190,11 @@ public class issac extends Player {
 							break;
 						}
 						boolean isrock = false;
-						if (walls!=null) {
-							for (int i = 0; i < walls.size(); i++) {
-								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+						if (structures!=null) {
+							for (int i = 0; i < structures.size(); i++) {
+								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
-											.intersects(walls.get(i).getSswall().getBounds())) {
+											.intersects(structures.get(i).getSsStructure().getBounds())) {
 										setXPlayer(getXPlayer() + 2);
 										issacInfoRefresh();
 										isrock = true;
@@ -244,11 +244,11 @@ public class issac extends Player {
 						}
 						// 돌 충돌 체크 시작
 						boolean isrock = false;
-						if (walls!=null) {
-							for (int i = 0; i < walls.size(); i++) {
-								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+						if (structures!=null) {
+							for (int i = 0; i < structures.size(); i++) {
+								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
-											.intersects(walls.get(i).getSswall().getBounds())) {
+											.intersects(structures.get(i).getSsStructure().getBounds())) {
 										setYPlayer(getYPlayer() - 2);
 										issacInfoRefresh();
 										isrock = true;
@@ -296,11 +296,11 @@ public class issac extends Player {
 							break;
 						}
 						boolean isrock = false;
-						if (walls!=null) {
-							for (int i = 0; i < walls.size(); i++) {
-								if (!walls.get(i).isBroken() && walls.get(i).getSswall().getGubun() == "rock") {
+						if (structures!=null) {
+							for (int i = 0; i < structures.size(); i++) {
+								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
-											.intersects(walls.get(i).getSswall().getBounds())) {
+											.intersects(structures.get(i).getSsStructure().getBounds())) {
 										setYPlayer(getYPlayer() + 2);
 										issacInfoRefresh();
 										isrock = true;

@@ -47,16 +47,12 @@ import startButton.StartButtonControl;
 import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
-import item.Heart;
 import item.Item;
-import item.Pill;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import mainPage.EndPage;
 import mainPage.StartPage;
-import wall.rock;
-import wall.wall;
+import wall.structure;
 
 @Getter
 @Setter
@@ -71,7 +67,7 @@ public class miniApp extends JFrame {
 	private TestControl testControl;
 	private Vector<Monster> monsters;
 	private Vector<Item> items;
-	private Vector<wall> walls;
+	private Vector<structure> structures;
 	private ConnectControl connectControl;
 	private TimerControl timerControl;
 	private EnemySwordControl enemySwordControl;
@@ -318,8 +314,8 @@ public class miniApp extends JFrame {
 					app.remove(startPage.getPagePanel());
 					app.repaint();
 					monsters = new Vector<Monster>();
-					walls = new Vector<wall>();
-					issac = new issac(app, monsters, walls, startButtonControl, connectControl, timerControl);
+					structures = new Vector<structure>();
+					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
 					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
@@ -351,8 +347,7 @@ public class miniApp extends JFrame {
 					connectControl = new ConnectControl();
 					startButtonControl = new StartButtonControl(app, connectControl);
 					timerControl = new TimerControl(app, connectControl);
-					issac = new issac(app, monsters, walls, startButtonControl, connectControl, timerControl);
-					enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
+					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
 					app.setFocusable(true);
 					app.requestFocus();
 					keyboardEvent();

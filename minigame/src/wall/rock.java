@@ -2,18 +2,31 @@ package wall;
 
 import javax.swing.JFrame;
 
+import SpriteSheet.SpriteSheet;
 import lombok.Data;
 import main.miniApp;
 
-@Data
-public class rock extends wall{
-	public rock(miniApp app, int xwall, int ywall) {
-		super(app, "structure/rock.png", "rock", xwall, ywall);
-		drawwall();
+public class rock extends structure{
+	public rock(miniApp app) {
+		super(app);
+		init();
+		setting();
+		batch();
 	}
-	@Override
-	public void drawwall() {
-		getSswall().drawObj(getXwall(), getYwall());
-		getApp().add(getSswall());
+
+	private void init() {
+		setSsStructure(new SpriteSheet(null, null, getXwall(), getXwall(), getYwall(), getXwall()));
+		setGUBUN("rock");
 	}
+
+	private void setting() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void batch() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
