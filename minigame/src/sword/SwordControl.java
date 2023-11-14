@@ -216,7 +216,7 @@ public class SwordControl extends Sword {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (!Thread.interrupted() && !issac.isDead()) {
+				while (!Thread.interrupted() && !issac.isDead() && monsters != null) {
 					boolean ismonster = false;
 					if (!monsters.isEmpty() && !isSwordAttacking()) {
 						for (int i = 0; i < monsters.size(); i++) {
@@ -243,7 +243,7 @@ public class SwordControl extends Sword {
 	}
 
 	public void swingAttack() {
-		if (!monsters.isEmpty()) {
+		if (monsters != null && !monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
 				if (swordControl.getSsSword().getBounds().intersects(monsters.get(i).getSsMonster().getBounds())) {
 					monsters.get(i).setLife(monsters.get(i).getLife() - issac.getAttackDamage());

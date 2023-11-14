@@ -139,10 +139,8 @@ public class EndPage {
 					app.remove(endLabel);
 					app.getEndPage().getEndLabel().removeAll();
 					app.setEndPage(null);
-					app.repaint();
-					app.getStartPage().getPagePanel().setFocusable(true);
-					app.getStartPage().getPagePanel().requestFocus();
-					app.listener();
+					app.dispose();
+					app = new miniApp();
 				}
 			}
 		});

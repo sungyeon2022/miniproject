@@ -35,7 +35,6 @@ public class issac extends Player {
 	private SpriteSheet ssDead, ssHit;
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
-	private Worm worm;
 	private Vector<Monster> monsters;
 	private Vector<wall> walls;
 	private Vector<Item> items;
@@ -542,15 +541,13 @@ public class issac extends Player {
 	
 	public void gameEnd() {
 		deadMotion();
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		for(int i = 0;i<monsters.size();i++) {
-			getApp().remove();
-		}
+//		try {
+//			Thread.sleep(1000);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		getApp().setEndPage(new EndPage(getApp()));
+		
 	}
 	
 	public synchronized void issacInfoRefresh() {

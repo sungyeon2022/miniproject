@@ -340,6 +340,24 @@ public class miniApp extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				startPage.getStartMultiButton().setFont(new Font(MyFont.FONT3, Font.BOLD, 40));
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				app.remove(startPage.getPagePanel());
+				app.repaint();
+				boolean check = true;
+				if (check) {
+					check = false;
+					connectControl = new ConnectControl();
+					startButtonControl = new StartButtonControl(app, connectControl);
+					timerControl = new TimerControl(app, connectControl);
+					issac = new issac(app, monsters, walls, startButtonControl, connectControl, timerControl);
+					enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
+					app.setFocusable(true);
+					app.requestFocus();
+					keyboardEvent();
+				}
+			}
 		});
 		startPage.getEndButton().addMouseListener(new MouseAdapter() {
 			@Override
@@ -354,16 +372,8 @@ public class miniApp extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				System.exit(0);
-				if (startPage != null) {
-					app.remove(startPage.getPagePanel());
-					app.repaint();
-					endPage = new EndPage(app);		
-				}
-				startPage = null;
+				System.exit(0);
 			}
 		});
-			
-		
 	}
 }

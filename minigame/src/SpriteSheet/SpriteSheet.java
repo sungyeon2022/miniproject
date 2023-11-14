@@ -13,6 +13,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -28,7 +29,7 @@ import main.miniApp;
 
 public class SpriteSheet extends JLabel {
 	private final static String TAG = "SpriteSheet:";
-	private miniApp app;
+	private miniApp app;	
 	private BufferedImage imgSprite;
 	private BufferedImage originImg;
 	private Graphics2D graphics;
@@ -52,7 +53,7 @@ public class SpriteSheet extends JLabel {
 		this.height = height;
 		loadSpriteimage(url);
 	}
-
+	
 	public void loadSpriteimage(String url) {
 		try {
 			imgSprite = ImageIO.read(new File("images/" + url));

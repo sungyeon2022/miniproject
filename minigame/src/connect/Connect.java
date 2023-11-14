@@ -31,7 +31,6 @@ public class Connect extends Lombok {
 	ObjectInputStream myObjectInputStream;
 	private boolean isconnect;
 	private String Name;
-	private Object receiveObject;
 	private int socketNum;
 	private DataClass sendDataClass;
 	private DataClass reciveDataClass;
