@@ -95,20 +95,4 @@ public class SpriteSheet extends JLabel {
 //		setBorder(new LineBorder(Color.black));
 //		
 //	}
-
-	public void erase() {
-		setIcon(null);
-	}
-	/*
-	 * public static BufferedImage resize(InputStream image, int width, int height)
-	 * throws IOException { BufferedImage inputImage = ImageIO.read(image);
-	 * BufferedImage outputimage = new BufferedImage(width, height,
-	 * inputImage.getType());
-	 * 
-	 * Graphics2D changeSize = outputimage.createGraphics();
-	 * changeSize.drawImage(inputImage, 0, 0, width, height, null);
-	 * changeSize.dispose();
-	 * 
-	 * return outputimage; }
-	 */
 }

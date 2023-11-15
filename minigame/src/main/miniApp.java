@@ -48,6 +48,7 @@ import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
 import item.Item;
+import item.bomb;
 import lombok.Getter;
 import lombok.Setter;
 import mainPage.EndPage;
@@ -88,6 +89,7 @@ public class miniApp extends JFrame {
 		app = this;
 		bg = new Background(app);
 		startPage = new StartPage(app);
+//		testControl = new TestControl(app);
 //		connectControl = new ConnectControl();
 //		startButtonControl = new StartButtonControl(app, connectControl);
 //		timerControl = new TimerControl(app, connectControl);
@@ -98,7 +100,7 @@ public class miniApp extends JFrame {
 //		swordControl = new SwordControl(app, issac, monsters, connectControl);
 //		enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
 //		enemySwordControl = new EnemySwordControl(app, issac, enemyIssac, connectControl);
-//		testControl = new TestControl(app, connectControl);
+		
 //		monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 //		monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 //		monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
@@ -315,10 +317,12 @@ public class miniApp extends JFrame {
 					app.repaint();
 					monsters = new Vector<Monster>();
 					structures = new Vector<structure>();
+					items = new Vector<Item>();
 					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
-					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+					items.add(new bomb(app, 200, 200));
+					//					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+//					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+//					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 				}
 				startPage = null;
 				app.setFocusable(true);

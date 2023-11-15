@@ -446,17 +446,6 @@ public class issac extends Player {
 		}
 	}
 
-	// 주변 아이템 여부 체크
-	public boolean nearItemCheck(Item item) {
-		if (getXPlayerCenter() > item.getXItem() && getXPlayerCenter() < item.getXItem() + item.getSsItem().getWidth()
-				&& getYPlayerCenter() > item.getYItem()
-				&& getYPlayerCenter() < item.getYItem() + item.getSsItem().getHeight()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public void deadMotion() {
 		ssBody.setVisible(false);
 		ssHead.setVisible(false);
