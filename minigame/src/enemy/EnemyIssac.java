@@ -32,14 +32,14 @@ public class EnemyIssac extends Enemy {
 	private int powerNum = 1;
 	private int attackspeedNum = 1;
 
-	public EnemyIssac(miniApp app, Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
+	public EnemyIssac(miniApp app, Vector<structure> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
 		init(walls, items, issac, connectControl);
 		setting();
 	}
 
-	public void init(Vector<wall> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
+	public void init(Vector<structure> walls, Vector<Item> items, issac issac, ConnectControl connectControl) {
 		this.issac = issac;
 		this.connectControl = connectControl;
 		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", 0, 0, issacSize.issacHEADWIDTH,

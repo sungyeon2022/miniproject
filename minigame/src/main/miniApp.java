@@ -1,62 +1,41 @@
 package main;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.KeyAdapter;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Vector;
-import java.util.PrimitiveIterator.OfDouble;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
-import connect.Connect;
 import connect.ConnectControl;
-import data.DataClass;
 import enemy.EnemyIssac;
 //import enemy.EnemyIssac;
 import imgSize.BodySize;
-import imgSize.BombSize;
 import imgSize.HeadSize;
-import imgSize.HeartSize;
-import imgSize.PillSize;
 import imgSize.WormSize;
+import item.Item;
+import lombok.Getter;
+import lombok.Setter;
+import mainPage.EndPage;
+import mainPage.StartPage;
 import map.Background;
+import map.Preset;
+import monster.Head;
+import monster.Monster;
 import monster.Worm;
 import monster.body;
 import objectSetting.MyFont;
 import objectSetting.ViewDirect;
-import monster.Head;
-import monster.Monster;
 import player.issac;
 import startButton.StartButtonControl;
 import sword.EnemySwordControl;
 import sword.SwordControl;
 import test.TestControl;
-import item.Heart;
-import item.Item;
-import item.Pill;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import mainPage.EndPage;
-import mainPage.StartPage;
 import wall.rock;
-import wall.wall;
+import wall.structure;
 
 @Getter
 @Setter
@@ -71,7 +50,7 @@ public class miniApp extends JFrame {
 	private TestControl testControl;
 	private Vector<Monster> monsters;
 	private Vector<Item> items;
-	private Vector<wall> walls;
+	private Vector<structure> structures;
 	private ConnectControl connectControl;
 	private TimerControl timerControl;
 	private EnemySwordControl enemySwordControl;
@@ -318,11 +297,13 @@ public class miniApp extends JFrame {
 					app.remove(startPage.getPagePanel());
 					app.repaint();
 					monsters = new Vector<Monster>();
-					walls = new Vector<wall>();
-					issac = new issac(app, monsters, walls, startButtonControl, connectControl, timerControl);
+					structures = new Vector<structure>();
+					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
 					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+					
+					new Preset(app,structures);
 				}
 				startPage = null;
 				app.setFocusable(true);
@@ -351,8 +332,8 @@ public class miniApp extends JFrame {
 					connectControl = new ConnectControl();
 					startButtonControl = new StartButtonControl(app, connectControl);
 					timerControl = new TimerControl(app, connectControl);
-					issac = new issac(app, monsters, walls, startButtonControl, connectControl, timerControl);
-					enemyIssac = new EnemyIssac(app, walls, items, issac, connectControl);
+					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
+					enemyIssac = new EnemyIssac(app, structures, items, issac, connectControl);
 					app.setFocusable(true);
 					app.requestFocus();
 					keyboardEvent();

@@ -2,6 +2,7 @@ package monster;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 
@@ -12,6 +13,7 @@ import imgSize.WormSize;
 import lombok.Data;
 import main.miniApp;
 import player.issac;
+import wall.structure;
 
 @Data
 
@@ -25,13 +27,14 @@ public class Worm extends Monster {
 	private boolean stop;
 	private int defaultX = 180;
 	private int defaultY = 130;
-	
+	private Vector<structure> structures;
 	public void setStop(boolean stop) {
 		this.stop = stop;
 	}
 
 	public Worm(miniApp app, issac Issac, String url, int imgWidth, int imgHeight) {
 		super(app, Issac, url, imgWidth, imgHeight );
+		this.structures = getApp().getStructures();
 		setGUBUN("Worm");
 		Timer timer = new Timer("Timer");
 		new Thread(new Runnable() {
@@ -53,12 +56,16 @@ public class Worm extends Monster {
 						break;
 					}
 					gapCheck();
+
+					collisionRock();
 					moveRangeCheck();
+
 //					attack(); // 지속적으로 공격 조건 감시
 					moveUp();					
 					moveDown();
 					moveRight();
 					moveLeft();
+					
 					moveMotion();
 					getSsMonster().drawObj(getXPlayer(), getYPlayer());
 						try {
@@ -87,8 +94,8 @@ public class Worm extends Monster {
 	//기본 세팅
 	public void setting() {
 		setViewDirect(ViewDirect.RIGHT);
-		setXPlayer(180);
-		setYPlayer(130);
+		setXPlayer(700);
+		setYPlayer(400);
 		setXPlayerCenter(getXPlayer() + WormSize.WIDTH / 2); 
 		setYPlayerCenter(getYPlayer() + WormSize.HEIGHT / 2); 
 		setLife(20);
@@ -288,6 +295,50 @@ public class Worm extends Monster {
 				}
 			}
 		}).start();
+	}
+	
+	public void collisionRock() {
+		if (structures != null) {
+				for (int i = 0; i < structures.size(); i++) {
+					if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
+						if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
+							if (isDown()) {
+								System.out.println("down");
+								setYPlayer(getYPlayer() - monsterSpeed);
+								setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
+								setDown(false);
+								setUp(true);
+							}
+
+							else if (isUp()) {
+								System.out.println("up");
+								setYPlayer(getYPlayer() + monsterSpeed);
+								setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
+								setUp(false);
+								setDown(true);
+							}
+
+							else if (isLeft()) {
+								System.out.println("left");
+								setXPlayer(getXPlayer() + monsterSpeed);
+								setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
+								setLeft(false);
+								setRight(true);
+							}
+
+							else if (isRight()) {
+								System.out.println("right");
+								setXPlayer(getXPlayer() - monsterSpeed);
+								setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
+								setRight(false);
+								setLeft(true);
+							}
+							
+							break;
+						}
+					}
+				}
+		}
 	}
 	
 }

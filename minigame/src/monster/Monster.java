@@ -1,6 +1,7 @@
 package monster;
 
 import java.util.Random;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 
@@ -10,7 +11,8 @@ import imgSize.Gap;
 import lombok.Data;
 import main.miniApp;
 import player.Player;
-import player.issac;//objectsetting에서 옮겨옴
+import player.issac;
+import wall.structure;//objectsetting에서 옮겨옴
 
 @Data
 
@@ -23,6 +25,7 @@ public class Monster extends Player{
 	private String url;
 	private int imgWidth, imgHeight;
 	private String GUBUN;
+	private Vector<structure> structures;
 	
 	public Monster(miniApp app, issac issac, String url, int imgWidth, int imgHeight) {
 		super(app);
@@ -30,6 +33,7 @@ public class Monster extends Player{
 		this.imgWidth = imgWidth;
 		this.imgHeight = imgHeight;
 		this.url = url;
+		this.structures = getApp().getStructures();
 		ssDead = new SpriteSheet("monster/deadMonster.png", "dead", 0, 0, DeadSize.WIDTH, DeadSize.HEIGHT);
 		init();
 		setting();
@@ -79,7 +83,7 @@ public class Monster extends Player{
 			setLeft(true);
 			setDown(false);
 			setUp(false);
-//			System.out.println("오른쪽 벽 충돌");
+			System.out.println("오른쪽 벽 충돌");
 		}
 		// 왼쪽
 		if((getXPlayer()<130)) {
@@ -87,7 +91,7 @@ public class Monster extends Player{
 			setRight(true);
 			setDown(false);
 			setUp(false);
-//			System.out.println("왼쪽 벽 충돌");
+			System.out.println("왼쪽 벽 충돌");
 		}
 		// 아래쪽
 		if((getYPlayer()>440)) {
@@ -95,7 +99,7 @@ public class Monster extends Player{
 			setRight(false);
 			setDown(false);
 			setUp(true);
-//			System.out.println("아래쪽 벽 충돌");
+			System.out.println("아래쪽 벽 충돌");
 		}
 		// 위쪽
 		if((getYPlayer()<100)) {
@@ -103,7 +107,7 @@ public class Monster extends Player{
 			setRight(false);
 			setUp(false);
 			setDown(true);
-//			System.out.println("위쪽 벽 충돌");
+			System.out.println("위쪽 벽 충돌");
 		}	
 	}
 	public void moveDirectCheck() {
@@ -138,5 +142,9 @@ public class Monster extends Player{
 		
 
 	}
+	
+	
+	
+	
 
 }
