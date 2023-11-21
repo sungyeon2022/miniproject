@@ -13,7 +13,7 @@ import sword.SwordControl;
 public class Player {
 	private miniApp app;
 	private final static String GUBUN="player";
-	private double life=1;//생명,최대 생명
+	private double life=5;//생명,최대 생명
 	private double maxlife=8;
 	private boolean isUp, isDown, isRight, isLeft;
 	private boolean isKeyPress;

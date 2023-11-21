@@ -38,6 +38,7 @@ import imgSize.WormSize;
 import map.Background;
 import monster.Worm;
 import monster.body;
+import monster.fly;
 import objectSetting.MyFont;
 import objectSetting.ViewDirect;
 import monster.Head;
@@ -49,6 +50,7 @@ import sword.SwordControl;
 import test.TestControl;
 import item.Item;
 import item.bomb;
+import itemEffect.wings;
 import lombok.Getter;
 import lombok.Setter;
 import mainPage.EndPage;
@@ -74,6 +76,7 @@ public class miniApp extends JFrame {
 	private EnemySwordControl enemySwordControl;
 	private StartButtonControl startButtonControl;
 	private EndPage endPage;
+	private wings wings;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -149,21 +152,25 @@ public class miniApp extends JFrame {
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.LEFT] = false;
 					issac.issacInfoRefresh();
+					issac.sliding();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					issac.setLeft(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.RIGHT] = false;
 					issac.issacInfoRefresh();
+					issac.sliding();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					issac.setDown(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.UP] = false;
 					issac.issacInfoRefresh();
+					issac.sliding();
 				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					issac.setUp(false);
 					issac.refreshDirect();
 					issac.getViewDirectInfo()[ViewDirect.DOWN] = false;
 					issac.issacInfoRefresh();
+					issac.sliding();
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					issac.setKeyPress(false);
 					issac.issacInfoRefresh();
@@ -186,51 +193,6 @@ public class miniApp extends JFrame {
 //			}
 //		}).start();
 //	}
-
-	public void monsterDeadCheck() {
-		new Thread(() -> {
-			while (!monsters.isEmpty()) {
-				for (int i = 0; i < monsters.size(); i++) {
-					if (monsters.get(i).isDead()) {
-						String monName = monsters.get(i).getGUBUN();
-						monsters.remove(i);
-						if (monName.equals("Worm")) {
-							try {
-								Thread.sleep(3000);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-						}
-						if (monName.equals("Head")) {
-							try {
-								Thread.sleep(3000);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-						}
-						if (monName.equals("Body")) {
-							try {
-								Thread.sleep(3000);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-						}
-					}
-				}
-				if (connectControl.isMulti()) {
-					gameStartCheck();
-				}
-				try {
-					Thread.sleep(10);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
-	}
 
 	public void gameStartCheck() {
 		for (int i = 0; i < monsters.size(); i++) {
@@ -318,11 +280,12 @@ public class miniApp extends JFrame {
 					monsters = new Vector<Monster>();
 					structures = new Vector<structure>();
 					items = new Vector<Item>();
-					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
-					items.add(new bomb(app, 200, 200));
-					//					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);
+					wings = new wings(app, issac);
+//					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 //					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 //					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+					items.add(new bomb(app, 450, 300));
 				}
 				startPage = null;
 				app.setFocusable(true);
@@ -351,7 +314,7 @@ public class miniApp extends JFrame {
 					connectControl = new ConnectControl();
 					startButtonControl = new StartButtonControl(app, connectControl);
 					timerControl = new TimerControl(app, connectControl);
-					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
+					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);
 					app.setFocusable(true);
 					app.requestFocus();
 					keyboardEvent();

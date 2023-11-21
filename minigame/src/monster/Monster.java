@@ -8,14 +8,17 @@ import SpriteSheet.SpriteSheet;
 import imgSize.DeadSize;
 import imgSize.Gap;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import main.miniApp;
 import player.Player;
 import player.issac;//objectsetting에서 옮겨옴
 
-@Data
-
-public class Monster extends Player{
+@Getter
+@Setter
+public class Monster extends Player {
 	private final static String TAG = "Monster : ";
+	private final Monster monster = this;
 	public int monsterSpeed = 2;
 	private issac issac;
 	private SpriteSheet ssMonster;
@@ -23,7 +26,7 @@ public class Monster extends Player{
 	private String url;
 	private int imgWidth, imgHeight;
 	private String GUBUN;
-	
+
 	public Monster(miniApp app, issac issac, String url, int imgWidth, int imgHeight) {
 		super(app);
 		this.issac = issac;
@@ -35,33 +38,38 @@ public class Monster extends Player{
 		setting();
 		batch();
 	}
+
 	public void init() {
 	}
+
 	public void setting() {
-		
+
 	}
+
 	public void batch() {
-		
+
 	}
+
 	public void attack() {
-		
+
 	}
 
 	@Override
 	public void dead() {
+		Monster monster = getApp().getMonsters().get(getApp().getMonsters().indexOf(this.monster));
 		int rowCount = 0;
 		getApp().remove(ssMonster);
 		getApp().repaint();
-		for(int i = 0; i < 11; i ++) {
-			if(i % 4 == 0 && i > 0) {
+		for (int i = 0; i < 11; i++) {
+			if (i % 4 == 0 && i > 0) {
 				rowCount += 1;
 			}
 			int x = DeadSize.WIDTH * (i % 4) + Gap.COLUMGAP * (i % 4);
-			int y = DeadSize.HEIGHT * rowCount  + (Gap.ROWGAP * rowCount);
+			int y = DeadSize.HEIGHT * rowCount + (Gap.ROWGAP * rowCount);
 			ssDead.setXPos(x);
 			ssDead.setYPos(y);
 			ssDead.drawObj(getXPlayer(), getYPlayer());
-			if(i == 0) {
+			if (i == 0) {
 				getApp().add(ssDead, 2);
 			}
 			try {
@@ -71,10 +79,12 @@ public class Monster extends Player{
 			}
 		}
 		getApp().remove(ssDead);
+		getApp().getMonsters().remove(monster);
 	}
-	public void moveRangeCheck() { //맵 밖으로 나가려하면 강제 방향전환
+
+	public void moveRangeCheck() { // 맵 밖으로 나가려하면 강제 방향전환
 		// 오른쪽
-		if((getXPlayer()>790) ) {
+		if ((getXPlayer() > 790)) {
 			setRight(false);
 			setLeft(true);
 			setDown(false);
@@ -82,7 +92,7 @@ public class Monster extends Player{
 //			System.out.println("오른쪽 벽 충돌");
 		}
 		// 왼쪽
-		if((getXPlayer()<130)) {
+		if ((getXPlayer() < 130)) {
 			setLeft(false);
 			setRight(true);
 			setDown(false);
@@ -90,7 +100,7 @@ public class Monster extends Player{
 //			System.out.println("왼쪽 벽 충돌");
 		}
 		// 아래쪽
-		if((getYPlayer()>440)) {
+		if ((getYPlayer() > 440)) {
 			setLeft(false);
 			setRight(false);
 			setDown(false);
@@ -98,45 +108,43 @@ public class Monster extends Player{
 //			System.out.println("아래쪽 벽 충돌");
 		}
 		// 위쪽
-		if((getYPlayer()<100)) {
+		if ((getYPlayer() < 100)) {
 			setLeft(false);
 			setRight(false);
 			setUp(false);
 			setDown(true);
 //			System.out.println("위쪽 벽 충돌");
-		}	
-	}
-	public void moveDirectCheck() {
-		 Random rd = new Random();
-		 int directionSwitch = rd.nextInt(4);
-		 switch(directionSwitch) {
-		 case 0:
-			 setUp(true);
-			 setDown(false);
-			 setLeft(false);
-			 setRight(false);
-			 break;
-		 case 1:
-			 setUp(false);
-			 setDown(true);
-			 setLeft(false);
-			 setRight(false);
-			 break;
-		 case 2:
-			 setUp(false);
-			 setDown(false);
-			 setLeft(true);
-			 setRight(false);
-			 break;
-		 case 3:
-			 setUp(false);
-			 setDown(false);
-			 setLeft(false);
-			 setRight(true);
-			 break;
 		}
-		
-
 	}
 
+	public void moveDirectCheck() {
+		Random rd = new Random();
+		int directionSwitch = rd.nextInt(4);
+		switch (directionSwitch) {
+		case 0:
+			setUp(true);
+			setDown(false);
+			setLeft(false);
+			setRight(false);
+			break;
+		case 1:
+			setUp(false);
+			setDown(true);
+			setLeft(false);
+			setRight(false);
+			break;
+		case 2:
+			setUp(false);
+			setDown(false);
+			setLeft(true);
+			setRight(false);
+			break;
+		case 3:
+			setUp(false);
+			setDown(false);
+			setLeft(false);
+			setRight(true);
+			break;
+		}
+	}
 }

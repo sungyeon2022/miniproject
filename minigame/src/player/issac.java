@@ -1,6 +1,7 @@
 package player;
 
 import java.nio.channels.NonReadableChannelException;
+import java.time.zone.ZoneOffsetTransitionRule;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
@@ -54,22 +55,23 @@ public class issac extends Player {
 	private TimerControl timerControl;
 	private EndPage endPage;
 
-	public issac(miniApp app, Vector<Monster> monsters, Vector<structure> structures,
+	public issac(miniApp app, Vector<Monster> monsters, Vector<structure> structures, Vector<Item> items,
 			StartButtonControl startButtonControl, ConnectControl connectControl, TimerControl timerControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
-		init(monsters, startButtonControl, connectControl, timerControl);
+		init(monsters, structures, items, startButtonControl, connectControl, timerControl);
 		setting();
 		batch();
 		moveMotion();
 	}
 
-	public void init(Vector<Monster> monsters,
+	public void init(Vector<Monster> monsters, Vector<structure> structures, Vector<Item> items,
 			StartButtonControl startButtonControl, ConnectControl connectControl, TimerControl timerControl) {
 		this.connectControl = connectControl;
 		this.startButtonControl = startButtonControl;
 		this.timerControl = timerControl;
 		this.monsters = monsters;
+		this.items = items;
 		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4,
 				0, issacSize.issacHEADWIDTH, issacSize.issacHEADHEIGHT);
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
@@ -91,7 +93,7 @@ public class issac extends Player {
 		setViewDirect(ViewDirect.UP);
 		setXPlayer(getDefaultX());
 		setYPlayer(getDefaultY());
-		setAttackDamage(1);
+		setAttackDamage(2);
 		setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
 		setYPlayerCenter(getYPlayer() + (issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT) / 2);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
@@ -138,7 +140,7 @@ public class issac extends Player {
 						}
 						boolean isrock = false;
 						// 돌 충돌 체크 시작
-						if (structures!=null) {
+						if (structures != null) {
 							for (int i = 0; i < structures.size(); i++) {
 								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
@@ -190,7 +192,7 @@ public class issac extends Player {
 							break;
 						}
 						boolean isrock = false;
-						if (structures!=null) {
+						if (structures != null) {
 							for (int i = 0; i < structures.size(); i++) {
 								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
@@ -244,7 +246,7 @@ public class issac extends Player {
 						}
 						// 돌 충돌 체크 시작
 						boolean isrock = false;
-						if (structures!=null) {
+						if (structures != null) {
 							for (int i = 0; i < structures.size(); i++) {
 								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
@@ -296,7 +298,7 @@ public class issac extends Player {
 							break;
 						}
 						boolean isrock = false;
-						if (structures!=null) {
+						if (structures != null) {
 							for (int i = 0; i < structures.size(); i++) {
 								if (!structures.get(i).isBroken() && structures.get(i).getGUBUN() == "rock") {
 									if (issac.getSsBody().getBounds()
@@ -393,14 +395,15 @@ public class issac extends Player {
 								motion += 1;
 							}
 						}
-						startCheck();
-						if(monsters!=null) {
+						if (connectControl!=null && !connectControl.isMulti()) {
+							startCheck();
+						}
+						if (monsters != null) {
 							MonsterCheck();
 						}
 						if (getLife() == 0) {
 							setDead(true);
 						}
-//						MonsterCheck();
 						try {
 							Thread.sleep(moveSpeed);
 						} catch (Exception e) {
@@ -466,8 +469,9 @@ public class issac extends Player {
 
 	public void MonsterCheck() {
 		for (int i = 0; i < monsters.size(); i++) {
-			if (ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds()) && !isInvincible()) {
-				setLife(getLife() - 1);
+			if (ssBody.getBounds().intersects(monsters.get(i).getSsMonster().getBounds()) && !isInvincible()
+					&& !monsters.get(i).isDead()) {
+				setLife(getLife() - 0.5);
 				reDrawLife();
 				if (getLife() == 0) {
 					setDead(true);
@@ -517,17 +521,53 @@ public class issac extends Player {
 	}
 
 	public void startCheck() {
-		if (connectControl != null && connectControl.isIsconnect()&&startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())) {
-			startButtonControl.getSsStartButton().setXPos(ButtonSize.XPos + ButtonSize.Width + ButtonSize.Gap);
-			startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
-					startButtonControl.getYButton());
-			issacInfoRefresh();
-			timerControl.getTimerLabel().setText("Wait Enemy");
-			connectControl.setMulti(true);
-			connectControl.getSendDataClass().setMulti(true);
+		if (connectControl != null && connectControl.isIsconnect()
+				&& startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())) {
+			if (startButtonControl != null) {
+				startButtonControl.getSsStartButton().setXPos(ButtonSize.XPos + ButtonSize.Width + ButtonSize.Gap);
+				startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
+						startButtonControl.getYButton());
+				issacInfoRefresh();
+				timerControl.getTimerLabel().setText("Wait Enemy");
+				connectControl.setMulti(true);
+				connectControl.getSendDataClass().setMulti(true);
+				getApp().getStartButtonControl().getSsStartButton().removeAll();
+				getApp().remove(getApp().getStartButtonControl().getSsStartButton());
+				getApp().setStartButtonControl(null);
+			}
 		}
 	}
-	
+
+	public void sliding() {
+		new Thread(() -> {
+			for (int i = 10; i > moveSpeed; i--) {
+				if (getViewDirect() == ViewDirect.RIGHT && getXPlayer() < 785) {
+					setXPlayer(getXPlayer() + 2);
+				}
+				if (getViewDirect() == ViewDirect.LEFT && getXPlayer() > 110) {
+					setXPlayer(getXPlayer() - 2);
+				}
+				if (getViewDirect() == ViewDirect.UP && getYPlayer() > 80) {
+					setYPlayer(getYPlayer() - 2);
+				}
+				if (getViewDirect() == ViewDirect.DOWN && getYPlayer() < 440) {
+					setYPlayer(getYPlayer() + 2);
+				}
+				setXPlayerCenter(getXPlayer() + issacSize.issacHEADWIDTH / 2);
+				setYPlayerCenter(getYPlayer() + (issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT) / 2);
+				issacInfoRefresh();
+				ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+				ssHead.drawObj(getXPlayer(), getYPlayer());
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}).start();
+	}
+
 	public void gameEnd() {
 		deadMotion();
 //		try {
@@ -536,9 +576,9 @@ public class issac extends Player {
 //			e.printStackTrace();
 //		}
 		getApp().setEndPage(new EndPage(getApp()));
-		
+
 	}
-	
+
 	public synchronized void issacInfoRefresh() {
 		if (connectControl != null && connectControl.isIsconnect() && connectControl.getSendDataClass() != null) {
 			connectControl.getSendDataClass().setXPlayer(945 - getXPlayer() - issacSize.issacHEADWIDTH);

@@ -2,6 +2,7 @@ package SpriteSheet;
 
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfigTemplate;
 import java.awt.GraphicsConfiguration;
@@ -32,7 +33,7 @@ public class SpriteSheet extends JLabel {
 	private miniApp app;	
 	private BufferedImage imgSprite;
 	private BufferedImage originImg;
-	private Graphics2D graphics;
+	private Graphics graphics;
 	private BufferedImage newImg;
 	private BufferedImage oldImg;
 	
@@ -74,7 +75,6 @@ public class SpriteSheet extends JLabel {
 		setBorder(new LineBorder(Color.black));
 //		System.out.println(TAG + gubun + "그려짐");
 	}
-	
 	//이미지 회전용(실패)
 //	public void rotateDraw(int x, int y, double degree) {
 //		oldImg = getObjimg();
