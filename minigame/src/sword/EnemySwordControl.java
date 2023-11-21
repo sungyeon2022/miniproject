@@ -26,9 +26,10 @@ public class EnemySwordControl extends Sword {
 
 	public EnemySwordControl(miniApp app, issac issac, EnemyIssac enemyIssac, ConnectControl connectControl) {
 		super(app);
-		System.out.println(TAG + "makeSword");
+		System.out.println(TAG + "makeEnemySword");
 		init(issac, enemyIssac, connectControl);
 		setting();
+		batch();
 		swordNomalForm();
 	}
 

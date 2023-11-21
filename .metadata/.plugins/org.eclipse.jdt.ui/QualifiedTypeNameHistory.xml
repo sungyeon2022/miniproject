@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
     <fullyQualifiedTypeName name="map.Background"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.metal.MetalInternalFrameUI"/>
     <fullyQualifiedTypeName name="javax.imageio.stream.MemoryCacheImageInputStream"/>
@@ -31,9 +29,7 @@
     <fullyQualifiedTypeName name="item.wings"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
-    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="java.awt.Graphics"/>
-    <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="imgSize.issacSize"/>
     <fullyQualifiedTypeName name="java.time.zone.ZoneOffsetTransitionRule"/>
@@ -51,7 +47,6 @@
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="com.google.gson.FieldNamingStrategy"/>
     <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
-    <fullyQualifiedTypeName name="player.issac"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction"/>
     <fullyQualifiedTypeName name="monster.fly"/>
     <fullyQualifiedTypeName name="lombok.Getter"/>
@@ -60,4 +55,9 @@
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="monster.Monster"/>
     <fullyQualifiedTypeName name="org.jcp.xml.dsig.internal.dom.DOMSubTreeData"/>
+    <fullyQualifiedTypeName name="player.issac"/>
+    <fullyQualifiedTypeName name="enemy.EnemyIssac"/>
+    <fullyQualifiedTypeName name="sword.EnemySwordControl"/>
+    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>

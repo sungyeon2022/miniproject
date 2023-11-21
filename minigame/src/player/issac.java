@@ -14,6 +14,7 @@ import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.ConnectControl;
 import data.DataClass;
+import enemy.EnemyIssac;
 import imgSize.*;
 import lombok.Data;
 import main.miniApp;
@@ -527,13 +528,14 @@ public class issac extends Player {
 				startButtonControl.getSsStartButton().setXPos(ButtonSize.XPos + ButtonSize.Width + ButtonSize.Gap);
 				startButtonControl.getSsStartButton().drawObj(startButtonControl.getXButton(),
 						startButtonControl.getYButton());
+				getApp().getStartButtonControl().getSsStartButton().removeAll();
+				getApp().remove(getApp().getStartButtonControl().getSsStartButton());
+				getApp().setStartButtonControl(null);
 				issacInfoRefresh();
 				timerControl.getTimerLabel().setText("Wait Enemy");
 				connectControl.setMulti(true);
 				connectControl.getSendDataClass().setMulti(true);
-				getApp().getStartButtonControl().getSsStartButton().removeAll();
-				getApp().remove(getApp().getStartButtonControl().getSsStartButton());
-				getApp().setStartButtonControl(null);
+				getApp().setEnemyIssac(new EnemyIssac(getApp(), structures, items, issac, connectControl));
 			}
 		}
 	}

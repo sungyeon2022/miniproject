@@ -20,7 +20,6 @@ import lombok.Lombok;
 import player.issac;
 
 @Data
-
 public class Connect extends Lombok {
 	private Socket socket;
 	private InputStream myInputStream;

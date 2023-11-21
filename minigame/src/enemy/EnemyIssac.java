@@ -13,6 +13,7 @@ import objectSetting.ViewDirect;
 import wall.*;
 import item.*;
 import player.*;
+import sword.EnemySwordControl;
 
 @Data
 
@@ -36,6 +37,7 @@ public class EnemyIssac extends Enemy {
 		super(app);
 		init(structures, items, issac, connectControl);
 		setting();
+		batch();
 	}
 
 	public void init(Vector<structure> structures, Vector<Item> items, issac issac, ConnectControl connectControl) {
@@ -72,6 +74,7 @@ public class EnemyIssac extends Enemy {
 				ssLife.get(i).drawObj(680 + (i * 30), 10);
 			}
 		}
+		getApp().setEnemySwordControl(new EnemySwordControl(getApp(), issac, this, connectControl));
 	}
 
 	public void batch() {
@@ -291,6 +294,7 @@ public class EnemyIssac extends Enemy {
 			setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
 			setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
 			setDead(connectControl.getReciveDataClass().isDead());
+			System.out.println(connectControl.getReciveDataClass().toString());
 		}
 	}
 }

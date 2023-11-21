@@ -10,8 +10,6 @@ import java.util.Map;
 import data.DataClass;
 import lombok.Data;
 
-@Data
-
 public class ConnectControl extends Connect {
 	public ConnectControl() {
 		connect();
