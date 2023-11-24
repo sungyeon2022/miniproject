@@ -3,10 +3,12 @@ package monster;
 import java.util.Vector;
 
 import javax.swing.JFrame;
+import javax.swing.plaf.IconUIResource;
 
 import SpriteSheet.SpriteSheet;
 import imgSize.BodySize;
 import imgSize.Gap;
+import imgSize.RockSize;
 import objectSetting.*;
 import lombok.Data;
 import main.miniApp;
@@ -34,15 +36,10 @@ public class body extends Monster {
 						setDead(true);
 						break;
 					}
-
-					moveRangeCheck();
-
-					//collisionRock();
-					moveUp();
-					moveDown();
-					moveRight();
-					moveLeft();
-					collisionRock();
+					
+					moveUp(); moveDown(); moveRight(); moveLeft();
+					 
+					
 					moveMotion();
 					getSsMonster().drawObj(getXPlayer(), getYPlayer());
 					try {
@@ -82,9 +79,14 @@ public class body extends Monster {
 	@Override
 	public void moveRight() {
 		if (getXPlayer() < getIssac().getXPlayerCenter() - getSsMonster().getWidth() / 2) {
+			
 			setViewDirect(ViewDirect.RIGHT);
 			setXPlayer(getXPlayer() + monsterSpeed);
 			setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
+			if (isblocked()) {
+				setXPlayer(getXPlayer() - monsterSpeed);
+				setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
+			}
 			setRight(true);
 		} else {
 			setRight(false);
@@ -97,6 +99,10 @@ public class body extends Monster {
 			setViewDirect(ViewDirect.LEFT);
 			setXPlayer(getXPlayer() - monsterSpeed);
 			setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
+			if (isblocked()) {
+				setXPlayer(getXPlayer() + monsterSpeed);
+				setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
+			}
 			setLeft(true);
 		} else {
 			setLeft(false);
@@ -109,6 +115,12 @@ public class body extends Monster {
 			setViewDirect(ViewDirect.UP);
 			setYPlayer(getYPlayer() - monsterSpeed);
 			setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
+
+			
+			  if (isblockedy()) { setYPlayer(getYPlayer() + monsterSpeed*2);
+			  setYPlayerCenter(getYPlayerCenter() + monsterSpeed*2); }
+			 
+
 			setUp(true);
 		} else {
 			setUp(false);
@@ -122,12 +134,19 @@ public class body extends Monster {
 			setViewDirect(ViewDirect.DOWN);
 			setYPlayer(getYPlayer() + monsterSpeed);
 			setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
+
+			
+			  if (isblockedy()) { setYPlayer(getYPlayer() - monsterSpeed*2);
+			  setYPlayerCenter(getYPlayerCenter() - monsterSpeed*2); }
+			 
+
 			setDown(true);
 		} else {
 			setDown(false);
 		}
 	}
-
+	
+	
 	public void moveMotion() {
 		if (isPlayerMoveStart())
 			return;
@@ -188,34 +207,85 @@ public class body extends Monster {
 	}
 
 	public void collisionRock() {
-		//new Thread(()->{
-			if (structures != null) {
-				for (int i = 0; i < structures.size(); i++) {
-					if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
-						if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
-							if (isLeft()) {
-								setXPlayer(getXPlayer() + monsterSpeed);
-								setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
-							}
-							if (isRight()) {
-								setXPlayer(getXPlayer() - monsterSpeed);
-								setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
-							}
-							if (isDown()) {
-								setYPlayer(getYPlayer() - monsterSpeed);
-								setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
-							} 
-							if (isUp()) {
-								setYPlayer(getYPlayer() + monsterSpeed);
-								setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
-							}
-
+		// new Thread(()->{
+		if (structures != null) {
+			for (int i = 0; i < structures.size(); i++) {
+				if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
+					if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
+						// 돌 오른쪽면에 닿음
+						if ((getYPlayer() <= structures.get(i).getYwall() + RockSize.HEIGHT
+								&& getYPlayer() + getImgHeight() >= structures.get(i).getYwall())
+								&& getXPlayer() + getImgWidth() >= structures.get(i).getXwall()
+								&& getXPlayer() + getImgWidth() < structures.get(i).getXwall() + RockSize.WIDTH) {
+							setXPlayer(getXPlayer() - monsterSpeed);
+							setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
+							System.out.println("you hit left side of wall");
 						}
+						// 돌 왼쪽면에 닿음
+
+						if ((getYPlayer() <= structures.get(i).getYwall() + RockSize.HEIGHT
+								&& getYPlayer() + getImgHeight() >= structures.get(i).getYwall())
+								&& getXPlayer() <= structures.get(i).getXwall() + RockSize.WIDTH
+								&& getXPlayer() >= structures.get(i).getXwall()) {
+							setXPlayer(getXPlayer() + monsterSpeed);
+							setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
+							System.out.println("you hit right side of wall");
+						}
+						// 돌 아랫면에 닿음
+						if ((getXPlayer() <= structures.get(i).getXwall() + RockSize.WIDTH
+								&& getXPlayer() + getImgWidth() >= structures.get(i).getXwall())
+								&& getYPlayer() <= structures.get(i).getYwall() + RockSize.HEIGHT
+								&& getYPlayer() >= structures.get(i).getYwall()) {
+							setYPlayer(getYPlayer() + monsterSpeed);
+							setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
+							System.out.println("you hit bottom side of wall");
+						}
+						// 돌 윗면에 닿음
+						if ((getXPlayer() <= structures.get(i).getXwall() + RockSize.WIDTH
+								&& getXPlayer() + getImgWidth() >= structures.get(i).getXwall())
+								&& getYPlayer() + getImgHeight() >= structures.get(i).getYwall()
+								&& getYPlayer() + getImgHeight() <= structures.get(i).getYwall() + RockSize.HEIGHT) {
+							setYPlayer(getYPlayer() - monsterSpeed);
+							setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
+							System.out.println("you hit top side of wall");
+						}
+
 					}
 				}
+			}
 		}
-		//}).start(); 
-		
+		// }).start();
+
+	}
+
+	public boolean isblocked() {
+		if (structures != null) {
+			for (int i = 0; i < structures.size(); i++) {
+				if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
+					if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
+						System.out.println("im stuck");
+						return true;
+
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isblockedy() {
+		if (structures != null) {
+			for (int i = 0; i < structures.size(); i++) {
+				if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
+					if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
+						System.out.println("im stucky");
+						return true;
+
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 }

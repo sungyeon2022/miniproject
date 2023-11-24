@@ -33,6 +33,7 @@ public class issac extends Player {
 	private StartButtonControl startButtonControl;
 	private SpriteSheet ssHead, ssBody;
 	private SpriteSheet ssDead, ssHit;
+	private SpriteSheet ssAttackDamage, ssMoveSpeed;
 	private Vector<SpriteSheet> ssLife;
 	private SwordControl swordControl;
 	private Vector<Monster> monsters;
@@ -76,6 +77,8 @@ public class issac extends Player {
 		ssBody = new SpriteSheet("issac/issac.png", "issacBody", 0, (issacSize.issacHEADHEIGHT + Gap.ROWGAP),
 				issacSize.issacBODYWIDTH, issacSize.issacBODYHEIGHT);
 		ssDead = new SpriteSheet("issac/issac.png", "issacDead", 63, 215, 42, 48);
+		ssAttackDamage = new SpriteSheet("issac/output-onlinepngtools.png", "AttackDamage", 0, 0, 30, 30);
+		ssMoveSpeed = new SpriteSheet("issac/output-onlinepngtools.png", "MoveSpeed", 30, 0, 32, 28);
 		ssLife = new Vector<SpriteSheet>();
 		for (int i = 0; i < getLife(); i++) {
 			this.ssLife.add(i,
@@ -97,6 +100,8 @@ public class issac extends Player {
 		setYPlayerCenter(getYPlayer() + (issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT) / 2);
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
+		ssAttackDamage.drawObj(10, 50);
+		ssMoveSpeed.drawObj(10, 90);
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (i <= getLife()) {
 				ssLife.get(i).drawObj(10 + (i * 30), 10);
@@ -105,12 +110,15 @@ public class issac extends Player {
 			}
 
 		}
+		
 	}
 
 	public void batch() {
 		getApp().add(ssHead, 0);
 		getApp().add(ssBody, 1);
 		getApp().add(ssDead, 2);
+		getApp().add(ssAttackDamage,1);
+		getApp().add(ssMoveSpeed,1);
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
 		}

@@ -10,7 +10,8 @@ public class rock extends structure {
 	public rock(miniApp app, int x, int y) {
 		
 		super(app);
-		
+		super.setXwall(x);
+		super.setYwall(y);
 		init();
 		setting();
 		batch(x, y);

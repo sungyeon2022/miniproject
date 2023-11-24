@@ -303,7 +303,6 @@ public class Worm extends Monster {
 					if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
 						if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
 							if (isDown()) {
-								System.out.println("down");
 								setYPlayer(getYPlayer() - monsterSpeed);
 								setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
 								setDown(false);
@@ -311,7 +310,6 @@ public class Worm extends Monster {
 							}
 
 							else if (isUp()) {
-								System.out.println("up");
 								setYPlayer(getYPlayer() + monsterSpeed);
 								setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
 								setUp(false);
@@ -319,7 +317,6 @@ public class Worm extends Monster {
 							}
 
 							else if (isLeft()) {
-								System.out.println("left");
 								setXPlayer(getXPlayer() + monsterSpeed);
 								setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
 								setLeft(false);
@@ -327,7 +324,6 @@ public class Worm extends Monster {
 							}
 
 							else if (isRight()) {
-								System.out.println("right");
 								setXPlayer(getXPlayer() - monsterSpeed);
 								setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
 								setRight(false);
