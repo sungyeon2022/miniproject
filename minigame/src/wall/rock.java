@@ -28,7 +28,7 @@ public class rock extends structure {
 
 	private void batch(int x, int y) {
 		getSsStructure().drawObj(x, y);
-		getApp().add(getSsStructure(), 0);
+		getApp().add(getSsStructure());
 
 	}
 }

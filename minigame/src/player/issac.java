@@ -1,28 +1,27 @@
 package player;
 
-import java.nio.channels.NonReadableChannelException;
-import java.util.Arrays;
-import java.util.Iterator;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Vector;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.ConnectControl;
-import data.DataClass;
-import imgSize.*;
+import imgSize.ButtonSize;
+import imgSize.Gap;
+import imgSize.Lifesize;
+import imgSize.issacSize;
+import item.Item;
 import lombok.Data;
 import main.miniApp;
 import mainPage.EndPage;
 import monster.Monster;
-import monster.Worm;
 import objectSetting.ViewDirect;
 import startButton.StartButtonControl;
-import wall.*;
-import item.*;
+import sword.SwordControl;
+import wall.structure;
 
 @Data
 
@@ -47,6 +46,8 @@ public class issac extends Player {
 	private int moveSpeed = 5;
 	// 상하 좌우 이동 모션
 	// 개수 및 수치 표시용 레이블 + 변수 선언 및 초기화
+	private JLabel attackJLabel = new JLabel("1 . 0");
+	private JLabel speedJLabel = new JLabel("1 . 0");
 	private int bombCount = 0;
 	private int speedNum = 11;
 	private int powerNum = 1;
@@ -101,7 +102,18 @@ public class issac extends Player {
 		ssHead.drawObj(getXPlayer(), getYPlayer());
 		ssBody.drawObj(getXPlayer() + xPlusBody, getYPlayer() + yPlusBody);
 		ssAttackDamage.drawObj(10, 50);
+		attackJLabel.setSize(40,20);
+		attackJLabel.setLocation(50, 55);
+		attackJLabel.setFont(new Font("D2Coding", Font.PLAIN,15));
+		attackJLabel.setForeground(Color.WHITE);
+		attackJLabel.setText(""+getAttackDamage());
 		ssMoveSpeed.drawObj(10, 90);
+		speedJLabel.setSize(40,20);
+		speedJLabel.setLocation(50,95);
+		speedJLabel.setFont(new Font("D2Coding", Font.PLAIN, 15));
+		speedJLabel.setForeground(Color.WHITE);
+		speedJLabel.setText(""+(10 - getMoveSpeed()));
+		
 		for (int i = 0; i < getMaxlife(); i++) {
 			if (i <= getLife()) {
 				ssLife.get(i).drawObj(10 + (i * 30), 10);
@@ -118,7 +130,9 @@ public class issac extends Player {
 		getApp().add(ssBody, 1);
 		getApp().add(ssDead, 2);
 		getApp().add(ssAttackDamage,1);
+		getApp().add(attackJLabel);
 		getApp().add(ssMoveSpeed,1);
+		getApp().add(speedJLabel);
 		for (int i = 0; i < getMaxlife(); i++) {
 			getApp().add(ssLife.get(i), 1);
 		}

@@ -181,23 +181,25 @@ public class miniApp extends JFrame {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-							monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+							monsters.add(new Worm(app, 400, 700));
 						}
+
 						if (monName.equals("Head")) {
 							try {
 								Thread.sleep(3000);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-							monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+							monsters.add(new Head(app, 300, 200));
 						}
+
 						if (monName.equals("Body")) {
 							try {
 								Thread.sleep(3000);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-							monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+							monsters.add(new body(app, 100, 100));
 						}
 					}
 				}
@@ -299,11 +301,11 @@ public class miniApp extends JFrame {
 					monsters = new Vector<Monster>();
 					structures = new Vector<structure>();
 					issac = new issac(app, monsters, structures, startButtonControl, connectControl, timerControl);
-					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-					
 					new Preset(app,structures);
+					monsters.add(new Worm(app, 200, 150));
+					monsters.add(new body(app, 100, 100));
+					//monsters.add(new Head(app, 100, 100));
+					
 				}
 				startPage = null;
 				app.setFocusable(true);

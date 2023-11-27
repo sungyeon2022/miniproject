@@ -17,9 +17,12 @@ public class Head extends Monster{
 	private int defaultX = 300;
 	private int defaultY = 200;
 	
-	public Head(miniApp app, issac issac, String url, int imgWidth, int imgHeight) {
-		super(app, issac, url, imgWidth, imgHeight);
+	public Head(miniApp app, int xLocation, int yLocation) {
+		super(app, xLocation, yLocation);
 		setGUBUN("Head");
+		init();
+		setting();
+		batch();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -51,14 +54,14 @@ public class Head extends Monster{
 	
 	//시작할 때 이미지 불러오기
 	public void init() {
-		setSsMonster(new SpriteSheet(getUrl(), "monster", 0, 0, getImgWidth(), getImgHeight())); 
+		setSsMonster(new SpriteSheet("monster/head.png", "monster", 0, 0, HeadSize.WIDTH, HeadSize.HEIGHT)); 
 	}
 	
 	//기본 세팅
 	public void setting() {
 		setViewDirect(ViewDirect.RIGHT);
-		setXPlayer(300);
-		setYPlayer(200);
+		setXPlayer(getXLocation());
+		setYPlayer(getYLocation());
 		setXPlayerCenter(getXPlayer() + HeadSize.WIDTH / 2); 
 		setYPlayerCenter(getYPlayer() + HeadSize.HEIGHT / 2); 
 		setLife(20);
@@ -68,7 +71,7 @@ public class Head extends Monster{
 	
 	public void batch() {
 		getSsMonster().drawObj(getXPlayer(), getYPlayer());
-		getApp().add(getSsMonster(), 0);
+		getApp().add(getSsMonster(),1);
 	}
 	
 	@Override
@@ -149,8 +152,8 @@ public class Head extends Monster{
 					while(!isDead()) {
 						if(motion > 2)
 							motion =0;
-						getSsMonster().setXPos((getImgWidth() * motion) + (7 * motion) + 4);
-						getSsMonster().setYPos(getImgHeight() * 0 + Gap.ROWGAP * 0);	// 몸 이미지 y좌표
+						getSsMonster().setXPos((HeadSize.WIDTH * motion) + (7 * motion) + 4);
+						getSsMonster().setYPos(HeadSize.HEIGHT * 0 + Gap.ROWGAP * 0);	// 몸 이미지 y좌표
 						getSsMonster().drawObj(getXPlayer(), getYPlayer());
 						
 						try {

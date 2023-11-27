@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import SpriteSheet.SpriteSheet;
 import imgSize.DeadSize;
 import imgSize.Gap;
+import imgSize.WormSize;
 import lombok.Data;
 import main.miniApp;
 import player.Player;
@@ -24,20 +25,18 @@ public class Monster extends Player{
 	private SpriteSheet ssDead;
 	private String url;
 	private int imgWidth, imgHeight;
+	private int xLocation, yLocation;
 	private String GUBUN;
 	private Vector<structure> structures;
 	
-	public Monster(miniApp app, issac issac, String url, int imgWidth, int imgHeight) {
+	public Monster(miniApp app, int xLocation, int yLocation) {
 		super(app);
-		this.issac = issac;
-		this.imgWidth = imgWidth;
-		this.imgHeight = imgHeight;
-		this.url = url;
+		this.issac = getApp().getIssac();
+		this.xLocation = xLocation;
+		this.yLocation = yLocation;
 		this.structures = getApp().getStructures();
 		ssDead = new SpriteSheet("monster/deadMonster.png", "dead", 0, 0, DeadSize.WIDTH, DeadSize.HEIGHT);
-		init();
-		setting();
-		batch();
+ 
 	}
 	public void init() {
 	}

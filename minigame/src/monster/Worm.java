@@ -27,15 +27,19 @@ public class Worm extends Monster {
 	private boolean stop;
 	private int defaultX = 180;
 	private int defaultY = 130;
+
 	private Vector<structure> structures;
 	public void setStop(boolean stop) {
 		this.stop = stop;
 	}
 
-	public Worm(miniApp app, issac Issac, String url, int imgWidth, int imgHeight) {
-		super(app, Issac, url, imgWidth, imgHeight );
+	public Worm(miniApp app, int xLocation, int yLocation) {
+		super(app,xLocation,yLocation);
 		this.structures = getApp().getStructures();
 		setGUBUN("Worm");
+		init();
+		setting();
+		batch();
 		Timer timer = new Timer("Timer");
 		new Thread(new Runnable() {
 			@Override
@@ -60,7 +64,7 @@ public class Worm extends Monster {
 					collisionRock();
 					moveRangeCheck();
 
-//					attack(); // 지속적으로 공격 조건 감시
+					attack(); // 지속적으로 공격 조건 감시
 					moveUp();					
 					moveDown();
 					moveRight();
@@ -85,7 +89,7 @@ public class Worm extends Monster {
 	
 	//시작할 때 이미지 불러오기
 	public void init() {
-		setSsMonster(new SpriteSheet(getUrl(), "monster", 0, 0, getImgWidth(), getImgHeight())); 
+		setSsMonster(new SpriteSheet("monster/worm.png", "monster", 0, 0, WormSize.WIDTH, WormSize.HEIGHT)); 
 	}
 	public void gapCheck() {
 		gapX = getIssac().getXPlayer() - getXPlayer(); //아이작 위치 - 몬스터 위치
@@ -94,8 +98,8 @@ public class Worm extends Monster {
 	//기본 세팅
 	public void setting() {
 		setViewDirect(ViewDirect.RIGHT);
-		setXPlayer(700);
-		setYPlayer(400);
+		setXPlayer(getXLocation());
+		setYPlayer(getYLocation());
 		setXPlayerCenter(getXPlayer() + WormSize.WIDTH / 2); 
 		setYPlayerCenter(getYPlayer() + WormSize.HEIGHT / 2); 
 		setLife(20);
@@ -140,21 +144,62 @@ public class Worm extends Monster {
 	public void attackOn() {
 		monsterSpeed = 6;
 		try {
-			Thread.sleep(100);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
 		while(getXPlayer() > 130 && getXPlayer() < 790 && getYPlayer() > 100 && getYPlayer() <440) {
+			Boolean blocked = false;
 			monsterAttacking = true;
 			if(getLife() <= 0) {
 				setDead(true);
 				break;
 			}
+			if (structures != null) {
+				for (int i = 0; i < structures.size(); i++) {
+					if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
+						if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
+							if (isDown()) {
+								setYPlayer(getYPlayer() - monsterSpeed*2);
+								setYPlayerCenter(getYPlayerCenter() - monsterSpeed*2);
+								setDown(false);
+								setUp(true);
+							}
+
+							else if (isUp()) {
+								setYPlayer(getYPlayer() + monsterSpeed*2);
+								setYPlayerCenter(getYPlayerCenter() + monsterSpeed*2);
+								setUp(false);
+								setDown(true);
+							}
+
+							else if (isLeft()) {
+								setXPlayer(getXPlayer() + monsterSpeed*2);
+								setXPlayerCenter(getXPlayerCenter() + monsterSpeed*2);
+								setLeft(false);
+								setRight(true);
+							}
+
+							else if (isRight()) {
+								setXPlayer(getXPlayer() - monsterSpeed*2);
+								setXPlayerCenter(getXPlayerCenter() - monsterSpeed*2);
+								setRight(false);
+								setLeft(true);
+							}
+							blocked = true;
+							break;
+						}
+					}
+				}
+		}
+			if(blocked) {
+				break;
+			}
 			
 			if( checkAttackDirectX && (gapX > 0)) { //오른쪽 공격
 				setViewDirect(ViewDirect.RIGHT);
-				attackMotion(ViewDirect.RIGHT-1);
+				attackMotion(ViewDirect.RIGHT);
 				moveRight();
 				setLeft(false);
 				setRight(true);
@@ -162,7 +207,7 @@ public class Worm extends Monster {
 				setUp(false);
 			}else if ( checkAttackDirectX && (gapX <= 0)) { //왼쪽 공격
 				setViewDirect(ViewDirect.LEFT);
-				attackMotion(ViewDirect.LEFT-1);
+				attackMotion(ViewDirect.LEFT);
 				moveLeft();
 				setRight(false);
 				setLeft(true);
@@ -170,7 +215,7 @@ public class Worm extends Monster {
 				setUp(false);
 			}else if ( checkAttackDirectY && (gapY > 0)) {//아래로 공격
 				setViewDirect(ViewDirect.DOWN);
-				attackMotion(ViewDirect.DOWN-1);
+				attackMotion(ViewDirect.DOWN);
 				moveDown();
 				setLeft(false);
 				setRight(false);
@@ -178,13 +223,14 @@ public class Worm extends Monster {
 				setDown(true);
 			}else if ( checkAttackDirectY && (gapY <= 0)) { //위로 공격
 				setViewDirect(ViewDirect.UP);
-				attackMotion(ViewDirect.UP-1);
+				attackMotion(ViewDirect.UP);
 				moveUp();
 				setLeft(false);
 				setRight(false);
 				setDown(false);
 				setUp(true);
 			}
+			
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
@@ -247,9 +293,9 @@ public class Worm extends Monster {
 						if(isDown() && getViewDirect() == ViewDirect.DOWN) {
 							if(motion > 3)
 								motion = 0;
-							getSsMonster().setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
+							getSsMonster().setXPos((WormSize.WIDTH * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.DOWN) {
-								getSsMonster().setYPos(getImgHeight() * 0 + Gap.ROWGAP * 0);	// 몸 이미지 y좌표
+								getSsMonster().setYPos(WormSize.HEIGHT * 0 + Gap.ROWGAP * 0);	// 몸 이미지 y좌표
 								getSsMonster().drawObj(getXPlayer(), getYPlayer());
 								motion += 1;
 							}
@@ -257,9 +303,9 @@ public class Worm extends Monster {
 						else if(isLeft() && getViewDirect() == ViewDirect.LEFT) {
 							if(motion > 3)
 								motion = 0;
-							getSsMonster().setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
+							getSsMonster().setXPos((WormSize.WIDTH * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.LEFT) {
-								getSsMonster().setYPos(getImgHeight() * 1 + Gap.ROWGAP * 1);	// 몸 이미지 y좌표
+								getSsMonster().setYPos(WormSize.HEIGHT * 1 + Gap.ROWGAP * 1);	// 몸 이미지 y좌표
 								getSsMonster().drawObj(getXPlayer(), getYPlayer());
 								motion += 1;
 							}
@@ -267,9 +313,9 @@ public class Worm extends Monster {
 						else if(isUp() && getViewDirect() == ViewDirect.UP) {
 							if(motion > 3)
 								motion = 0;
-							getSsMonster().setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
+							getSsMonster().setXPos((WormSize.WIDTH * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.UP) {
-								getSsMonster().setYPos(getImgHeight() * 2 + Gap.ROWGAP * 2);	// 몸 이미지 y좌표
+								getSsMonster().setYPos(WormSize.HEIGHT * 2 + Gap.ROWGAP * 2);	// 몸 이미지 y좌표
 								getSsMonster().drawObj(getXPlayer(), getYPlayer());
 								motion += 1;
 							}
@@ -277,9 +323,9 @@ public class Worm extends Monster {
 						else if(isRight() && getViewDirect() == ViewDirect.RIGHT) {
 							if(motion > 3)
 								motion = 0;
-							getSsMonster().setXPos((getImgWidth() * motion) + (Gap.COLUMGAP * motion));
+							getSsMonster().setXPos((WormSize.WIDTH * motion) + (Gap.COLUMGAP * motion));
 							if(getViewDirect() == ViewDirect.RIGHT) {
-								getSsMonster().setYPos(getImgHeight() * 3 + Gap.ROWGAP * 3);	// 몸 이미지 y좌표
+								getSsMonster().setYPos(WormSize.HEIGHT * 3 + Gap.ROWGAP * 3);	// 몸 이미지 y좌표
 								getSsMonster().drawObj(getXPlayer(), getYPlayer());
 								motion += 1;
 							}
@@ -303,29 +349,29 @@ public class Worm extends Monster {
 					if (!structures.get(i).isBroken() && structures.get(i).getSsStructure().getGubun() == "rock") {
 						if (getSsMonster().getBounds().intersects(structures.get(i).getSsStructure().getBounds())) {
 							if (isDown()) {
-								setYPlayer(getYPlayer() - monsterSpeed);
-								setYPlayerCenter(getYPlayerCenter() - monsterSpeed);
+								setYPlayer(getYPlayer() - monsterSpeed*2);
+								setYPlayerCenter(getYPlayerCenter() - monsterSpeed*2);
 								setDown(false);
 								setUp(true);
 							}
 
 							else if (isUp()) {
-								setYPlayer(getYPlayer() + monsterSpeed);
-								setYPlayerCenter(getYPlayerCenter() + monsterSpeed);
+								setYPlayer(getYPlayer() + monsterSpeed*2);
+								setYPlayerCenter(getYPlayerCenter() + monsterSpeed*2);
 								setUp(false);
 								setDown(true);
 							}
 
 							else if (isLeft()) {
-								setXPlayer(getXPlayer() + monsterSpeed);
-								setXPlayerCenter(getXPlayerCenter() + monsterSpeed);
+								setXPlayer(getXPlayer() + monsterSpeed*2);
+								setXPlayerCenter(getXPlayerCenter() + monsterSpeed*2);
 								setLeft(false);
 								setRight(true);
 							}
 
 							else if (isRight()) {
-								setXPlayer(getXPlayer() - monsterSpeed);
-								setXPlayerCenter(getXPlayerCenter() - monsterSpeed);
+								setXPlayer(getXPlayer() - monsterSpeed*2);
+								setXPlayerCenter(getXPlayerCenter() - monsterSpeed*2);
 								setRight(false);
 								setLeft(true);
 							}
