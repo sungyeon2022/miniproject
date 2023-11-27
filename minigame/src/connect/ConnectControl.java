@@ -9,9 +9,11 @@ import java.util.Map;
 
 import data.DataClass;
 import lombok.Data;
+import main.miniApp;
 
 public class ConnectControl extends Connect {
-	public ConnectControl() {
+	public ConnectControl(miniApp app) {
+		super(app);
 		connect();
 	}
 
@@ -63,8 +65,10 @@ public class ConnectControl extends Connect {
 				while (isIsconnect()) {
 					try {
 						setReciveDataClass((DataClass) getMyObjectInputStream().readObject());
+						System.out.println(getReciveDataClass().toString());
 						setReciveMulti(getReciveDataClass().isMulti()); 
 						setStart(getReciveDataClass().isStart());
+						getApp().getEnemyIssac().reciveData();
 					} catch (Exception e) {
 						System.out.println("데이터 입력 오류");
 						setIsconnect(false);

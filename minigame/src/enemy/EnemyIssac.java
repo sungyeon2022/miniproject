@@ -74,7 +74,7 @@ public class EnemyIssac extends Enemy {
 				ssLife.get(i).drawObj(680 + (i * 30), 10);
 			}
 		}
-		getApp().setEnemySwordControl(new EnemySwordControl(getApp(), issac, this, connectControl));
+//		getApp().setEnemySwordControl(new EnemySwordControl(getApp(), issac, this, connectControl));
 	}
 
 	public void batch() {
@@ -102,7 +102,6 @@ public class EnemyIssac extends Enemy {
 				if (!isEnemyMoveStart()) {
 					setEnemyMoveStart(true);
 					while (!isDead()) {
-						receiveData();
 						if (getViewDirectInfo()[ViewDirect.DOWN] && getViewDirect() == ViewDirect.DOWN) {
 							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
@@ -113,7 +112,6 @@ public class EnemyIssac extends Enemy {
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);// X좌표로 순서를 정하고 Y좌표는 사진사이의 간격과
 																						// 머리 이미지를 무시해야 하기에 머리 이미지의 크기만큼
 																						// 더해서 좌표값을 내려줍니다
-								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy()); // 그려지는 기준점이 되는 캐릭터(몬스터의) 좌표값을 설정합니다.
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);// X와Y좌표를 기준으로 머리를
 																									// 생성하고 머리와 몸이 겹치지
@@ -129,13 +127,11 @@ public class EnemyIssac extends Enemy {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 6 + Gap.HEADCOLUMGAP * 6);
 								ssBody.setYPos(
 										issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT * 2 + Gap.ROWGAP * 3);
-								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy());
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 
 								motion += 1;
 							}
-
 						} else if (getViewDirectInfo()[ViewDirect.UP] && getViewDirect() == ViewDirect.UP) {
 							if (motion > 9 * 4)
 								motion = 0;
@@ -143,12 +139,10 @@ public class EnemyIssac extends Enemy {
 							if (getViewDirect() == ViewDirect.UP) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + Gap.ROWGAP);
-								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy());
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 								motion += 1;
 							}
-
 						} else if (getViewDirectInfo()[ViewDirect.RIGHT] && getViewDirect() == ViewDirect.RIGHT) {
 							if (motion > 9 * 4)
 								motion = 0;
@@ -156,18 +150,15 @@ public class EnemyIssac extends Enemy {
 							if (getViewDirect() == ViewDirect.RIGHT) {
 								ssHead.setXPos(issacSize.issacHEADWIDTH * 2 + Gap.HEADCOLUMGAP * 2);
 								ssBody.setYPos(issacSize.issacHEADHEIGHT + issacSize.issacBODYHEIGHT + Gap.ROWGAP * 2);
-								receiveData();
 								ssHead.drawObj(getXEnemy(), getYEnemy());
 								ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 								motion += 1;
 							}
-
 						} else {
 							ssBody.setXPos(0);
 							ssHead.drawObj(getXEnemy(), getYEnemy());
 							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 						}
-						receiveData();
 						if (isSendInvincible()&&!isDead()) {
 							hitCheck();
 						}
@@ -281,7 +272,7 @@ public class EnemyIssac extends Enemy {
 		}
 	}
 
-	public void receiveData() {
+	public void reciveData() {
 		if (connectControl.isIsconnect() && connectControl.isReciveMulti()) {
 			setXEnemy(connectControl.getReciveDataClass().getXPlayer());
 			setYEnemy(connectControl.getReciveDataClass().getYPlayer());
@@ -294,7 +285,6 @@ public class EnemyIssac extends Enemy {
 			setMovespeed(connectControl.getReciveDataClass().getMoveSpeed());
 			setAttackDamage(connectControl.getReciveDataClass().getAttackDamage());
 			setDead(connectControl.getReciveDataClass().isDead());
-			System.out.println(connectControl.getReciveDataClass().toString());
 		}
 	}
 }

@@ -1,10 +1,7 @@
 package main;
 
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -12,21 +9,17 @@ import javax.swing.JFrame;
 import Timer.TimerControl;
 import connect.ConnectControl;
 import enemy.EnemyIssac;
-import item.Item;
-import item.bomb;
-import itemEffect.wings;
-import lombok.Getter;
-import lombok.Setter;
-import mainPage.EndPage;
-import mainPage.StartPage;
+import item.*;
+import lombok.*;
+import mainPage.*;
 import map.Background;
 import monster.Monster;
-import objectSetting.MyFont;
-import objectSetting.ViewDirect;
+import objectSetting.*;
 import player.issac;
+import skins.Skins;
+import skins.Wings;
 import startButton.StartButtonControl;
-import sword.EnemySwordControl;
-import sword.SwordControl;
+import sword.*;
 import test.TestControl;
 import wall.structure;
 
@@ -49,7 +42,7 @@ public class miniApp extends JFrame {
 	private EnemySwordControl enemySwordControl;
 	private StartButtonControl startButtonControl;
 	private EndPage endPage;
-	private wings wings;
+	private Skins skins;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -254,7 +247,7 @@ public class miniApp extends JFrame {
 					structures = new Vector<structure>();
 					items = new Vector<Item>();
 					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);
-					wings = new wings(app, issac);
+					skins = new Wings(app);
 //					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 //					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 //					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
@@ -284,7 +277,7 @@ public class miniApp extends JFrame {
 				boolean check = true;
 				if (check) {
 					check = false;
-					connectControl = new ConnectControl();
+					connectControl = new ConnectControl(app);
 					startButtonControl = new StartButtonControl(app, connectControl);
 					timerControl = new TimerControl(app, connectControl);
 					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);

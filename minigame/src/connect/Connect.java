@@ -17,10 +17,12 @@ import java.util.logging.Handler;
 import data.DataClass;
 import lombok.Data;
 import lombok.Lombok;
+import main.miniApp;
 import player.issac;
 
 @Data
 public class Connect extends Lombok {
+	private miniApp app;
 	private Socket socket;
 	private InputStream myInputStream;
 	private OutputStream myOutputStream;
@@ -36,7 +38,8 @@ public class Connect extends Lombok {
 	private boolean isMulti;
 	private boolean isStart;
 	private boolean isReciveMulti;
-	public Connect() {
+	public Connect(miniApp app) {
+		this.app = app;
 		this.socket = null;
 		this.myInputStream = null;
 		this.myOutputStream = null;
