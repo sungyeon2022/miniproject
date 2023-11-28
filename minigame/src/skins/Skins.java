@@ -1,27 +1,24 @@
 package skins;
 
 import SpriteSheet.SpriteSheet;
-import lombok.Data;
 import main.miniApp;
-
-@Data
 
 public class Skins {
 	private miniApp app;
+	private int xSkin;
+	private int ySkin;
 	private SpriteSheet ssSkin;
-	private int skinX;
-	private int skinY;
-	
-	
 	public Skins(miniApp app) {
 		this.app = app;
 		init();
 		setting();
 		batch();
 		motion();
+		position();
 	}
-	public void init() {}
-	public void setting() {}
-	public void batch() {}
-	public void motion() {}
+	private void init() {}
+	private void setting() {}
+	private void batch() {}
+	private void motion() {}
+	private void position() {} //Collection와 동일
 }

@@ -7,6 +7,13 @@ import java.util.Vector;
 import javax.swing.JFrame;
 
 import Timer.TimerControl;
+import collections.DarkWings;
+import collections.GreenMus;
+import collections.Mantle;
+import collections.RedMus;
+import collections.Collections;
+import collections.Crown;
+import collections.Wings;
 import connect.ConnectControl;
 import enemy.EnemyIssac;
 import item.*;
@@ -16,8 +23,6 @@ import map.Background;
 import monster.Monster;
 import objectSetting.*;
 import player.issac;
-import skins.Skins;
-import skins.Wings;
 import startButton.StartButtonControl;
 import sword.*;
 import test.TestControl;
@@ -42,7 +47,7 @@ public class miniApp extends JFrame {
 	private EnemySwordControl enemySwordControl;
 	private StartButtonControl startButtonControl;
 	private EndPage endPage;
-	private Skins skins;
+	private Collections collections;
 
 	// miniApp에서 필요한 시스템 정보 가져옴
 	public miniApp() {
@@ -247,7 +252,7 @@ public class miniApp extends JFrame {
 					structures = new Vector<structure>();
 					items = new Vector<Item>();
 					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);
-					skins = new Wings(app);
+					collections = new Mantle(app);
 //					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 //					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 //					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));

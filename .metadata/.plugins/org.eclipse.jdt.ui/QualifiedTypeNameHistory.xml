@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
-    <fullyQualifiedTypeName name="javax.swing.JPanel"/>
-    <fullyQualifiedTypeName name="java.util.concurrent.ExecutionException"/>
-    <fullyQualifiedTypeName name="javax.management.monitor.MonitorSettingException"/>
-    <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
-    <fullyQualifiedTypeName name="java.io.File"/>
-    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
-    <fullyQualifiedTypeName name="javax.swing.text.html.ImageView"/>
-    <fullyQualifiedTypeName name="java.io.InterruptedIOException"/>
-    <fullyQualifiedTypeName name="imgSize.explosionsize"/>
-    <fullyQualifiedTypeName name="java.beans.VetoableChangeListener"/>
-    <fullyQualifiedTypeName name="wall.structure"/>
-    <fullyQualifiedTypeName name="java.util.Vector"/>
-    <fullyQualifiedTypeName name="item.Item"/>
-    <fullyQualifiedTypeName name="objectSetting.setting"/>
     <fullyQualifiedTypeName name="objectSetting.defaultSetting"/>
     <fullyQualifiedTypeName name="item.wings"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
@@ -32,7 +17,6 @@
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="com.google.gson.FieldNamingStrategy"/>
-    <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction"/>
     <fullyQualifiedTypeName name="monster.fly"/>
     <fullyQualifiedTypeName name="lombok.Getter"/>
@@ -45,8 +29,6 @@
     <fullyQualifiedTypeName name="sword.EnemySwordControl"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
-    <fullyQualifiedTypeName name="main.miniApp"/>
-    <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
     <fullyQualifiedTypeName name="java.sql.BatchUpdateException"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
@@ -54,10 +36,28 @@
     <fullyQualifiedTypeName name="java.awt.event.KeyAdapter"/>
     <fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
     <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
-    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="javax.security.auth.callback.ConfirmationCallback"/>
-    <fullyQualifiedTypeName name="skins.Skins"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="java.io.InterruptedIOException"/>
     <fullyQualifiedTypeName name="skins.Wings"/>
+    <fullyQualifiedTypeName name="objectSetting.ViewDirect"/>
     <fullyQualifiedTypeName name="imgSize.WingsSize"/>
+    <fullyQualifiedTypeName name="java.nio.channels.NonReadableChannelException"/>
+    <fullyQualifiedTypeName name="imgSize.DarkWingsSize"/>
+    <fullyQualifiedTypeName name="skins.DarkWings"/>
+    <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.CrownSize"/>
+    <fullyQualifiedTypeName name="collections.Crown"/>
+    <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.MantleSize"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="collections.RedMus"/>
+    <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.RedMusSize"/>
+    <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.GreenMusSize"/>
+    <fullyQualifiedTypeName name="collections.GreenMus"/>
+    <fullyQualifiedTypeName name="collections.Collections"/>
+    <fullyQualifiedTypeName name="collections.Wings"/>
+    <fullyQualifiedTypeName name="collections.DarkWings"/>
+    <fullyQualifiedTypeName name="collections.Mantle"/>
+    <fullyQualifiedTypeName name="skins.Skins"/>
+    <fullyQualifiedTypeName name="main.miniApp"/>
+    <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
+    <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
 </qualifiedTypeNameHistroy>
