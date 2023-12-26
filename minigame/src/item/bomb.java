@@ -45,7 +45,7 @@ public class bomb extends Item {
 				explosionsize.HEIGHT);
 		setItemLabel(new JLabel());
 		try {
-			imgtemp = ImageIO.read(new File("images/item/bomb.png"));
+			imgtemp = ImageIO.read(getClass().getClassLoader().getResource("images/item/bomb.png"));
 			resizeimg = imgtemp.getScaledInstance(bombWidth, bombHeight, Image.SCALE_SMOOTH);
 		} catch (Exception e) {
 			e.printStackTrace();

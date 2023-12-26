@@ -47,7 +47,6 @@
     <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.CrownSize"/>
     <fullyQualifiedTypeName name="collections.Crown"/>
     <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.MantleSize"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="collections.RedMus"/>
     <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.RedMusSize"/>
     <fullyQualifiedTypeName name="imgSize.CollectionsImgSize.GreenMusSize"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="main.miniApp"/>
     <fullyQualifiedTypeName name="SpriteSheet.SpriteSheet"/>
     <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
 </qualifiedTypeNameHistroy>

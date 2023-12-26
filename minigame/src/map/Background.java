@@ -24,7 +24,7 @@ public class Background {
 	public Background(miniApp app) {
 		app.setSize(960, 640);
 
-		ImageIcon back = new ImageIcon("images/structure/map.png");
+		ImageIcon back = new ImageIcon(getClass().getClassLoader().getResource("images/structure/map.png"));
 		isBackground = new JLabel(back);
 		app.setContentPane(isBackground);
 	}

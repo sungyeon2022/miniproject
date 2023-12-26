@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import Timer.TimerControl;
 import collections.DarkWings;
@@ -15,12 +15,19 @@ import collections.Collections;
 import collections.Crown;
 import collections.Wings;
 import connect.ConnectControl;
+import data.DataClass;
 import enemy.EnemyIssac;
+import imgSize.BodySize;
+import imgSize.HeadSize;
+import imgSize.WormSize;
 import item.*;
 import lombok.*;
 import mainPage.*;
 import map.Background;
+import monster.Head;
 import monster.Monster;
+import monster.Worm;
+import monster.body;
 import objectSetting.*;
 import player.issac;
 import startButton.StartButtonControl;
@@ -32,6 +39,7 @@ import wall.structure;
 @Setter
 //JFrame 참조 
 public class miniApp extends JFrame {
+	private DataClass PrimaryDataClass;
 	private miniApp app;
 	private StartPage startPage;
 	private Background bg;
@@ -60,7 +68,21 @@ public class miniApp extends JFrame {
 
 	// 앱에서 필요한 데이터정보 가져옴
 	public void init() {
+		PrimaryDataClass = new DataClass();
+		String ID = JOptionPane.showInputDialog("ID를 입력해주세요");
+		if(ID==null || ID.trim().isEmpty() || ID.contains(" ")){
+			JOptionPane.showMessageDialog(null,"ID형식이 잘못되었습니다.");
+			System.exit(0);
+		}
+		String PW = JOptionPane.showInputDialog("PW를 입력해주세요");
+		if(PW==null || PW.trim().isEmpty() || PW.contains(" ")) {
+			JOptionPane.showMessageDialog(null, "PW형식이 잘못되었습니다.");
+			System.exit(0);
+		}
+		PrimaryDataClass.setMem_Id(ID);
+		PrimaryDataClass.setMem_pw(PW);
 		app = this;
+		connectControl = new ConnectControl(app);
 		bg = new Background(app);
 		startPage = new StartPage(app);
 //		testControl = new TestControl(app);
@@ -253,9 +275,9 @@ public class miniApp extends JFrame {
 					items = new Vector<Item>();
 					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);
 					collections = new Mantle(app);
-//					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
-//					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
-//					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
+					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
+					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
+					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
 					items.add(new bomb(app, 450, 300));
 				}
 				startPage = null;

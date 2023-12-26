@@ -1,10 +1,7 @@
 package main;
 
-public class miniAppController extends miniApp {
-
-	public static void main(String[] args) {
-		new miniApp();
-
-	}
-
+public class miniAppController {
+    public static void main(String[] args) {
+        miniApp app = new miniApp();
+    }
 }

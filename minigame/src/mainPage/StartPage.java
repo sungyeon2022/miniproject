@@ -6,12 +6,7 @@ import java.awt.Image;
 
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import Timer.TimerControl;
@@ -32,7 +27,6 @@ public class StartPage{
 	private JLabel pageLabel;
 	private JLabel pJLabel;
 	private JLabel nameLabel;
-	private JTextField nameField;
 	private JButton startSingleButton;
 	private JButton startMultiButton;
 	private JButton endButton;
@@ -44,7 +38,9 @@ public class StartPage{
 	private TimerControl timerControl;
 	private JLabel referenceLabel;
 	private JLabel checkLabel;
-	
+	private JLabel greetingLabel;
+	private JOptionPane optionPane;
+
 	public StartPage(miniApp app) {
 		this.app = app;
 		init();
@@ -53,18 +49,21 @@ public class StartPage{
 	}
 
 	public void init() {
+		optionPane = new JOptionPane();
 		pJLabel = new JLabel();
 		pagePanel = new JPanel();
 		pageLabel = new JLabel();
 		startSingleButton = new JButton();
 		startMultiButton = new JButton();
 		endButton = new JButton();
-		nameField = new JTextField();
+		nameLabel = new JLabel();
 		referenceLabel = new JLabel("This app is reference by Binding of Isaac");
 		checkLabel = new JLabel("If you have Text error, run isaacGame.ttf in lib");
-		ImageIcon pageIcon = new ImageIcon("images/structure/titlemenu.png");
-		ImageIcon inputNameIcon = new ImageIcon("images/structure/namepaper.png");
-		ImageIcon nameIcon = new ImageIcon("images/structure/main name.png");
+		greetingLabel = new JLabel("Hello "+getApp().getConnectControl().getReciveDataClass().getClientName()+"!");
+//		ImageIcon pageIcon = new ImageIcon("images/structure/titlemenu.png");
+		ImageIcon pageIcon = new ImageIcon(getClass().getClassLoader().getResource("images/structure/titlemenu.png"));
+		ImageIcon inputNameIcon = new ImageIcon(getClass().getClassLoader().getResource("images/structure/namepaper.png"));
+		ImageIcon nameIcon = new ImageIcon(getClass().getClassLoader().getResource("images/structure/main name.png"));
 		Image pageImg = pageIcon.getImage();
 		Image reSizeImgImage = pageImg.getScaledInstance(944, 600, Image.SCALE_SMOOTH);
 		ImageIcon updateIcon = new ImageIcon(reSizeImgImage);
@@ -81,24 +80,26 @@ public class StartPage{
 		endButton.setText("EXIT");
 		endButton.setFont(new Font(MyFont.FONT3, Font.BOLD, 40));
 		endButton.setHorizontalAlignment(JButton.CENTER);
-		
-		nameField.setBorder(new LineBorder(Color.black));
-		
+
+		greetingLabel.setFont(new Font(MyFont.FONT3, Font.BOLD, 40));
+
 		referenceLabel.setFont(new Font(MyFont.FONT3, 0, 15));
 		
 		checkLabel.setFont(new Font(MyFont.FONT3,0,15));
+
 	}
 
 	public void setting() {
+
 		pagePanel.setBounds(0, 0, 960, 640);
 		pagePanel.setLayout(null);
 		
 		pageLabel.setLayout(null);
 		pageLabel.setBounds(0, 0, 944, 600);
-		
-		nameField.setBounds(200, 100, 100, 100);
-		
+
 		pJLabel.setBounds(230, 10, 500, 100);
+
+		greetingLabel.setBounds(380, 350, 300, 50);
 		
 		startSingleButton.setBounds(345, 120, 300, 50);
 		startSingleButton.setBorderPainted(false);
@@ -118,19 +119,20 @@ public class StartPage{
 		referenceLabel.setBounds(330,460,300,20);
 		
 		checkLabel.setBounds(0,5,400,18);
-		
-//		pageLabel.add(nameField);
+
 		pageLabel.add(pJLabel);
 		pageLabel.add(startSingleButton);
-		pageLabel.add(startMultiButton);
+		if (getApp().getConnectControl().getReciveDataClass().getBattleRoomNum() != 0) {
+			pageLabel.add(startMultiButton);
+		}
+		pageLabel.add(greetingLabel);
 		pageLabel.add(endButton);
 		pageLabel.add(referenceLabel);
 		pageLabel.add(checkLabel);
 		pagePanel.add(pageLabel);
-		pagePanel.setBackground(Color.GRAY);
 	}
 
-	public void batch() {
+	public void batch(){
 		app.add(pagePanel,0);
 	}
 }

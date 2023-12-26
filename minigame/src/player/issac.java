@@ -1,33 +1,29 @@
 package player;
 
-import java.nio.channels.NonReadableChannelException;
-import java.time.zone.ZoneOffsetTransitionRule;
-import java.util.Arrays;
-import java.util.Iterator;
+
 import java.util.Vector;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
 import connect.ConnectControl;
-import data.DataClass;
 import enemy.EnemyIssac;
 import imgSize.*;
 import lombok.Data;
 import main.miniApp;
 import mainPage.EndPage;
 import monster.Monster;
-import monster.Worm;
 import objectSetting.ViewDirect;
 import startButton.StartButtonControl;
 import wall.*;
 import item.*;
 
-@Data
-
+@Getter
+@Setter
 public class issac extends Player {
 	private final static String TAG = "issac: ";
 	private issac issac = this;

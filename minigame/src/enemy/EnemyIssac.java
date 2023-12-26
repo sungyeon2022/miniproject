@@ -8,6 +8,8 @@ import SpriteSheet.SpriteSheet;
 import connect.ConnectControl;
 import imgSize.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import main.miniApp;
 import objectSetting.ViewDirect;
 import wall.*;
@@ -15,8 +17,8 @@ import item.*;
 import player.*;
 import sword.EnemySwordControl;
 
-@Data
 
+@Data
 public class EnemyIssac extends Enemy {
 	private final static String TAG = "issac: ";
 	private ConnectControl connectControl;
@@ -33,7 +35,8 @@ public class EnemyIssac extends Enemy {
 	private int powerNum = 1;
 	private int attackspeedNum = 1;
 
-	public EnemyIssac(miniApp app, Vector<structure> structures, Vector<Item> items, issac issac, ConnectControl connectControl) {
+	public EnemyIssac(miniApp app, Vector<structure> structures, Vector<Item> items, issac issac,
+			ConnectControl connectControl) {
 		super(app);
 		init(structures, items, issac, connectControl);
 		setting();
@@ -102,6 +105,7 @@ public class EnemyIssac extends Enemy {
 				if (!isEnemyMoveStart()) {
 					setEnemyMoveStart(true);
 					while (!isDead()) {
+						reciveData();
 						if (getViewDirectInfo()[ViewDirect.DOWN] && getViewDirect() == ViewDirect.DOWN) {
 							if (motion > 9 * 5) // 상하좌우 방향 모션 개수와 동일 0~9 10개
 								motion = 0;// 마지막사진 도착후 처음으로 순환을 위한 if문 종료
@@ -159,7 +163,7 @@ public class EnemyIssac extends Enemy {
 							ssHead.drawObj(getXEnemy(), getYEnemy());
 							ssBody.drawObj(getXEnemy() + xPlusBody, getYEnemy() + yPlusBody);
 						}
-						if (isSendInvincible()&&!isDead()) {
+						if (isSendInvincible() && !isDead()) {
 							hitCheck();
 						}
 						if (getLife() == 0) {

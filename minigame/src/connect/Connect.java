@@ -26,7 +26,7 @@ public class Connect extends Lombok {
 	private Socket socket;
 	private InputStream myInputStream;
 	private OutputStream myOutputStream;
-//	private DataOutputStream dataOutputStream;
+	//	private DataOutputStream dataOutputStream;
 //	private DataInputStream dataInputStream;
 	ObjectOutputStream myObjectOutputStream;
 	ObjectInputStream myObjectInputStream;
@@ -46,7 +46,7 @@ public class Connect extends Lombok {
 		this.myObjectInputStream = null;
 		this.myObjectOutputStream = null;
 		this.Name = "Beta1";
-		this.socketNum = 8050;
+		this.socketNum = 8056;
 	}
 	public void SendData() {}
 	public void ReceiveDataThread() {}

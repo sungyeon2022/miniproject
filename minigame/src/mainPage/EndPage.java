@@ -52,9 +52,9 @@ public class EndPage {
 		endAlphaPanel = new JPanel();
 		checkLabel = new JLabel();
 
-		endpageIcon = new ImageIcon("images/structure/paper.png");
+		endpageIcon = new ImageIcon(getClass().getClassLoader().getResource("images/structure/paper.png"));
 
-		endIcon = new ImageIcon("images/structure/endpage.png");
+		endIcon = new ImageIcon(getClass().getClassLoader().getResource("images/structure/endpage.png"));
 		resizeimg = endIcon.getImage();
 		endIcon = new ImageIcon(resizeimg.getScaledInstance(400, 500, Image.SCALE_SMOOTH));
 
