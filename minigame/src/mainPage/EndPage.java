@@ -135,12 +135,12 @@ public class EndPage {
 
 			public void mouseClicked(MouseEvent e) {
 				if (getApp().getEndPage() != null) {
+					app.getContentPane().removeAll();
 					app.setStartPage(new StartPage(app));
-					app.remove(endLabel);
-					app.getEndPage().getEndLabel().removeAll();
-					app.setEndPage(null);
-					app.dispose();
-					app = new miniApp();
+					app.getContentPane().repaint();
+					app.getConnectControl().getSendDataClass().setSingle(false);
+					app.getConnectControl().getSendDataClass().setEnd(false);
+					app.listener();
 				}
 			}
 		});

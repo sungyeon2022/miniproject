@@ -24,10 +24,7 @@ import item.*;
 import lombok.*;
 import mainPage.*;
 import map.Background;
-import monster.Head;
-import monster.Monster;
-import monster.Worm;
-import monster.body;
+import monster.*;
 import objectSetting.*;
 import player.issac;
 import startButton.StartButtonControl;
@@ -63,6 +60,7 @@ public class miniApp extends JFrame {
 		setting();
 		batch();
 		listener();
+		keyboardEvent();
 //		checkUsedMomory();
 	}
 
@@ -267,23 +265,22 @@ public class miniApp extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (startPage != null) {
+					connectControl.getSendDataClass().setSingle(true);
 					startPage.getPagePanel().removeAll();
 					app.remove(startPage.getPagePanel());
 					app.repaint();
 					monsters = new Vector<Monster>();
 					structures = new Vector<structure>();
 					items = new Vector<Item>();
-					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);
-					collections = new Mantle(app);
+					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl);
 					monsters.add(new Worm(app, issac, "monster/worm.png", WormSize.WIDTH, WormSize.HEIGHT));
 					monsters.add(new body(app, issac, "monster/body.png", BodySize.WIDTH, BodySize.HEIGHT));
 					monsters.add(new Head(app, issac, "monster/head.png", HeadSize.WIDTH, HeadSize.HEIGHT));
-					items.add(new bomb(app, 450, 300));
+					monsters.add(new fly(app, issac, "monster/fly.png",0,0));
 				}
 				startPage = null;
 				app.setFocusable(true);
 				app.requestFocus();
-				keyboardEvent();
 			}
 		});
 		startPage.getStartMultiButton().addMouseListener(new MouseAdapter() {
@@ -304,13 +301,10 @@ public class miniApp extends JFrame {
 				boolean check = true;
 				if (check) {
 					check = false;
-					connectControl = new ConnectControl(app);
 					startButtonControl = new StartButtonControl(app, connectControl);
-					timerControl = new TimerControl(app, connectControl);
-					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl, timerControl);
+					issac = new issac(app, monsters, structures, items, startButtonControl, connectControl);
 					app.setFocusable(true);
 					app.requestFocus();
-					keyboardEvent();
 				}
 			}
 		});

@@ -1,12 +1,14 @@
 package player;
 
 
+import java.util.Objects;
 import java.util.Vector;
 
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import sword.EnemySwordControl;
 import sword.SwordControl;
 import SpriteSheet.SpriteSheet;
 import Timer.TimerControl;
@@ -49,24 +51,22 @@ public class issac extends Player {
 	private int powerNum = 1;
 	private int attackspeedNum = 1;
 	private ConnectControl connectControl;
-	private TimerControl timerControl;
 	private EndPage endPage;
 
 	public issac(miniApp app, Vector<Monster> monsters, Vector<structure> structures, Vector<Item> items,
-			StartButtonControl startButtonControl, ConnectControl connectControl, TimerControl timerControl) {
+			StartButtonControl startButtonControl, ConnectControl connectControl) {
 		super(app);
 		System.out.println(TAG + "make issac");
-		init(monsters, structures, items, startButtonControl, connectControl, timerControl);
+		init(monsters, structures, items, startButtonControl, connectControl);
 		setting();
 		batch();
 		moveMotion();
 	}
 
 	public void init(Vector<Monster> monsters, Vector<structure> structures, Vector<Item> items,
-			StartButtonControl startButtonControl, ConnectControl connectControl, TimerControl timerControl) {
+			StartButtonControl startButtonControl, ConnectControl connectControl) {
 		this.connectControl = connectControl;
 		this.startButtonControl = startButtonControl;
-		this.timerControl = timerControl;
 		this.monsters = monsters;
 		this.items = items;
 		ssHead = new SpriteSheet("issac/issac.png", "issacssHead", issacSize.issacHEADWIDTH * 4 + Gap.HEADCOLUMGAP * 4,
@@ -392,13 +392,17 @@ public class issac extends Player {
 								motion += 1;
 							}
 						}
-						if (connectControl!=null && !connectControl.isMulti()) {
+						if (!connectControl.isMulti()) {
 							startCheck();
+						}
+						if(connectControl.isMulti() && !connectControl.isStart()){
+							setXPlayer(getDefaultX());
+							setYPlayer(getDefaultY());
 						}
 						if (monsters != null) {
 							MonsterCheck();
 						}
-						if (getLife() == 0) {
+						if (getLife() <= 0) {
 							setDead(true);
 						}
 						try {
@@ -518,7 +522,7 @@ public class issac extends Player {
 	}
 
 	public void startCheck() {
-		if (connectControl != null && connectControl.isIsconnect()
+		if (connectControl != null && connectControl.isIsconnect()&&!connectControl.getSendDataClass().isSingle()
 				&& startButtonControl.getSsStartButton().getBounds().intersects(issac.getSsBody().getBounds())) {
 			if (startButtonControl != null) {
 				startButtonControl.getSsStartButton().setXPos(ButtonSize.XPos + ButtonSize.Width + ButtonSize.Gap);
@@ -528,10 +532,10 @@ public class issac extends Player {
 				getApp().remove(getApp().getStartButtonControl().getSsStartButton());
 				getApp().setStartButtonControl(null);
 				issacInfoRefresh();
-				timerControl.getTimerLabel().setText("Wait Enemy");
 				connectControl.setMulti(true);
 				connectControl.getSendDataClass().setMulti(true);
 				getApp().setEnemyIssac(new EnemyIssac(getApp(), structures, items, issac, connectControl));
+				getApp().setEnemySwordControl(new EnemySwordControl(getApp(), this, getApp().getEnemyIssac(), connectControl));
 			}
 		}
 	}
@@ -566,15 +570,20 @@ public class issac extends Player {
 		}).start();
 	}
 
-	public void gameEnd() {
-		deadMotion();
-//		try {
-//			Thread.sleep(1000);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	public void gameEnd(){
+		if(issac.isDead()) {
+			deadMotion();
+		}
+		connectControl.getSendDataClass().setEnd(true);
+		issacInfoRefresh();
+		connectControl.getSendDataClass().setEnd(false);
+		issacInfoRefresh();
+		try {
+			Thread.sleep(2000);
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		getApp().setEndPage(new EndPage(getApp()));
-
 	}
 
 	public synchronized void issacInfoRefresh() {

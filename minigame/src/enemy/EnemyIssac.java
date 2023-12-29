@@ -176,7 +176,7 @@ public class EnemyIssac extends Enemy {
 							e.printStackTrace();
 						}
 					}
-					deadMotion();
+					issac.gameEnd();
 				}
 			}
 		}).start();
@@ -277,7 +277,7 @@ public class EnemyIssac extends Enemy {
 	}
 
 	public void reciveData() {
-		if (connectControl.isIsconnect() && connectControl.isReciveMulti()) {
+		if (connectControl.isIsconnect()&&connectControl.getReciveDataClass().isMulti()) {
 			setXEnemy(connectControl.getReciveDataClass().getXPlayer());
 			setYEnemy(connectControl.getReciveDataClass().getYPlayer());
 			setViewDirect(connectControl.getReciveDataClass().getIntView());

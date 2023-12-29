@@ -80,6 +80,9 @@ public class Monster extends Player {
 		}
 		getApp().remove(ssDead);
 		getApp().getMonsters().remove(monster);
+		if(getApp().getMonsters().isEmpty()){
+			getIssac().gameEnd();
+		}
 	}
 
 	public void moveRangeCheck() { // 맵 밖으로 나가려하면 강제 방향전환

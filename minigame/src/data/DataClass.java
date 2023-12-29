@@ -30,6 +30,8 @@ public class DataClass implements Serializable {
 	private boolean isStart;
 	private int battleRoomNum;
 	private int useitem;
+	private boolean isSingle;
+	private boolean isEnd;
 	
 	public DataClass() {} 
 }
