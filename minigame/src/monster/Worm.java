@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
 import imgSize.Gap;
-import imgSize.ViewDirect;
+import objectSetting.*;
 import imgSize.WormSize;
 import lombok.Data;
 import player.issac;
@@ -51,7 +51,7 @@ public class Worm extends Monster {
 					}
 					gapCheck();
 					moveRangeCheck();
-					attack(); // 지속적으로 공격 조건 감시
+//					attack(); // 지속적으로 공격 조건 감시
 					moveUp();					
 					moveDown();
 					moveRight();

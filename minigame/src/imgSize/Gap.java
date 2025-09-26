@@ -5,5 +5,5 @@ public interface Gap {
 	int ROWGAP = 6;
 	int WALLCOLUMGAP = 150;
 	int WALLROWGAP = 200;
-	
+	int HEADCOLUMGAP = 1;
 }

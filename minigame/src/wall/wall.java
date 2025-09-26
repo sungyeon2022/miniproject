@@ -3,8 +3,8 @@ package wall;
 import javax.swing.JFrame;
 
 import SpriteSheet.SpriteSheet;
+import imgSize.RockSize;
 import lombok.Data;
-import objectSetting.RockSize;
 
 @Data
 public class wall {
